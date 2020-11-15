@@ -7,25 +7,10 @@ from .forms import *
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Hello, this is MainPage")
+    return render(request,'main/index.html',{})
 
-def admin(request):
-    return HttpResponse("Hello, this is adminPage")
+def about(request):
+    return render(request,'main/about.html',{})
 
-def adminSignin(request):
-    if(request.method == "POST"):
-        form = adminLoginForm(request.POST)
-        sfid = request.POST['staff_id']
-        cursor = connection.cursor()
-        sql = "SELECT staff_id FROM page_staff WHERE staff_id=="+sfid
-        result = cursor.execute(sql)
-        print(result)
-
-        if(user is not None):
-            login(request,user)
-            return redirect('admin')
-        else:
-            return HttpResponse('fail')
-    else:
-        form = adminLoginForm()
-        return render(request,'admin/admin_login.html')
+def rooms(request):
+    return render(request,'main/rooms-single.html',{})
