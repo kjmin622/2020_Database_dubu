@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>login</title>
+    </head>
+    <body>
+    {% if request.session.staff_id != None %}
+        <h1>안녕하세요, {{request.session.staff_id}}</h1>
+        <a href="{% url 'admin_logout' %}">로그아웃</a>
+    {% else %}
+        <a href="{% url 'admin_login' %}">로그인</a>
+    {% endif %}
+    </body>
+</html>

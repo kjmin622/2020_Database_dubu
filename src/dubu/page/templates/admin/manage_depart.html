@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>login</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+        <h3>부서 생성</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="depart_id">depart_id</label>
+                <input type="text" name="depart_id" class="form-control" id="depart_id">
+            </div>
+            <div class="form-group">
+                <label for="depart_name">depart_name</label>
+                <input type="text" name="depart_name" class="form-control" id="depart_name">
+            </div>
+            <div class="form-group">
+                <label for="position">position</label>
+                <input type="text" name="position" class="form-control" id="position">
+            </div>
+            <button type="submit" class="btn btn-default">create</button>
+        </form>
+        <div style="width:1px; height:10px;"></div>
+        <h3>리스트</h3>
+        <h4>depart_id/depart_name/position</h4>
+        <ul>
+        {% for data in datas %}
+            <li>{{data}}</li>
+        {% endfor %}
+        <ul>
+    </body>
+</html>
