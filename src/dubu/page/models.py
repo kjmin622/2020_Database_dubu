@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+
 class account_info(models.Model):
     account = models.CharField(max_length=100, primary_key=True)   
     bank = models.CharField(max_length=30)    
