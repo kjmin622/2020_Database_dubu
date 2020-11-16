@@ -182,7 +182,7 @@ class purchase_list(models.Model):
 
 
 class staff_info(models.Model):
-    staff_id = models.CharField(max_length=100)    
+    staff_id = models.CharField(max_length=100,primary_key=True)    
     first_name = models.CharField(max_length=30)    
     last_name = models.CharField(max_length=30)    
     phone = models.CharField(max_length=100)  
@@ -191,7 +191,7 @@ class staff_info(models.Model):
 
 
 class staff_address(models.Model):
-    staff_id = models.CharField(max_length=100)  
+    staff_id = models.CharField(max_length=100,primary_key=True)  
     wide_area_unit = models.CharField(max_length=30)    
     street = models.CharField(max_length=30)    
     basic_unit = models.CharField(max_length=30, null=True)    
@@ -222,7 +222,7 @@ class staff_day_off_info(models.Model):
 
 
 class team_staff(models.Model):
-    staff_id = models.CharField(max_length=100)   
+    staff_id = models.CharField(max_length=100,primary_key=True)   
     team_name = models.CharField(max_length=30)    
 
 
