@@ -121,7 +121,7 @@ class room_type_bed(models.Model):
 
 
 class book_request(models.Model):
-    booking_id = models.ForeignKey(booking, on_delete=models.CASCADE)   
+    booking_id = models.CharField(max_length=100)  
     room_type = models.CharField(max_length=100)   
     breakfast = models.IntegerField()  
     adult_num = models.IntegerField()  
@@ -131,13 +131,13 @@ class book_request(models.Model):
 
 
 class customer_info(models.Model):
-    booking_id = models.ForeignKey(booking, on_delete=models.CASCADE)   
+    booking_id = models.CharField(max_length=100)    
     first_name = models.CharField(max_length=30)    
     last_name= models.CharField(max_length=30)    
 
 
 class member_customer(models.Model):
-    booking_id = models.ForeignKey(customer_info, on_delete=models.CASCADE)   
+    booking_id = models.CharField(max_length=100)  
     member_id = models.CharField(max_length=100)   
 
 
@@ -166,12 +166,12 @@ class invoice(models.Model):
 
 
 class product_price(models.Model):
-    product_id = models.ForeignKey(product, on_delete=models.CASCADE)   
+    product_id = models.CharField(max_length=100)  
     price = models.IntegerField()  
 
 
 class in_storage(models.Model):
-    product_id = models.ForeignKey(product, on_delete=models.CASCADE) 
+    product_id = models.CharField(max_length=100)  
     count = models.IntegerField()  
 
 
@@ -182,23 +182,16 @@ class purchase_list(models.Model):
 
 
 class staff_info(models.Model):
-    staff_id = models.ForeignKey(staff, on_delete=models.CASCADE)   
+    staff_id = models.CharField(max_length=100)    
     first_name = models.CharField(max_length=30)    
     last_name = models.CharField(max_length=30)    
-
-
-class staff_phone(models.Model):
-    staff_id = models.ForeignKey(staff, on_delete=models.CASCADE)  
-    phone = models.CharField(max_length=100)   
-
-
-class staff_account(models.Model):
-    staff_id = models.ForeignKey(staff, on_delete=models.CASCADE)    
-    account = models.ForeignKey(account_info, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=100)  
+    bank = models.CharField(max_length=30)  
+    account = models.CharField(max_length=100)  
 
 
 class staff_address(models.Model):
-    staff_id = models.ForeignKey(staff_info, on_delete=models.CASCADE)
+    staff_id = models.CharField(max_length=100)  
     wide_area_unit = models.CharField(max_length=30)    
     street = models.CharField(max_length=30)    
     basic_unit = models.CharField(max_length=30, null=True)    
@@ -206,11 +199,10 @@ class staff_address(models.Model):
     eub_myeon = models.CharField(max_length=30, null=True)    
     building_number = models.CharField(max_length=30)    
     detail_address = models.CharField(max_length=100, null=True)   
-    
 
 
 class customer_phone(models.Model):
-    booking_id = models.ForeignKey(customer_info, on_delete=models.CASCADE) 
+    booking_id = models.CharField(max_length=100)   
     phone = models.CharField(max_length=100)   
 
 
@@ -235,7 +227,7 @@ class team_staff(models.Model):
 
 
 class bill(models.Model):
-    booking_id = models.ForeignKey(booking, on_delete=models.CASCADE) 
+    booking_id = models.CharField(max_length=100)  
     paytime = models.DateTimeField()    
     payment = models.CharField(max_length=30)    
     card_id = models.CharField(max_length=100, null=True)   

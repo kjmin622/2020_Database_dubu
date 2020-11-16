@@ -5,6 +5,7 @@ from django.db import connection
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
+from .tools import *
 
 def admin(request):
     if("staff_id" not in request.session or request.session["staff_id"] is None):
@@ -61,3 +62,9 @@ def manage_depart(request):
         datas.append(str(data).replace("'",'').replace('(','').replace(')','').replace(',',' /'))
 
     return render(request,'admin/manage_depart.html',{'datas':datas})
+
+
+
+def manage_staff(request):
+    a = staff.delete_staff({'staff_id':'123'})
+    return HttpResponse(str(a))
