@@ -42,7 +42,7 @@ class engineering(models.Model):
 
 
 class depart(models.Model):
-    depart_id = models.CharField(max_length=100, primary_key=True)   
+    depart_id = models.CharField(max_length=100)   
     depart_name = models.CharField(max_length=100)   
     position = models.CharField(max_length=100)   
 
