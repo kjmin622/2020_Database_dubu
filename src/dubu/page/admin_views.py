@@ -61,3 +61,26 @@ def manage_depart(request):
         datas.append(str(data).replace("'",'').replace('(','').replace(')','').replace(',',' /'))
 
     return render(request,'admin/manage_depart.html',{'datas':datas})
+
+
+# admin
+def staff(request):
+    return render(request,'admin/staff.html',{})
+
+def s_reservation(request):
+    return render(request,'admin/s_reservation.html',{})
+
+def room_select(request):
+    return render(request,'admin/room_select.html',{})
+
+def parking(request):
+    return render(request,'admin/parking.html',{})
+
+def product(request):
+    return render(request,'admin/product.html',{})
+
+def engineer(request):
+    return render(request,'admin/engineer.html',{})
+
+def staff_search(request):
+    return render(request,'admin/staff_search.html',{})
