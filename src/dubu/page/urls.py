@@ -7,7 +7,12 @@ urlpatterns = [
     path('',views.index,name="index"),
     path('about',views.about,name="about"),
     path('rooms',views.rooms,name="rooms"),
-
+    path('reservation',views.reservation,name="reservation"),
+    path('join',views.join,name="join"),
+    path('event',views.event,name="event"),
+    path('login',views.login,name="login"),
+    path('mypage',views.mypage,name="mypage"),
+    
     #admin
     path('admin',admin_views.admin,name="admin"),
     path('admin/login',admin_views.adminLogin,name="admin_login"),

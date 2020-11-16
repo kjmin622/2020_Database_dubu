@@ -14,3 +14,18 @@ def about(request):
 
 def rooms(request):
     return render(request,'main/rooms-single.html',{})
+
+def reservation(request):
+    return render(request,'main/reservation.html',{})
+
+def join(request):
+    return render(request,'main/join.html',{})
+
+def event(request):
+    return render(request,'main/event.html',{})
+
+def login(request):
+    return render(request,'main/login.html',{})
+
+def mypage(request):
+    return render(request,'main/mypage.html',{})
