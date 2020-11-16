@@ -65,6 +65,10 @@ def manage_depart(request):
 
 
 
+        # staff_id, rank, status, depart_id, first_name, last_name, phone, bank, account,
+        # wide_area_unit, street, basic_unit, si_gu, eub_myeon, building_number, detail_address
 def manage_staff(request):
-    a = staff.delete_staff({'staff_id':'123'})
+    a = staff.insert_staff({'staff_id':'2020111701','rank':'A','status':'off','depart_id':'staff',
+                            'first_name':'jeong_min','last_name':'gil','phone':'010-3903-2779','bank':'11','account':'22',
+                            'wide_area_unit':'hi','street':'hi','basic_unit':'dd','si_gu':'cc','eub_myeon':'c','building_number':'a','detail_address':'cd'})
     return HttpResponse(str(a))

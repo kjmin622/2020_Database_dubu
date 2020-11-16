@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>login</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+        <h3>직원 생성</h3>
+        <form method="POST">
+            {% csrf_token %}
+                <label for="staff_id">staff_id</label>
+                <input type="text" name="staff_id" class="form-control" id="staff_id">
+
+                <label for="rank">rank</label>
+                <input type="text" name="rank" class="form-control" id="rank">
+
+                <label for="status">status</label>
+                <input type="text" name="position" class="form-control" id="position">
+            <button type="submit" class="btn btn-default">create</button>
+        </form>
+        <div style="width:1px; height:10px;"></div>
+        <h3>리스트</h3>
+        <h4>depart_id/depart_name/position</h4>
+        <ul>
+        {% for data in datas %}
+            <li>{{data}}</li>
+        {% endfor %}
+        <ul>
+    </body>
+</html>

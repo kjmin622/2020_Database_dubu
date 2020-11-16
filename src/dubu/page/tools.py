@@ -3,15 +3,26 @@ from django.db import connection
 
 class staff():
     
+    def get_staff(dataDir):
+        try:
+            staff_id = dataDir["staff_id"]
+            cursor = connection.cursor()
+            sqlStr = f"select * from page_staff natural join (select * from page_staff_info natural join page_staff_address)"
+            connection.close()
+        except:
+            connection.rollback()
+            connection.close()
+
     def insert_staff(dataDir): 
         # staff_id, rank, status, depart_id,/ staff_id, first_name, last_name, phone, bank, account,
         # / staff_id, wide_area_unit, street, basic_unit, si_gu, eub_myeon, building_number, detail_address
         try:
             staff_id = dataDir["staff_id"];rank = dataDir["rank"];status = dataDir["status"];depart_id = dataDir["depart_id"];first_name = dataDir["first_name"];last_name = dataDir["last_name"];phone = dataDir["phone"];bank = dataDir["bank"];account = dataDir["account"];wide_area_unit = dataDir["wide_area_unit"];street = dataDir["street"];basic_unit = dataDir["basic_unit"];si_gu = dataDir["si_gu"];eub_myeon = dataDir["eub_myeon"];building_number = dataDir["building_number"];detail_address = dataDir["detail_address"]
             cursor = connection.cursor()
-            sqlStr1 = f"insert into page_staff(staff_id,rank,status,depart_id) values({staff_id},{rank},{status},{depart_id})"
-            sqlStr2 = f"insert into page_staff_info(staff_id,first_name,last_name,phone,bank,account) values({staff_id},{first_name},{last_name},{phone},{bank},{account})"
-            sqlStr3 = f"insert into page_staff_address(staff_id,wide_area_unit,streeet,basic_unit,si_gu,eub_myeon,building_number,detail_address) values({staff_id},{wide_area_unit},{street},{basic_unit},{si_gu},{eub_myeon},{building_number},{detail_address})"
+            sqlStr1 = f"insert into page_staff(staff_id,rank,status,depart_id) values('{staff_id}','{rank}','{status}','{depart_id}')"
+            sqlStr2 = f"insert into page_staff_info(staff_id,first_name,last_name,phone,bank,account) values('{staff_id}','{first_name}','{last_name}','{phone}','{bank}','{account}')"
+            sqlStr3 = f"insert into page_staff_address(staff_id,wide_area_unit,streeet,basic_unit,si_gu,eub_myeon,building_number,detail_address) values('{staff_id}','{wide_area_unit}','{street}','{basic_unit}','{si_gu}','{eub_myeon}','{building_number}','{detail_address}')"
+            print(sqlStr1,'\n', sqlStr2,'\n', sqlStr3)
             cursor.execute(sqlStr1);cursor.fetchall()
             cursor.execute(sqlStr2);cursor.fetchall()
             cursor.execute(sqlStr3);cursor.fetchall()
@@ -45,3 +56,4 @@ class staff():
             connection.close()
             return False
         return False
+
