@@ -12,15 +12,7 @@ class purchase_slip(models.Model):
     order_date = models.DateTimeField()    
     delivery_date = models.DateTimeField()    
     is_purchase = models.BooleanField()    
-    staff_id = models.CharField(max_length=100)   
-
-
-class widearea_street(models.Model):
-    wide_area_unit = models.CharField(max_length=30, primary_key=True)    
-    street = models.CharField(max_length=30)    
-    basic_unit = models.CharField(max_length=30, null=True)    
-    si_gu = models.CharField(max_length=30, null=True)    
-    eub_myeon = models.CharField(max_length=30, null=True)    
+    staff_id = models.CharField(max_length=100)    
 
 
 class team(models.Model):
@@ -44,6 +36,9 @@ class rooms(models.Model):
 class engineering(models.Model):
     facility_id = models.CharField(max_length=100, primary_key=True)   
     facility_name = models.CharField(max_length=30)    
+    check_date = models.DateTimeField()    
+    check_limit = models.DateTimeField()    
+    status = models.CharField(max_length=100) 
 
 
 class depart(models.Model):
@@ -65,7 +60,10 @@ class room_type(models.Model):
 
 class event(models.Model):
     event_id = models.CharField(max_length=100, primary_key=True)   
-    event_name = models.CharField(max_length=30)    
+    event_name = models.CharField(max_length=30)   
+    start_date = models.DateTimeField()    
+    end_date = models.DateTimeField()    
+    contents = models.CharField(max_length=2000) 
 
 
 class booking(models.Model):
@@ -77,10 +75,16 @@ class booking(models.Model):
 
 class member_info(models.Model):
     member_id = models.CharField(max_length=100, primary_key=True)   
+    password = models.CharField(max_length=100)
+    email = models.CharField(max_length=100) 
+    last_name = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=30)
+    phone = models.CharField(max_length=100) 
     membership = models.CharField(max_length=30)    
     birth = models.DateTimeField()    
     is_sms = models.BooleanField()    
-    password = models.CharField(max_length=100)   
+       
+    
 
 
 class card_info(models.Model):
@@ -108,13 +112,6 @@ class event_team(models.Model):
 class engineering_team(models.Model):
     team_name = models.CharField(max_length=30)    
     facility_id = models.CharField(max_length=100)   
-
-
-class engineering_content(models.Model):
-    facility_id = models.ForeignKey(engineering, on_delete=models.CASCADE)   
-    check_date = models.DateTimeField()    
-    check_limit = models.DateTimeField()    
-    status = models.CharField(max_length=100)   
 
 
 class room_type_bed(models.Model):
@@ -200,22 +197,16 @@ class staff_account(models.Model):
     account = models.ForeignKey(account_info, on_delete=models.CASCADE)
 
 
-class member_phone(models.Model):
-    member_id = models.ForeignKey(member_info, on_delete=models.CASCADE)  
-    phone = models.CharField(max_length=100)   
-
-
 class staff_address(models.Model):
     staff_id = models.ForeignKey(staff_info, on_delete=models.CASCADE)
-    building_number = models.CharField(max_length=30)    
-    detail_address = models.CharField(max_length=100, null=True)   
     wide_area_unit = models.CharField(max_length=30)    
     street = models.CharField(max_length=30)    
-
-
-class member_email(models.Model):
-    member_id = models.ForeignKey(member_info, on_delete=models.CASCADE)
-    email = models.CharField(max_length=100)   
+    basic_unit = models.CharField(max_length=30, null=True)    
+    si_gu = models.CharField(max_length=30, null=True)    
+    eub_myeon = models.CharField(max_length=30, null=True)    
+    building_number = models.CharField(max_length=30)    
+    detail_address = models.CharField(max_length=100, null=True)   
+    
 
 
 class customer_phone(models.Model):
@@ -248,10 +239,3 @@ class bill(models.Model):
     paytime = models.DateTimeField()    
     payment = models.CharField(max_length=30)    
     card_id = models.CharField(max_length=100, null=True)   
-
-
-class event_content(models.Model):
-    event_id = models.ForeignKey(event, on_delete=models.CASCADE)
-    start_date = models.DateTimeField()    
-    end_date = models.DateTimeField()    
-    contents = models.CharField(max_length=2000)
