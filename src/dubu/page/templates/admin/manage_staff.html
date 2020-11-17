@@ -67,7 +67,7 @@
                         <td>{{data.wide_area_unit}} {{data.basic_unit}} {{data.street}} {{data.si_gu}} {{data.eub_myeon}} {{data.building_number}} {{data.detail_address}}</td>
                         <td><input type="button" value="edit" class="edit_btn" name="edit_{{data.staff_id}}"></td>
                         <td><input type="button" value="근무일 보기/수정" class="working_btn" name="working_{{data.staff_id}}"></td>
-                        <td><input type="button" value="휴가일 보기/수정" class="holiday_btn"></td>
+                        <td><input type="button" value="휴가일 보기/수정" class="holiday_btn" name="holiday_{{data.staff_id}}"></td>
                         <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
                             <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
                             <input type="submit" value="delete" class="delete_btn"></form></td>
@@ -101,8 +101,9 @@
             {% endif %}
             {% endfor %}
             <input type="submit" value="edit">
+            </form>
         </div>
-        <div class="staff_working popup" style="z-index:100;position:fixed;width:300px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-150px,-300px);background-color:rgba(255,255,255,0.8);">
+        <div class="staff_working popup" style="display:none;overflow:scroll;z-index:100;position:fixed;width:300px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-150px,-300px);background-color:rgba(255,255,255,0.8);">
             <div>
                 <table class="working_result_box">
                     <thead><th> start </th><th>end</th><th>Xday</th><th>delete</th></thead>
@@ -112,7 +113,34 @@
                 </table>
             </div>
             <div>
-                
+                <form action="{% url 'insert_staff_working' %}" method="POST">
+                    <input type="text" style="display: none" name="staff_id" class="work_sid" readonly>
+                    <input type="text" name="work_time_start" placeholder="starttime(00:00:00)">
+                    <input type="text" name="work_time_end" placeholder="endtime(00:00:00)">
+                    <input type="text" name="x_day" placeholder="x_day(***_day)">
+                    <input type="submit" value="add">
+                </form>
+            </div>
+        </div>
+
+        <div class="staff_holiday popup" style="display:none;overflow:scroll;z-index:100;position:fixed;width:400px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-200px,-300px);background-color:rgba(255,255,255,0.8);">
+            <div>
+                <table class="holiday_result_box">
+                    <thead><th>start</th><th>end</th><th>type</th><th>paid</th><th>delete</th></thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <form action="{% url 'insert_staff_holiday' %}" method="POST">
+                    <input type="text" style="display: none" name="staff_id" class="holi_sid" readonly>
+                    <input type="text" name="off_start" placeholder="startdate(0000-00-00)">
+                    <input type="text" name="off_end" placeholder="enddate(0000-00-00)">
+                    <input type="text" name="day_off_type" placeholder="병가 연차...">
+                    <input type="text" name="is_paid" placeholder="True/False">
+                    <input type="submit" value="add">
+                </form>
             </div>
         </div>
 
@@ -165,13 +193,30 @@
     $(".working_btn").click(function(){
         $(".fullscreen").css("display","block");
         $(".staff_working").css("display","block");
+        $(".working_result_box tbody").empty();
         var staff_id = $(this).attr('name').slice(8);
+        $(".work_sid").attr('value',staff_id);
         {% for data in working_datas %}
-        console.log(staff_id, '{{data.staff_id}}');
         if(staff_id == '{{data.staff_id}}'){
-            $('.working_result_box').append("<tr><td>a</td><td>b</td><td>c</td><td>d</td></tr>");
+            $('.working_result_box tbody').append("<tr><td>{{data.work_time_start}}</td><td>{{data.work_time_end}}</td><td>{{data.x_day}}</td><td><form action=\"{% url 'delete_staff_working' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete'></form></td></tr>");
         }
+        
         {% endfor %}
     })
+
+    $(".holiday_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_holiday").css("display","block");
+        $(".holiday_result_box tbody").empty();
+        var staff_id = $(this).attr('name').slice(8);
+        $(".holi_sid").attr('value',staff_id);
+        {% for data in holiday_datas %}
+        if(staff_id == '{{data.staff_id}}'){
+            $('.holiday_result_box tbody').append("<tr><td>{{data.off_start}}</td><td>{{data.off_end}}</td><td>{{data.day_off_type}}</td><td>{{data.is_paid}}</td><td><form action=\"{% url 'delete_staff_holiday' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete'></form></td></tr>");
+        }
+        
+        {% endfor %}
+    })
+
 
 </script>

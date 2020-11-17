@@ -94,14 +94,13 @@ class Staff():
     def get_staff_working():
         try:
             cursor = connection.cursor()
-            sqlStr = "select staff_id, x_day, work_time_start, work_time_end from page_staff_working_info"
+            sqlStr = "select staff_id, x_day, work_time_start, work_time_end, id from page_staff_working_info"
             result = cursor.execute(sqlStr)
             datas = cursor.fetchall()
             connection.close()
             output_data = []
-            print(datas)
             for data in datas:
-                output_data.append({"staff_id":datas[0],"x_day":datas[1],"work_time_start":datas[2],"work_time_end":datas[3]})
+                output_data.append({"staff_id":data[0],"x_day":data[1],"work_time_start":data[2],"work_time_end":data[3],"id":data[4]})
             return output_data
         except:
             connection.close()
@@ -110,16 +109,75 @@ class Staff():
     def get_staff_holiday():
         try:
             cursor = connection.cursor()
-            sqlStr = "select staff_id, off_start, off_end, day_off_type, is_paid from page_staff_day_off_info"
+            sqlStr = "select staff_id, off_start, off_end, day_off_type, is_paid, id from page_staff_day_off_info"
             result = cursor.execute(sqlStr)
             datas = cursor.fetchall()
             connection.close()
             output_data = []
-            print(datas)
             for data in datas:
-                output_data.append({"staff_id":datas[0],"off_start":datas[1],"off_end":datas[2],"day_off_type":datas[3],"is_paid":datas[4]})
+                output_data.append({"staff_id":data[0],"off_start":data[1],"off_end":data[2],"day_off_type":data[3],"is_paid":data[4], "id":data[5]})
             return output_data
         except:
             connection.close()
             return None
+    
+    def insert_staff_working(dataDir):
+        try:
+            cursor = connection.cursor()
+            sqlStr = f"insert into page_staff_working_info(staff_id,x_day,work_time_start,work_time_end) values ('{dataDir['staff_id']}','{dataDir['x_day']}','{dataDir['work_time_start']}','{dataDir['work_time_end']}')"
+            cursor.execute(sqlStr)
+            cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+        return False
 
+    def insert_staff_holiday(dataDir):
+        try:
+            cursor = connection.cursor()
+            sqlStr = f"insert into page_staff_day_off_info(staff_id,off_start,off_end,day_off_type,is_paid) values ('{dataDir['staff_id']}','{dataDir['off_start']}','{dataDir['off_end']}','{dataDir['day_off_type']}','{dataDir['is_paid']}')"
+            cursor.execute(sqlStr)
+            cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+        return False
+
+    def delete_staff_working(dataDir):
+        try:
+            cursor = connection.cursor()
+            sqlStr = f"delete from page_staff_working_info where id={dataDir['id']}"
+            cursor.execute(sqlStr)
+            cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+        return False
+
+    def delete_staff_holiday(dataDir):
+        try:
+            cursor = connection.cursor()
+            sqlStr = f"delete from page_staff_day_off_info where id={dataDir['id']}"
+            print(sqlStr)
+            cursor.execute(sqlStr)
+            cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+        return False

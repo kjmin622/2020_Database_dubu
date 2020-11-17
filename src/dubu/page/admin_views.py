@@ -116,3 +116,27 @@ def edit_staff(request):
     if(request.method=="POST"):
         Staff.edit_staff(request.POST)
     return redirect('manage_staff')
+
+@csrf_exempt
+def insert_staff_working(request):
+    if(request.method=="POST"):
+        Staff.insert_staff_working(request.POST)
+    return redirect('manage_staff')
+
+@csrf_exempt
+def insert_staff_holiday(request):
+    if(request.method=="POST"):
+        Staff.insert_staff_holiday(request.POST)
+    return redirect('manage_staff')
+
+@csrf_exempt
+def delete_staff_working(request):
+    if(request.method=="POST"):
+        Staff.delete_staff_working(request.POST)
+    return redirect('manage_staff')
+
+@csrf_exempt
+def delete_staff_holiday(request):
+    if(request.method=="POST"):
+        Staff.delete_staff_holiday(request.POST)
+    return redirect('manage_staff')
