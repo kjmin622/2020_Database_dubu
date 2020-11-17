@@ -9,8 +9,8 @@ class account_info(models.Model):
 
 class purchase_slip(models.Model):
     purchase_id = models.CharField(max_length=100, primary_key=True)   
-    order_date = models.DateTimeField()    
-    delivery_date = models.DateTimeField()    
+    order_date = models.CharField(max_length=20)   
+    delivery_date = models.CharField(max_length=20)    
     is_purchase = models.BooleanField()    
     staff_id = models.CharField(max_length=100)    
 
@@ -36,8 +36,8 @@ class rooms(models.Model):
 class engineering(models.Model):
     facility_id = models.CharField(max_length=100, primary_key=True)   
     facility_name = models.CharField(max_length=30)    
-    check_date = models.DateTimeField()    
-    check_limit = models.DateTimeField()    
+    check_date = models.CharField(max_length=20)    
+    check_limit = models.CharField(max_length=20)  
     status = models.CharField(max_length=100) 
 
 
@@ -61,16 +61,16 @@ class room_type(models.Model):
 class event(models.Model):
     event_id = models.CharField(max_length=100, primary_key=True)   
     event_name = models.CharField(max_length=30)   
-    start_date = models.DateTimeField()    
-    end_date = models.DateTimeField()    
+    start_date = models.CharField(max_length=20) 
+    end_date = models.CharField(max_length=20)   
     contents = models.CharField(max_length=2000) 
 
 
 class booking(models.Model):
     booking_id = models.CharField(max_length=100, primary_key=True)   
     is_check_in = models.BooleanField()    
-    check_in = models.DateTimeField()    
-    check_out = models.DateTimeField()   
+    check_in = models.CharField(max_length=20)    
+    check_out = models.CharField(max_length=20)  
 
 
 class member_info(models.Model):
@@ -81,7 +81,7 @@ class member_info(models.Model):
     first_name = models.CharField(max_length=30)
     phone = models.CharField(max_length=100) 
     membership = models.CharField(max_length=30)    
-    birth = models.DateTimeField()    
+    birth = models.CharField(max_length=20)  
     is_sms = models.BooleanField()    
        
     
@@ -91,7 +91,7 @@ class card_info(models.Model):
     card_id = models.CharField(max_length=100, primary_key=True)   
     bank = models.CharField(max_length=30)    
     cvc = models.IntegerField()  
-    expiration_date = models.DateTimeField()    
+    expiration_date = models.CharField(max_length=20)  
     card_number1 = models.BooleanField()    
     card_number2 = models.BooleanField()    
     card_number3 = models.BooleanField()    
@@ -158,8 +158,8 @@ class card_list(models.Model):
 
 class invoice(models.Model):
     product_id = models.CharField(max_length=100)   
-    order_time = models.DateTimeField()    
-    offer_time = models.DateTimeField(null=True)    
+    order_time = models.CharField(max_length=20) 
+    offer_time = models.CharField(max_length=20)   
     is_payment = models.BooleanField()    
     count = models.IntegerField()  
     booking_id = models.CharField(max_length=100)   
@@ -209,14 +209,14 @@ class customer_phone(models.Model):
 class staff_working_info(models.Model):
     staff_id = models.CharField(max_length=100)   
     x_day= models.CharField(max_length=30)    
-    work_time_start = models.DateTimeField()    
-    work_time_end = models.DateTimeField()    
+    work_time_start = models.CharField(max_length=20)   
+    work_time_end = models.CharField(max_length=20)  
 
 
 class staff_day_off_info(models.Model):
     staff_id = models.CharField(max_length=100)   
-    off_start = models.DateTimeField() 
-    off_end = models.DateTimeField()   
+    off_start = models.CharField(max_length=20) 
+    off_end = models.CharField(max_length=20) 
     day_off_type = models.CharField(max_length=100)   
     is_paid = models.BooleanField()    
 
@@ -228,6 +228,6 @@ class team_staff(models.Model):
 
 class bill(models.Model):
     booking_id = models.CharField(max_length=100)  
-    paytime = models.DateTimeField()    
+    paytime = models.CharField(max_length=20)    
     payment = models.CharField(max_length=30)    
     card_id = models.CharField(max_length=100, null=True)   
