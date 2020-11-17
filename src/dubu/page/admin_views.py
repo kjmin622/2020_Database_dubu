@@ -11,7 +11,7 @@ from .tools import *
 
 def admin(request):
     if("staff_id" not in request.session or request.session["staff_id"] is None):
-        return adminLogin(request)
+        return redirect('admin_login')
     return render(request,'admin/admin_index.html',{})
 
 def adminLogin(request):
@@ -20,13 +20,13 @@ def adminLogin(request):
     if(request.method == "POST"):
         staffId = request.POST["staff_id"]
         cursor = connection.cursor()
-        strSql = "select * from page_staff where staff_id="+staffId
+        strSql = "select * from page_staff where staff_id='"+staffId+"'"
         result = cursor.execute(strSql)
         books = cursor.fetchall()
         connection.close()
         if(books):
             request.session["staff_id"]=staffId
-            return admin(request)
+            return redirect('admin')
         else:
             return render(request,'admin/admin_login.html')
     else:
