@@ -6,11 +6,17 @@
     width:60%;
     
 }
-
+/* sub title 틀  */
+.sub_title{
+    font-size: 30px;
+    padding-top: 10px;
+    padding-left: 30px;
+}
 
 .m_back{
     background-color: dimgray;
 }
+
 *{
     margin:0px;
     padding: 0px;

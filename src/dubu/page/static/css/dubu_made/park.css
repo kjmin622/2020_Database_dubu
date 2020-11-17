@@ -1,21 +1,17 @@
-/* product 틀 */
+/* parking 틀 */
 *{
     margin: 0px;
     padding:0px;
 }
 
+body{
+    /* background-color: black; */
+}
 .s_i_s{
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
     justify-content: space-around;
-}
-
-
-
-.bold_test_product{
-    border: 2px dotted;
-    border-color: aqua;
 }
 
 .bold_sec{
@@ -29,13 +25,7 @@
     padding-bottom: 40px;
 }
 
-body{
-    /* background-color: rgb(182, 182, 182); */
-}
 
 
-/* 재고 현황 및 수정 */
 
-/* 발주 신청 */
 
-/* 발주 현황 */
