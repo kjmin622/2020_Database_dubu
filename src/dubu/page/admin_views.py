@@ -114,3 +114,4 @@ def edit_staff(request):
     if(request.method=="POST"):
         Staff.edit_staff(request.POST)
     return redirect('manage_staff')
+
