@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
   </head>
   <body>
   
@@ -57,7 +60,8 @@
 
 {% comment %} top : title + background {% endcomment %}
     <section class="home-slider owl-carousel">
-      <div class="slider-item" style=" background-image:url({% static 'images/bg_1.jpg' %});">
+    {% comment %} style=" background-image:url({% static 'images/bg_1.jpg' %});" {% endcomment %}
+      <div class="slider-item m_back" >
       	<div class="overlay"></div>
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center">

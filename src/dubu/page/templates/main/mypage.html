@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
   </head>
   <body>
 
@@ -59,8 +62,9 @@
 <!-- END nav -->
 
 {% comment %} top : title + background {% endcomment %}
-    <div class="hero-wrap" style="background-image: url({% static 'images/bg_1.jpg'%});">
-      <div class="overlay"></div>
+{% comment %} style="background-image: url({% static 'images/bg_1.jpg'%});" {% endcomment %}
+  <div class="hero-wrap m_back" >
+    <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
