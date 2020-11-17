@@ -5,7 +5,7 @@
         <style>
             .manageBox{
                 position:relative;
-                width:900px;
+                width:1350px;
                 overflow:scroll;
                 border:solid 1px black;
                 padding:20px;
@@ -15,7 +15,7 @@
             }
             .resultBox{
                 position: relative;
-                width: 750px;
+                width: 1310px;
                 height:250px;
                 overflow:scroll;
                 border:solid 1px black;
@@ -55,23 +55,23 @@
                     </thead>
                     <tbody>
                     {% for data in datas %}
-                    <TR><TD>{{data.staff_id}}</TD>
-                        <TD class="staff_info_name">{{data.last_name}} {{data.first_name}}</TD>
-                        <TD>{{data.rank}}</TD>
-                        <TD>{{data.depart_id}}</TD>
-                        <TD>{{data.team}}</TD>
-                        <TD>{{data.status}}</TD>
-                        <TD>{{data.bank}}</TD>
-                        <TD>{{data.account}}</TD>
-                        <TD>{{data.phone}}</TD>
-                        <TD>{{data.wide_area_unit}} {{data.basic_unit}} {{data.street}} {{data.si_gu}} {{data.eub_myeon}} {{data.building_number}} {{data.detail_address}}</TD>
-                        <TD><input type="button" value="edit" id="edit_btn" name="edit_{{data.staff_id}}"></TD>
-                        <TD><input type="button" value="근무일 보기/수정"></TD>
-                        <TD><input type="button" value="휴가일 보기/수정"></TD>
-                        <TD><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                    <tr><td>{{data.staff_id}}</td>
+                        <td class="staff_info_name">{{data.last_name}} {{data.first_name}}</td>
+                        <td>{{data.rank}}</td>
+                        <td>{{data.depart_id}}</td>
+                        <td>{{data.team}}</td>
+                        <td>{{data.status}}</td>
+                        <td>{{data.bank}}</td>
+                        <td>{{data.account}}</td>
+                        <td>{{data.phone}}</td>
+                        <td>{{data.wide_area_unit}} {{data.basic_unit}} {{data.street}} {{data.si_gu}} {{data.eub_myeon}} {{data.building_number}} {{data.detail_address}}</td>
+                        <td><input type="button" value="edit" class="edit_btn" name="edit_{{data.staff_id}}"></td>
+                        <td><input type="button" value="근무일 보기/수정"></td>
+                        <td><input type="button" value="휴가일 보기/수정"></td>
+                        <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
                             <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
-                            <input type="submit" value="delete" class="delete_btn"></form></TD>
-                        </TR>
+                            <input type="submit" value="delete" class="delete_btn"></form></td>
+                        </tr>
                     {% endfor %}
                     </tbody>
                 </table>
@@ -122,12 +122,12 @@
         $(".popup").css("display","none");
     })
 
-    $("#edit_btn").click(function(){
+    $(".edit_btn").click(function(){
         $(".fullscreen").css("display","block");
         $(".staff_info_edit").css("display","block");
         var staff_id = $(this).attr('name').slice(5);
         {% for data in datas %}
-        if(staff_id == {{data.staff_id}}){
+        if(staff_id == '{{data.staff_id}}'){
             $('#staff_edit_input_staff_id').attr('value','{{data.staff_id}}')
             $('#staff_edit_input_rank').attr('value','{{data.rank}}')
             $('#staff_edit_input_status').attr('value','{{data.status}}')
