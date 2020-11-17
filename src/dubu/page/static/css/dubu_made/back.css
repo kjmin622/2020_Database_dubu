@@ -1,3 +1,13 @@
+
+
+/* div 기본 셋팅 */
+.staff_s_div{
+    padding: 10px;
+    width:60%;
+    
+}
+
+
 .m_back{
     background-color: dimgray;
 }
@@ -15,12 +25,6 @@
 .test{
     width: 200px;
     height: 200px;
-}
-
-/* div 기본 셋팅 */
-.staff_s_div{
-    padding: 10px;
-    width:60%;
 }
 
 .row_c{
