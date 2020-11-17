@@ -1,0 +1,151 @@
+<html>
+    <head>
+        <title>login</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <style>
+            .manageBox{
+                position:relative;
+                width:1350px;
+                overflow:scroll;
+                border:solid 1px black;
+                padding:20px;
+            }
+            .searchBox h4{
+                display:inline;
+            }
+            .resultBox{
+                position: relative;
+                width: 1310px;
+                height:250px;
+                overflow:scroll;
+                border:solid 1px black;
+                margin-top:20px;
+            }
+            .resultList{
+                list-style: none;
+            }
+            .resultList li div{
+                display:inline;
+            }
+            table,th,td{
+                border:solid 1px gray;
+                white-space:nowrap;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="manageBox staff_work_box">
+            <h3>직원근무관리</h3>
+            <div class="searchBox">
+                <h4>객실번호</h4>
+                <input type="search" placeholder="search">
+            </div>
+            <div class="resultBox"></div>
+        </div>
+        <div class="manageBox staff_info_box">
+            <h3>직원정보관리</h3>
+            <div class="searchBox">
+                <h4>name</h4>
+                <input type="text" placeholder="search" id="staff_info_search">
+            </div>
+            <div class="resultBox">
+                <table id="staff_result_tab">
+                    <thead>
+                    <th>staff_id</th><th>name</th><th>rank</th><th>depart_id</th><th>team</th><th>status</th><th>bank</th><th>account</th><th>phone</th><th>address</th><th>edit</th><th>working_time</th><th>holiday</th><th>delete</th>
+                    </thead>
+                    <tbody>
+                    {% for data in datas %}
+                    <tr><td>{{data.staff_id}}</td>
+                        <td class="staff_info_name">{{data.last_name}} {{data.first_name}}</td>
+                        <td>{{data.rank}}</td>
+                        <td>{{data.depart_id}}</td>
+                        <td>{{data.team}}</td>
+                        <td>{{data.status}}</td>
+                        <td>{{data.bank}}</td>
+                        <td>{{data.account}}</td>
+                        <td>{{data.phone}}</td>
+                        <td>{{data.wide_area_unit}} {{data.basic_unit}} {{data.street}} {{data.si_gu}} {{data.eub_myeon}} {{data.building_number}} {{data.detail_address}}</td>
+                        <td><input type="button" value="edit" class="edit_btn" name="edit_{{data.staff_id}}"></td>
+                        <td><input type="button" value="근무일 보기/수정"></td>
+                        <td><input type="button" value="휴가일 보기/수정"></td>
+                        <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                            <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
+                            <input type="submit" value="delete" class="delete_btn"></form></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="addStaffBox">
+                <form action="{% url 'insert_staff' %}" method="POST">
+                    {% for s in names %}
+                    <input type="text" name="{{s}}" placeholder="{{s}}">
+                    {% endfor %}
+                    <input type="submit" value="add">
+                </form>
+            </div>
+        </div>
+
+        <!-- popup -->
+        <div class="fullscreen popup" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.5)"></div>
+        <div class="staff_info_edit popup" style="display:none;z-index: 100; position:fixed; width:250px; height:700px; padding:20px;left:50%; top:50%; transform:translate(-125px,-350px); background-color:rgba(255,255,255,0.8)">
+            <form action="{% url 'edit_staff' %}" method="POST">
+            {% for s in names %}
+            {% if s != 'staff_id' %}
+            <div style="display:block">
+            <label style="display:block; margin-top:2px; margin-bottom:-2px">{{s}}</label>
+            <input type="text" id="staff_edit_input_{{s}}" name="{{s}}" placeholder="{{s}}">
+            </div>
+            {% else %}
+            <input type="text" id="staff_edit_input_staff_id" name="staff_id" readonly>
+            {% endif %}
+            {% endfor %}
+            <input type="submit" value="edit">
+        </div>
+
+        </div>
+            
+        </div>
+    </body>
+</html>
+<script>
+    $(document).ready(function() {
+        $("#staff_info_search").keyup(function() {
+            var k = $(this).val();
+            $("#staff_result_tab > tbody > tr").hide();
+            var temp = $(".staff_info_name:contains('" + k + "')");
+
+            $(temp).parent().show();
+        })
+    })
+    $(".fullscreen").click(function(){
+        $(".popup").css("display","none");
+    })
+
+    $(".edit_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_info_edit").css("display","block");
+        var staff_id = $(this).attr('name').slice(5);
+        {% for data in datas %}
+        if(staff_id == '{{data.staff_id}}'){
+            $('#staff_edit_input_staff_id').attr('value','{{data.staff_id}}')
+            $('#staff_edit_input_rank').attr('value','{{data.rank}}')
+            $('#staff_edit_input_status').attr('value','{{data.status}}')
+            $('#staff_edit_input_depart_id').attr('value','{{data.depart_id}}')
+            $('#staff_edit_input_team').attr('value','{{data.team}}')
+            $('#staff_edit_input_first_name').attr('value','{{data.first_name}}')
+            $('#staff_edit_input_last_name').attr('value','{{data.last_name}}')
+            $('#staff_edit_input_phone').attr('value','{{data.phone}}')
+            $('#staff_edit_input_bank').attr('value','{{data.bank}}')
+            $('#staff_edit_input_account').attr('value','{{data.account}}')
+            $('#staff_edit_input_wide_area_unit').attr('value','{{data.wide_area_unit}}')
+            $('#staff_edit_input_street').attr('value','{{data.street}}')
+            $('#staff_edit_input_basic_unit').attr('value','{{data.basic_unit}}')
+            $('#staff_edit_input_si_gu').attr('value','{{data.si_gu}}')
+            $('#staff_edit_input_eub_myeon').attr('value','{{data.eub_myeon}}')
+            $('#staff_edit_input_building_number').attr('value','{{data.building_number}}')
+            $('#staff_edit_input_detail_address').attr('value','{{data.detail_address}}')
+        }
+        {% endfor %}
+    })
+</script>

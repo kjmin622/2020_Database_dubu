@@ -4,7 +4,10 @@ from django.contrib.auth import authenticate
 from django.db import connection
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import resolve_url
+from django.shortcuts import redirect
 from .models import *
+from .tools import *
 
 def admin(request):
     if("staff_id" not in request.session or request.session["staff_id"] is None):
@@ -63,6 +66,7 @@ def manage_depart(request):
     return render(request,'admin/manage_depart.html',{'datas':datas})
 
 
+<<<<<<< HEAD
 # admin
 def staff(request):
     return render(request,'admin/staff.html',{})
@@ -84,3 +88,32 @@ def engineer(request):
 
 def staff_search(request):
     return render(request,'admin/staff_search.html',{})
+=======
+
+        # staff_id, rank, status, depart_id, first_name, last_name, phone, bank, account,
+        # wide_area_unit, street, basic_unit, si_gu, eub_myeon, building_number, detail_address
+def manage_staff(request):
+    datas = staff.get_staff()
+    names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
+    return render(request,'admin/manage_staff.html',{'datas':datas, 'names':names})
+
+@csrf_exempt
+def delete_staff(request):
+    if(request.method=="POST"):
+        staff.delete_staff(request.POST)
+    
+    return redirect('manage_staff')
+
+@csrf_exempt
+def insert_staff(request):
+    if(request.method=="POST"):
+        staff.insert_staff(request.POST)
+    
+    return redirect('manage_staff')
+
+@csrf_exempt
+def edit_staff(request):
+    if(request.method=="POST"):
+        staff.edit_staff(request.POST)
+    return redirect('manage_staff')
+>>>>>>> develop
