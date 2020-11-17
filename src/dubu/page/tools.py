@@ -1,7 +1,7 @@
 from .models import *
 from django.db import connection
 
-class staff():
+class Staff():
     
     def get_staff(dataDir={}):
         try:

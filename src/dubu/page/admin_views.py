@@ -66,7 +66,6 @@ def manage_depart(request):
     return render(request,'admin/manage_depart.html',{'datas':datas})
 
 
-<<<<<<< HEAD
 # admin
 def staff(request):
     return render(request,'admin/staff.html',{})
@@ -88,32 +87,30 @@ def engineer(request):
 
 def staff_search(request):
     return render(request,'admin/staff_search.html',{})
-=======
 
         # staff_id, rank, status, depart_id, first_name, last_name, phone, bank, account,
         # wide_area_unit, street, basic_unit, si_gu, eub_myeon, building_number, detail_address
 def manage_staff(request):
-    datas = staff.get_staff()
+    datas = Staff.get_staff()
     names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
     return render(request,'admin/manage_staff.html',{'datas':datas, 'names':names})
 
 @csrf_exempt
 def delete_staff(request):
     if(request.method=="POST"):
-        staff.delete_staff(request.POST)
+        Staff.delete_staff(request.POST)
     
     return redirect('manage_staff')
 
 @csrf_exempt
 def insert_staff(request):
     if(request.method=="POST"):
-        staff.insert_staff(request.POST)
+        Staff.insert_staff(request.POST)
     
     return redirect('manage_staff')
 
 @csrf_exempt
 def edit_staff(request):
     if(request.method=="POST"):
-        staff.edit_staff(request.POST)
+        Staff.edit_staff(request.POST)
     return redirect('manage_staff')
->>>>>>> develop
