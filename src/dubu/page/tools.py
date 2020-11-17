@@ -90,4 +90,34 @@ class Staff():
             connection.rollback()
             connection.close()
             return False
+    
+    def get_staff_working():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select staff_id, x_day, work_time_start, work_time_end from page_staff_working_info"
+            result = cursor.execute(sqlStr)
+            datas = cursor.fetchall()
+            connection.close()
+            output_data = []
+            for data in datas:
+                output_data.append({"staff_id":datas[0],"x_day":datas[1],"work_time_start":datas[2],"work_time_end":datas[3]})
+            return output_data
+        except:
+            connection.close()
+            return None
+
+    def get_staff_holiday():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select staff_id, off_start, off_end, day_off_type, is_paid from page_staff_working_info"
+            result = cursor.execute(sqlStr)
+            datas = cursor.fetchall()
+            connection.close()
+            output_data = []
+            for data in datas:
+                output_data.append({"staff_id":datas[0],"x_day":datas[1],"work_time_start":datas[2],"work_time_end":datas[3]})
+            return output_data
+        except:
+            connection.close()
+            return None
 
