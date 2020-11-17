@@ -66,8 +66,8 @@
                         <td>{{data.phone}}</td>
                         <td>{{data.wide_area_unit}} {{data.basic_unit}} {{data.street}} {{data.si_gu}} {{data.eub_myeon}} {{data.building_number}} {{data.detail_address}}</td>
                         <td><input type="button" value="edit" class="edit_btn" name="edit_{{data.staff_id}}"></td>
-                        <td><input type="button" value="근무일 보기/수정"></td>
-                        <td><input type="button" value="휴가일 보기/수정"></td>
+                        <td><input type="button" value="근무일 보기/수정" class="working_btn" name="working_{{data.staff_id}}"></td>
+                        <td><input type="button" value="휴가일 보기/수정" class="holiday_btn"></td>
                         <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
                             <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
                             <input type="submit" value="delete" class="delete_btn"></form></td>
@@ -102,9 +102,17 @@
             {% endfor %}
             <input type="submit" value="edit">
         </div>
-        <div class="staff_working popup" stype="z-index:100;position:fixed;width:300px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-150px,-300px);background-color:rgba(255,255,255,0.8);">
+        <div class="staff_working popup" style="z-index:100;position:fixed;width:300px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-150px,-300px);background-color:rgba(255,255,255,0.8);">
             <div>
-                <ul class="popup_result_box"></ul>
+                <table class="working_result_box">
+                    <thead><th> start </th><th>end</th><th>Xday</th><th>delete</th></thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                
             </div>
         </div>
 
@@ -153,4 +161,17 @@
         }
         {% endfor %}
     })
+
+    $(".working_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_working").css("display","block");
+        var staff_id = $(this).attr('name').slice(8);
+        {% for data in working_datas %}
+        console.log(staff_id, '{{data.staff_id}}');
+        if(staff_id == '{{data.staff_id}}'){
+            $('.working_result_box').append("<tr><td>a</td><td>b</td><td>c</td><td>d</td></tr>");
+        }
+        {% endfor %}
+    })
+
 </script>
