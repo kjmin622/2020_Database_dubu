@@ -7,17 +7,8 @@ urlpatterns = [
     path('',views.index,name="index"),
     path('about',views.about,name="about"),
     path('rooms',views.rooms,name="rooms"),
-<<<<<<< HEAD
     path('login',views.login,name="login"),
     path('signup',views.signup,name="signup"),
-=======
-    path('reservation',views.reservation,name="reservation"),
-    path('join',views.join,name="join"),
-    path('event',views.event,name="event"),
-    path('login',views.login,name="login"),
-    path('mypage',views.mypage,name="mypage"),
- 
->>>>>>> develop
 
     #admin
     path('admin',admin_views.admin,name="admin"),
