@@ -2,24 +2,31 @@ from .models import *
 from django.db import connection
 
 class Staff():
-    
-    def get_staff(dataDir={}):
+
+    def get_staff(staff_id=""):
         try:
-            if(dataDir=={}):
-                cursor = connection.cursor()
-                #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
-                sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name,depart_name,position from page_depart natural join (select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id)))"
-                result = cursor.execute(sqlStr)
-                datas = cursor.fetchall()
-                connection.close()
+            cursor = connection.cursor()
+            #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
+            sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name,depart_name,position from page_depart natural join (select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id)))"
+            result = cursor.execute(sqlStr)
+            datas = cursor.fetchall()
+            connection.close()
 
-                output_data = []
+            if(staff_id!=""):
                 for data in datas:
-                    output_data.append({'staff_id':data[0], 'first_name':data[1], 'last_name':data[2], 'rank':data[3],
-                                        'depart_id':data[4], 'status':data[5], 'bank':data[6], 'account':data[7],
-                                        'phone':data[8],'wide_area_unit':data[9],'basic_unit':data[10],'street':data[11],'si_gu':data[12],'eub_myeon':data[13],'buildding_number':data[14],'detail_address':data[15], 'team':data[16], 'depart_name':data[17],'depart_position':data[18]})
+                    if(data[0]==staff_id):
+                        return {'staff_id':data[0], 'first_name':data[1], 'last_name':data[2], 'rank':data[3],
+                                    'depart_id':data[4], 'status':data[5], 'bank':data[6], 'account':data[7],
+                                    'phone':data[8],'wide_area_unit':data[9],'basic_unit':data[10],'street':data[11],'si_gu':data[12],'eub_myeon':data[13],'buildding_number':data[14],'detail_address':data[15], 'team':data[16], 'depart_name':data[17],'depart_position':data[18]}
+                return None
 
-                return output_data
+            output_data = []
+            for data in datas:
+                output_data.append({'staff_id':data[0], 'first_name':data[1], 'last_name':data[2], 'rank':data[3],
+                                    'depart_id':data[4], 'status':data[5], 'bank':data[6], 'account':data[7],
+                                    'phone':data[8],'wide_area_unit':data[9],'basic_unit':data[10],'street':data[11],'si_gu':data[12],'eub_myeon':data[13],'buildding_number':data[14],'detail_address':data[15], 'team':data[16], 'depart_name':data[17],'depart_position':data[18]})
+
+            return output_data
 
         except:
             connection.rollback()
@@ -125,7 +132,12 @@ class Staff():
     def insert_staff_working(dataDir):
         try:
             cursor = connection.cursor()
-            sqlStr = f"insert into page_staff_working_info(staff_id,x_day,work_time_start,work_time_end) values ('{dataDir['staff_id']}','{dataDir['x_day']}','{dataDir['work_time_start']}','{dataDir['work_time_end']}')"
+            staff_id=dataDir['staff_id'];x_day=dataDir['x_day'].lower();start=dataDir['work_time_start'];end=dataDir['work_time_end']
+            day = ["mon","tues","wednes",'thurs','fri','satur','sun']
+            if(x_day.split('_')[0] not in day): raise(ValueError)
+            start_h,start_m = list(map(int,start.split(':')))
+            end_h,end_m = list(map(int,start.split(':')))
+            sqlStr = f"insert into page_staff_working_info(staff_id,x_day,work_time_start,work_time_end) values ('{staff_id}','{x_day}','{start}','{end}')"
             cursor.execute(sqlStr)
             cursor.fetchall()
             connection.commit()
@@ -183,3 +195,36 @@ class Staff():
             connection.close()
             return False
         return False
+    
+    def staff_login_check(request):
+        if("staff_id" not in request.session.keys() or request.session["staff_id"] is None):
+            return False
+        return True
+
+    def staff_working_day(staff_id):
+        try:
+            cursor = connection.cursor()
+            sqlStr = f"select x_day,work_time_start,work_time_end from page_staff_working_info where staff_id='{staff_id}'"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            connection.close()
+            datas = []
+            for data in result:
+                try:
+                    datas.append({'x_day':data[0].split('_')[0],'start':data[1],'end':data[2]})
+                except:
+                    pass
+            output = {"mon":[],"tues":[],"wednes":[],'thurs':[],'fri':[],'satur':[],'sun':[]}
+            days = ["mon","tues","wednes",'thurs','fri','satur','sun']
+            for day in days:
+                for data in datas:
+                    if(data['x_day']==day):
+                        output[day].append(data['start']+'~'+data['end'])
+            return output
+        except:
+            connection.close()
+            return None
+
+
+            
+

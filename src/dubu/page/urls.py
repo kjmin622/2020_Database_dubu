@@ -15,7 +15,6 @@ urlpatterns = [
  
 
     #admin
-    path('admin',admin_views.admin,name="admin"),
     path('admin/login',admin_views.adminLogin,name="admin_login"),
     path('admin/logout',admin_views.adminLogout,name="admin_logout"),
     path('admin/manage_depart',admin_views.manage_depart,name="manage_depart"),

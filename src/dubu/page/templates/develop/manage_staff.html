@@ -133,9 +133,15 @@
             <div>
                 <form action="{% url 'insert_staff_working' %}" method="POST">
                     <input type="text" style="display: none" name="staff_id" class="work_sid" readonly>
-                    <input type="text" name="work_time_start" placeholder="starttime(00:00:00)">
-                    <input type="text" name="work_time_end" placeholder="endtime(00:00:00)">
-                    <input type="text" name="x_day" placeholder="x_day(***_day)">
+                    <input type="text" name="work_time_start" placeholder="starttime(00:00)">
+                    <input type="text" name="work_time_end" placeholder="endtime(00:00)"><br>
+                    <input type="radio" name="x_day" value="sun_day" checked>sun_day
+                    <input type="radio" name="x_day" value="mon_day">mon_day
+                    <input type="radio" name="x_day" value="tues_day">tues_day<br>
+                    <input type="radio" name="x_day" value="wednes_day">wednes_day
+                    <input type="radio" name="x_day" value="thurs_day">thurs_day
+                    <input type="radio" name="x_day" value="fri_day">fri_day<br>
+                    <input type="radio" name="x_day" value="satur_day">satur_day
                     <input type="submit" value="add">
                 </form>
             </div>
