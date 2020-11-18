@@ -32,6 +32,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/room_s.css' %}">  
 
   </head>
   <body>
@@ -76,12 +77,66 @@
     </div>
 {% comment %} end top {% endcomment %}
 
-{% comment %} test  {% endcomment %}
-	<section class="test1">
-        <h1>Room select</h1>
-    </section>
+{% comment %} main section  {% endcomment %}
+<div class="staff_s_a">
+<!-- 예약자에 대한 대한 정보를 입력하는 section-->
+  <section class="search_room  row_c" >
 
-    
+      <div class="staff_s_div bold_sec">
+
+        <div class="sub_title">Reservation Input</div>
+        <div class="room_select_input">
+          {% comment %} 예약정보를 입력합니다. {% endcomment %}
+          <div class="reservation_input">Name</div>
+          <div class="reservation_input">Phone_num</div>
+          <div class="reservation_input">Reservation_num</div>
+          <div class="reservation_input">Click!</div>
+        </div>
+
+      </div>
+
+  </section>
+
+  <div class="row_c">
+    <div class="room_select_output staff_s_div">
+
+      <!-- 손님의 예약 정보 -->
+      <section class="reservation_info" >
+
+          <div class="bold_sec o_1">
+
+            <div class="sub_title_select">reservation Info</div>
+
+            {% comment %} 예약자의 예약정보를 출력합니다. {% endcomment %}
+            <div class="reservation_output">
+              <div>인원</div>
+              <div>객실 수</div>
+              <div>추가 요첨 사항</div>
+            </div>
+
+          </div>
+
+      </section>
+      <!-- 투숙 가능한 방의 정보 -->
+      
+      <section class="room_info" >
+
+          <div class="bold_sec o_1">
+
+            <div class="sub_title_select">Room List</div>
+
+            <div class="output_room_list">
+              <div>Room Num</div>
+              <div>Room Num</div>
+              <div>Room Num</div>
+            </div>
+
+          </div>
+
+      </section>
+    </div>
+  </div>
+</div>
 
 
 

@@ -32,6 +32,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/m_index.css' %}">
   </head>
   <body>
   
@@ -51,7 +52,7 @@
             <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">Join/My page</a></li>
             {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
             <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
-            <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li>
+            {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
 	        </ul>
 	      </div>
 	    </div>
@@ -59,36 +60,37 @@
 <!-- END nav -->
 
 {% comment %} top : title + background {% endcomment %}
-    <section class="home-slider owl-carousel">
+  <section class=" home-slider owl-carousel " style="min-height:1000px" >
     {% comment %} style=" background-image:url({% static 'images/bg_1.jpg' %});" {% endcomment %}
-      <div class="slider-item m_back" >
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-12 ftco-animate text-center">
-          	<div class="text mb-5 pb-3">
-	            <h1 class="mb-3">Welcome To DuBu</h1>
-	            <h2>Hotels</h2>
+      <div class="slider-item m_back " style="min-height:1000px" >
+        <div class="overlay "></div>
+        <div class="container ">
+          <div class="row no-gutters slider-text align-items-center justify-content-center ">
+          <div class="col-md-12 ftco-animate text-center ">
+            <div class="text mb-5 pb-3 ">
+              <h1 class="mb-3 ">Welcome To DuBu</h1>
+              <h2>Hotels</h2>
             </div>
           </div>
         </div>
         </div>
       </div>
 
-      <div class="slider-item" style="background-image:url({% static 'images/bg_2.jpg' %});">
-      	<div class="overlay"></div>
-        <div class="container">
-          <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-12 ftco-animate text-center">
-          	<div class="text mb-5 pb-3">
-	            <h1 class="mb-3">Enjoy A Luxury Experience</h1>
-	            <h2>Join With Us</h2>
+    {% comment %} style=" background-image:url({% static 'images/bg_1.jpg' %});" {% endcomment %}
+      <div class="slider-item m_back  " style="min-height:1000px">
+        <div class="overlay "></div>
+        <div class="container ">
+          <div class="row no-gutters slider-text align-items-center justify-content-center ">
+          <div class="col-md-12 ftco-animate text-center ">
+            <div class="text mb-5 pb-3 ">
+              <h1 class="mb-3 ">Enjoy A Luxury Experience</h1>
+              <h2>Join With Us</h2>
             </div>
           </div>
         </div>
         </div>
       </div>
-    </section>
+  </section>
 {% comment %} top : title + background {% endcomment %}
 
 {% comment %} 검색 입력 기능 시작 {% endcomment %}
@@ -166,98 +168,80 @@
     	</div>
     </section>
 
-
-    <!-- <section class="ftco-section ftc-no-pb ftc-no-pt">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/bg_2.jpg);">
-						<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
-							<span class="icon-play"></span>
-						</a>
-					</div>
-					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
-	          <div class="heading-section heading-section-wo-line pt-md-5 pl-md-5 mb-5">
-	          	<div class="ml-md-0">
-		          	<span class="subheading">Welcome to Deluxe Hotel</span>
-		            <h2 class="mb-4">Welcome To Our Hotel</h2>
-	            </div>
-	          </div>
-	          <div class="pb-md-5">
-							<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-							<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-							<ul class="ftco-social d-flex">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section> -->
-
-<!-- <section class="ftco-section">
-      <div class="container">
-        <div class="row d-flex">
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services py-4 d-block text-center">
-              <div class="d-flex justify-content-center">
-              	<div class="icon d-flex align-items-center justify-content-center">
-              		<span class="flaticon-reception-bell"></span>
-              	</div>
+{% comment %} main section  {% endcomment %}
+<div class="main_a ">
+    <section class="event_info">
+      <div class="about_main_title">Event</div>
+      <div id="slide">
+        <input type="radio" name="pos" id="pos1" checked>
+        <input type="radio" name="pos" id="pos2">
+        <input type="radio" name="pos" id="pos3">
+        <input type="radio" name="pos" id="pos4">
+        <ul class="t">
+          <li>
+            <div class="event_s e_test col_c">
+              <div class="sub_title_e">EVENT1</div>
+              <div class="info_e col_c">
+                  내용내용내용내용내용내용내용내용내용내용내용내용<br>
+                  내용내용내용내용내용내용내용내용내용내용내용내용
               </div>
-              <div class="media-body p-2 mt-2">
-                <h3 class="heading mb-3">25/7 Front Desk</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+          </li>
+          <li>
+            <div class="event_s e_test col_c">
+              <div class="sub_title_e">EVENT2</div>
+              <div class="info_e col_c">
+                  내용내용
+              
               </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services py-4 d-block text-center">
-              <div class="d-flex justify-content-center">
-              	<div class="icon d-flex align-items-center justify-content-center">
-              		<span class="flaticon-serving-dish"></span>
-              	</div>
+            </div>
+          </li>
+          <li>
+            <div class="event_s e_test col_c">
+              <div class="sub_title_e">EVENT3</div>
+              <div class="info_e col_c">
+                내용내용
               </div>
-              <div class="media-body p-2 mt-2">
-                <h3 class="heading mb-3">Restaurant Bar</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+          </li>
+          <li>
+            <div class="event_s e_test col_c">
+              <div class="sub_title_e">EVENT4</div>
+              <div class="info_e col_c">
+                내용내용
               </div>
-            </div>    
-          </div>
-          <div class="col-md-3 d-flex align-sel Searchf-stretch ftco-animate">
-            <div class="media block-6 services py-4 d-block text-center">
-              <div class="d-flex justify-content-center">
-              	<div class="icon d-flex align-items-center justify-content-center">
-              		<span class="flaticon-car"></span>
-              	</div>
-              </div>
-              <div class="media-body p-2 mt-2">
-                <h3 class="heading mb-3">Transfer Services</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services py-4 d-block text-center">
-              <div class="d-flex justify-content-center">
-              	<div class="icon d-flex align-items-center justify-content-center">
-              		<span class="flaticon-spa"></span>
-              	</div>
-              </div>
-              <div class="media-body p-2 mt-2">
-                <h3 class="heading mb-3">Spa Suites</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
-              </div>
-            </div>      
-          </div>
-        </div>
+            </div>
+          </li>
+        </ul>
+        <p class="pos">
+          <label for="pos1"></label>
+          <label for="pos2"></label>
+          <label for="pos3"></label>
+          <label for="pos4"></label>
+        </p>
       </div>
-	</section> -->
-	
+    </section>
 
+  <!-- 호텔 설명을 입력하는 section-->
+  <section class="hotel_info  row_c sub_footer" >
 
+      <div class="">
+
+        <div class="about_main_title">Our hotel</div>
+          {% comment %} 호텔의 소개문구를 입력합니다. {% endcomment %}
+          <div class="hotel_info_t">
+            여기는 
+          </div>
+          <div class="hotel_info_t">
+            호텔을 소개하는 문구가
+          </div>
+          <div class="hotel_info_t">
+            들어가야 해요
+          </div>
+      </div>
+
+  </section>
+</div>
 <!-- footer -->
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
