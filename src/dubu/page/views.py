@@ -32,15 +32,15 @@ def login(request):
             is_member=cursor.fetchall()
             if(is_member):
                 request.session["member_id"]=member_id
-                return render(request,'main/index.html',{})    
+                return redirect('index')    
             else:
                 return render(request, 'main/tlogin.html', {'Error': 'Member ID or PW is incorrect'})
         except:
             connection.rollback()
             connection.close()
-            return render(request,'main/index.html',{})
+            return render(request,'main/tlogin.html',{1})
     else:
-        return render(request,'main/tlogin.html',{})
+        return render(request,'main/tlogin.html',{2})
 
 def logout(request):
     request.session["member_id"]=None
