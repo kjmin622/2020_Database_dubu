@@ -32,7 +32,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dubu_made/main_index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/m_index.css' %}">
   </head>
   <body>
   
@@ -168,24 +168,80 @@
     	</div>
     </section>
 
-
-<!-- Hotel info -->
-    <section class="m_hotel_info row_c">
-        <div class="row_set  bold_test staff_s_div">
-          <a href="{% url 'about' %}" class="nav-link">About hotel</a>
-        </div>
+{% comment %} main section  {% endcomment %}
+<div class="main_a ">
+    <section class="event_info">
+      <div class="about_main_title">Event</div>
+      <div id="slide">
+        <input type="radio" name="pos" id="pos1" checked>
+        <input type="radio" name="pos" id="pos2">
+        <input type="radio" name="pos" id="pos3">
+        <input type="radio" name="pos" id="pos4">
+        <ul class="t">
+          <li>
+            <div class="event_s e_test col_c">
+              <div class="sub_title_e">EVENT1</div>
+              <div class="info_e col_c">
+                  내용내용내용내용내용내용내용내용내용내용내용내용<br>
+                  내용내용내용내용내용내용내용내용내용내용내용내용
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="event_s e_test col_c">
+              <div class="sub_title_e">EVENT2</div>
+              <div class="info_e col_c">
+                  내용내용
+              
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="event_s e_test col_c">
+              <div class="sub_title_e">EVENT3</div>
+              <div class="info_e col_c">
+                내용내용
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="event_s e_test col_c">
+              <div class="sub_title_e">EVENT4</div>
+              <div class="info_e col_c">
+                내용내용
+              </div>
+            </div>
+          </li>
+        </ul>
+        <p class="pos">
+          <label for="pos1"></label>
+          <label for="pos2"></label>
+          <label for="pos3"></label>
+          <label for="pos4"></label>
+        </p>
+      </div>
     </section>
 
+  <!-- 호텔 설명을 입력하는 section-->
+  <section class="hotel_info  row_c sub_footer" >
 
-<!--  Event -->
-    <section class="m_event  row_c">
-        <div class="row_set bold_test staff_s_div">
-          Event
-        </div>
-    </section>
-	
+      <div class="">
 
+        <div class="about_main_title">Our hotel</div>
+          {% comment %} 호텔의 소개문구를 입력합니다. {% endcomment %}
+          <div class="hotel_info_t">
+            여기는 
+          </div>
+          <div class="hotel_info_t">
+            호텔을 소개하는 문구가
+          </div>
+          <div class="hotel_info_t">
+            들어가야 해요
+          </div>
+      </div>
 
+  </section>
+</div>
 <!-- footer -->
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
