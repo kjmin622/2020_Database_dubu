@@ -207,6 +207,7 @@ class Staff():
             sqlStr = f"select x_day,work_time_start,work_time_end from page_staff_working_info where staff_id='{staff_id}'"
             cursor.execute(sqlStr)
             result = cursor.fetchall()
+            print(result)
             connection.close()
             datas = []
             for data in result:
