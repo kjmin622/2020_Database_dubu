@@ -32,7 +32,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/dubu_made/staff.css' %}">
   </head>
   <body>
 
@@ -76,11 +76,74 @@
     </div>
 {% comment %} end top {% endcomment %}
 
-{% comment %} test  {% endcomment %}
-	<section class="test1">
-        <h1>Staff home</h1>
-    </section>
+{% comment %} main section  {% endcomment %}
 
+<div class="staff_home_a">
+<!-- 직원정보를 보여주는 section-->
+  <section class="search_staff_room  row_c">
+      <div class="bold_test_staff staff_s_div bold_sec">
+        <div class="staff_title ">Staff_info</div>
+        <div class="s_i_s">
+          <div class="s_i  col_c">
+            <div class="s_i_logo ">Staff</div>
+          </div>
+          <div class="s_i s_i_text">
+            <ul style="list-style-type:none">
+              <li>이름 : 길정민</li>
+              <li>직원 ID : s2020111708012123</li>
+              <li>연락처 : 01039032779</li>
+              <li>직급 : 부장</li>
+              <li>부서 : back</li>
+              <li>팀 : team1A</li>
+              <li>주소 : 경기도 안산시 반석로 상록구 신안1차 120-102</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </section>
+</div>
+
+<!-- 직원의 현재 상태를 입력하는 section -->
+  <section class="staff_status row_c">
+      <div class="bold_test_staff staff_s_div bold_sec">
+        <div class="staff_title ">Staff Status</div>
+        여기 누를수 있는 버튼들
+        <div class="s_s">
+          <div class="s_s_s"> A </div>
+          <div class="s_s_s"> B </div>
+          <div class="s_s_s"> C </div>
+          <div class="s_s_s"> D </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- 직원의 업무일정을 보여주는 section -->
+  <section class="staff_Schedule  row_c">
+      <div class="bold_test_staff staff_s_div bold_sec">
+        <div class="staff_title ">Staff Schedule</div>
+        <div class="s_c col_c">
+          <table border="2" height="80%" bordercolor= "darkgrey"; >
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+            <tr>
+                <td>AM 9:00 ~ PM 6:00</td>
+                <td>AM 9:00 ~ PM 6:00</td>
+                <td>AM 9:00 ~ PM 6:00</td>
+                <td>AM 9:00 ~ PM 6:00</td>
+                <td>AM 9:00 ~ PM 6:00</td>
+                <td>AM 9:00 ~ PM 6:00</td>
+                <td>AM 9:00 ~ PM 6:00</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+  </section>
+</div>
     
 
 
