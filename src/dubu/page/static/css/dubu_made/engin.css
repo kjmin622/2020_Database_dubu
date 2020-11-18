@@ -1,0 +1,36 @@
+/* engineering 틀 */
+*{
+    margin: 0px;
+    padding:0px;
+}
+
+body{
+    /* background-color: black; */
+}
+.s_i_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+
+/* .bold_test_engine{
+    border: 2px dotted;
+    border-color: aqua;
+} */
+
+.bold_sec{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid;
+    border-color: darkgray;
+    display: flex;
+    flex-flow: column;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+
+

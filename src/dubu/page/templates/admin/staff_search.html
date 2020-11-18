@@ -32,7 +32,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/dubu_made/staff_s.css' %}">
   </head>
   <body>
 
@@ -68,7 +68,7 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <h1 class="mb-4 bread">Staff search & plus</h1>
+	            <h1 class="mb-4 bread">Staff management</h1>
             </div>
           </div>
         </div>
@@ -76,10 +76,37 @@
     </div>
 {% comment %} end top {% endcomment %}
 
-{% comment %} test  {% endcomment %}
-	<section class="test1">
-        <h1>Staff Search & Plus</h1>
-    </section>
+{% comment %} main section  {% endcomment %}
+<div class="staff_s_a">
+<!-- 응대 가능한 직원 찾기 section-->
+  <section class="search_staff_s  row_c">
+
+      <div class="staff_s_div bold_sec">
+
+        <div class="sub_title">Search Staff</div>
+        <div class="s_i_s">
+          현재 응대 가능한 직원을 찾는 곳이예요
+        </div>
+
+      </div>
+
+  </section>
+
+  <!-- hotel내부의 기계들의 정보를 검색가능한 section-->
+  <section class="search_staff_s  row_c">
+
+      <div class="staff_s_div bold_sec">
+
+        <div class="sub_title">Add or Fix Staff Info</div>
+
+        <div class="s_i_s">
+            직원의 정보를 수정하거나 새로 추가 할수 있는 공간 입니다.
+        </div>
+
+      </div>
+
+  </section>
+</div>
 
     
 
