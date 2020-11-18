@@ -48,7 +48,7 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
             {% comment %} Log out {% endcomment %}
-              <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Log out</a></li>
+              <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
               <li class="nav-item"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li>
 	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
 	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
@@ -106,7 +106,7 @@
               <h2 class="ftco-heading-2">Quick menu</h2>
               <ul class="list-unstyled">
               {% comment %} log out 버튼 {% endcomment %}
-                <li><a href="#" class="py-2 d-block">Log out</a></li>
+                <li><a href="{% url 'admin_logout' %}" class="py-2 d-block">Log out</a></li>
                 <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
                 <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
               </ul>

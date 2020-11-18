@@ -47,8 +47,7 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item "><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
-            {% comment %} Log out {% endcomment %}
-            <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Log out</a></li>
+            <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
             <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li>
 	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
 	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
@@ -89,13 +88,13 @@
           </div>
           <div class="s_i s_i_text">
             <ul style="list-style-type:none">
-              <li>이름 : 길정민</li>
-              <li>직원 ID : s2020111708012123</li>
-              <li>연락처 : 01039032779</li>
-              <li>직급 : 부장</li>
-              <li>부서 : back</li>
-              <li>팀 : team1A</li>
-              <li>주소 : 경기도 안산시 반석로 상록구 신안1차 120-102</li>
+              <li>이름 : {{datas.last_name}} {{datas.first_name}}</li>
+              <li>직원 ID : {{datas.staff_id}}</li>
+              <li>연락처 : {{datas.phone}}</li>
+              <li>직급 : {{datas.rank}}</li>
+              <li>부서 : {{datas.depart_id}}</li>
+              <li>팀 : {{datas.team}}</li>
+              <li>주소 : {{datas.wide_area_unit}} {{datas.basic_unit}} {{datas.street}} {{datas.si_gu}} {{datas.eub_myeon}} {{datas.building_number}} {{datas.detail_address}}</li>
             </ul>
           </div>
         </div>
@@ -107,12 +106,27 @@
   <section class="staff_status row_c">
       <div class="bold_test_staff staff_s_div bold_sec">
         <div class="staff_title ">Staff Status</div>
-        여기 누를수 있는 버튼들
         <div class="s_s">
-          <div class="s_s_s"> A </div>
-          <div class="s_s_s"> B </div>
-          <div class="s_s_s"> C </div>
-          <div class="s_s_s"> D </div>
+          <div class="s_s_s status_btn" name="off"
+          {% if datas.status == 'off' %} 
+          style="background-color: rgb(204, 255, 238);" 
+          {% endif %}
+          > 퇴근 </div>
+          <div class="s_s_s status_btn" name="wait"
+          {% if datas.status == 'wait' %} 
+          style="background-color: rgb(204, 255, 238);" 
+          {% endif %}
+          > 대기 </div>
+          <div class="s_s_s status_btn" name="working"
+          {% if datas.status == 'working' %} 
+          style="background-color: rgb(204, 255, 238);" 
+          {% endif %}
+          > 업무 </div>
+          <div class="s_s_s status_btn" name="rest"
+          {% if datas.status == 'rest' %} 
+          style="background-color: rgb(204, 255, 238);" 
+          {% endif %}
+          > 휴식 </div>
         </div>
       </div>
   </section>
@@ -131,13 +145,69 @@
             <th>금</th>
             <th>토</th>
             <tr>
-                <td>AM 9:00 ~ PM 6:00</td>
-                <td>AM 9:00 ~ PM 6:00</td>
-                <td>AM 9:00 ~ PM 6:00</td>
-                <td>AM 9:00 ~ PM 6:00</td>
-                <td>AM 9:00 ~ PM 6:00</td>
-                <td>AM 9:00 ~ PM 6:00</td>
-                <td>AM 9:00 ~ PM 6:00</td>
+                <td>
+                {% if working_datas.sun %}
+                  {% for s in working_datas.sun %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.mon %}
+                  {% for s in working_datas.mon %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.tues %}
+                  {% for s in working_datas.tues %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.wednes %}
+                  {% for s in working_datas.wednes %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.thurs %}
+                  {% for s in working_datas.thurs %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.fri %}
+                  {% for s in working_datas.fri %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.satur %}
+                  {% for s in working_datas.satur %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
             </tr>
           </table>
         </div>
@@ -170,8 +240,7 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Quick menu</h2>
               <ul class="list-unstyled">
-              {% comment %} log out 버튼 {% endcomment %}
-                <li><a href="#" class="py-2 d-block">Log out</a></li>
+                <li><a href="{% url 'admin_logout' %}" class="py-2 d-block">Log out</a></li>
                 <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
                 <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
               </ul>
@@ -220,6 +289,29 @@
   <script src="{% static 'js/google-map.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
 
+  <script>
+    $(".status_btn").click(function(){
+      var form = document.createElement('form');
+      form.setAttribute('method','post');
+      form.setAttribute('action', '{% url "change_staff_status" %}');
+      document.charset = 'utf-8';
+      var hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type','hidden');
+      hiddenField.setAttribute('name','staff_id');
+      hiddenField.setAttribute('value','{{datas.staff_id}}');
+      form.appendChild(hiddenField);
+      
+      hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type','hidden');
+      hiddenField.setAttribute('name','status');
+      hiddenField.setAttribute('value',$(this).attr('name'));
+      form.appendChild(hiddenField);
+
+      document.body.appendChild(form);
+      form.submit();
+    });
+    
+  </script>
 
   </body>
 </html>
