@@ -92,8 +92,10 @@ def staff_search(request):
         # wide_area_unit, street, basic_unit, si_gu, eub_myeon, building_number, detail_address
 def manage_staff(request):
     datas = Staff.get_staff()
+    working_datas = Staff.get_staff_working()
+    holiday_datas = Staff.get_staff_holiday()
     names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
-    return render(request,'admin/manage_staff.html',{'datas':datas, 'names':names})
+    return render(request,'admin/manage_staff.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names})
 
 @csrf_exempt
 def delete_staff(request):
@@ -115,3 +117,26 @@ def edit_staff(request):
         Staff.edit_staff(request.POST)
     return redirect('manage_staff')
 
+@csrf_exempt
+def insert_staff_working(request):
+    if(request.method=="POST"):
+        Staff.insert_staff_working(request.POST)
+    return redirect('manage_staff')
+
+@csrf_exempt
+def insert_staff_holiday(request):
+    if(request.method=="POST"):
+        Staff.insert_staff_holiday(request.POST)
+    return redirect('manage_staff')
+
+@csrf_exempt
+def delete_staff_working(request):
+    if(request.method=="POST"):
+        Staff.delete_staff_working(request.POST)
+    return redirect('manage_staff')
+
+@csrf_exempt
+def delete_staff_holiday(request):
+    if(request.method=="POST"):
+        Staff.delete_staff_holiday(request.POST)
+    return redirect('manage_staff')
