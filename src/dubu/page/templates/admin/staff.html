@@ -106,12 +106,27 @@
   <section class="staff_status row_c">
       <div class="bold_test_staff staff_s_div bold_sec">
         <div class="staff_title ">Staff Status</div>
-        여기 누를수 있는 버튼들
         <div class="s_s">
-          <div class="s_s_s" style="background-color: rgb(204, 255, 238);"> A </div>
-          <div class="s_s_s"> B </div>
-          <div class="s_s_s"> C </div>
-          <div class="s_s_s"> D </div>
+          <div class="s_s_s status_btn" name="off"
+          {% if datas.status == 'off' %} 
+          style="background-color: rgb(204, 255, 238);" 
+          {% endif %}
+          > 퇴근 </div>
+          <div class="s_s_s status_btn" name="wait"
+          {% if datas.status == 'wait' %} 
+          style="background-color: rgb(204, 255, 238);" 
+          {% endif %}
+          > 대기 </div>
+          <div class="s_s_s status_btn" name="working"
+          {% if datas.status == 'working' %} 
+          style="background-color: rgb(204, 255, 238);" 
+          {% endif %}
+          > 업무 </div>
+          <div class="s_s_s status_btn" name="rest"
+          {% if datas.status == 'rest' %} 
+          style="background-color: rgb(204, 255, 238);" 
+          {% endif %}
+          > 휴식 </div>
         </div>
       </div>
   </section>
@@ -274,6 +289,29 @@
   <script src="{% static 'js/google-map.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
 
+  <script>
+    $(".status_btn").click(function(){
+      var form = document.createElement('form');
+      form.setAttribute('method','post');
+      form.setAttribute('action', '{% url "change_staff_status" %}');
+      document.charset = 'utf-8';
+      var hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type','hidden');
+      hiddenField.setAttribute('name','staff_id');
+      hiddenField.setAttribute('value','{{datas.staff_id}}');
+      form.appendChild(hiddenField);
+      
+      hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type','hidden');
+      hiddenField.setAttribute('name','status');
+      hiddenField.setAttribute('value',$(this).attr('name'));
+      form.appendChild(hiddenField);
+
+      document.body.appendChild(form);
+      form.submit();
+    });
+    
+  </script>
 
   </body>
 </html>

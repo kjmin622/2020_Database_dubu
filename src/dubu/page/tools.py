@@ -224,6 +224,20 @@ class Staff():
         except:
             connection.close()
             return None
+        
+    def change_staff_status(dataDir):
+        try:
+            staff_id = dataDir["staff_id"];status=dataDir["status"]
+            cursor = connection.cursor()
+            sqlStr = f"update page_staff set status='{status}' where staff_id='{staff_id}'"
+            cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
 
 
             

@@ -158,3 +158,9 @@ def delete_staff_holiday(request):
     if(request.method=="POST"):
         Staff.delete_staff_holiday(request.POST)
     return redirect('manage_staff')
+
+@csrf_exempt
+def change_staff_status(request):
+    if(request.method=="POST"):
+        Staff.change_staff_status(request.POST)
+    return redirect('staff')
