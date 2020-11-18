@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/manage_staff/del_work',admin_views.delete_staff_working,name="delete_staff_working"),
     path('admin/manage_staff/add_holi',admin_views.insert_staff_holiday,name="insert_staff_holiday"),
     path('admin/manage_staff/del_holi',admin_views.delete_staff_holiday,name="delete_staff_holiday"),
+    path('admin/staff/change_status',admin_views.change_staff_status,name="change_staff_status"),
 
     # front admin
     path('admin/staff',admin_views.staff,name="staff"),
