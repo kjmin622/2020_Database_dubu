@@ -7,8 +7,8 @@ urlpatterns = [
     path('',views.index,name="index"),
     path('about',views.about,name="about"),
     path('rooms',views.rooms,name="rooms"),
-    path('login',views.adminLogin,name="login"),
-    path('signup',views.adminLogout,name="signup"),
+    path('login',views.login,name="login"),
+    path('signup',views.signup,name="signup"),
 
     #admin
     path('admin',admin_views.admin,name="admin"),

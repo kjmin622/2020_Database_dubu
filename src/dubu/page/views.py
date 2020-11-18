@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from django.db import connection
 from .models import *
 from .forms import *
-from django.contrib.auth.models import Member
+from django.contrib.auth.models import User
 from django.contrib import auth
 # Create your views here.
 
@@ -47,7 +47,7 @@ def signup(request):
             return render(request,'main/signup.html',{'Error': 'Fill all the blanks.'})
 
         if request.POST["password1"] == request.POST["password2"]:
-            member_info = Member.objects.create_member_info(
+            member_info = User.objects.create_member_info(
                 last_name = request.POST["last_name"],
                 first_name = request.POST["first_name"],
                 birth = request.POST["birth"],
@@ -60,3 +60,28 @@ def signup(request):
             return redirect('main/index.html')
         return render(request,'main/signup.html',{'Error': 'Password is not correctly checked.'})
     return render(request,'main/signup.html',)
+
+def signup(request):
+    if(request.method=="POST"):
+        #last_name, first_name, birth, phone, email, member_id, password, password2, is_sms
+        last_name = request.POST["last_name"];first_name = request.POST["first_name"];birth = request.POST["birth"];phone = request.POST["phone"];email = request.POST["email"];member_id = request.POST["member_id"];password = request.POST["password1"];password2 = request.POST["password2"];is_sms = request.POST["is_sms"])
+        
+        try:
+            #조건 미충족
+            if (request.POST["last_name"] == '' or request.POST["first_name"] == '' or request.POST["birth"] == '' or request.POST["phone"] == '' or request.POST["email"] == '' or request.POST["member_id"] == '' or request.POST["password1"] == '' or request.POST["password2"] == ''):
+                return render(request,'main/signup.html',{'Error': 'Fill all the blanks.'})
+            if(password!=password2): 
+                return render(request,'main/signup.html',{'Error': 'Password is not correctly checked.'})
+    
+            cursor = connection.cursor()
+            sqlStr = f"select member_id from page_member_info where member_id = {member_id}"
+            result = cursor.execute();member_id=cursor.fetchall()
+            if(member_id):
+                return render(request,'main/signup.html',{'Error': 'This ID is occupied.'})
+
+            sqlStr = f"insert into page_member_info(member_id,membership,birth,is_sms,)"
+
+        
+        
+        
+        
