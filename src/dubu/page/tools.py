@@ -139,7 +139,8 @@ class Staff():
     def insert_staff_holiday(dataDir):
         try:
             cursor = connection.cursor()
-            sqlStr = f"insert into page_staff_day_off_info(staff_id,off_start,off_end,day_off_type,is_paid) values ('{dataDir['staff_id']}','{dataDir['off_start']}','{dataDir['off_end']}','{dataDir['day_off_type']}','{dataDir['is_paid']}')"
+            is_paid = 1 if dataDir['is_paid']=='True' or dataDir['is_paid']=='true' else 2
+            sqlStr = f"insert into page_staff_day_off_info(staff_id,off_start,off_end,day_off_type,is_paid) values ('{dataDir['staff_id']}','{dataDir['off_start']}','{dataDir['off_end']}','{dataDir['day_off_type']}','{is_paid}')"
             cursor.execute(sqlStr)
             cursor.fetchall()
             connection.commit()
