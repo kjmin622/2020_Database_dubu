@@ -36,15 +36,15 @@ def logout(request):
 
 def signup(request):
     if request.method == "POST":
-        if request.POST["last_name"] == '' or
+        if (request.POST["last_name"] == '' or
            request.POST["first_name"] == '' or
            request.POST["birth"] == '' or
            request.POST["phone"] == '' or
            request.POST["email"] == '' or
            request.POST["member_id"] == '' or
            request.POST["password1"] == '' or
-           request.POST["password2"] == '':
-        return render(request,'main/signup.html',{'Error': 'Fill all the blanks.'})
+           request.POST["password2"] == ''):
+            return render(request,'main/signup.html',{'Error': 'Fill all the blanks.'})
 
         if request.POST["password1"] == request.POST["password2"]:
             member_info = Member.objects.create_member_info(
