@@ -27,7 +27,7 @@
             .resultList li div{
                 display:inline;
             }
-            table,th,td{
+            table,thead,tbody,th,td{
                 border:solid 1px gray;
                 white-space:nowrap;
             }
@@ -37,10 +37,28 @@
         <div class="manageBox staff_work_box">
             <h3>직원근무관리</h3>
             <div class="searchBox">
-                <h4>객실번호</h4>
-                <input type="search" placeholder="search">
+                <h4>search</h4>
+                <input type="text" placeholder="search" id="staff_working_search">
             </div>
-            <div class="resultBox"></div>
+            <div class="resultBox">
+                <table id="staff_working_tab">
+                    <thead>
+                        <th>이름</th><th>소속팀</th><th>담당객실</th><th>부서</th><th>역할</th><th>근무상태</th>
+                    </thead>
+                    <tbody>
+                        {% for data in datas %}
+                        <tr>
+                            <td>{{data.last_name}} {{data.first_name}}</td>
+                            <td>{{data.team}}</td>
+                            <td class="working_search">없음</td>
+                            <td class="working_search">{{data.depart_name}}</td>
+                            <td>{{data.depart_position}}</td>
+                            <td>{{data.status}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="manageBox staff_info_box">
             <h3>직원정보관리</h3>
@@ -150,6 +168,14 @@
     </body>
 </html>
 <script>
+    $(document).ready(function() {
+        $("#staff_working_search").keyup(function() {
+            var k = $(this).val();
+            $("#staff_working_tab > tbody > tr").hide();
+            var temp = $(".working_search:contains('" + k + "')");
+            $(temp).parent().show();
+        })
+    })
     $(document).ready(function() {
         $("#staff_info_search").keyup(function() {
             var k = $(this).val();

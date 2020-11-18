@@ -34,7 +34,7 @@ def adminLogin(request):
 
 def adminLogout(request):
     request.session["staff_id"] = None
-    return admin(request)
+    return redirect('admin')
 
 
 def manage_depart(request):
