@@ -27,7 +27,7 @@
             .resultList li div{
                 display:inline;
             }
-            table,th,td{
+            table,thead,tbody,th,td{
                 border:solid 1px gray;
                 white-space:nowrap;
             }
@@ -37,10 +37,28 @@
         <div class="manageBox staff_work_box">
             <h3>직원근무관리</h3>
             <div class="searchBox">
-                <h4>객실번호</h4>
-                <input type="search" placeholder="search">
+                <h4>search</h4>
+                <input type="text" placeholder="search" id="staff_working_search">
             </div>
-            <div class="resultBox"></div>
+            <div class="resultBox">
+                <table id="staff_working_tab">
+                    <thead>
+                        <th>이름</th><th>소속팀</th><th>담당객실</th><th>부서</th><th>역할</th><th>근무상태</th>
+                    </thead>
+                    <tbody>
+                        {% for data in datas %}
+                        <tr>
+                            <td>{{data.last_name}} {{data.first_name}}</td>
+                            <td>{{data.team}}</td>
+                            <td class="working_search">없음</td>
+                            <td class="working_search">{{data.depart_name}}</td>
+                            <td>{{data.depart_position}}</td>
+                            <td>{{data.status}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="manageBox staff_info_box">
             <h3>직원정보관리</h3>
@@ -115,9 +133,15 @@
             <div>
                 <form action="{% url 'insert_staff_working' %}" method="POST">
                     <input type="text" style="display: none" name="staff_id" class="work_sid" readonly>
-                    <input type="text" name="work_time_start" placeholder="starttime(00:00:00)">
-                    <input type="text" name="work_time_end" placeholder="endtime(00:00:00)">
-                    <input type="text" name="x_day" placeholder="x_day(***_day)">
+                    <input type="text" name="work_time_start" placeholder="starttime(00:00)">
+                    <input type="text" name="work_time_end" placeholder="endtime(00:00)"><br>
+                    <input type="radio" name="x_day" value="sun_day" checked>sun_day
+                    <input type="radio" name="x_day" value="mon_day">mon_day
+                    <input type="radio" name="x_day" value="tues_day">tues_day<br>
+                    <input type="radio" name="x_day" value="wednes_day">wednes_day
+                    <input type="radio" name="x_day" value="thurs_day">thurs_day
+                    <input type="radio" name="x_day" value="fri_day">fri_day<br>
+                    <input type="radio" name="x_day" value="satur_day">satur_day
                     <input type="submit" value="add">
                 </form>
             </div>
@@ -150,6 +174,14 @@
     </body>
 </html>
 <script>
+    $(document).ready(function() {
+        $("#staff_working_search").keyup(function() {
+            var k = $(this).val();
+            $("#staff_working_tab > tbody > tr").hide();
+            var temp = $(".working_search:contains('" + k + "')");
+            $(temp).parent().show();
+        })
+    })
     $(document).ready(function() {
         $("#staff_info_search").keyup(function() {
             var k = $(this).val();
