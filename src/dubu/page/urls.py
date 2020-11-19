@@ -11,7 +11,6 @@ urlpatterns = [
     path('signup',views.signup,name="signup"),
 
     #admin
-    path('admin',admin_views.admin,name="admin"),
     path('admin/login',admin_views.adminLogin,name="admin_login"),
     path('admin/logout',admin_views.adminLogout,name="admin_logout"),
     path('admin/manage_depart',admin_views.manage_depart,name="manage_depart"),
@@ -25,6 +24,7 @@ urlpatterns = [
     path('admin/manage_staff/del_work',admin_views.delete_staff_working,name="delete_staff_working"),
     path('admin/manage_staff/add_holi',admin_views.insert_staff_holiday,name="insert_staff_holiday"),
     path('admin/manage_staff/del_holi',admin_views.delete_staff_holiday,name="delete_staff_holiday"),
+    path('admin/staff/change_status',admin_views.change_staff_status,name="change_staff_status"),
 
     # front admin
     path('admin/staff',admin_views.staff,name="staff"),
