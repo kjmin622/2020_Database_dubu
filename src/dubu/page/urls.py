@@ -37,5 +37,5 @@ urlpatterns = [
     path('admin/product',admin_views.product,name="product"),
     path('admin/engineer',admin_views.engineer,name="engineer"),
     path('admin/staff_search',admin_views.staff_search,name="staff_search"),
-
+    path('admin/management',admin_views.management,name="management"),    
 ]

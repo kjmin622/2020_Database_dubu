@@ -24,9 +24,9 @@ def adminLogin(request):
             return redirect('staff')
         else:
             request.POST={}
-            return render(request,'develop/admin_login.html')
+            return render(request,'admin/admin_login.html')
     else:
-        return render(request,'develop/admin_login.html')
+        return render(request,'admin/admin_login.html')
 
 def adminLogout(request):
     request.session["staff_id"] = None
@@ -78,7 +78,9 @@ def staff_search(request):
     names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
     return render(request,'admin/staff_search.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names})
 
-
+def management(request):
+    if(not Staff.staff_login_check(request)): return redirect('admin_login')
+    return render(request,'admin/management.html',{})
 
 
 
