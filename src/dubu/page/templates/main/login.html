@@ -80,18 +80,37 @@
 {% comment %} end top {% endcomment %}
 
 {% comment %} test  {% endcomment %}
+<div class="tle">
 	<section class="test1 ">
         <div class="login "> 
           <div class = "id_in ">ID</div>
           <div class = "pass_in ">PASSWORD</div>
           <div class = "login_button ">BUTTON</div>
-          <div class = "join_in">회원가입</div>
+          <div class = "join_in"><a href="{% url 'join' %}">회원가입</a></div>
           <div class = "s_id">아이디/비밀번호 찾기</div>
         </div>
         
-    </section>
+  </section>
 
-    
+  <section class="t_ser ">  
+    <p style="font-size:25px">Find ID</p>
+    <div class="s_t ">
+      <div class="ppp id_in ">Name</div>
+      <div class="ppp  pass_in ">Phone_num</div>
+      <div class="ppp  e_in ">Email</div>
+      <div class="send login_button">button</div>
+    </div>
+  </section>
+  <section class="t_ser ">  
+    <p style="font-size:25px">Find PASSWORD</p>
+    <div class="s_t ">
+      <div class="ppp id_in ">Name</div>
+      <div class="ppp  pass_in ">ID</div>
+      <div class="ppp  e_in ">Email</div>
+      <div class="send login_button">button</div>
+    </div>
+  </section>
+</div>  
 
 <!-- footer -->
     <footer class="ftco-footer ftco-bg-dark ftco-section">

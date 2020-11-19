@@ -1,3 +1,12 @@
+.tle{
+    /* position:relative; */
+    /* border: 2px dotted; */
+    /* border-color: red; */
+    /* display: flex; */
+    /* align-items: center; */
+}
+
+
 .test1{
     display: flex;
     justify-content: center;
@@ -23,9 +32,9 @@
 
 .id_in{
     position: absolute;
-    left: 45px;
-    top: 40px;
-    font-size: 20px;
+    left: 35px;
+    top: 35px;
+    font-size: 15px;
     width: 180px;
     /* border: 2px solid;
     border-color: darkgray; */
@@ -35,8 +44,8 @@
 
 .pass_in{
     position: absolute;
-    left: 45px;
-    top: 90px;
+    left: 35px;
+    top: 80px;
     font-size: 15px;
     width: 180px;
     /* border: 2px solid;
@@ -47,10 +56,10 @@
 
 .login_button{
     position: absolute;
-    left: 255px;
-    top: 55px;
+    left: 245px;
+    top: 50px;
     font-size: 20px;
-    padding: 10px;
+    padding: 5px 10px;
     text-align: center;
     background-color: white;
     border-radius: 10px;
@@ -58,8 +67,8 @@
 
 .join_in{
     position: absolute;
-    left: 45px;
-    top: 150px;
+    left: 35px;
+    top: 140px;
     background-color: rgba(255, 255, 255, 0.466);
     padding: 5px;
     border-radius: 5px;
@@ -67,9 +76,77 @@
 
 .s_id{
     position: absolute;
-    left: 127px;
-    top: 150px;
+    left: 117px;
+    top: 140px;
     background-color: rgba(255, 255, 255, 0.466);
     padding: 5px;
     border-radius: 5px;
+}
+
+
+.d_id{
+    /* padding: 50px; */
+    position: relative;
+    width: 370px;
+    height: 150px;
+    /* position: absolute; */
+    
+
+}
+
+.d_pass{
+    width: 600px;
+    /* height: 300px; */
+    /* position: absolute; */
+}
+
+.t_ser{
+    /* position: absolute; */
+    left: 50%-2;
+    top: 50%;
+    padding: 20px 40px;
+    width: max-content;
+    border: 2px solid;
+    border-color: darkgray;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.ppp{
+    border-color: darkgray;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.e_in{
+    position: absolute;
+    left: 35px;
+    top: 125px;
+    font-size: 15px;
+    width: 180px;
+    /* border: 2px solid;
+    border-color: darkgray; */
+    padding-left: 6px;
+    background-color: white;
+}
+
+.s_t{
+    /* padding: 50px; */
+    position: relative;
+    width: 370px;
+    height: 190px;
+    /* position: absolute; */
+}
+
+.send{
+    position: absolute;
+    left: 245px;
+    top: 70px;
+    font-size: 20px;
+    padding: 5px 10px;
+    text-align: center;
+    background-color:darkgrey;
+    border-radius: 10px;
+    color: white;
 }
