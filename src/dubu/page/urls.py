@@ -18,7 +18,6 @@ urlpatterns = [
     path('admin/login',admin_views.adminLogin,name="admin_login"),
     path('admin/logout',admin_views.adminLogout,name="admin_logout"),
     path('admin/manage_depart',admin_views.manage_depart,name="manage_depart"),
-    path('admin/manage_staff',admin_views.manage_staff,name="manage_staff"),
 
     #tool
     path('admin/manage_staff/del',admin_views.delete_staff,name="delete_staff"),
