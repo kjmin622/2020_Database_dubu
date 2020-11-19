@@ -54,6 +54,7 @@
 
 body{
     /* background-color: rgb(182, 182, 182); */
+    min-width:1000px;
 }
 
 
@@ -65,15 +66,15 @@ body{
     justify-content: flex-start;
     flex-wrap: wrap;
     padding: 30px;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .s_s_s{
     border: 3px solid;
-    border-color: rgb(107, 216, 180);
+    border-color: rgb(104, 199, 167);
     border-radius: 10px;
 
-    padding: 10px 40px;
+    padding: 5px 30px;
     margin: 10px;
     /* background-color: rgb(95, 187, 156); */
 }
@@ -85,6 +86,6 @@ body{
     font-size:15px; 
     text-align: center;
     margin: 30px;
-    /* min-height: 250px; */
+    /* min-height: 250px; */  
 }
 
