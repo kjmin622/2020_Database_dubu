@@ -110,14 +110,6 @@ def manage_depart(request):
 
     return render(request,'develop/manage_depart.html',{'datas':datas})
 
-        # staff_id, rank, status, depart_id, first_name, last_name, phone, bank, account,
-        # wide_area_unit, street, basic_unit, si_gu, eub_myeon, building_number, detail_address
-def manage_staff(request):
-    datas = Staff.get_staff()
-    working_datas = Staff.get_staff_working()
-    holiday_datas = Staff.get_staff_holiday()
-    names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
-    return render(request,'develop/manage_staff.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names})
 
 @csrf_exempt
 def delete_staff(request):
