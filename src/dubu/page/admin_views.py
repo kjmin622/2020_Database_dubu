@@ -69,6 +69,10 @@ def engineer(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     return render(request,'admin/engineer.html',{})
 
+def bill(request):
+    if(not Staff.staff_login_check(request)): return redirect('admin_login')
+    return render(request,'admin/bill.html',{})
+
 def staff_search(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     datas = Staff.get_staff()
