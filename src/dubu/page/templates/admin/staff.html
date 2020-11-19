@@ -53,7 +53,8 @@
 	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
 	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
 	          <li class="nav-item active"><a href="{% url 'engineer' %}" class="nav-link">Engineering</a></li>
-	          <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search & Plus</a></li>
+	          <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+            <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
           </ul>
 	      </div>
 	    </div>
@@ -77,10 +78,10 @@
 
 {% comment %} main section  {% endcomment %}
 
-<div class="staff_home_a">
+<div  class="staff_home_a">
 <!-- 직원정보를 보여주는 section-->
   <section class="search_staff_room  row_c">
-      <div class="bold_test_staff staff_s_div bold_sec">
+      <div  class="bold_test_staff staff_s_div bold_sec">
         <div class="staff_title ">Staff_info</div>
         <div class="s_i_s">
           <div class="s_i  col_c">
@@ -100,11 +101,10 @@
         </div>
       </div>
   </section>
-</div>
 
 <!-- 직원의 현재 상태를 입력하는 section -->
   <section class="staff_status row_c">
-      <div class="bold_test_staff staff_s_div bold_sec">
+      <div  class="bold_test_staff staff_s_div bold_sec">
         <div class="staff_title ">Staff Status</div>
         <div class="s_s">
           <div class="s_s_s status_btn" name="off"
@@ -133,7 +133,7 @@
 
   <!-- 직원의 업무일정을 보여주는 section -->
   <section class="staff_Schedule  row_c">
-      <div class="bold_test_staff staff_s_div bold_sec">
+      <div  class="bold_test_staff staff_s_div bold_sec">
         <div class="staff_title ">Staff Schedule</div>
         <div class="s_c col_c">
           <table border="2" height="80%" bordercolor= "darkgrey"; >
