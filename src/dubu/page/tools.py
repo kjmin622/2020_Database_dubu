@@ -318,7 +318,7 @@ class Book():
 
     def edit_booking(dataDir):
         try:
-            booking_id=dataDir['booking_id'];is_check_in=dataDir['is_check_in'];check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];baby_num=dataDir['baby_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
+            booking_id=dataDir['booking_id'];is_check_in=1 if dataDir['is_check_in'] is "True" or dataDir['is_check_in'] is "true" else 0;check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];baby_num=dataDir['baby_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
             cursor = connection.cursor()
             sqlStr = f"select * from rooms where room_num={room_num} and room_type='{room_type}'"
             cursor.execute(sqlStr)
