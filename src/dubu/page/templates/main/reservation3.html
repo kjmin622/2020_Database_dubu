@@ -173,7 +173,7 @@
   <div class = "staff_s_div">
     <div style = "padding-bottom:50px; padding-top:20px;">
     <center>
-    <button class = "btn" onclick="location.href='index.html'"> 예약완료 </button>
+    <button class = "btn" onclick="location.href='{% url 'index' %}'"> 예약완료 </button>
     </center>
     </div>
   </div>
@@ -206,8 +206,16 @@
           <h2 class="ftco-heading-2" style = "font-size: 25px">Quick Menu</h2>
           <ul class="list-unstyled">
             <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
-            <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
-            <li><a href="{% url 'mypage' %}" class="py-2 d-block">Join/Mypage</a></li>
+            <!-- <li><a href="#" class="py-2 d-block"            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+            {% endif %}>Rooms</a></li> -->
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+            {% endif %}
             <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
             <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
           </ul>

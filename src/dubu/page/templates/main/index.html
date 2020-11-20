@@ -262,7 +262,11 @@
           <ul class="list-unstyled">
             <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
             <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
-            <li><a href="{% url 'mypage' %}" class="py-2 d-block">Join/Mypage</a></li>
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+            {% endif %}
             <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
             <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
           </ul>
