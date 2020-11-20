@@ -195,3 +195,10 @@ def edit_room_type(request):
         Room.edit_room_type(request.POST)
     
     return redirect('management')
+
+@csrf_exempt
+def delete_booking(request):
+    if(request.method=="POST"):
+        Book.delete_booking(request.POST)
+    
+    return redirect('management')

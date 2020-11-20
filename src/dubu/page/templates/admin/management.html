@@ -188,26 +188,32 @@
           <div class="resultBox">
               <table id="staff_result_tab">
                   <thead>
-                  <th>booking_id</th><th>name</th><th>room_num</th><th>depart_id</th><th>team</th><th>status</th><th>bank</th><th>account</th><th>phone</th><th>address</th><th>edit</th><th>working_time</th><th>holiday</th><th>delete</th>
+                  <th>booking_id</th><th>name</th><th>phone</th><th>is_check_in</th><th>check_in</th><th>check_out</th>
+                  <th>room_num</th><th>room_type</th><th>adult_num</th><th>child_num</th><th>baby_num</th>
+                  <th>breakfast</th><th>extra_text</th><th>edit</th><th>delete</th>
                   </thead>
                   <tbody>
-                  <!--booking_id, is_check_in, check_in, check_out, room_num,room_type,breakfast,
-                      adult_num,child_num,baby_num,extra_text,first_name,last_name,phone-->
+                  <!--booking_id, first_name,last_name,
+                      is_check_in, check_in, check_out, room_num,room_type,breakfast,
+                      adult_num,child_num,baby_num,extra_text,phone-->
                   {% for data in booking_datas %}
                     <tr>
                       <td>{{data.booking_id}}</td>
                       <td>{{data.last_name}} {{data.first_name}}</td>
-                      <td>{{data.rank}}</td>
-                      <td>{{data.depart_id}}</td>
-                      <td>{{data.team}}</td>
-                      <td>{{data.status}}</td>
-                      <td>{{data.bank}}</td>
-                      <td>{{data.account}}</td>
                       <td>{{data.phone}}</td>
-                      <td></td>
-                      <td><input type="button" value="edit" class="edit_btn" name="edit_{{data.booking_id}}"></td>
-                      <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
-                          <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
+                      <td>{{data.is_check_in}}</td>
+                      <td>{{data.check_in}}</td>
+                      <td>{{data.check_out}}</td>
+                      <td>{{data.room_num}}</td>
+                      <td>{{data.room_type}}</td>
+                      <td>{{data.adult_num}}</td>
+                      <td>{{data.child_num}}</td>
+                      <td>{{data.baby_num}}</td>
+                      <td>{{data.breakfast}}</td>
+                      <td>{{data.extra_text}}</td>
+                      <td>아무튼 버튼임</td>
+                      <td><form action="{% url 'delete_booking' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                          <input type="text" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
                           <input type="submit" value="delete" class="delete_btn"></form></td>
                     </tr>
                   {% endfor %}
@@ -311,9 +317,6 @@
         <input type="submit" value="edit">
         </form>
     </div>
-
-    <!--객실유형 침대 팝업-->
-    <!--객실유형 객실 팝업-->
 
 
 <!-- footer -->

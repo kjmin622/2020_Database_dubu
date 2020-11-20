@@ -269,20 +269,53 @@ class Book():
 
             output = []
             for booking_id in booking_ids:
-                sqlStr = "select room_num from page_booking_rooms"
+                sqlStr = f"select room_num from page_booking_rooms where booking_id = '{booking_id}'"
                 cursor.execute(sqlStr);is_room=cursor.fetchall()
                 if(is_room):
                     sqlStr = f"select booking_id, is_check_in, check_in, check_out,room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone,room_num from page_booking natural join (select booking_id, room_num from page_booking_rooms) natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
                 else:
                     sqlStr = f"select booking_id, is_check_in, check_in, check_out, room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone from page_booking natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
-                cursor.execute(sqlStr);data=cursor.fetchall()
-                output.append({'booking_id':data[0], 'is_check_in':data[1], 'check_in':data[2], 'check_out':data[3],'room_type':data[4],'breakfast':data[5],'adult_num':data[6],'child_num':data[7],'baby_num':data[8],'extra_text':data[9],'first_name':data[10],'last_name':data[11],'phone':data[12],'room_num': ("" if not is_room else data[13])})
+                cursor.execute(sqlStr)
+                data=cursor.fetchall()[0]
+
+                output.append({'booking_id':data[0], 'is_check_in':data[1], 'check_in':data[2], 'check_out':data[3],'room_type':data[4],'breakfast':data[5],'adult_num':data[6],'child_num':data[7],'baby_num':data[8],'extra_text':data[9],'first_name':data[10],'last_name':data[11],'phone':data[12],'room_num': ""})
+                if(is_room):
+                    output[-1]["room_num"] = data[13]
 
             connection.close()
             return output
         except:
             connection.close()
             return None
+
+    def delete_booking(dataDir):
+        try:
+            cursor = connection.cursor()
+            booking_id = dataDir["booking_id"]
+            table = ["page_booking","page_booking_rooms","page_book_request",
+                    "page_customer_info","page_customer_phone","page_member_customer",
+                    "page_booking_parking","page_bill","page_invoice"]
+
+            sqlStrs = []
+            for sql in table:
+                sqlStrs.append(f"delete from {sql} where booking_id='{booking_id}'")
+            
+            car_numbers = []
+            sqlStr = f"select car_number from page_booking_parking where booking_id='{booking_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            for car in result:
+                sqlStrs.append(f"delete from page_parking where car_number = '{car[0]}'")
+            
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
+
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
 
     def insert_parking(dataDir):
         # car_number room_num spot team_name
