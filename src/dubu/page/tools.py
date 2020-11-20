@@ -317,6 +317,27 @@ class Book():
             connection.close()
             return False
 
+    def edit_booking(dataDir):
+        try:
+            booking_id=dataDir['booking_id'];is_check_in=dataDir['is_check_in'];check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];baby_num=dataDir['baby_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
+            cursor = connection.cursor()
+            sqlStrs = [
+                f"update page_booking set is_check_in='{is_check_in}', check_in='{check_in}', check_out='{check_out}' where booking_id='{booking_id}'",
+                f"update page_booking_rooms set room_num={room_num} where booking_id='{booking_id}'",
+                f"update page_book_request set room_type='{room_type}',breakfast='{breakfast}',adult_num='{adult_num}',child_num='{child_num}',baby_num='{baby_num}',extra_text='{extra_text}' where booking_id='{booking_id}'",
+                f"update page_customer_info set first_name='{first_name}',last_name='{last_name}' where booking_id='{booking_id}'",
+                f"update page_customer_phone set phone='{phone}' where booking_id='{booking_id}'"
+            ]
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
     def insert_parking(dataDir):
         # car_number room_num spot team_name
         try:
