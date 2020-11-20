@@ -50,7 +50,7 @@
 	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
               {% comment %} Log out {% endcomment %}
               <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
-              <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
 	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
 	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
 	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
