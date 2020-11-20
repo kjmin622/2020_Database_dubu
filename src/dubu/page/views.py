@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from django.db import connection
 from django.shortcuts import redirect
+from django.contrib import messages
 from .models import *
 from .forms import *
 # Create your views here.
@@ -25,6 +26,9 @@ def join(request):
 def event(request):
     return render(request,'main/event.html',{})
 
+def find_id(request):
+    return HttpResponse(f"{request.POST["member_id"]}")
+
 def login(request):
     if request.method == "POST":
 
@@ -46,7 +50,7 @@ def login(request):
             except:
                 connection.rollback()
                 connection.close()
-                return render(request,'main/login.html',{1})
+                return render(request,'main/login.html',{})
 
         elif request.POST["input"]=="find_id":
             try:
@@ -55,13 +59,13 @@ def login(request):
                 result = cursor.execute(sqlStr)
                 is_member=cursor.fetchall()
                 if(is_member): 
-                    return render(request, 'main/login.html', {'아이디 띄워주고싶어'})
+                    return render_template('main/index.html', message=any_variable)
                 else:
                     return render(request, 'main/login.html', {'Error': 'Your information is incorrect'})
             except:
                 connection.rollback()
                 connection.close()
-                return render(request,'main/login.html',{1})
+                return render(request,'main/login.html',{})
 
         elif request.POST["input"]=="find_pw":
             try:
@@ -70,13 +74,13 @@ def login(request):
                 result = cursor.execute(sqlStr)
                 is_member=cursor.fetchall()
                 if(is_member): 
-                    return render(request, 'main/login.html', {'비번 바꿔주고싶어'})
+                    return render(request, 'main/index.html', {})
                 else:
                     return render(request, 'main/login.html', {'Error': 'Your information is incorrect'})
             except:
                 connection.rollback()
                 connection.close()
-                return render(request,'main/login.html',{1})
+                return render(request,'main/login.html',{})
         else:
             return redirect('login')
 
