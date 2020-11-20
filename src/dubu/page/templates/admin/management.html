@@ -183,10 +183,10 @@
         <div class="s_i_s">
           <div class="searchBox">
               <h4>search</h4>
-              <input type="text" placeholder=" name" id="staff_info_search">
+              <input type="text" placeholder=" name" id="booking_search">
           </div>
           <div class="resultBox">
-              <table id="staff_result_tab">
+              <table id="booking_result_tab">
                   <thead>
                   <th>booking_id</th><th>name</th><th>phone</th><th>is_check_in</th><th>check_in</th><th>check_out</th>
                   <th>room_num</th><th>room_type</th><th>adult_num</th><th>child_num</th><th>baby_num</th>
@@ -198,14 +198,14 @@
                       adult_num,child_num,baby_num,extra_text,phone-->
                   {% for data in booking_datas %}
                     <tr>
-                      <td>{{data.booking_id}}</td>
-                      <td>{{data.last_name}} {{data.first_name}}</td>
-                      <td>{{data.phone}}</td>
+                      <td class="booking_search_td">{{data.booking_id}}</td>
+                      <td class="booking_search_td">{{data.last_name}} {{data.first_name}}</td>
+                      <td class="booking_search_td">{{data.phone}}</td>
                       <td>{{data.is_check_in}}</td>
                       <td>{{data.check_in}}</td>
                       <td>{{data.check_out}}</td>
-                      <td>{{data.room_num}}</td>
-                      <td>{{data.room_type}}</td>
+                      <td class="booking_search_td">{{data.room_num}}</td>
+                      <td class="booking_search_td">{{data.room_type}}</td>
                       <td>{{data.adult_num}}</td>
                       <td>{{data.child_num}}</td>
                       <td>{{data.baby_num}}</td>
@@ -232,19 +232,19 @@
         <div class="s_i_s">
           <div class="searchBox">
               <h4>search</h4>
-              <input type="text" placeholder=" name" id="staff_info_search">
+              <input type="text" placeholder=" name" id="engineering_search">
           </div>
           <div class="resultBox">
-              <table id="staff_result_tab">
+              <table id="engineering_result_tab">
                   <thead>
                   <th>facility_id</th><th>facility_name</th><th>team_name</th><th>check_date</th><th>check_limit</th><th>status</th><th>edit</th><th>delete</th>
                   </thead>
                   <tbody>
                   {% for data in engineering_datas %}
                     <tr>
-                      <td>{{data.facility_id}}</td>
-                      <td>{{data.facility_name}}</td>
-                      <td>{{data.team_name}}</td>
+                      <td class="engineering_search_td">{{data.facility_id}}</td>
+                      <td class="engineering_search_td">{{data.facility_name}}</td>
+                      <td class="engineering_search_td">{{data.team_name}}</td>
                       <td>{{data.check_date}}</td>
                       <td>{{data.check_limit}}</td>
                       <td>{{data.status}}</td>
@@ -493,7 +493,23 @@
 
             $(temp).parent().show();
         })
+        $("#booking_search").keyup(function() {
+            var k = $(this).val();
+            $("#booking_result_tab > tbody > tr").hide(); 
+            var temp = $(".booking_search_td:contains('" + k + "')");
+
+            $(temp).parent().show();
+        })
+        $("#engineering_search").keyup(function() {
+            var k = $(this).val();
+            $("#engineering_result_tab > tbody > tr").hide();
+            var temp = $(".engineering_search_td:contains('" + k + "')");
+
+            $(temp).parent().show();
+        })
     })
+
+
     $(".fullscreen").click(function(){
         $(".popup").css("display","none");
     })
