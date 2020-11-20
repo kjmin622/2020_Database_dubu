@@ -322,7 +322,20 @@
     <div class="booking_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
         <form action="{% url 'edit_booking' %}" method="POST">
         {% for s in booking_names %}
-        {% if s != 'booking_id' %}
+        {% if s == 'room_type' %}
+        <div style="display:block">
+        <label style="margin:0px; margin-top:-3px; height:21px">standard</label>
+        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="standard" name="{{s}}"><br>
+        <label style="margin:0px; margin-top:-3px; height:21px">superior</label>
+        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="superior" name="{{s}}"><br>
+        <label style="margin:0px; margin-top:-3px; height:21px">delux</label>
+        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="delux" name="{{s}}"><br>
+        <label style="margin:0px; margin-top:-3px; height:21px">suite_delux</label>
+        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_delux" name="{{s}}"><br>
+        <label style="margin:0px; margin-top:-3px; height:21px">suite_royal</label>
+        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_royal" name="{{s}}">
+        </div> 
+        {% elif s != 'booking_id' %}
         <div style="display:block">
         <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
         <input type="text" id="booking_edit_input_{{s}}" style="height:21px; padding:1px;" name="{{s}}" placeholder="{{s}}">
@@ -505,7 +518,6 @@
             $('#booking_edit_input_check_in').attr('value','{{data.check_in}}')
             $('#booking_edit_input_check_out').attr('value','{{data.check_out}}')
             $('#booking_edit_input_room_num').attr('value','{{data.room_num}}')
-            $('#booking_edit_input_room_type').attr('value','{{data.room_type}}')
             $('#booking_edit_input_adult_num').attr('value','{{data.adult_num}}')
             $('#booking_edit_input_child_num').attr('value','{{data.child_num}}')
             $('#booking_edit_input_baby_num').attr('value','{{data.baby_num}}')
