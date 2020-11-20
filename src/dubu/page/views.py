@@ -113,6 +113,7 @@ def login(request):
                     #조건 미충족
                     if request.POST["member_id"] == '' or request.POST["password"] == '':
                         return render(request,'main/login.html',{'Error': 'Fill all the blanks.'})
+
                     cursor = connection.cursor()
                     sqlStr = f"select member_id, password from page_member_info where member_id = '{member_id}' and password = '{password}'"
                     result = cursor.execute(sqlStr)
