@@ -33,6 +33,30 @@
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
     <link rel="stylesheet" href="{% static 'css/dubu_made/product.css' %}">
+  
+    <style>
+      .pro_search_result{
+        height:200px;
+        overflow:auto;
+      }
+      th, td{
+        padding: 3px 10px;
+      }
+      table, thead, tbody, th, td, tr{
+        border:1px solid gray;
+        white-space:nowrap;
+      }
+      th{
+        text-align:center;
+        font-size:17px;
+        font-weight:500;
+      }
+
+      .p_output th,td{
+        padding: 3px 20px;
+      }
+    </style>
+  
   </head>
   <body>
 
@@ -80,10 +104,33 @@
 <div class="product_a">
 <!-- 재고의 정보를 보여주고 수종가능한 section-->
   <section class="search_product  row_c">
-      <div class="staff_s_div bold_sec">
+      <div class="staff_s_div bold_sec" style="height: 450px">
         <div class="sub_title ">재고 현황 및 수정</div>
         <div class="s_i_s">
-          안녕 나는 재고 현황이야
+          
+            <div class="pro_search">
+
+              <div class="s_s_t">Product 재고 확인 및 수정</div>
+
+              <div class="p_s">
+                <input type="text" class="pro_search_input p_input" placeholder="Product Name">
+                <div class="pro_search_result p_output">
+                  <table>
+                    <thead><th>Product Id</th><th>Product Name</th><th>In storage</th><th>EDIT</th></thead>
+                    <tbody>
+                      <tr class="none_pro" style="display:none"><td colspan="5" style="text-align:center">재고가 없습니다.</td></tr>
+                      <tr>
+                        <td class="pro_search_pivot">11111</td>
+                        <td class="pro_search_pivot">11111</td>
+                        <td class="pro_search_pivot">11111</td>
+                        <td class="pro_search_pivot"><div class="p_button">EDIT</div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
         </div>
       </div>
   </section>
@@ -92,18 +139,43 @@
   <section class="search_p_apply  row_c">
       <div class="staff_s_div bold_sec">
         <div class="sub_title ">발주 신청</div>
-        <div class="s_i_s">
-          안녕 나는 발주 신청이야
-        </div>
+            <div class="park_insert">
+              <div class="s_s_t"></div>
+              <form method="POST" onsubmit="return confirm('발주를 신청하시겠습니다?');">
+                <div class="p_i_input"> 
+                  <input class="p_i_add p_i_i" type="text" name="method" value="in_car" style="display:none" readonly>
+                  <input class="p_i_add p_i_i" type="text" name="car_number" placeholder="Product Name">
+                  <input class="p_i_add p_i_i" type="text" name="room_num" placeholder="Count">
+                  {% comment %} <input class="p_i_add p_i_i" type="text" name="spot" placeholder="요청사항"> {% endcomment %}
+                  <input class="p_i_add p_button" type="submit" value="INSERT">
+                </div>
+              </form>
+            </div>
       </div>
   </section>
 
   <!-- 발주 정보를 확인하고 재고 정보를 갱신가능한 section-->
   <section class="search_a_check row_c">
-      <div class="bold_test_product staff_s_div bold_sec">
+      <div class="bold_test_product staff_s_div bold_sec" style="height: 400px">
         <div class="sub_title ">발주 현황</div>
         <div class="s_i_s">
-          안녕 나는 발주 현황이야
+              <div class="b_s">
+                <div class="b_s_r b_output">
+                  <table style="height: 250px">
+                    <thead><th>Order Date</th><th>Product Id</th><th>Product Name</th><th>Product Name</th><th>Count</th><th>납품완료</th></thead>
+                    <tbody>
+                      <tr>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p"><div class="p_button">EDIT</div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
         </div>
       </div>
   </section>

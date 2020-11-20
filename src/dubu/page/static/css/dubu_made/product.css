@@ -1,21 +1,18 @@
-/* product 틀 */
+/* parking 틀 */
 *{
     margin: 0px;
     padding:0px;
 }
 
+body{
+    /* background-color: black; */
+}
 .s_i_s{
     display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
+    flex-flow: column;
+    flex-wrap: nowrap;
     justify-content: space-around;
-}
-
-
-
-.bold_test_product{
-    border: 2px dotted;
-    border-color: aqua;
+    padding: 0px 20px;
 }
 
 .bold_sec{
@@ -27,15 +24,99 @@
     flex-flow: column;
     padding-top: 30px;
     padding-bottom: 40px;
+    /* height: 650px; */
+    /* min-width: 800px; */
+    /* background-color: blue; */
 }
+
+
 
 body{
-    /* background-color: rgb(182, 182, 182); */
+    min-width: 1500px;
 }
 
+.p_input{
+    /* border: 2px solid; */
+    /* border-color:blue;   */
+    font-size: 17px;
+    padding: 10px 3px 10px 13px;
+    width: 150px;
+    height: 40px;
+    margin: 0px 20px;
+}
 
-/* 재고 현황 및 수정 */
+.p_i_input{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    justify-content: start;
+    /* margin-top: 20px; */
+    padding: 10px 20px;
+}
 
-/* 발주 신청 */
+.pro_search{
+    /* border: 2px solid; */
+    /* border-color: brown;   */
+    padding: 40px;
+}
 
-/* 발주 현황 */
+.p_output{
+    border: 2px solid;
+    padding: 5px;
+    border-color: darkgray;
+    margin: 0px 40px;
+}
+
+.park_insert{
+    padding: 40px;
+    /* border: 2px solid; */
+    /* border-color: brown; */
+    display: flex;
+    flex-flow: column;
+    /* justify-content: start; */
+    margin-top: 20px;
+}
+
+.p_i_i{
+    width: 150px;
+    padding-left: 10px;
+}
+.p_i_add{
+    margin: 5px;
+}
+
+.s_s_t{
+    font-size: 20px;
+    font-weight: 300;
+    /* margin: 20px; */
+}
+
+.p_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    margin-top: 20px;
+}
+
+.p_button{
+    padding: 0px 20px;
+    background-color: rgb(95, 95, 95);
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.b_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    margin-top: 20px;
+}
+
+.b_output{
+    border: 2px solid;
+    padding: 5px;
+    border-color: darkgray;
+    margin: 0px 40px;
+}
