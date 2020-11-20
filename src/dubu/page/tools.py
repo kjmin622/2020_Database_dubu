@@ -241,7 +241,6 @@ class Staff():
             return False
 
 
-            
 
 class Book():
     def get_parking_info():
@@ -427,4 +426,19 @@ class Room():
             connection.close()
             return False
 
-    
+
+class OtherTool():
+    def get_engineering():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select facility_id, facility_name, team_name, check_date, check_limit, status from page_engineering natural join (select team_name, facility_id from page_engineering_team)"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({"facility_id":data[0],"facility_name":data[1],"team_name":data[2],"check_data":data[3],"check_limit":data[4],"status":data[5]})
+            connection.close()
+            return output
+        except:
+            connection.close()
+            return None

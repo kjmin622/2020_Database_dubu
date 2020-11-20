@@ -99,6 +99,8 @@ def management(request):
     booking_names = ['booking_id', 'first_name','last_name', 'phone', 'is_check_in', 'check_in', 'check_out', 'room_num', 'room_type', 'adult_num', 'child_num', 'baby_num', 'breakfast', 'extra_text']
     rooms_datas,room_type_datas,room_type_bed_datas = Room.get_room_info()
     booking_datas = Book.get_booking_info()
+    engineering_datas = OtherTool.get_engineering()
+    print(engineering_datas)
     return render(request,'admin/management.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names,
                                                     'rooms_datas':rooms_datas,'room_type_datas':room_type_datas,'room_type_bed_datas':room_type_bed_datas,
                                                     'booking_datas':booking_datas, 'booking_names':booking_names})
