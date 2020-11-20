@@ -39,6 +39,24 @@ def reservation(request):
         login = True
     return render(request,'main/reservation.html',{"login":login})
 
+def reservation2(request):
+    # not login
+    if "member_id" not in request.session or request.session["member_id"]==None :
+        login = False
+    # login
+    else:
+        login = True
+    return render(request,'main/reservation2.html',{"login":login})
+
+def reservation3(request):
+    # not login
+    if "member_id" not in request.session or request.session["member_id"]==None :
+        login = False
+    # login
+    else:
+        login = True
+    return render(request,'main/reservation3.html',{"login":login})    
+
 def join(request):
     # not login
     if "member_id" not in request.session or request.session["member_id"]==None :
