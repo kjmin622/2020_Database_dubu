@@ -32,7 +32,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dubu_made/park.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/parking.css' %}">
 
 
     <style>
@@ -41,13 +41,20 @@
         overflow:auto;
       }
       th, td{
-        padding:10px;
+        padding: 3px 10px;
+
       }
       table, thead, tbody, th, td, tr{
         border:1px solid gray;
         white-space:nowrap;
       }
+      th{
+        text-align:center;
+        font-size:17px;
+        font-weight:500;
+      }
     </style>
+
   </head>
   <body>
 
@@ -64,7 +71,7 @@
 	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
             {% comment %} Log out {% endcomment %}
               <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
-              <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
 	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
 	          <li class="nav-item active"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
 	          <li class="nav-item"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
@@ -102,38 +109,49 @@
         <div class="sub_title">Parking</div>
 
         <div class="s_i_s">
+
             <div class="park_search">
-              <input type="text" class="parking_search_input" placeholder=" search">
-              <div class="parking_search_result">
-                <table>
-                  <thead><th>car number</th><th>room number</th><th>spot</th><th>team name</th><th>출차</th></thead>
-                  <tbody>
-                  <tr class="none_parking" style="display:none"><td colspan="5" style="text-align:center">주차정보가 없습니다.</td></tr>
-                  {% for data in parking_datas %}
-                  <tr>
-                    <td class="parking_search_pivot">{{data.car_number}}</td>
-                    <td class="parking_search_pivot">{{data.room_num}}</td>
-                    <td class="parking_search_pivot">{{data.spot}}</td>
-                    <td class="parking_search_pivot">{{data.team_name}}</td>
-                    <td><form method="POST" onsubmit="return confirm('차번호: {{data.car_number}}\n방번호: {{data.room_num}}\n주차구역: {{data.spot}}\n출차가 완료되었습니까?');">
-                      <input type="text" name="method" value="out_car" style="display:none" readonly>
-                      <input type="text" name="car_number" value="{{data.car_number}}" style="display:none" readonly>
-                      <input type="submit" value="출차">
-                    </form></td>
-                  </tr>
-                  {% endfor %}
-                  </tbody>
-                </table>
+
+              <div class="s_s_t">주차 정보 확인 및 출차</div>
+
+              <div class="p_s">
+                <input type="text" class="parking_search_input p_input" placeholder="Search">
+                <div class="parking_search_result p_output">
+                  <table>
+                    <thead><th>car number</th><th>room number</th><th>spot</th><th>team name</th><th>car out</th></thead>
+                    <tbody>
+                      <tr class="none_parking" style="display:none"><td colspan="5" style="text-align:center">주차정보가 없습니다.</td></tr>
+                      {% for data in parking_datas %}
+                      <tr>
+                        <td class="parking_search_pivot">{{data.car_number}}</td>
+                        <td class="parking_search_pivot">{{data.room_num}}</td>
+                        <td class="parking_search_pivot">{{data.spot}}</td>
+                        <td class="parking_search_pivot">{{data.team_name}}</td>
+                        <td><form method="POST" onsubmit="return confirm('차번호: {{data.car_number}}\n방번호: {{data.room_num}}\n주차구역: {{data.spot}}\n출차가 완료되었습니까?');">
+                          <input type="text" name="method" value="out_car" style="display:none" readonly>
+                          <input type="text" name="car_number" value="{{data.car_number}}" style="display:none" readonly>
+                          <input class="p_button" type="submit" value="CHECK">
+                        </form></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
               </div>
+
             </div>
+
             <div class="park_insert">
+              <div class="s_s_t">주차 정보 추가</div>
               <form method="POST" onsubmit="return confirm('입차가 완료되었습니까?');">
-                <input type="text" name="method" value="in_car" style="display:none" readonly>
-                <input type="text" name="car_number" placeholder="차번호">
-                <input type="text" name="room_num" placeholder="방번호">
-                <input type="text" name="spot" placeholder="주차위치">
-                <input type="text" name="team_name" placeholder="팀이름">
-                <input type="submit" value="입차">
+                <div class="p_i_input"> 
+                  <input class="p_i_add p_i_i" type="text" name="method" value="in_car" style="display:none" readonly>
+                  <input class="p_i_add p_i_i" type="text" name="car_number" placeholder="차번호">
+                  <input class="p_i_add p_i_i" type="text" name="room_num" placeholder="방번호">
+                  <input class="p_i_add p_i_i" type="text" name="spot" placeholder="주차위치">
+                  <input class="p_i_add p_i_i" type="text" name="team_name" placeholder="팀이름">
+                  <input class="p_i_add p_button" type="submit" value="INSERT">
+                </div>
               </form>
             </div>
         </div>

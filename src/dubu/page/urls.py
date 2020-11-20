@@ -31,7 +31,7 @@ urlpatterns = [
 
     # front admin
     path('admin/staff',admin_views.staff,name="staff"),
-    path('admin/s_reservation',admin_views.s_reservation,name="s_reservation"),
+    # path('admin/s_reservation',admin_views.s_reservation,name="s_reservation"),
     path('admin/room_select',admin_views.room_select,name="room_select"),
     path('admin/parking',admin_views.parking,name="parking"),
     path('admin/product',admin_views.product,name="product"),

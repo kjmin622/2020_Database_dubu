@@ -150,3 +150,16 @@
     border-radius: 10px;
     color: white;
 }
+
+.l_find{
+    /* background-color: aqua; */
+    display: flex;
+    flex-flow: row;
+    /* align-items: center; */
+    justify-content: center;
+}
+
+
+body{
+    /* background-color: aqua; */
+}

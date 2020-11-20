@@ -138,8 +138,8 @@ def mypage(request):
 def staff(request):
     return render(request,'admin/staff.html',{})
 
-def s_reservation(request):
-    return render(request,'admin/s_reservation.html',{})
+# def s_reservation(request):
+#     return render(request,'admin/s_reservation.html',{})
 
 def room_select(request):
     return render(request,'admin/room_select.html',{})
