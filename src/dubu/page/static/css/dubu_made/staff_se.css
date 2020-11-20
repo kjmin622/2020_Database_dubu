@@ -1,0 +1,66 @@
+*{
+    margin: 0px;
+    padding:0px;
+}
+
+body{
+    min-width: 1500px;
+}
+.s_i_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    /* justify-content: space-around; */
+    /* display: flex;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    justify-content: space-around; */
+    padding: 30px 0px;
+}
+
+
+
+/* .bold_test_engine{
+    border: 2px dotted;
+    border-color: aqua;
+} */
+
+.bold_sec{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid;
+    border-color: darkgray;
+    display: flex;
+    flex-flow: column;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.resultBox{
+    border: 2px solid;
+    padding: 5px;
+    border-color: darkgray;
+    margin: 0px 0px 0px 20px;
+}
+
+
+.p_input{
+    /* border: 2px solid; */
+    /* border-color:blue;   */
+    font-size: 17px;
+    padding: 10px 3px 10px 13px;
+    width: 145px;
+    height: 40px;
+    margin: 0px 20px;
+    color: rgb(116, 116, 116);
+}
+
+.s_s_t{
+    font-size: 20px;
+    font-weight: 300;
+    /* margin: 20px; */
+}
+
+.s_s_content{
+    padding: 40px 60px;
+}

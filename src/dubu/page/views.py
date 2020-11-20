@@ -9,97 +9,119 @@ from .models import *
 from .forms import *
 # Create your views here.
 
-def index(request):
-    return render(request,'main/index.html',{})
+def index(request):  
+    # not login
+    if "member_id" not in request.session or request.session["member_id"]==None :
+        login = False
+    # login
+    else:
+        login = True
+    return render(request,'main/index.html',{"login":login})
 
 def about(request):
-    return render(request,'main/about.html',{})
+    # not login
+    if "member_id" not in request.session or request.session["member_id"]==None :
+        login = False
+    # login
+    else:
+        login = True
+    return render(request,'main/about.html',{"login":login})
 
 def rooms(request):
     return render(request,'main/rooms-single.html',{})
 
 def reservation(request):
-    return render(request,'main/reservation.html',{})
+    # not login
+    if "member_id" not in request.session or request.session["member_id"]==None :
+        login = False
+    # login
+    else:
+        login = True
+    return render(request,'main/reservation.html',{"login":login})
 
 def join(request):
-    return render(request,'main/join.html',{})
+    # not login
+    if "member_id" not in request.session or request.session["member_id"]==None :
+        return render(request,'main/join.html',{})  
+    # login
+    else :
+        return render(request,'main/mypage.html',{})
 
 def event(request):
     return render(request,'main/event.html',{})
 
-def find_id(request):
-    return HttpResponse(request.POST['member_id'])
-    
-
 def login(request):
-    if request.method == "POST":
-        #login
-        if(request.POST["input"]=="login"):
-            member_id = request.POST['member_id']; password = request.POST['password']
-            try:
-                #조건 미충족
-                if request.POST["member_id"] == '' or request.POST["password"] == '':
-                    return render(request,'main/login.html',{'Error': 'Fill all the blanks.'})
-                cursor = connection.cursor()
-                sqlStr = f"select member_id, password from page_member_info where member_id = '{member_id}' and password = '{password}'"
-                result = cursor.execute(sqlStr)
-                is_member=cursor.fetchall()
-                if(is_member):
-                    request.session["member_id"]=member_id
-                    return redirect('index')    
-                else:
-                    return render(request, 'main/login.html', {'Error': 'Member ID or PW is incorrect'})
-            except:
-                connection.rollback()
-                connection.close()
-                return render(request,'main/login.html',{})
-        #id
-        elif request.POST["input"]=="find_id":
-            try:
-                member_id = request.POST['member_id']; last_name = request.POST['last_named']; first_name = request.POST['first_name']; email = request.POST['email']
-                info = False
-                cursor = connection.cursor()
-                sqlStr = f"select member_id from page_member_info where last_name = '{last_name}' and first_name = '{first_name}' and email = '{email}'"
-                result = cursor.execute(sqlStr)
-                is_member=cursor.fetchall()
-                if(is_member): 
-                    info = True
-                    member_id = is_member
-                    return render(request, 'main/login.html', {})
-                else:
-                    return render(request, 'main/index.html', {'Error': 'Your information is incorrect'})
-            except:
-                connection.rollback()
-                connection.close()
-                return render(request,'main/login.html',{})
-        #pw
-        elif request.POST["input"]=="find_pw":
-            try:
-                member_id = request.POST['member_id'];last_name = request.POST['last_name'];first_name = request.POST['first_name'];email = request.POST['email']
-                cursor = connection.cursor()
-                sqlStr = f"select password from page_member_info where last_name = '{last_name}' and first_name = '{first_name}' and member_id = '{member_id}' and email = '{email}'"
-                result = cursor.execute(sqlStr)
-                is_member=cursor.fetchall()
-                print(is_member)
-                if(is_member): 
-                    password = str(is_member[0][0])
-                    return render(request, 'main/login.html',{'info':'find_password','password':password})
-                else:
-                    return render(request, 'main/index.html', {'Error': 'Your information is incorrect'})
-            except:
-                connection.rollback()
-                connection.close()
-                return render(request,'main/about.html',{})
+    # not login
+    if "member_id" not in request.session or request.session["member_id"]==None : 
+        if request.method == "POST":
+            #login start
+            if(request.POST["input"]=="login"):
+                member_id = request.POST['member_id']; password = request.POST['password']
+                try:
+                    #조건 미충족
+                    if request.POST["member_id"] == '' or request.POST["password"] == '':
+                        return render(request,'main/login.html',{'Error': 'Fill all the blanks.'})
+                    cursor = connection.cursor()
+                    sqlStr = f"select member_id, password from page_member_info where member_id = '{member_id}' and password = '{password}'"
+                    result = cursor.execute(sqlStr)
+                    is_member=cursor.fetchall()
+                    if(is_member):
+                        request.session["member_id"]=member_id
+                        return redirect('index')
+                    else:
+                        return render(request, 'main/login.html', {'Error': 'Member ID or PW is incorrect'})
+                except:
+                    connection.rollback()
+                    connection.close()
+                    return render(request,'main/login.html',{})
+            #id
+            elif request.POST["input"]=="find_id":
+                try:
+                    member_id = request.POST['member_id']; last_name = request.POST['last_named']; first_name = request.POST['first_name']; email = request.POST['email']
+                    info = False
+                    cursor = connection.cursor()
+                    sqlStr = f"select member_id from page_member_info where last_name = '{last_name}' and first_name = '{first_name}' and email = '{email}'"
+                    result = cursor.execute(sqlStr)
+                    is_member=cursor.fetchall()
+                    if(is_member): 
+                        info = True
+                        member_id = is_member
+                        return render(request, 'main/login.html', {})
+                    else:
+                        return render(request, 'main/index.html', {'Error': 'Your information is incorrect'})
+                except:
+                    connection.rollback()
+                    connection.close()
+                    return render(request,'main/login.html',{})
+            #pw
+            elif request.POST["input"]=="find_pw":
+                try:
+                    member_id = request.POST['member_id'];last_name = request.POST['last_name'];first_name = request.POST['first_name'];email = request.POST['email']
+                    cursor = connection.cursor()
+                    sqlStr = f"select password from page_member_info where last_name = '{last_name}' and first_name = '{first_name}' and member_id = '{member_id}' and email = '{email}'"
+                    result = cursor.execute(sqlStr)
+                    is_member=cursor.fetchall()
+                    print(is_member)
+                    if(is_member): 
+                        password = str(is_member[0][0])
+                        return render(request, 'main/login.html',{'info':'find_password','password':password})
+                    else:
+                        return render(request, 'main/index.html', {'Error': 'Your information is incorrect'})
+                except:
+                    connection.rollback()
+                    connection.close()
+                    return render(request,'main/about.html',{})
+            else:
+                return redirect('login')
+
         else:
-            return redirect('login')
+            return render(request, 'main/login.html')
+        return redirect('login')
 
-    else:
-        return render(request, 'main/login.html')
-    return redirect('login')
-
-def logout(request):
-    request.session["member_id"]=None
-    return render(request,'main/index.html',{})
+    # already login
+    else : 
+        request.session["member_id"]=None
+        return render(request,'main/index.html',{})
 
 def signup(request):
     if(request.method=="POST"):
@@ -126,7 +148,7 @@ def signup(request):
             connection.commit()
             connection.close()
             return redirect('login')
-        
+
         except:
             connection.rollback()
             connection.close()
