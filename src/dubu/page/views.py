@@ -4,10 +4,7 @@ from django.contrib.auth import authenticate
 from django.db import connection
 from django.shortcuts import redirect
 from django.contrib import messages
-<<<<<<< HEAD
 from django.template import loader
-=======
->>>>>>> develop
 from .models import *
 from .forms import *
 # Create your views here.
@@ -36,7 +33,6 @@ def find_id(request):
 
 def login(request):
     if request.method == "POST":
-<<<<<<< HEAD
         #login
         if(request.POST["input"]=="login"):
             member_id = request.POST['member_id']; password = request.POST['password']
@@ -44,15 +40,6 @@ def login(request):
                 #조건 미충족
                 if request.POST["member_id"] == '' or request.POST["password"] == '':
                     return render(request,'main/login.html',{'Error': 'Fill all the blanks.'})
-=======
-
-        if(request.POST["input"]=="login"):
-            member_id = request.POST['member_id'];password = request.POST['password']
-            try:
-                #조건 미충족
-                if request.POST["member_id"] == '' or request.POST["password"] == '':
-                    return render(request,'main/tlogin.html',{'Error': 'Fill all the blanks.'})
->>>>>>> develop
                 cursor = connection.cursor()
                 sqlStr = f"select member_id, password from page_member_info where member_id = '{member_id}' and password = '{password}'"
                 result = cursor.execute(sqlStr)
@@ -66,7 +53,6 @@ def login(request):
                 connection.rollback()
                 connection.close()
                 return render(request,'main/login.html',{})
-<<<<<<< HEAD
         #id
         elif request.POST["input"]=="find_id":
             try:
@@ -82,24 +68,10 @@ def login(request):
                     return render(request, 'main/login.html', {})
                 else:
                     return render(request, 'main/index.html', {'Error': 'Your information is incorrect'})
-=======
-
-        elif request.POST["input"]=="find_id":
-            try:
-                cursor = connection.cursor()
-                sqlStr = f"select member_id, from page_member_info where last_name = '{last_name}' and first_name = '{first_name}' and email = '{email}'"
-                result = cursor.execute(sqlStr)
-                is_member=cursor.fetchall()
-                if(is_member): 
-                    return render_template('main/index.html', message=any_variable)
-                else:
-                    return render(request, 'main/login.html', {'Error': 'Your information is incorrect'})
->>>>>>> develop
             except:
                 connection.rollback()
                 connection.close()
                 return render(request,'main/login.html',{})
-<<<<<<< HEAD
         #pw
         elif request.POST["input"]=="find_pw":
             try:
@@ -118,32 +90,11 @@ def login(request):
                 connection.rollback()
                 connection.close()
                 return render(request,'main/about.html',{})
-=======
-
-        elif request.POST["input"]=="find_pw":
-            try:
-                cursor = connection.cursor()
-                sqlStr = f"select password, from page_member_info where last_name = '{last_name}' and first_name = '{first_name}' and member_id = '{member_id}' and email = '{email}'"
-                result = cursor.execute(sqlStr)
-                is_member=cursor.fetchall()
-                if(is_member): 
-                    return render(request, 'main/index.html', {})
-                else:
-                    return render(request, 'main/login.html', {'Error': 'Your information is incorrect'})
-            except:
-                connection.rollback()
-                connection.close()
-                return render(request,'main/login.html',{})
->>>>>>> develop
         else:
             return redirect('login')
 
     else:
-<<<<<<< HEAD
         return render(request, 'main/login.html')
-=======
-        return render(request, 'main/tlogin.html')
->>>>>>> develop
     return redirect('login')
 
 def logout(request):
