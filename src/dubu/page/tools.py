@@ -241,7 +241,6 @@ class Staff():
             return False
 
 
-            
 
 class Book():
     def get_parking_info():
@@ -269,20 +268,78 @@ class Book():
 
             output = []
             for booking_id in booking_ids:
-                sqlStr = "select room_num from page_booking_rooms"
+                sqlStr = f"select room_num from page_booking_rooms where booking_id = '{booking_id}'"
                 cursor.execute(sqlStr);is_room=cursor.fetchall()
                 if(is_room):
                     sqlStr = f"select booking_id, is_check_in, check_in, check_out,room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone,room_num from page_booking natural join (select booking_id, room_num from page_booking_rooms) natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
                 else:
                     sqlStr = f"select booking_id, is_check_in, check_in, check_out, room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone from page_booking natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
-                cursor.execute(sqlStr);data=cursor.fetchall()
-                output.append({'booking_id':data[0], 'is_check_in':data[1], 'check_in':data[2], 'check_out':data[3],'room_type':data[4],'breakfast':data[5],'adult_num':data[6],'child_num':data[7],'baby_num':data[8],'extra_text':data[9],'first_name':data[10],'last_name':data[11],'phone':data[12],'room_num': ("" if not is_room else data[13])})
+                cursor.execute(sqlStr)
+                data=cursor.fetchall()[0]
+
+                output.append({'booking_id':data[0], 'is_check_in':data[1], 'check_in':data[2], 'check_out':data[3],'room_type':data[4],'breakfast':data[5],'adult_num':data[6],'child_num':data[7],'baby_num':data[8],'extra_text':data[9],'first_name':data[10],'last_name':data[11],'phone':data[12],'room_num': ""})
+                if(is_room):
+                    output[-1]["room_num"] = data[13]
 
             connection.close()
             return output
         except:
             connection.close()
             return None
+
+    def delete_booking(dataDir):
+        try:
+            cursor = connection.cursor()
+            booking_id = dataDir["booking_id"]
+            table = ["page_booking","page_booking_rooms","page_book_request",
+                    "page_customer_info","page_customer_phone","page_member_customer",
+                    "page_booking_parking","page_bill","page_invoice"]
+
+            sqlStrs = []
+            for sql in table:
+                sqlStrs.append(f"delete from {sql} where booking_id='{booking_id}'")
+            
+            car_numbers = []
+            sqlStr = f"select car_number from page_booking_parking where booking_id='{booking_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            for car in result:
+                sqlStrs.append(f"delete from page_parking where car_number = '{car[0]}'")
+            
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
+
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+    def edit_booking(dataDir):
+        try:
+            booking_id=dataDir['booking_id'];is_check_in=dataDir['is_check_in'];check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];baby_num=dataDir['baby_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
+            cursor = connection.cursor()
+            sqlStr = f"select * from rooms where room_num={room_num} and room_type='{room_type}'"
+            cursor.execute(sqlStr)
+            if(not cursor.fetchall()):
+                raise ValueError
+            sqlStrs = [
+                f"update page_booking set is_check_in='{is_check_in}', check_in='{check_in}', check_out='{check_out}' where booking_id='{booking_id}'",
+                f"update page_booking_rooms set room_num={room_num} where booking_id='{booking_id}'",
+                f"update page_book_request set room_type='{room_type}',breakfast='{breakfast}',adult_num='{adult_num}',child_num='{child_num}',baby_num='{baby_num}',extra_text='{extra_text}' where booking_id='{booking_id}'",
+                f"update page_customer_info set first_name='{first_name}',last_name='{last_name}' where booking_id='{booking_id}'",
+                f"update page_customer_phone set phone='{phone}' where booking_id='{booking_id}'"
+            ]
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
 
     def insert_parking(dataDir):
         # car_number room_num spot team_name
@@ -369,4 +426,32 @@ class Room():
             connection.close()
             return False
 
-    
+
+class OtherTool():
+    def get_engineering():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select facility_id, facility_name, team_name, check_date, check_limit, status from page_engineering natural join (select team_name, facility_id from page_engineering_team)"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({"facility_id":data[0],"facility_name":data[1],"team_name":data[2],"check_data":data[3],"check_limit":data[4],"status":data[5]})
+            connection.close()
+            return output
+        except:
+            connection.close()
+            return None
+
+    def delete_engineering(dataDir):
+        try:
+            cursor = connection.cursor()
+            facility_id = dataDir["facility_id"]
+
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False

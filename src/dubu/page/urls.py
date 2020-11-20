@@ -31,6 +31,8 @@ urlpatterns = [
     path('admin/manage_staff/del_holi',admin_views.delete_staff_holiday,name="delete_staff_holiday"),
     path('admin/staff/change_status',admin_views.change_staff_status,name="change_staff_status"),
     path('admin/management/edit_room_type',admin_views.edit_room_type,name="edit_room_type"),
+    path('admin/management/del_booking',admin_views.delete_booking,name="delete_booking"),
+    path('admin/management/edit_booking',admin_views.edit_booking,name="edit_booking"),
     # path('admin/staff/bill',admin_views.change_staff_status,name="bill"),
 
     # front admin
