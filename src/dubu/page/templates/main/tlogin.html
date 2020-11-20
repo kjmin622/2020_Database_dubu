@@ -30,6 +30,18 @@
                 <input type="text" name="email" class="form-control" id="email">
             </div>
             <button type="submit" class="btn btn-default">Find ID</button>
+
+            <div class="found_id">
+                <script>
+                    {% if info == 'find_id' %}
+                        style="display:inline"
+                        document.write("Your Id is ",member_id)
+                    {% else %}
+                        style="display:none"
+                    {% endif %}
+                    
+                </script>
+            </div>
         </form>
         <form method="POST">
             {% csrf_token %}
@@ -49,5 +61,21 @@
                 <input type="text" name="email" class="form-control" id="email">
             </div>
             <button type="submit" class="btn btn-default">Find PW</button>
+
+            <div class="found_pw">
+                <script>
+                    $(document).ready(function{
+                        {% if info == 'find_password' %}
+                            {% comment %} style="display:inline" {% endcomment %}
+                            alert("Your PW is ", '{{password}}');
+                            console.log('{{password}}');
+                        {% else %}
+                            {% comment %} style="display:none" {% endcomment %}
+                        {% endif %}
+                    });
+                    
+                </script>
+            </div>
         </form>
     </body>
+
