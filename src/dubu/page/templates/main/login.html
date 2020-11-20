@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-<html>
-    <head>
-        <title>Log In</title>
-    </head>
-    <body>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="account">
-                <label for="member_id">ID</label>
-                <input type="text" name="member_id" class="form-control" id="member_id">
-                <br>
-                <label for="password">PW</label>
-                <input type="password" name="password" class="form-control" id="password">
-            </div>
-            <button type="submit" class="btn btn-default">submit</button>
-        </form>
-    </body>
-=======
 {% comment %} 로그인 {% endcomment %}
 {% comment %} 로그아웃은 단순히 버튼 입니다. {% endcomment %}
 
@@ -166,7 +147,11 @@
           <ul class="list-unstyled">
             <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
             <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
-            <li><a href="{% url 'mypage' %}" class="py-2 d-block">Join/Mypage</a></li>
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+            {% endif %}
             <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
             <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
           </ul>
@@ -231,5 +216,4 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 
 
   </body>
->>>>>>> develop
 </html>

@@ -211,7 +211,11 @@
             {% else %}
               <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
             {% endif %}>Rooms</a></li> -->
-
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+            {% endif %}
             <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
             <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
           </ul>
