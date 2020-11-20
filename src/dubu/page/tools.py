@@ -464,6 +464,18 @@ class OtherTool():
         try:
             cursor = connection.cursor()
             facility_id=dataDir["facility_id"];facility_name=dataDir["facility_name"];team_name=dataDir["team_name"];check_date=dataDir["check_date"];check_limit=dataDir["check_limit"];status=dataDir["status"]
+            
+            for date in [check_date,check_limit]:
+                y,m,d = date.split('-')
+                if(int(y)<2000 or int(m)<1 or int(m)>12 or int(d)>31 or int(d)<0):
+                    raise ValueError
+            
+            sqlStr = f"select section from page_team where team_name='{team_name}'"
+            cursor.execute(sqlStr);is_team=cursor.fetchall()
+            if(not is_team):
+                raise ValueError
+
+
             sqlStrs = [f"update page_engineering set facility_name='{facility_name}',check_date='{check_date}',check_limit='{check_limit}',status='{status}' where facility_id='{facility_id}'",
                        f"update page_engineering_team set team_name='{team_name}' where facility_id='{facility_id}'"]
             for sqlStr in sqlStrs:
