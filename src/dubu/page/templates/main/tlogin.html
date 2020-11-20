@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>Log In</title>
+    </head>
+    <body>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="account">
+                <input type="text" name="input" class="form-control" value="login" style="display:none" readonly>
+                <label for="member_id">ID</label>
+                <input type="text" name="member_id" class="form-control" id="member_id">
+                <br>
+                <label for="password">PW</label>
+                <input type="password" name="password" class="form-control" id="password">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="find_id">
+                <input type="text" name="input" class="form-control" value="find_id" style="display:none" readonly>
+                <p>ID 찾기</p>
+                <label for="last_name">Last Name</label> 
+                <label for="first_name">Fist Name</label> 
+                <br>
+                <input type="text" name="last_name" class="form-control" id="last_name">
+                <input type="text" name="first_name" class="form-control" id="first_name">
+                <br>
+                <label for="email">E-mail</label>
+                <input type="text" name="email" class="form-control" id="email">
+            </div>
+            <button type="submit" class="btn btn-default">Find ID</button>
+
+            <div class="found_id">
+                <script>
+                    {% if info == 'find_id' %}
+                        style="display:inline"
+                        document.write("Your Id is ",member_id)
+                    {% else %}
+                        style="display:none"
+                    {% endif %}
+                    
+                </script>
+            </div>
+        </form>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="find_pw">
+                <input type="text" name="input" class="form-control" value="find_pw" style="display:none" readonly>
+                <p>PW 찾기</p>
+                <label for="member_id">ID</label>
+                <input type="text" name="member_id" class="form-control" id="member_id">
+                <br>
+                <label for="last_name">Last Name</label> 
+                <label for="first_name">Fist Name</label> 
+                <br>
+                <input type="text" name="last_name" class="form-control" id="last_name">
+                <input type="text" name="first_name" class="form-control" id="first_name">
+                <br>
+                <label for="email">E-mail</label>
+                <input type="text" name="email" class="form-control" id="email">
+            </div>
+            <button type="submit" class="btn btn-default">Find PW</button>
+
+            <div class="found_pw">
+                <script>
+                    $(document).ready(function{
+                        {% if info == 'find_password' %}
+                            {% comment %} style="display:inline" {% endcomment %}
+                            alert("Your PW is ", '{{password}}');
+                            console.log('{{password}}');
+                        {% else %}
+                            {% comment %} style="display:none" {% endcomment %}
+                        {% endif %}
+                    });
+                    
+                </script>
+            </div>
+        </form>
+    </body>
+

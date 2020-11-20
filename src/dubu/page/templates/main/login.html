@@ -82,14 +82,26 @@
 {% comment %} test  {% endcomment %}
 <div class="tle">
 	<section class="test1 ">
+    <form method="POST">
+      {% csrf_token %}
         <div class="login "> 
-          <div class = "id_in ">ID</div>
-          <div class = "pass_in ">PASSWORD</div>
-          <div class = "login_button ">BUTTON</div>
+          <input type="text" name="input" class="form-control" value="login" style="display:none" readonly>
+          <div class = "id_in ">
+          <label for="member_id">ID</label>
+          <input type="text" name="member_id" class="form-control" id="member_id">
+          </div>
+          <div class = "pass_in ">
+          PASSWORD
+          <input type="password" name="password" class="form-control" id="password">
+          </div>
+          <div class = "login_button ">
+          BUTTON
+          <button type="submit" class="btn btn-default">Submit</button>
+          </div>
           <div class = "join_in"><a href="{% url 'join' %}">회원가입</a></div>
           <div class = "s_id">아이디/비밀번호 찾기</div>
         </div>
-        
+    </form>    
   </section>
 
   <div class="l_find">
