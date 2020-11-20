@@ -104,7 +104,7 @@
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Check-in Date</label>
-				    					<input type="text" class="form-control checkin_date" placeholder="Check-in date">
+				    					<input type="text" class="form-control checkin_date" placeholder="Check-in">
 			    					</div>
 			    				</div>
 	        			</div>
@@ -112,7 +112,7 @@
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 				    					<label for="#">Check-out Date</label>
-				    					<input type="text" class="form-control checkout_date" placeholder="Check-out date">
+				    					<input type="text" class="form-control checkout_date" placeholder="Check-out">
 			    				</div>
 			    				</div>
 	        			</div>
@@ -124,33 +124,26 @@
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 			                    <select name="" id="" class="form-control">
-			                    	<option value="">Suite</option>
-			                      <option value="">Family Room</option>
-			                      <option value="">Deluxe Room</option>
-			                      <option value="">Classic Room</option>
-			                      <option value="">Superior Room</option>
-			                      <option value="">Luxury Room</option>
+			                    	<option value="">one</option>
+			                      <option value="">two</option>
+			                      <option value="">three</option>
 			                    </select>
 			                  </div>
 				              </div>
 				            </div>
-		              </div>
-	        			</div>
+                  </div>
+                </div>
+
 	        			<div class="col-md d-flex">
 	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
 	        					<div class="wrap">
 			      					<label for="#">Customer</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
-			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                    <select name="" id="" class="form-control">
-			                    	<option value="">1 Adult</option>
-			                      <option value="">2 Adult</option>
-			                      <option value="">3 Adult</option>
-			                      <option value="">4 Adult</option>
-			                      <option value="">5 Adult</option>
-			                      <option value="">6 Adult</option>
-			                    </select>
+                          <p>Adult <input type="text" size = "3px"></input></p>
+                          <p>Child <input type="text" size = "3px"></input></p>
+                          <p>Baby <input type="text" size = "3px"></input></p>
+			  
 			                  </div>
 				              </div>
 				            </div>
@@ -248,8 +241,8 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">DuBu Hotel</h2>
-              <p>Welcome .</p>
+              <h2 class="ftco-heading-2" style = "text-align: center; font-size: 35px">DuBu Hotel</h2>
+              <p style= "text-align: center;">For a comfortable time.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
 {% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -264,7 +257,7 @@
               <ul class="list-unstyled">
                 <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
                 <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
-                <li><a href="{% url 'mypage' %}" class="py-2 d-block">mypage</a></li>
+                <li><a href="{% url 'mypage' %}" class="py-2 d-block">Mypage</a></li>
                 <li><a href="{% url 'event' %}" class="py-2 d-block">Events</a></li>
               </ul>
             </div>
@@ -282,12 +275,12 @@
           </div> -->
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<h2 class="ftco-heading-2">About Hotel</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">주소||주소||주소</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+0 000 0000 0000</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">DuBu@hanyang.ac.kr</span></a></li>
+	                <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>

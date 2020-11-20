@@ -57,9 +57,21 @@ def room_select(request):
 
     return render(request,'admin/room_select.html',{})
 
+
+@csrf_exempt
 def parking(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/parking.html',{})
+    if(request.method=="POST"):
+        try:
+            if(request.POST["method"]=="out_car"):
+                Book.delete_parking(request.POST)
+            elif(request.POST["method"]=="in_car"):
+                Book.insert_parking(request.POST)
+            return redirect('parking')
+        except:
+            return redirect('parking')
+    parking_datas = Book.get_parking_info()
+    return render(request,'admin/parking.html',{'parking_datas':parking_datas})
 
 def product(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
