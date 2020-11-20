@@ -237,10 +237,10 @@
           <div class="resultBox">
               <table id="staff_result_tab">
                   <thead>
-                  <th>facility_id</th><th>facility_name</th><th>team_name</th><th>check_date</th><th>check_limit</th><th>status</th>
+                  <th>facility_id</th><th>facility_name</th><th>team_name</th><th>check_date</th><th>check_limit</th><th>status</th><th>edit</th><th>delete</th>
                   </thead>
                   <tbody>
-                  {% for data in engineerings_datas %}
+                  {% for data in engineering_datas %}
                     <tr>
                       <td>{{data.facility_id}}</td>
                       <td>{{data.facility_name}}</td>

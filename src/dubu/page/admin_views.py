@@ -100,7 +100,6 @@ def management(request):
     rooms_datas,room_type_datas,room_type_bed_datas = Room.get_room_info()
     booking_datas = Book.get_booking_info()
     engineering_datas = OtherTool.get_engineering()
-    print(engineering_datas)
     return render(request,'admin/management.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names,
                                                     'rooms_datas':rooms_datas,'room_type_datas':room_type_datas,'room_type_bed_datas':room_type_bed_datas,
                                                     'booking_datas':booking_datas, 'booking_names':booking_names,
@@ -214,4 +213,10 @@ def delete_booking(request):
 def edit_booking(request):
     if(request.method=="POST"):
         Book.edit_booking(request.POST)
+    return redirect('management')
+
+@csrf_exempt
+def delete_engineering(request):
+    if(request.method=="POST"):
+        OtherTool.delete_engineering(request.POST)
     return redirect('management')

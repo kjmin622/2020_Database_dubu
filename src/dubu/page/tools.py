@@ -447,6 +447,10 @@ class OtherTool():
         try:
             cursor = connection.cursor()
             facility_id = dataDir["facility_id"]
+            sqlStrs = [f"delete from page_engineering where facility_id = '{facility_id}'",
+                      f"delete from page_engineering_team where facility_id = '{facility_id}'"]
+            for sqlStr in sqlStr:
+                cursor.execute(sqlStr);cursor.fetchall()
 
             connection.commit()
             connection.close()
