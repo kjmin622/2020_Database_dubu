@@ -1,6 +1,6 @@
 from .models import *
 from django.db import connection
-
+import time
 class Staff():
 
     def get_staff(staff_id=""):
@@ -342,6 +342,16 @@ class Book():
             connection.rollback()
             connection.close()
             return False
+
+    def insert_booking(dataDir):
+        try:
+            booking_id = time.strftime('%Y%m%d%H%M%S00')
+        
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
 
     def insert_parking(dataDir):
         # car_number room_num spot team_name
