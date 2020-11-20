@@ -220,3 +220,9 @@ def delete_engineering(request):
     if(request.method=="POST"):
         OtherTool.delete_engineering(request.POST)
     return redirect('management')
+
+@csrf_exempt
+def edit_engineering(request):
+    if(request.method=="POST"):
+        OtherTool.edit_engineering(request.POST)
+    return redirect('management')
