@@ -257,6 +257,14 @@
                   </tbody>
               </table>
           </div>
+          <div class="addEngineeringBox">
+              <form action="{% url 'insert_engineering' %}" method="POST">
+                  {% for s in engineering_names %}
+                  <input type="text" name="{{s}}" placeholder="{{s}}">
+                  {% endfor %}
+                  <input type="submit" value="add">
+              </form>
+          </div>
         </div>
       </div>
   </section>
