@@ -1,0 +1,361 @@
+{% comment %}  예약#1 {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/staff.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+
+    <style>
+      .popup1{
+        width:50%;
+        margin:20% auto;
+        padding-bottom: 20%;
+        position:fixed;
+        left:50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+      }
+    </style>
+
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'index' %}">DuBu</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
+            <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in/out</a></li>
+            <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">Join/My page</a></li>
+          {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
+            <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
+            {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+{% comment %} style="background-image: url({% static 'images/bg_1.jpg'%});" {% endcomment %}
+  <div class="hero-wrap m_back" >
+    <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Reservation</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+		
+{% comment %} test  {% endcomment %}
+<section class="test1 row_c">
+  <div class = "staff_s_div">
+    <div class= "staff_title">01 객실검색 > 02 객실, 요금, 옵션 선택</div>
+  </div>
+  
+  <div class="bold_test_staff staff_s_div bold_sec">
+    <div class="form-group p-4 align-self-stretch d-flex align-items-end">
+      <div class="wrap" style = "margin-right:30px;">
+        <label for="#">Check-in Date</label>
+      </div>
+      <div class="wrap" style = "margin-right:30px;">
+        <label for="#">Check-out Date</label>
+      </div>
+
+      <div class="wrap" style = "margin-right:30px;">
+        <label for="#">객실 n</label>
+      </div>
+
+      <div class="wrap" style = "margin-right:30px;">
+        <label for="#">어른 n</label>
+      </div>
+
+      <div class="wrap" style = "margin-right:30px;">
+        <label for="#">어린이 n</label>
+      </div>
+
+      <div class="wrap">
+        <label for="#">유아 n</label>
+      </div>
+
+    </div>
+  </div>
+ 
+
+  <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">객실 유형(이름) + Bed Type</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <button class = "popup1_btn btn"> 자세히 보기 </button>
+            <button class = "btn"> 요금보기 </button>
+          </ul>
+        </div>
+      </div>
+  </div>
+
+  <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
+
+  <div class="popup popup1" style = "display: none;">
+
+    <div class = "container">
+
+      <div class = "s_i_logo" style = "margin-top:10px;">Room image</div>
+
+      <div class = "s_i s_i text">
+        <ul style = "list-style-type: none">
+          <li> Room name : </li>
+          <li> 객실 설명 : </li>
+        </ul>
+      </div>
+
+      <div class = "container" style = "border:2px solid gray; margin-bottom: 30px;" >
+        <label for="#">객실개요</label>
+        <div class = "s_i s_i text">
+          <ul style = "list-style-type: none">
+            <li> bed type : </li>
+            <li> 투숙 인원 : </li>
+            <li> check-in/check-out : </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class = "container" style = "border:2px solid gray">
+        <label for="#">어메니티</label>
+        <div class = "s_i s_i text">
+          <ul style = "list-style-type: none">
+            <li> 일반 : </li>
+            <li> 욕실 : </li>
+            <li> 기타 : </li>
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+        
+
+
+
+  </div>
+
+  <div  class="bold_test_staff staff_s_div bold_sec">
+
+    <div class = "container">
+
+      <div class="staff_title ">조식 신청</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <li> 성인 n </li>
+            <li> 가격 0 </li>
+            <li> 인원 <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+              <input class = "count" value="1" readonly= "" name = "">
+              <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+            </li><br>
+            <p> * 유아와 어린이는 별도로 신청해주세요. </p>
+          </ul>
+        </div>
+      </div>
+
+      <div class="staff_title ">추가 요청</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <input class = "input" size = 50></input>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec">
+
+      <div class="staff_title ">객실 요금</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <li> 객실 금액 : </li>
+            <li> 조식 금액 : </li>
+            <li> 세금 및 봉사료 : </li>
+            <li style = "font-weight: bold"> 총 금액 : </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec">
+
+    <div class="staff_title ">요금 정책 & 취소 규정</div>
+    <div class="s_i_s">
+      <div class="s_i s_i_text">
+        <label for="#">- 요금 정책</label>
+        <p>해당 요금에 부가세 10%와 봉사료 10% (총 21%)가 부과됩니다.</p>
+        <label for="#">- 취소 규정</label>
+        <p>예약 취소 및 변경은 체크인 하루 전 18:00(한국시간)까지 가능합니다. 예약하신 일자에 체크인 되지 않거나 또는 위의 지정 시간 이후에 예약을 취소했을 경우에는 예약 사항에 대해 노-쇼 (No Show) 처리되며, 이에 따른 위약금으로 예약 첫날에 해당하는 1박 객실요금이 청구되오니 유의하시기 바랍니다.</p>
+      </div>
+    </div>
+</div>
+
+</div>
+
+
+  <div class = "staff_s_div">
+    <div style = "padding-bottom:50px; padding-top:20px;">
+    <center>
+    <button class = "btn" onclick="location.href='reservation3.html'"> 예약 </button>
+    </center>
+    </div>
+  </div>
+
+ 
+
+</section>
+
+    
+
+<!-- footer -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">DuBu Hotel</h2>
+              <p>Welcome .</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Useful Links</h2>
+              <ul class="list-unstyled">
+                <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
+                <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
+                <li><a href="{% url 'mypage' %}" class="py-2 d-block">mypage</a></li>
+                <li><a href="{% url 'event' %}" class="py-2 d-block">Events</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Privacy</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-2 d-block">Career</a></li>
+                <li><a href="#" class="py-2 d-block">About Us</a></li>
+                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="#" class="py-2 d-block">Services</a></li>
+              </ul>
+            </div>
+          </div> -->
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">주소||주소||주소</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+0 000 0000 0000</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">DuBu@hanyang.ac.kr</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <script>
+
+    $('.popup_background').click(function(){
+      $('.popup').css('display', 'none')
+    });
+
+    $('.popup1_btn').click(function(){
+      $('.popup_background').css('display', 'block');
+      $('.popup1').css('display', 'block');
+    });
+  </script>
+
+  </body>
+</html>
