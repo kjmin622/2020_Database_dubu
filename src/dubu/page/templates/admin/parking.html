@@ -34,6 +34,20 @@
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
     <link rel="stylesheet" href="{% static 'css/dubu_made/park.css' %}">
 
+
+    <style>
+      .parking_search_result{
+        height:200px;
+        overflow:auto;
+      }
+      th, td{
+        padding:10px;
+      }
+      table, thead, tbody, th, td, tr{
+        border:1px solid gray;
+        white-space:nowrap;
+      }
+    </style>
   </head>
   <body>
 
@@ -88,7 +102,40 @@
         <div class="sub_title">Parking</div>
 
         <div class="s_i_s">
-          주차 정보를 검색하고 수정할 수 있는 공간입니다.
+            <div class="park_search">
+              <input type="text" class="parking_search_input" placeholder=" search">
+              <div class="parking_search_result">
+                <table>
+                  <thead><th>car number</th><th>room number</th><th>spot</th><th>team name</th><th>출차</th></thead>
+                  <tbody>
+                  <tr class="none_parking" style="display:none"><td colspan="5" style="text-align:center">주차정보가 없습니다.</td></tr>
+                  {% for data in parking_datas %}
+                  <tr>
+                    <td class="parking_search_pivot">{{data.car_number}}</td>
+                    <td class="parking_search_pivot">{{data.room_num}}</td>
+                    <td class="parking_search_pivot">{{data.spot}}</td>
+                    <td class="parking_search_pivot">{{data.team_name}}</td>
+                    <td><form method="POST" onsubmit="return confirm('차번호: {{data.car_number}}\n방번호: {{data.room_num}}\n주차구역: {{data.spot}}\n출차가 완료되었습니까?');">
+                      <input type="text" name="method" value="out_car" style="display:none" readonly>
+                      <input type="text" name="car_number" value="{{data.car_number}}" style="display:none" readonly>
+                      <input type="submit" value="출차">
+                    </form></td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="park_insert">
+              <form method="POST" onsubmit="return confirm('입차가 완료되었습니까?');">
+                <input type="text" name="method" value="in_car" style="display:none" readonly>
+                <input type="text" name="car_number" placeholder="차번호">
+                <input type="text" name="room_num" placeholder="방번호">
+                <input type="text" name="spot" placeholder="주차위치">
+                <input type="text" name="team_name" placeholder="팀이름">
+                <input type="submit" value="입차">
+              </form>
+            </div>
         </div>
 
       </div>
@@ -169,3 +216,20 @@
 
   </body>
 </html>
+
+<script>
+  $(document).ready(function() {
+    $(".parking_search_input").keyup(function() {
+      var k = $(this).val();
+      $(".parking_search_result > table > tbody > tr").hide();
+      var temp = $(".parking_search_pivot:contains('" + k + "')");
+      if(!temp.length){
+        $('.none_parking').show();
+      }
+      else{
+        $('.none_parking').hide();
+      }
+      $(temp).parent().show();
+    });
+  });
+</script>

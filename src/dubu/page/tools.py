@@ -243,3 +243,60 @@ class Staff():
 
             
 
+class Book():
+    def get_parking_info():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select booking_id, car_number, room_num, spot, team_name from page_booking_rooms natural join (select booking_id, car_number, team_name, spot from page_booking_parking natural join page_parking)"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({'booking_id':data[0],'car_number':data[1],'room_num':data[2],'spot':data[3],'team_name':data[4]})
+            return output
+        except:
+            connection.close()
+            return None
+        
+    def insert_parking(dataDir):
+        # car_number room_num spot team_name
+        try:
+            car_number=dataDir["car_number"];room_num=dataDir["room_num"];spot=dataDir["spot"];team_name=dataDir["team_name"]
+            cursor = connection.cursor()
+            sqlStr = f"select booking_id from page_booking_rooms where room_num = {room_num}"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            if(len(result)!=1):
+                raise ValueError
+            booking_id = str(result[0][0])
+
+            sqlStr = f"select section from page_team where team_name='{team_name}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            if(not result):
+                raise ValueError
+
+            sqlStr = f"insert into page_parking(car_number,team_name,spot) values('{car_number}','{team_name}','{spot}')"
+            cursor.execute(sqlStr);cursor.fetchall()
+            sqlStr = f"insert into page_booking_parking(booking_id,car_number) values('{booking_id}','{car_number}')"
+            cursor.execute(sqlStr);cursor.fetchall()
+
+            return True
+            
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+    def delete_parking(dataDir):
+        try:
+            car_number = dataDir["car_number"]
+            cursor = connection.cursor()
+            sqlStr = f"delete from page_parking where car_number='{car_number}'"
+            cursor.execute(sqlStr);cursor.fetchall()
+            sqlStr = f"delete from page_booking_parking where car_number='{car_number}'"
+            cursor.execute(sqlStr);cursor.fetchall()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False

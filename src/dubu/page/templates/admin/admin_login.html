@@ -1,15 +1,24 @@
 <html>
     <head>
         <title>login</title>
+    {% comment %} dubu_make {% endcomment %}
+    {% load static %}
+        <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+        <link rel="stylesheet" href="{% static 'css/dubu_made/s_login.css' %}">
     </head>
-    <body>
+    <body >
         <form method="POST">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="staff_id">staff_id</label>
-                <input type="text" name="staff_id" class="form-control" id="staff_id">
+            <div class="l_tle">
+                <div class="form-group ttt ">
+                    <div class="s_l_t ">Login</div>
+                    <div class="s_l_in">staff_id</div>
+                    <div class="l_input">
+                        <input type="text" name="staff_id" class="form-control tt ll" id="staff_id">
+                    </div>
+                    <button type="submit" class="btn btn-default  tt bu">submit</button>
+                </div>
             </div>
-            <button type="submit" class="btn btn-default">submit</button>
         </form>
     </body>
 </html>
