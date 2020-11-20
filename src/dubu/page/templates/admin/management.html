@@ -224,7 +224,22 @@
               <form action="{% url 'insert_booking' %}" method="POST">
                   {% for s in booking_names %}
                   {% if s != "booking_id" and s != "is_check_in" %}
-                  <input type="text" name="{{s}}" placeholder="{{s}}">
+                    {% if s == "room_type" %}
+                    <div style="display:block">
+                    <label style="margin:0px; margin-top:-3px; height:21px">standard</label>
+                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="standard" name="{{s}}" checked>
+                    <label style="margin:0px; margin-top:-3px; height:21px">superior</label>
+                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="superior" name="{{s}}">
+                    <label style="margin:0px; margin-top:-3px; height:21px">delux</label>
+                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="delux" name="{{s}}">
+                    <label style="margin:0px; margin-top:-3px; height:21px">suite_delux</label>
+                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_delux" name="{{s}}">
+                    <label style="margin:0px; margin-top:-3px; height:21px">suite_royal</label>
+                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_royal" name="{{s}}">
+                    </div> 
+                    {% else %}
+                    <input type="text" name="{{s}}" placeholder="{{s}}">
+                    {% endif %}
                   {% endif %}
                   {% endfor %}
                   <input type="submit" value="add">
