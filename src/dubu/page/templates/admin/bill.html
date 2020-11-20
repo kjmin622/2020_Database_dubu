@@ -32,7 +32,27 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dubu_made/bill.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/bil.css' %}">
+
+
+    <style>
+      .b_s_r{
+        height:200px;
+        overflow:auto;
+      }
+      th, td{
+        padding: 3px 10px;
+      }
+      table, thead, tbody, th, td, tr{
+        border:1px solid gray;
+        white-space:nowrap;
+      }
+      th{
+        text-align:center;
+        font-size:17px;
+        font-weight:500;
+      }
+    </style>
 
   </head>
   <body>
@@ -86,21 +106,92 @@
   <section class="search_bill  row_c">
 
       <div class="staff_s_div bold_sec">
-
-        <div class="sub_title">주문 내역</div>
-
-        <div class="s_i_s">
-          방 번호를 검색하면 전체 이용정보가 필요해요<br>
-          결제할 내역들( 방 가격 + 유료서비스 이용 정보들 : 영수증에 나올법한 것들이요)<br>
-          그리고 이용 내역을 추가 할 수 있어야 해요<br>
-          예를 들어 101번방 손님이 A 상품을 주문하면 상품명이랑 개수를 입력가능하도록<br>
-
-          +<br>
-
-          쿠폰 이용하면 그것도!!<br>
+        <div class="sub_title_b">
+          <a>BILL</a>
+          <input type="text" class="b_input" placeholder="Room Number" style="margin:0px 40px;">
         </div>
+        <div class="s_i_s">
 
-        <div class="sub_title">최종 결제 금액</div>
+            <div class="bill_search">
+              <div style="display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
+                <div class="b_s_t">Purchase</div>
+                <div class="sub_title_b"> 
+                  <div class="b_s_t" style="margin: 0px 20px;">총 이용 금액: </div>
+                  <div class="b_s_t b_t_o">OUTPUT</div>
+                </div>
+              </div>
+              <div class="b_s">
+                <div class="b_s_r b_output">
+                  <table>
+                    <thead><th>Reservation Id</th><th>Room Number</th><th>Product Id</th><th>Product Name</th><th>count</th><th>price</th><th>order time</th></thead>
+                    <tbody>
+                      <tr>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="bill_search">
+              <div style="display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
+                <div class="b_s_t">Coupon List</div>
+                <div class="sub_title_b"> 
+                  <div class="b_s_t" style="margin: 0px 20px;">총 할인 금액: </div>
+                  <div class="b_s_t b_t_o">OUTPUT</div>
+                </div>
+              </div>
+              <div class="b_s">
+                <div class="b_s_r b_output">
+                  <table>
+                    <thead><th>Member Id</th><th>Coupon Name</th><th>Coupon Id</th><th>Dc Price</th><th>사용 여부</th></thead>
+                    <tbody>
+                      <tr>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p"><input class="b_button" type="submit" value="< USE >"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="margin-top:40px; margin-bottom:50px; display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
+              <div class="sub_title_b"> 
+                <div class="b_s_t" style="margin: 0px 20px;">Point: </div>
+                <div class="b_s_t b_t_o">OUTPUT</div>
+              </div>
+              <div class="sub_title_b" style="margin: 0px 40px;"> 
+                <div class="b_s_t" style="margin: 0px 20px;">Point to Use: </div>
+                <div class="b_s_t b_t_o">OUTPUT</div>
+              </div>
+            </div>
+
+            <hr style="border: dotted 2px darkgray;">
+
+            <div style="margin-top:50px; display: flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
+              <div class="sub_title_b"> 
+                <div class="b_s_t" style="margin: 0px 20px;">Total: </div>
+                <div class="b_s_t b_t_o">OUTPUT</div>
+              </div>
+              <div class="sub_title_b" style="margin: 0px 40px;"> 
+                <input class="b_p" type="submit" value="COMPLETE">
+              </div>
+            </div>
+
+        </div>
       </div>
 
   </section>
