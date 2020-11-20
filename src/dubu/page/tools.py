@@ -26,9 +26,10 @@ class Staff():
             connection.close()
             if(staff_id!=""):
                 for data in output_data:
-                    if(data["staff_id"]=="staff_id"):
+                    if(data["staff_id"]==staff_id):
                         return data
                 raise ValueError
+
             return output_data
 
         except:
@@ -187,7 +188,6 @@ class Staff():
         try:
             cursor = connection.cursor()
             sqlStr = f"delete from page_staff_day_off_info where id={dataDir['id']}"
-            print(sqlStr)
             cursor.execute(sqlStr)
             cursor.fetchall()
             connection.commit()
@@ -210,7 +210,6 @@ class Staff():
             sqlStr = f"select x_day,work_time_start,work_time_end from page_staff_working_info where staff_id='{staff_id}'"
             cursor.execute(sqlStr)
             result = cursor.fetchall()
-            print(result)
             connection.close()
             datas = []
             for data in result:
@@ -334,7 +333,6 @@ class Book():
                 f"update page_customer_info set first_name='{first_name}',last_name='{last_name}' where booking_id='{booking_id}'",
                 f"update page_customer_phone set phone='{phone}' where booking_id='{booking_id}'"
             ]
-            print(sqlStrs[0])
             for sqlStr in sqlStrs:
                 cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()

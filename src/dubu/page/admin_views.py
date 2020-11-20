@@ -23,8 +23,7 @@ def adminLogin(request):
             request.session["staff_id"]=staffId
             return redirect('staff')
         else:
-            request.POST={}
-            return render(request,'admin/admin_login.html')
+            return redirect('admin_login')
     else:
         return render(request,'admin/admin_login.html')
 
