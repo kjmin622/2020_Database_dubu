@@ -28,7 +28,7 @@ def event(request):
     return render(request,'main/event.html',{})
 
 def find_id(request):
-    return HttpResponse(f"{request.POST["member_id"]}")
+    return HttpResponse(request.POST['member_id'])
     
 
 def login(request):
