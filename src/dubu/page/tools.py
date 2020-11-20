@@ -465,7 +465,7 @@ class OtherTool():
             cursor = connection.cursor()
             facility_id=dataDir["facility_id"];facility_name=dataDir["facility_name"];team_name=dataDir["team_name"];check_date=dataDir["check_date"];check_limit=dataDir["check_limit"];status=dataDir["status"]
             sqlStrs = [f"update page_engineering set facility_name='{facility_name}',check_date='{check_date}',check_limit='{check_limit}',status='{status}' where facility_id='{facility_id}'",
-                       f"update page_engineering set team_name='{team_name}' where facility_id='{facility_id}'"]
+                       f"update page_engineering_team set team_name='{team_name}' where facility_id='{facility_id}'"]
             for sqlStr in sqlStrs:
                 cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
