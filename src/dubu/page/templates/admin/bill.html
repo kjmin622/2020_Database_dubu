@@ -1,4 +1,4 @@
-{% comment %} staff search & plus {% endcomment %}
+{% comment %} Engineering {% endcomment %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,31 +32,8 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dubu_made/staff_s.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/bill.css' %}">
 
-    <style>
-            .searchBox h4{
-                display:inline;
-            }
-            .resultBox{
-                position: relative;
-                width: 1310px;
-                height:250px;
-                overflow:scroll;
-                border:solid 1px black;
-                margin-top:20px;
-            }
-            .resultList{
-                list-style: none;
-            }
-            .resultList li div{
-                display:inline;
-            }
-            table,thead,tbody,th,td{
-                border:solid 1px gray;
-                white-space:nowrap;
-            }
-    </style>
   </head>
   <body>
 
@@ -71,16 +48,16 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
-            {% comment %} Log out {% endcomment %}
+              {% comment %} Log out {% endcomment %}
               <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
               <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li>
 	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
-	          <li class="nav-item active"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
+	          <li class="nav-item"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
 	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
 	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
-	          <li class="nav-item"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+            <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
             <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
-          </ul>
+          </ul> 
 	      </div>
 	    </div>
 	  </nav>
@@ -93,7 +70,7 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <h1 class="mb-4 bread">Staff management</h1>
+	            <h1 class="mb-4 bread">BILL</h1>
             </div>
           </div>
         </div>
@@ -101,46 +78,33 @@
     </div>
 {% comment %} end top {% endcomment %}
 
+
+
 {% comment %} main section  {% endcomment %}
-<div class="staff_s_a">
-<!-- 응대 가능한 직원 찾기 section-->
-  <section class="search_staff_s  row_c">
+<div class="bill_a">
+<!-- hotel내부의 기계들의 정보를 검색가능한 section-->
+  <section class="search_bill  row_c">
 
       <div class="staff_s_div bold_sec">
 
-        <div class="sub_title">Search Staff</div>
+        <div class="sub_title">주문 내역</div>
+
         <div class="s_i_s">
-          <div class="searchBox">
-                <h4>search</h4>
-                <input type="text" placeholder=" depart/room" id="staff_working_search">
-            </div>
-            <div class="resultBox">
-                <table id="staff_working_tab">
-                    <thead>
-                        <th>이름</th><th>소속팀</th><th>담당객실</th><th>부서</th><th>역할</th><th>근무상태</th>
-                    </thead>
-                    <tbody>
-                        {% for data in datas %}
-                        <tr>
-                            <td>{{data.last_name}} {{data.first_name}}</td>
-                            <td>{{data.team}}</td>
-                            <td class="working_search">없음</td>
-                            <td class="working_search">{{data.depart_name}}</td>
-                            <td>{{data.depart_position}}</td>
-                            <td>{{data.status}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+          방 번호를 검색하면 전체 이용정보가 필요해요<br>
+          결제할 내역들( 방 가격 + 유료서비스 이용 정보들 : 영수증에 나올법한 것들이요)<br>
+          그리고 이용 내역을 추가 할 수 있어야 해요<br>
+          예를 들어 101번방 손님이 A 상품을 주문하면 상품명이랑 개수를 입력가능하도록<br>
+
+          +<br>
+
+          쿠폰 이용하면 그것도!!<br>
         </div>
 
+        <div class="sub_title">최종 결제 금액</div>
       </div>
 
   </section>
 </div>
-
-    
 
 
 
@@ -164,7 +128,8 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Quick menu</h2>
               <ul class="list-unstyled">
-                <li><a href="{% url 'admin_logout' %}" class="py-2 d-block">Log out</a></li>
+              {% comment %} log out 버튼 {% endcomment %}
+                <li><a href="#" class="py-2 d-block">Log out</a></li>
                 <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
                 <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
               </ul>
@@ -216,16 +181,3 @@
 
   </body>
 </html>
-
-<script>
-    $(document).ready(function() {
-        $("#staff_working_search").keyup(function() {
-            var k = $(this).val();
-            $("#staff_working_tab > tbody > tr").hide();
-            var temp = $(".working_search:contains('" + k + "')");
-            $(temp).parent().show();
-        })
-    })
-
-
-</script>

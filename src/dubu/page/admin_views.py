@@ -34,8 +34,6 @@ def adminLogout(request):
 
 
 # admin
-
-
 def staff(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     try:
@@ -56,6 +54,7 @@ def s_reservation(request):
 
 def room_select(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
+
     return render(request,'admin/room_select.html',{})
 
 def parking(request):
@@ -70,17 +69,24 @@ def engineer(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     return render(request,'admin/engineer.html',{})
 
+def bill(request):
+    if(not Staff.staff_login_check(request)): return redirect('admin_login')
+    return render(request,'admin/bill.html',{})
+
 def staff_search(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     datas = Staff.get_staff()
     working_datas = Staff.get_staff_working()
     holiday_datas = Staff.get_staff_holiday()
-    names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
-    return render(request,'admin/staff_search.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names})
+    return render(request,'admin/staff_search.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas})
 
 def management(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/management.html',{})
+    datas = Staff.get_staff()
+    working_datas = Staff.get_staff_working()
+    holiday_datas = Staff.get_staff_holiday()
+    names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
+    return render(request,'admin/management.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names})
 
 
 
@@ -162,3 +168,12 @@ def change_staff_status(request):
     if(request.method=="POST"):
         Staff.change_staff_status(request.POST)
     return redirect('staff')
+
+
+@csrf_exempt
+def insert_room_type(request):
+    if(request.method=="POST"):
+        print(request.POST)
+
+    return redirect('manage_room')
+
