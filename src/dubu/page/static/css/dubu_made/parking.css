@@ -43,7 +43,6 @@ body{
     width: 150px;
     height: 40px;
     margin: 0px 20px;
-    
 }
 
 .p_i_input{
@@ -57,7 +56,7 @@ body{
 
 .park_search{
     /* border: 2px solid; */
-    border-color: bro/wn;  
+    /* border-color: brown;   */
     padding: 40px;
 }
 
