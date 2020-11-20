@@ -231,4 +231,13 @@ class bill(models.Model):
     booking_id = models.CharField(max_length=100)  
     paytime = models.CharField(max_length=20)    
     payment = models.CharField(max_length=30)    
-    card_id = models.CharField(max_length=100, null=True)   
+    card_id = models.CharField(max_length=100, null=True)  
+
+class coupon_list(models.Model):
+    coupon_id = models.CharField(max_length=100, primary_key=True)
+    coupon_type = models.CharField(max_length=100)
+    coupon_name = models.CharField(max_length=30)
+    value = models.IntegerField()
+    min_price = models.IntegerField()
+    member_id = models.CharField(max_length=100)
+
