@@ -216,6 +216,13 @@ def edit_booking(request):
     return redirect('management')
 
 @csrf_exempt
+def insert_booking(request):
+    if(request.method=="POST"):
+        Book.insert_booking(request.POST)
+    return redirect('management')
+
+
+@csrf_exempt
 def delete_engineering(request):
     if(request.method=="POST"):
         OtherTool.delete_engineering(request.POST)
