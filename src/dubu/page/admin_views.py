@@ -48,9 +48,9 @@ def staff(request):
         connection.close()
         return redirect('admin_logout')
 
-def s_reservation(request):
-    if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/s_reservation.html',{})
+# def s_reservation(request):
+#     if(not Staff.staff_login_check(request)): return redirect('admin_login')
+#     return render(request,'admin/s_reservation.html',{})
 
 def room_select(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
