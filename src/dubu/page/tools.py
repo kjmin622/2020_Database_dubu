@@ -10,22 +10,25 @@ class Staff():
             sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name,depart_name,position from page_depart natural join (select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id)))"
             result = cursor.execute(sqlStr)
             datas = cursor.fetchall()
-            connection.close()
-
-            if(staff_id!=""):
-                for data in datas:
-                    if(data[0]==staff_id):
-                        return {'staff_id':data[0], 'first_name':data[1], 'last_name':data[2], 'rank':data[3],
-                                    'depart_id':data[4], 'status':data[5], 'bank':data[6], 'account':data[7],
-                                    'phone':data[8],'wide_area_unit':data[9],'basic_unit':data[10],'street':data[11],'si_gu':data[12],'eub_myeon':data[13],'buildding_number':data[14],'detail_address':data[15], 'team':data[16], 'depart_name':data[17],'depart_position':data[18]}
-                return None
 
             output_data = []
+
             for data in datas:
                 output_data.append({'staff_id':data[0], 'first_name':data[1], 'last_name':data[2], 'rank':data[3],
                                     'depart_id':data[4], 'status':data[5], 'bank':data[6], 'account':data[7],
-                                    'phone':data[8],'wide_area_unit':data[9],'basic_unit':data[10],'street':data[11],'si_gu':data[12],'eub_myeon':data[13],'buildding_number':data[14],'detail_address':data[15], 'team':data[16], 'depart_name':data[17],'depart_position':data[18]})
-
+                                    'phone':data[8],'wide_area_unit':data[9],'basic_unit':data[10],'street':data[11],'si_gu':data[12],'eub_myeon':data[13],'buildding_number':data[14],'detail_address':data[15], 'team':data[16], 'depart_name':data[17],'depart_position':data[18], 'rooms':[]})
+                sqlStr = f"select room_num from page_rooms where team_name='{data[16]}'"
+                cursor.execute(sqlStr);result=cursor.fetchall()
+                for room_number in result:
+                    output_data[-1]["rooms"].append(room_number[0])
+                output_data[-1]["rooms"] = str(output_data[-1]["rooms"]).replace('[','').replace(']','')
+            
+            connection.close()
+            if(staff_id!=""):
+                for data in output_data:
+                    if(data["staff_id"]=="staff_id"):
+                        return data
+                raise ValueError
             return output_data
 
         except:

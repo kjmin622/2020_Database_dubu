@@ -128,11 +128,17 @@
                         <tr>
                             <td>{{data.last_name}} {{data.first_name}}</td>
                             <td>{{data.team}}</td>
-                            <td class="working_search">없음</td>
+                            <td class="working_search">
+                            {% if data.rooms == "" %}
+                            없음
+                            {% else %}
+                            {{data.rooms}}
+                            {% endif %}
+                            </td>
                             <td class="working_search">{{data.depart_name}}</td>
                             <td>{{data.depart_position}}</td>
                             <td>{{data.status}}</td>
-                            <td class="working_search">없음</td>
+                            <td class="working_search">{{data.phone}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
