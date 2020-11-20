@@ -96,7 +96,7 @@ class card_info(models.Model):
     card_number1 = models.BooleanField()    
     card_number2 = models.BooleanField()    
     card_number3 = models.BooleanField()    
-    card_number4 = models.BooleanField()    
+    card_number4 = models.BooleanField()
 
 
 class product(models.Model):

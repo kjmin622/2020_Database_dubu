@@ -243,3 +243,17 @@ class Staff():
 
             
 
+class Book():
+    def get_parking_info():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select booking_id, car_number, room_num, spot, team_name from page_booking_rooms natural join (select booking_id, car_number, team_name, spot from page_booking_parking natural join page_parking)"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({'booking_id':data[0],'car_number':data[1],'room_num':data[2],'spot':data[3],'team_name':data[4]})
+            return output
+        except:
+            connection.close()
+            return None
