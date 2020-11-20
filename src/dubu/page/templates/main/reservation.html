@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/staff.css' %}">
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
   </head>
   <body>
@@ -75,10 +76,64 @@
 
 		
 {% comment %} test  {% endcomment %}
-	<section class="test1">
-        <h1>Reservation</h1>
-    </section>
+<section class="test1 row_c">
+  <div class = "staff_s_div">
+    <div class= "staff_title">01 객실검색</div>
+  </div>
+  
+  <div class="bold_test_staff staff_s_div bold_sec">
+    <div class="form-group p-4 align-self-stretch d-flex align-items-end">
+      <div class="wrap" style = "margin-right:50px;">
+        <label for="#">Check-in Date</label>
+        <input type="text" class="form-control checkin_date" placeholder="Check-in date">
+      </div>
+      <div class="wrap">
+        <label for="#">Check-out Date</label>
+        <input type="text" class="form-control checkin_date" placeholder="Check-out date">
+      </div>
+    </div>
+  </div>
+ 
+  <div class="bold_test_staff staff_s_div bold_sec">
+    <div class="s_i_s">
+      <div class="s_i s_i_text">
+        <ul style="list-style-type:none">
+          <label for="#">객실 # 1</label>
+          <li>어른
+            <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+            <input class = "count" value="1" readonly= "" name = "">
+            <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+          </li><br>
+          <li>어린이
+            <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+            <input class = "count" value="1" readonly= "" name = "">
+            <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+          </li><br>
+          <li>유아
+            <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+            <input class = "count" value="1" readonly= "" name = "">
+            <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+          </li>
 
+        </ul>
+
+        <button class = "btn"> + 객실 추가 </button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class = "staff_s_div">
+    <div style = "padding-bottom:50px; padding-top:20px;">
+    <center>
+    <button class = "btn" onclick="location.href='reservation2.html'"> 객실 및 요금 확인 </button>
+    </center>
+    </div>
+  </div>
+
+ 
+
+</section>
 
     
 
