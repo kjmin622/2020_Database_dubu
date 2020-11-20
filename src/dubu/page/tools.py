@@ -436,7 +436,7 @@ class OtherTool():
             result = cursor.fetchall()
             output = []
             for data in result:
-                output.append({"facility_id":data[0],"facility_name":data[1],"team_name":data[2],"check_data":data[3],"check_limit":data[4],"status":data[5]})
+                output.append({"facility_id":data[0],"facility_name":data[1],"team_name":data[2],"check_date":data[3],"check_limit":data[4],"status":data[5]})
             connection.close()
             return output
         except:
@@ -447,7 +447,66 @@ class OtherTool():
         try:
             cursor = connection.cursor()
             facility_id = dataDir["facility_id"]
+            sqlStrs = [f"delete from page_engineering where facility_id = '{facility_id}'",
+                      f"delete from page_engineering_team where facility_id = '{facility_id}'"]
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
 
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+    def edit_engineering(dataDir):
+        try:
+            cursor = connection.cursor()
+            facility_id=dataDir["facility_id"];facility_name=dataDir["facility_name"];team_name=dataDir["team_name"];check_date=dataDir["check_date"];check_limit=dataDir["check_limit"];status=dataDir["status"]
+            
+            for date in [check_date,check_limit]:
+                y,m,d = date.split('-')
+                if(int(y)<2000 or int(m)<1 or int(m)>12 or int(d)>31 or int(d)<0):
+                    raise ValueError
+            
+            sqlStr = f"select section from page_team where team_name='{team_name}'"
+            cursor.execute(sqlStr);is_team=cursor.fetchall()
+            if(not is_team):
+                raise ValueError
+
+
+            sqlStrs = [f"update page_engineering set facility_name='{facility_name}',check_date='{check_date}',check_limit='{check_limit}',status='{status}' where facility_id='{facility_id}'",
+                       f"update page_engineering_team set team_name='{team_name}' where facility_id='{facility_id}'"]
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+    def insert_engineering(dataDir):
+        try:
+            cursor = connection.cursor()
+            facility_id=dataDir["facility_id"];facility_name=dataDir["facility_name"];team_name=dataDir["team_name"];check_date=dataDir["check_date"];check_limit=dataDir["check_limit"];status=dataDir["status"]
+            
+            for date in [check_date,check_limit]:
+                y,m,d = date.split('-')
+                if(int(y)<2000 or int(m)<1 or int(m)>12 or int(d)>31 or int(d)<0):
+                    raise ValueError
+            
+            sqlStr = f"select section from page_team where team_name='{team_name}'"
+            cursor.execute(sqlStr);is_team=cursor.fetchall()
+            if(not is_team):
+                raise ValueError
+
+            sqlStrs = [f"insert into page_engineering(facility_id,facility_name,check_date,check_limit,status) values('{facility_id}','{facility_name}','{check_date}','{check_limit}','{status}')",
+                        f"insert into page_engineering_team(facility_id,team_name) values('{facility_id}','{team_name}')"]
+            for sqlStr in sqlStrs :
+                cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
             connection.close()
             return True

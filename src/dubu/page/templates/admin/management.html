@@ -237,10 +237,10 @@
           <div class="resultBox">
               <table id="staff_result_tab">
                   <thead>
-                  <th>facility_id</th><th>facility_name</th><th>team_name</th><th>check_date</th><th>check_limit</th><th>status</th>
+                  <th>facility_id</th><th>facility_name</th><th>team_name</th><th>check_date</th><th>check_limit</th><th>status</th><th>edit</th><th>delete</th>
                   </thead>
                   <tbody>
-                  {% for data in engineerings_datas %}
+                  {% for data in engineering_datas %}
                     <tr>
                       <td>{{data.facility_id}}</td>
                       <td>{{data.facility_name}}</td>
@@ -256,6 +256,14 @@
                   {% endfor %}
                   </tbody>
               </table>
+          </div>
+          <div class="addEngineeringBox">
+              <form action="{% url 'insert_engineering' %}" method="POST">
+                  {% for s in engineering_names %}
+                  <input type="text" name="{{s}}" placeholder="{{s}}">
+                  {% endfor %}
+                  <input type="submit" value="add">
+              </form>
           </div>
         </div>
       </div>
@@ -371,6 +379,33 @@
         <input type="text" id="booking_edit_input_booking_id" style="height:21px; padding:1px;" name="booking_id" readonly>
         {% endif %}
         {% endfor %}
+        <input type="submit" value="edit">
+        </form>
+    </div>
+     <!--engineering edit 팝업-->
+    <div class="engineering_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+        <form action="{% url 'edit_engineering' %}" method="POST">
+        <input type="text" id="engineering_edit_input_facility_id" style="height:21px; padding:1px;" name="facility_id" readonly>
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">시설이름</label>
+        <input type="text" id="engineering_edit_input_facility_name" style="height:21px; padding:1px;" name="facility_name" placeholder="facility_name">
+        </div>
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">팀이름</label>
+        <input type="text" id="engineering_edit_input_team_name" style="height:21px; padding:1px;" name="team_name" placeholder="team_name">
+        </div>
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">검사일</label>
+        <input type="text" id="engineering_edit_input_check_date" style="height:21px; padding:1px;" name="check_date" placeholder="check_date">
+        </div>
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">검사제한일</label>
+        <input type="text" id="engineering_edit_input_check_limit" style="height:21px; padding:1px;" name="check_limit" placeholder="check_limit">
+        </div>
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">현상황</label>
+        <input type="text" id="engineering_edit_input_status" style="height:21px; padding:1px;" name="status" placeholder="status">
+        </div>
         <input type="submit" value="edit">
         </form>
     </div>
@@ -550,6 +585,22 @@
             $('#booking_edit_input_baby_num').attr('value','{{data.baby_num}}')
             $('#booking_edit_input_breakfast').attr('value','{{data.breakfast}}')
             $('#booking_edit_input_extra_text').attr('value','{{data.extra_text}}')
+        }
+        {% endfor %}
+    })
+
+    $(".engineering_edit_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".engineering_edit").css("display","block");
+        var facility_id = $(this).attr('name').slice(5);
+        {% for data in engineering_datas %}
+        if(facility_id == '{{data.facility_id}}'){
+            $('#engineering_edit_input_facility_id').attr('value','{{data.facility_id}}')
+            $('#engineering_edit_input_facility_name').attr('value','{{data.facility_name}}')
+            $('#engineering_edit_input_team_name').attr('value','{{data.team_name}}')
+            $('#engineering_edit_input_check_date').attr('value','{{data.check_date}}')
+            $('#engineering_edit_input_check_limit').attr('value','{{data.check_limit}}')
+            $('#engineering_edit_input_status').attr('value','{{data.status}}')
         }
         {% endfor %}
     })
