@@ -30,7 +30,7 @@
 }
 
 body{
-    /* background-color: rgb(182, 182, 182); */
+    min-width: 1000px;
 }
 
 

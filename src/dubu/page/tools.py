@@ -258,6 +258,32 @@ class Book():
             connection.close()
             return None
         
+    def get_booking_info():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select booking_id from page_booking"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            booking_ids = []
+            for data in result:
+                booking_ids.append(data[0])
+
+            output = []
+            for booking_id in booking_ids:
+                sqlStr = "select room_num from page_booking_rooms"
+                cursor.execute(sqlStr);is_room=cursor.fetchall()
+                if(is_room):
+                    sqlStr = f"select booking_id, is_check_in, check_in, check_out,room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone,room_num from page_booking natural join (select booking_id, room_num from page_booking_rooms) natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
+                else:
+                    sqlStr = f"select booking_id, is_check_in, check_in, check_out, room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone from page_booking natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
+                cursor.execute(sqlStr);data=cursor.fetchall()
+                output.append({'booking_id':data[0], 'is_check_in':data[1], 'check_in':data[2], 'check_out':data[3],'room_type':data[4],'breakfast':data[5],'adult_num':data[6],'child_num':data[7],'baby_num':data[8],'extra_text':data[9],'first_name':data[10],'last_name':data[11],'phone':data[12],'room_num': ("" if not is_room else data[13])})
+
+            connection.close()
+            return output
+        except:
+            connection.close()
+            return None
+
     def insert_parking(dataDir):
         # car_number room_num spot team_name
         try:
@@ -300,3 +326,47 @@ class Book():
             connection.rollback()
             connection.close()
             return False
+
+class Room():
+    def get_room_info():
+        try:
+            cursor = connection.cursor()
+
+            sqlStr = "select room_num, team_name, room_type from page_rooms"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            output_rooms = []
+            for data in result:
+                output_rooms.append({"room_num":data[0],"team_name":data[1],"room_type":data[2]})
+            sqlStr = "select room_type, price, mem_limit from page_room_type"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            output_room_type = []
+            for data in result:
+                output_room_type.append({"room_type":data[0],"price":data[1],"mem_limit":data[2]})
+            
+            sqlStr = "select bed_type, bed_num, room_type from page_room_type_bed"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            output_room_type_bed = []
+            for data in result:
+                output_rooms.append({"bed_type":data[0],"bed_num":data[1],"room_type":data[2]})
+            
+            connection.close()
+            return (output_rooms,output_room_type,output_room_type_bed)
+
+        except:
+            connection.close()
+            return (None,None,None)
+
+    def edit_room_type(dataDir):
+        try:
+            cursor = connection.cursor()
+            room_type=dataDir["room_type"];price=dataDir["price"];mem_limit=dataDir["mem_limit"]
+            sqlStr = (f"update page_room_type set price={price}, mem_limit={mem_limit} where room_type='{room_type}'")
+            cursor.execute(sqlStr);cursor.fetchall()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+    

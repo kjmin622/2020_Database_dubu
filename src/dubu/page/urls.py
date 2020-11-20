@@ -12,7 +12,7 @@ urlpatterns = [
     path('event',views.event,name="event"),
     path('login',views.login,name="login"),
     path('mypage',views.mypage,name="mypage"),
- 
+    path('signup',views.signup,name="signup"),
 
     #admin
     path('admin/login',admin_views.adminLogin,name="admin_login"),
@@ -28,16 +28,18 @@ urlpatterns = [
     path('admin/manage_staff/add_holi',admin_views.insert_staff_holiday,name="insert_staff_holiday"),
     path('admin/manage_staff/del_holi',admin_views.delete_staff_holiday,name="delete_staff_holiday"),
     path('admin/staff/change_status',admin_views.change_staff_status,name="change_staff_status"),
+    path('admin/management/edit_room_type',admin_views.edit_room_type,name="edit_room_type"),
     # path('admin/staff/bill',admin_views.change_staff_status,name="bill"),
 
     # front admin
     path('admin/staff',admin_views.staff,name="staff"),
-    path('admin/s_reservation',admin_views.s_reservation,name="s_reservation"),
+    # path('admin/s_reservation',admin_views.s_reservation,name="s_reservation"),
     path('admin/room_select',admin_views.room_select,name="room_select"),
     path('admin/parking',admin_views.parking,name="parking"),
     path('admin/product',admin_views.product,name="product"),
     path('admin/engineer',admin_views.engineer,name="engineer"),
     path('admin/staff_search',admin_views.staff_search,name="staff_search"),
-    path('admin/bill',admin_views.bill,name="bill"),
-    path('admin/management',admin_views.management,name="management"),    
+    path('admin/bill',admin_views.bill,name="bill"),	
+    path('admin/management',admin_views.management,name="management"),  
+
 ]
