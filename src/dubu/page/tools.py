@@ -442,3 +442,16 @@ class OtherTool():
         except:
             connection.close()
             return None
+
+    def delete_engineering(dataDir):
+        try:
+            cursor = connection.cursor()
+            facility_id = dataDir["facility_id"]
+
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False

@@ -103,7 +103,8 @@ def management(request):
     print(engineering_datas)
     return render(request,'admin/management.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names,
                                                     'rooms_datas':rooms_datas,'room_type_datas':room_type_datas,'room_type_bed_datas':room_type_bed_datas,
-                                                    'booking_datas':booking_datas, 'booking_names':booking_names})
+                                                    'booking_datas':booking_datas, 'booking_names':booking_names,
+                                                    'engineering_datas':engineering_datas})
 
 
 
