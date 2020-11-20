@@ -56,6 +56,7 @@ class parking(models.Model):
 class room_type(models.Model):
     room_type = models.CharField(max_length=100, primary_key=True)   
     price = models.IntegerField()  
+    mem_limit = models.IntegerField()
 
 
 class event(models.Model):
@@ -81,6 +82,7 @@ class member_info(models.Model):
     first_name = models.CharField(max_length=30)
     phone = models.CharField(max_length=100) 
     membership = models.CharField(max_length=30)    
+    point = models.IntegerField()
     birth = models.CharField(max_length=20)  
     is_sms = models.BooleanField()    
        
@@ -92,10 +94,10 @@ class card_info(models.Model):
     bank = models.CharField(max_length=30)    
     cvc = models.IntegerField()  
     expiration_date = models.CharField(max_length=20)  
-    card_number1 = models.BooleanField()    
-    card_number2 = models.BooleanField()    
-    card_number3 = models.BooleanField()    
-    card_number4 = models.BooleanField()    
+    card_number1 = models.CharField(max_length=10)  
+    card_number2 = models.CharField(max_length=10)
+    card_number3 = models.CharField(max_length=10)
+    card_number4 = models.CharField(max_length=10)
 
 
 class product(models.Model):
@@ -230,4 +232,13 @@ class bill(models.Model):
     booking_id = models.CharField(max_length=100)  
     paytime = models.CharField(max_length=20)    
     payment = models.CharField(max_length=30)    
-    card_id = models.CharField(max_length=100, null=True)   
+    card_id = models.CharField(max_length=100, null=True)  
+
+class coupon_list(models.Model):
+    coupon_id = models.CharField(max_length=100, primary_key=True)
+    coupon_type = models.CharField(max_length=100)
+    coupon_name = models.CharField(max_length=30)
+    value = models.IntegerField()
+    min_price = models.IntegerField()
+    member_id = models.CharField(max_length=100)
+

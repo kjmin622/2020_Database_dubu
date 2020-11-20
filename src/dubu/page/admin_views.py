@@ -24,9 +24,9 @@ def adminLogin(request):
             return redirect('staff')
         else:
             request.POST={}
-            return render(request,'develop/admin_login.html')
+            return render(request,'admin/admin_login.html')
     else:
-        return render(request,'develop/admin_login.html')
+        return render(request,'admin/admin_login.html')
 
 def adminLogout(request):
     request.session["staff_id"] = None
@@ -34,8 +34,6 @@ def adminLogout(request):
 
 
 # admin
-
-
 def staff(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     try:
@@ -50,17 +48,26 @@ def staff(request):
         connection.close()
         return redirect('admin_logout')
 
-def s_reservation(request):
-    if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/s_reservation.html',{})
-
 def room_select(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
+
     return render(request,'admin/room_select.html',{})
 
+
+@csrf_exempt
 def parking(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/parking.html',{})
+    if(request.method=="POST"):
+        try:
+            if(request.POST["method"]=="out_car"):
+                Book.delete_parking(request.POST)
+            elif(request.POST["method"]=="in_car"):
+                Book.insert_parking(request.POST)
+            return redirect('parking')
+        except:
+            return redirect('parking')
+    parking_datas = Book.get_parking_info()
+    return render(request,'admin/parking.html',{'parking_datas':parking_datas})
 
 def product(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
@@ -70,11 +77,34 @@ def engineer(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     return render(request,'admin/engineer.html',{})
 
+def bill(request):
+    if(not Staff.staff_login_check(request)): return redirect('admin_login')
+    return render(request,'admin/bill.html',{})
+
 def staff_search(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/staff_search.html',{})
+    datas = Staff.get_staff()
+    working_datas = Staff.get_staff_working()
+    holiday_datas = Staff.get_staff_holiday()
+    return render(request,'admin/staff_search.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas})
 
 
+# <th>booking_id</th><th>name</th><th>phone</th><th>is_check_in</th><th>check_in</th><th>check_out</th><th>room_num</th><th>room_type</th><th>adult_num</th><th>child_num</th><th>baby_num</th><th>breakfast</th><th>extra_text</th>
+def management(request):
+    if(not Staff.staff_login_check(request)): return redirect('admin_login')
+    datas = Staff.get_staff()
+    working_datas = Staff.get_staff_working()
+    holiday_datas = Staff.get_staff_holiday()
+    names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
+    booking_names = ['booking_id', 'first_name','last_name', 'phone', 'is_check_in', 'check_in', 'check_out', 'room_num', 'room_type', 'adult_num', 'child_num', 'baby_num', 'breakfast', 'extra_text']
+    engineering_names = ['facility_id', 'facility_name', 'team_name', 'check_date', 'check_limit', 'status']
+    rooms_datas,room_type_datas,room_type_bed_datas = Room.get_room_info()
+    booking_datas = Book.get_booking_info()
+    engineering_datas = OtherTool.get_engineering()
+    return render(request,'admin/management.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names,
+                                                    'rooms_datas':rooms_datas,'room_type_datas':room_type_datas,'room_type_bed_datas':room_type_bed_datas,
+                                                    'booking_datas':booking_datas, 'booking_names':booking_names,
+                                                    'engineering_datas':engineering_datas, 'engineering_names':engineering_names})
 
 
 
@@ -106,14 +136,6 @@ def manage_depart(request):
 
     return render(request,'develop/manage_depart.html',{'datas':datas})
 
-        # staff_id, rank, status, depart_id, first_name, last_name, phone, bank, account,
-        # wide_area_unit, street, basic_unit, si_gu, eub_myeon, building_number, detail_address
-def manage_staff(request):
-    datas = Staff.get_staff()
-    working_datas = Staff.get_staff_working()
-    holiday_datas = Staff.get_staff_holiday()
-    names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
-    return render(request,'develop/manage_staff.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names})
 
 @csrf_exempt
 def delete_staff(request):
@@ -164,3 +186,50 @@ def change_staff_status(request):
     if(request.method=="POST"):
         Staff.change_staff_status(request.POST)
     return redirect('staff')
+
+
+@csrf_exempt
+def insert_room_type(request):
+    if(request.method=="POST"):
+        print(request.POST)
+
+    return redirect('manage_room')
+
+@csrf_exempt
+def edit_room_type(request):
+    if(request.method=="POST"):
+        Room.edit_room_type(request.POST)
+    
+    return redirect('management')
+
+@csrf_exempt
+def delete_booking(request):
+    if(request.method=="POST"):
+        Book.delete_booking(request.POST)
+    
+    return redirect('management')
+
+
+@csrf_exempt
+def edit_booking(request):
+    if(request.method=="POST"):
+        Book.edit_booking(request.POST)
+    return redirect('management')
+
+@csrf_exempt
+def delete_engineering(request):
+    if(request.method=="POST"):
+        OtherTool.delete_engineering(request.POST)
+    return redirect('management')
+
+@csrf_exempt
+def edit_engineering(request):
+    if(request.method=="POST"):
+        OtherTool.edit_engineering(request.POST)
+    return redirect('management')
+
+@csrf_exempt
+def insert_engineering(request):
+    if(request.method=="POST"):
+        OtherTool.insert_engineering(request.POST)
+    return redirect('management')

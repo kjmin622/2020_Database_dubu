@@ -32,7 +32,33 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dubu_made/staff_s.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/staff_se.css' %}">
+
+    <style>
+      .searchBox h4{
+      }
+      .resultBox{
+        width: max-content;
+        height:300px;
+        overflow:scroll;
+      }
+      .resultList{
+          list-style: none;
+      }
+      .resultList li div{
+          display:inline;
+      }
+      table,thead,tbody,th,td{
+          border:solid 1px gray;
+          white-space:nowrap;
+      }
+      th{
+        text-align:center;
+      }
+      th, td{
+        padding: 3px 10px;
+      }
+    </style>
   </head>
   <body>
 
@@ -49,12 +75,13 @@
 	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
             {% comment %} Log out {% endcomment %}
               <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
-              <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
 	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
+	          <li class="nav-item active"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
 	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
 	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
-	          <li class="nav-item active"><a href="{% url 'engineer' %}" class="nav-link">Engineering</a></li>
-	          <li class="nav-item"><a href="{% url 'staff_search' %}" class="nav-link">Search & Plus</a></li>
+	          <li class="nav-item"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+            <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
           </ul>
 	      </div>
 	    </div>
@@ -84,25 +111,35 @@
       <div class="staff_s_div bold_sec">
 
         <div class="sub_title">Search Staff</div>
-        <div class="s_i_s">
-          현재 응대 가능한 직원을 찾는 곳이예요
+        <div class="s_s_content">
+          <div class="s_s_t">Room number / Department 직원 정보</div>
+          <div class="s_i_s">
+            <div class="searchBox">
+                {% comment %} <h4>search</h4> {% endcomment %}
+                <input class="p_input" type="text" placeholder=" depart/room" id="staff_working_search" value="Search">
+            </div>
+            <div class="resultBox">
+                <table id="staff_working_tab">
+                    <thead>
+                        <th>이름</th><th>소속팀</th><th>담당객실</th><th>부서</th><th>역할</th><th>근무상태</th><th>전화번호</th>
+                    </thead>
+                    <tbody>
+                        {% for data in datas %}
+                        <tr>
+                            <td>{{data.last_name}} {{data.first_name}}</td>
+                            <td>{{data.team}}</td>
+                            <td class="working_search">없음</td>
+                            <td class="working_search">{{data.depart_name}}</td>
+                            <td>{{data.depart_position}}</td>
+                            <td>{{data.status}}</td>
+                            <td class="working_search">없음</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+          </div>
         </div>
-
-      </div>
-
-  </section>
-
-  <!-- hotel내부의 기계들의 정보를 검색가능한 section-->
-  <section class="search_staff_s  row_c">
-
-      <div class="staff_s_div bold_sec">
-
-        <div class="sub_title">Add or Fix Staff Info</div>
-
-        <div class="s_i_s">
-            직원의 정보를 수정하거나 새로 추가 할수 있는 공간 입니다.
-        </div>
-
       </div>
 
   </section>
@@ -184,3 +221,16 @@
 
   </body>
 </html>
+
+<script>
+    $(document).ready(function() {
+        $("#staff_working_search").keyup(function() {
+            var k = $(this).val();
+            $("#staff_working_tab > tbody > tr").hide();
+            var temp = $(".working_search:contains('" + k + "')");
+            $(temp).parent().show();
+        })
+    })
+
+
+</script>

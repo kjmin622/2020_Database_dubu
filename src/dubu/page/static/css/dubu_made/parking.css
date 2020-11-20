@@ -1,0 +1,108 @@
+/* parking 틀 */
+*{
+    margin: 0px;
+    padding:0px;
+}
+
+body{
+    /* background-color: black; */
+}
+.s_i_s{
+    display: flex;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    padding: 0px 20px;
+}
+
+.bold_sec{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid;
+    border-color: darkgray;
+    display: flex;
+    flex-flow: column;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    height: 650px;
+    /* min-width: 800px; */
+    /* background-color: blue; */
+}
+
+
+
+body{
+    min-width: 1500px;
+}
+
+.p_input{
+    /* border: 2px solid; */
+    /* border-color:blue;   */
+    font-size: 17px;
+    padding: 10px 3px 10px 13px;
+    width: 150px;
+    height: 40px;
+    margin: 0px 20px;
+}
+
+.p_i_input{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    justify-content: start;
+    /* margin-top: 20px; */
+    padding: 10px 20px;
+}
+
+.park_search{
+    /* border: 2px solid; */
+    /* border-color: brown;   */
+    padding: 40px;
+}
+
+.p_output{
+    border: 2px solid;
+    padding: 5px;
+    border-color: darkgray;
+    margin: 0px 40px;
+}
+
+.park_insert{
+    padding: 40px;
+    /* border: 2px solid; */
+    /* border-color: brown; */
+    display: flex;
+    flex-flow: column;
+    /* justify-content: start; */
+    margin-top: 20px;
+}
+
+.p_i_i{
+    width: 150px;
+    padding-left: 10px;
+}
+.p_i_add{
+    margin: 5px;
+}
+
+.s_s_t{
+    font-size: 20px;
+    font-weight: 300;
+    /* margin: 20px; */
+}
+
+.p_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    margin-top: 20px;
+}
+
+.p_button{
+    padding: 0px 20px;
+    background-color: rgb(95, 95, 95);
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    font-size: 17px;
+}

@@ -1,4 +1,4 @@
-/* parking 틀 */
+/* BILL 틀 */
 *{
     margin: 0px;
     padding:0px;
@@ -14,6 +14,13 @@ body{
     justify-content: space-around;
 }
 
+
+
+/* .bold_test_engine{
+    border: 2px dotted;
+    border-color: aqua;
+} */
+
 .bold_sec{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -24,8 +31,6 @@ body{
     padding-top: 30px;
     padding-bottom: 40px;
 }
-
-
 
 
 

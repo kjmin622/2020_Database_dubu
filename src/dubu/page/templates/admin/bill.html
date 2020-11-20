@@ -1,4 +1,4 @@
-{% comment %} staff 예약기능 {% endcomment %}
+{% comment %} Engineering {% endcomment %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +32,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/bill.css' %}">
 
   </head>
   <body>
@@ -47,15 +48,16 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
-            {% comment %} Log out {% endcomment %}
+              {% comment %} Log out {% endcomment %}
               <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
-              <li class="nav-item"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
 	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
+	          <li class="nav-item"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
 	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
 	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
-	          <li class="nav-item active"><a href="{% url 'engineer' %}" class="nav-link">Engineering</a></li>
-	          <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search & Plus</a></li>
-          </ul>
+            <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+            <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
+          </ul> 
 	      </div>
 	    </div>
 	  </nav>
@@ -68,7 +70,7 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <h1 class="mb-4 bread">Staff Reservation</h1>
+	            <h1 class="mb-4 bread">BILL</h1>
             </div>
           </div>
         </div>
@@ -76,12 +78,33 @@
     </div>
 {% comment %} end top {% endcomment %}
 
-{% comment %} test  {% endcomment %}
-	<section class="test1">
-        <h1>staff reservation</h1>
-    </section>
 
-    
+
+{% comment %} main section  {% endcomment %}
+<div class="bill_a">
+<!-- hotel내부의 기계들의 정보를 검색가능한 section-->
+  <section class="search_bill  row_c">
+
+      <div class="staff_s_div bold_sec">
+
+        <div class="sub_title">주문 내역</div>
+
+        <div class="s_i_s">
+          방 번호를 검색하면 전체 이용정보가 필요해요<br>
+          결제할 내역들( 방 가격 + 유료서비스 이용 정보들 : 영수증에 나올법한 것들이요)<br>
+          그리고 이용 내역을 추가 할 수 있어야 해요<br>
+          예를 들어 101번방 손님이 A 상품을 주문하면 상품명이랑 개수를 입력가능하도록<br>
+
+          +<br>
+
+          쿠폰 이용하면 그것도!!<br>
+        </div>
+
+        <div class="sub_title">최종 결제 금액</div>
+      </div>
+
+  </section>
+</div>
 
 
 
@@ -106,7 +129,7 @@
               <h2 class="ftco-heading-2">Quick menu</h2>
               <ul class="list-unstyled">
               {% comment %} log out 버튼 {% endcomment %}
-                <li><a href="{% url 'admin_logout' %}" class="py-2 d-block">Log out</a></li>
+                <li><a href="#" class="py-2 d-block">Log out</a></li>
                 <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
                 <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
               </ul>
