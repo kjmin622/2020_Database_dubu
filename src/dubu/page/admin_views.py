@@ -48,10 +48,6 @@ def staff(request):
         connection.close()
         return redirect('admin_logout')
 
-# def s_reservation(request):
-#     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-#     return render(request,'admin/s_reservation.html',{})
-
 def room_select(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
 
@@ -98,7 +94,11 @@ def management(request):
     working_datas = Staff.get_staff_working()
     holiday_datas = Staff.get_staff_holiday()
     names = ['staff_id', 'rank', 'status', 'depart_id', 'team', 'first_name', 'last_name', 'phone', 'bank', 'account', 'wide_area_unit', 'street', 'basic_unit', 'si_gu', 'eub_myeon', 'building_number', 'detail_address']
-    return render(request,'admin/management.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names})
+    rooms_datas,room_type_datas,room_type_bed_datas = Room.get_room_info()
+    booking_datas = Book.get_booking_info()
+    return render(request,'admin/management.html',{'datas':datas, 'working_datas':working_datas, 'holiday_datas':holiday_datas, 'names':names,
+                                                    'rooms_datas':rooms_datas,'room_type_datas':room_type_datas,'room_type_bed_datas':room_type_bed_datas,
+                                                    'booking_datas':booking_datas})
 
 
 
@@ -189,3 +189,9 @@ def insert_room_type(request):
 
     return redirect('manage_room')
 
+@csrf_exempt
+def edit_room_type(request):
+    if(request.method=="POST"):
+        Room.edit_room_type(request.POST)
+    
+    return redirect('management')

@@ -155,7 +155,23 @@
       <div class="staff_s_div bold_sec">
         <div class="sub_title ">Manage Room</div>
         <div class="s_i_s">
-          안녕 나는 방정보를 관리하는 곳이야
+          <div class="resultBox">
+              <table>
+                  <thead>
+                  <th>room type</th><th>price</th><th>member limit</th><th>edit</th>
+                  </thead>
+                  <tbody>
+                  {% for data in room_type_datas %}
+                  <tr>
+                    <td>{{data.room_type}}</td>
+                    <td>{{data.price}}</td>
+                    <td>{{data.mem_limit}}</td>
+                    <td><input type="button" value="edit" class="room_type_edit_btn" name="edit_{{data.room_type}}"></td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
         </div>
       </div>
   </section>
@@ -165,7 +181,39 @@
       <div class="bold_test_mana staff_s_div bold_sec">
         <div class="sub_title ">Manage reservation</div>
         <div class="s_i_s">
-          안녕 나는 예약 정보를 수정하는 곳이야
+          <div class="searchBox">
+              <h4>search</h4>
+              <input type="text" placeholder=" name" id="staff_info_search">
+          </div>
+          <div class="resultBox">
+              <table id="staff_result_tab">
+                  <thead>
+                  <th>booking_id</th><th>name</th><th>room_num</th><th>depart_id</th><th>team</th><th>status</th><th>bank</th><th>account</th><th>phone</th><th>address</th><th>edit</th><th>working_time</th><th>holiday</th><th>delete</th>
+                  </thead>
+                  <tbody>
+                  <!--booking_id, is_check_in, check_in, check_out, room_num,room_type,breakfast,
+                      adult_num,child_num,baby_num,extra_text,first_name,last_name,phone-->
+                  {% for data in booking_datas %}
+                    <tr>
+                      <td>{{data.booking_id}}</td>
+                      <td>{{data.last_name}} {{data.first_name}}</td>
+                      <td>{{data.rank}}</td>
+                      <td>{{data.depart_id}}</td>
+                      <td>{{data.team}}</td>
+                      <td>{{data.status}}</td>
+                      <td>{{data.bank}}</td>
+                      <td>{{data.account}}</td>
+                      <td>{{data.phone}}</td>
+                      <td></td>
+                      <td><input type="button" value="edit" class="edit_btn" name="edit_{{data.booking_id}}"></td>
+                      <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                          <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
+                          <input type="submit" value="delete" class="delete_btn"></form></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
         </div>
       </div>
   </section>
@@ -183,68 +231,89 @@
 </div>
 
     <div class="fullscreen popup" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.5)"></div>
-        <div class="staff_info_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
-            <form action="{% url 'edit_staff' %}" method="POST">
-            {% for s in names %}
-            {% if s != 'staff_id' %}
-            <div style="display:block">
-            <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
-            <input type="text" id="staff_edit_input_{{s}}" style="height:21px; padding:1px;" name="{{s}}" placeholder="{{s}}">
-            </div>
-            {% else %}
-            <input type="text" id="staff_edit_input_staff_id" style="height:21px; padding:1px;" name="staff_id" readonly>
-            {% endif %}
-            {% endfor %}
-            <input type="submit" value="edit">
+    <!--스태프 edit 팝업-->
+    <div class="staff_info_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+        <form action="{% url 'edit_staff' %}" method="POST">
+        {% for s in names %}
+        {% if s != 'staff_id' %}
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="staff_edit_input_{{s}}" style="height:21px; padding:1px;" name="{{s}}" placeholder="{{s}}">
+        </div>
+        {% else %}
+        <input type="text" id="staff_edit_input_staff_id" style="height:21px; padding:1px;" name="staff_id" readonly>
+        {% endif %}
+        {% endfor %}
+        <input type="submit" value="edit">
+        </form>
+    </div>
+    <!--스태프 근무일 팝업-->
+    <div class="staff_working popup" style="box-sizing:content-box;display:none;overflow:scroll;z-index:100;position:fixed;width:300px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-150px,-300px);background-color:rgba(255,255,255,0.8);">
+        <div>
+            <table class="working_result_box">
+                <thead><th> start </th><th>end</th><th>Xday</th><th>delete</th></thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <form action="{% url 'insert_staff_working' %}" method="POST">
+                <input type="text" style="display: none" name="staff_id" class="work_sid" readonly>
+                <input type="text" name="work_time_start" placeholder="starttime(00:00)">
+                <input type="text" name="work_time_end" placeholder="endtime(00:00)"><br>
+                <input type="radio" name="x_day" value="sun_day" checked>sun_day
+                <input type="radio" name="x_day" value="mon_day">mon_day
+                <input type="radio" name="x_day" value="tues_day">tues_day<br>
+                <input type="radio" name="x_day" value="wednes_day">wednes_day
+                <input type="radio" name="x_day" value="thurs_day">thurs_day
+                <input type="radio" name="x_day" value="fri_day">fri_day<br>
+                <input type="radio" name="x_day" value="satur_day">satur_day
+                <input type="submit" value="add">
             </form>
         </div>
-        <div class="staff_working popup" style="box-sizing:content-box;display:none;overflow:scroll;z-index:100;position:fixed;width:300px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-150px,-300px);background-color:rgba(255,255,255,0.8);">
-            <div>
-                <table class="working_result_box">
-                    <thead><th> start </th><th>end</th><th>Xday</th><th>delete</th></thead>
-                    <tbody>
+    </div>
 
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <form action="{% url 'insert_staff_working' %}" method="POST">
-                    <input type="text" style="display: none" name="staff_id" class="work_sid" readonly>
-                    <input type="text" name="work_time_start" placeholder="starttime(00:00)">
-                    <input type="text" name="work_time_end" placeholder="endtime(00:00)"><br>
-                    <input type="radio" name="x_day" value="sun_day" checked>sun_day
-                    <input type="radio" name="x_day" value="mon_day">mon_day
-                    <input type="radio" name="x_day" value="tues_day">tues_day<br>
-                    <input type="radio" name="x_day" value="wednes_day">wednes_day
-                    <input type="radio" name="x_day" value="thurs_day">thurs_day
-                    <input type="radio" name="x_day" value="fri_day">fri_day<br>
-                    <input type="radio" name="x_day" value="satur_day">satur_day
-                    <input type="submit" value="add">
-                </form>
-            </div>
+    <!--스태프 휴무일 팝업-->
+    <div class="staff_holiday popup" style="box-sizing:content-box;display:none;overflow:scroll;z-index:100;position:fixed;width:400px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-200px,-300px);background-color:rgba(255,255,255,0.8);">
+        <div>
+            <table class="holiday_result_box">
+                <thead><th>start</th><th>end</th><th>type</th><th>paid</th><th>delete</th></thead>
+                <tbody>
+
+                </tbody>
+            </table>
         </div>
-
-        <div class="staff_holiday popup" style="box-sizing:content-box;display:none;overflow:scroll;z-index:100;position:fixed;width:400px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-200px,-300px);background-color:rgba(255,255,255,0.8);">
-            <div>
-                <table class="holiday_result_box">
-                    <thead><th>start</th><th>end</th><th>type</th><th>paid</th><th>delete</th></thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <form action="{% url 'insert_staff_holiday' %}" method="POST">
-                    <input type="text" style="display: none" name="staff_id" class="holi_sid" readonly>
-                    <input type="text" name="off_start" placeholder="startdate(0000-00-00)">
-                    <input type="text" name="off_end" placeholder="enddate(0000-00-00)">
-                    <input type="text" name="day_off_type" placeholder="병가 연차...">
-                    <input type="text" name="is_paid" placeholder="True/False">
-                    <input type="submit" value="add">
-                </form>
-            </div>
+        <div>
+            <form action="{% url 'insert_staff_holiday' %}" method="POST">
+                <input type="text" style="display: none" name="staff_id" class="holi_sid" readonly>
+                <input type="text" name="off_start" placeholder="startdate(0000-00-00)">
+                <input type="text" name="off_end" placeholder="enddate(0000-00-00)">
+                <input type="text" name="day_off_type" placeholder="병가 연차...">
+                <input type="text" name="is_paid" placeholder="True/False">
+                <input type="submit" value="add">
+            </form>
         </div>
+    </div>
 
+    <!--객실유형 edit 팝업-->
+    <div class="room_type_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+        <form action="{% url 'edit_room_type' %}" method="POST">
+        <input type="text" id="room_type_edit_input_room_type" style="height:21px; padding:1px;" name="room_type" readonly>
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">가격</label>
+        <input type="text" id="room_type_edit_input_price" style="height:21px; padding:1px;" name="price" placeholder="price">
+        </div>
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">최대인원수</label>
+        <input type="text" id="room_type_edit_input_mem_limit" style="height:21px; padding:1px;" name="mem_limit" placeholder="member_limit">
+        </div>
+        <input type="submit" value="edit">
+        </form>
+    </div>
+
+    <!--객실유형 침대 팝업-->
+    <!--객실유형 객실 팝업-->
 
 
 <!-- footer -->
@@ -390,5 +459,17 @@
         {% endfor %}
     })
 
+    $(".room_type_edit_btn").click(function(){
+      $(".fullscreen").css("display","block");
+      $(".room_type_edit").css("display","block");
+      var room_type = $(this).attr('name').slice(5)
+      {% for data in room_type_datas %}
+        if(room_type == '{{data.room_type}}'){
+            $('#room_type_edit_input_room_type').attr('value','{{data.room_type}}')
+            $('#room_type_edit_input_price').attr('value','{{data.price}}')
+            $('#room_type_edit_input_mem_limit').attr('value','{{data.mem_limit}}')
+        }
+      {% endfor %}
+    });
 
 </script>
