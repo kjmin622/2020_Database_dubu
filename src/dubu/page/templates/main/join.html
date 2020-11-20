@@ -33,6 +33,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/staff.css' %}">
   </head>
   <body>
 
@@ -76,12 +77,67 @@
 {% comment %} end top {% endcomment %}
 
 {% comment %} test  {% endcomment %}
-	<section class="test1">
-        <h1>join</h1>
-    </section>
+	<section class="test1 row_c">
+
+    <div class = "staff_s_div">
+      
+      <div class= "staff_title">회원가입</div>
+      
+    </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">약관동의</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <li>개인 정보 이용동의 <input type = "checkbox" value = '동의'> 동의 </input></li>
+            <li>SMS 수신 동의 <input type = "checkbox" value = '동의'> 동의 </input></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">회원정보</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <li>first name : <input class = "input"></input></li><br>
+            <li>last name : <input class = "input"></input></li><br>
+            <li>birth : <input class = "input"></input></li><br>
+            <li>email : 
+              <input class = "input"></input>
+              <button class = "btn"> 확인 </button>
+            </li><br>
+            <li>ID : <input class = "input"></input></li><br>
+            <li>PASSWORD : <input class = "input"></input></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">추천인</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <li>추천인 ID : <input class = "input"></input></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class = "staff_s_div">
+      <div style = "padding-bottom:50px; padding-top:20px;">
+      <center>
+      <button class = "btn"> 가입완료 </button>
+      </center>
+      </div>
+    </div>
+
+  </section>
 
     
-
 <!-- footer -->
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
