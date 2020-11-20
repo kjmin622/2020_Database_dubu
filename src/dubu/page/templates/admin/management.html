@@ -220,6 +220,16 @@
                   </tbody>
               </table>
           </div>
+          <div class="addBookingBox">
+              <form action="{% url 'insert_booking' %}" method="POST">
+                  {% for s in booking_names %}
+                  {% if s != "booking_id" and s != "is_check_in" %}
+                  <input type="text" name="{{s}}" placeholder="{{s}}">
+                  {% endif %}
+                  {% endfor %}
+                  <input type="submit" value="add">
+              </form>
+          </div>
         </div>
       </div>
   </section>
