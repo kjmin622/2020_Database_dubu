@@ -345,8 +345,16 @@ class Book():
 
     def insert_booking(dataDir):
         try:
-            booking_id = time.strftime('%Y%m%d%H%M%S00')
-        
+            cursor = connection.cursor()
+            booking_id = int(time.strftime('%Y%m%d%H%M%S00'))
+            FsqlStr = lambda x : f"select * from page_booking where booking_id = '{x}'"
+            cursor.execute(FsqlStr(booking_id))
+            while(not cursor.fetchall()):
+                booking_id += 1
+                cursor.execute(FsqlStr(booking_id))
+            booking_id = str(booking_id)
+
+
         except:
             connection.rollback()
             connection.close()
