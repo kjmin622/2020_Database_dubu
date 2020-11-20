@@ -93,10 +93,10 @@ class card_info(models.Model):
     bank = models.CharField(max_length=30)    
     cvc = models.IntegerField()  
     expiration_date = models.CharField(max_length=20)  
-    card_number1 = models.BooleanField()    
-    card_number2 = models.BooleanField()    
-    card_number3 = models.BooleanField()    
-    card_number4 = models.BooleanField()    
+    card_number1 = models.CharField(max_length=10)  
+    card_number2 = models.CharField(max_length=10)
+    card_number3 = models.CharField(max_length=10)
+    card_number4 = models.CharField(max_length=10)
 
 
 class product(models.Model):
