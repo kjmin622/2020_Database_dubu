@@ -1,6 +1,8 @@
 from .models import *
 from django.db import connection
 import time
+import datetime
+
 class Staff():
 
     def get_staff(staff_id=""):
@@ -540,6 +542,109 @@ class OtherTool():
             sqlStrs = [f"insert into page_engineering(facility_id,facility_name,check_date,check_limit,status) values('{facility_id}','{facility_name}','{check_date}','{check_limit}','{status}')",
                         f"insert into page_engineering_team(facility_id,team_name) values('{facility_id}','{team_name}')"]
             for sqlStr in sqlStrs :
+                cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+class Product():
+    def get_product():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select product_id,name,price,count from page_product_price natural join page_product natural join page_in_storage"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({'product_id':data[0],'name':data[1],'price':data[2],'count':data[3]})
+            
+            connection.close()
+            return output
+        except:
+            connection.close()
+            return None
+
+    def edit_product(dataDir):
+        try:
+            cursor = connection.cursor()
+            product_id=dataDir["product_id"];name=dataDir["name"];count=dataDir["count"];price=dataDir["price"]
+            sqlStrs = [f"update page_product set name='{name}' where product_id='{product_id}'",
+                      f"update page_in_storage set count='{count}' where product_id='{product_id}'",
+                      f"update page_product_price set price='{price}' where product_id='{product_id}'"
+            ]
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+    def get_purchase():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select purchase_id, order_date, delivery_date, is_purchase, staff_id from page_purchase_slip"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({"purchase_id":data[0],"order_date":data[1],"delivery_date":data[2],"is_purchase":data[3],"staff_id":data[4],"product":[]})
+                sqlStr = f"select product_id, count from page_purchase_list where purchase_id={data[0]}"
+                cursor.execute(sqlStr)
+                product_datas = cursor.fetchall()
+                for product in product_datas:
+                    output[-1]["product"].append([product[0]])
+                    output[-1]["product"][-1].append(product[1])
+            return output
+        except:
+            connection.close()
+            return None
+    
+    def insert_purchase(dataDir):
+        try:
+            cursor = connection.cursor()
+            staff_id=dataDir["staff_id"];product_id_list = dataDir["product_id"];count_list=dataDir["count"]
+            now = datetime.datetime.now()
+            purchase_id = now.strftime('%Y%m%d%H%M%S')
+            order_date = now.strftime('%Y-%m-%d')
+            delivery_date = (now + datetime.timedelta(days=7)).strftime('%Y-%m-%d')
+
+        
+            sqlStr = f"insert into page_purchase_slip(purchase_id,delivery_date,is_purchase,staff_id,order_date) values('{purchase_id}','{delivery_date}',0,'{staff_id}','{order_date}')"
+            cursor.execute(sqlStr);cursor.fetchall()
+            
+            for i in range(len(product_id_list)):
+                sqlStr = f"insert into page_purchase_list(purchase_id,product_id,count) values('{purchase_id}','{product_id_list[i]}',{count_list[i]})"
+                cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+    def complete_purchase(dataDir):
+        try:
+            cursor = connection.cursor()
+            purchase_id = dataDir["purchase_id"]
+            sqlStr = f"update page_purchase_slip set is_purchase=1 where purchase_id = '{purchase_id}'"
+            cursor.execute(sqlStr);cursor.fetchall()
+            
+            sqlStr = f"select product_id, count from page_purchase_list where purchase_id = '{purchase_id}'"
+            cursor.execute(sqlStr)
+            result = cursor.fetchall()
+            for data in result:
+                sqlStr = f"select count from page_in_storage where product_id='{data[0]}'"
+                cursor.execute(sqlStr)
+                count = cursor.fetchall()[0][0]
+                sqlStr = f"update page_in_storage set count={count+data[1]} where product_id='{data[0]}'"
                 cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
             connection.close()

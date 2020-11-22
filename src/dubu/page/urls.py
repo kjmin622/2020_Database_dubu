@@ -37,6 +37,7 @@ urlpatterns = [
     path('admin/management/del_engineering',admin_views.delete_engineering,name="delete_engineering"),
     path('admin/management/edit_engineering',admin_views.edit_engineering,name="edit_engineering"),
     path('admin/management/insert_engineering',admin_views.insert_engineering,name="insert_engineering"),
+    
     # path('admin/staff/bill',admin_views.change_staff_status,name="bill"),
 
     # front admin
