@@ -105,25 +105,25 @@
     			<div class="col-lg-12">
     				<form action="#" class="booking-form">
 	        		<div class="row">
-	        			<div class="col-md-3 d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
-				    					<label for="#">Check-in Date</label>
-				    					<input type="text" class="form-control checkin_date" placeholder="Check-in">
+	        			<div class="col-md-3 d-flex" style = "height: 160px;">
+	        				<div class="form-group p-4 d-flex align-items-end">
+	        					<div class="wrap" style = "padding-bottom: 40px;">
+				    					<label for="#">Check-in</label>
+				    					<input type="text" class="form-control checkin_date" placeholder="Date">
 			    					</div>
 			    				</div>
 	        			</div>
-	        			<div class="col-md-3 d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
-				    					<label for="#">Check-out Date</label>
-				    					<input type="text" class="form-control checkout_date" placeholder="Check-out">
+	        			<div class="col-md-3 d-flex" style = "height: 160px;">
+	        				<div class="form-group p-4 d-flex align-items-end">
+	        					<div class="wrap" style = "padding-bottom: 40px;">
+				    					<label for="#">Check-out</label>
+				    					<input type="text" class="form-control checkout_date" placeholder="Date">
 			    				</div>
 			    				</div>
 	        			</div>
-	        			<div class="col-md d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
+	        			<div class="col-md d-flex" style = "height: 160px;">
+	        				<div class="form-group p-4 d-flex align-items-end">
+	        					<div class="wrap" style = "padding-bottom: 40px;">
 			      					<label for="#">Room</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
@@ -139,16 +139,15 @@
                   </div>
                 </div>
 
-	        			<div class="col-md d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        			<div class="col-md d-flex" style = "height: 160px;">
+	        				<div class="form-group p-4 d-flex align-items-end">
 	        					<div class="wrap">
 			      					<label for="#">Customer</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
-                          <p>Adult <input type="text" size = "3px"></input></p>
-                          <p>Child <input type="text" size = "3px"></input></p>
-                          <p>Baby <input type="text" size = "3px"></input></p>
-			  
+                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Adult <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
+                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Child <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
+                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Baby <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
 			                  </div>
 				              </div>
 				            </div>
@@ -167,8 +166,8 @@
     </section>
 
 {% comment %} main section  {% endcomment %}
-<div class="main_a ">
-    <section class="event_info">
+<div class="main_a " style="margin-top: 250px;">
+    <section class="event_info" style="margin-bottom: 250px;">
       <div class="about_main_title">Event</div>
       <div id="slide">
         <input type="radio" name="pos" id="pos1" checked>
@@ -219,26 +218,6 @@
         </p>
       </div>
     </section>
-
-  <!-- 호텔 설명을 입력하는 section-->
-  <section class="hotel_info  row_c sub_footer" >
-
-      <div class="">
-
-        <div class="about_main_title">Our hotel</div>
-          {% comment %} 호텔의 소개문구를 입력합니다. {% endcomment %}
-          <div class="hotel_info_t">
-            여기는 
-          </div>
-          <div class="hotel_info_t">
-            호텔을 소개하는 문구가
-          </div>
-          <div class="hotel_info_t">
-            들어가야 해요
-          </div>
-      </div>
-
-  </section>
 </div>
 <!-- footer -->
 <footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
