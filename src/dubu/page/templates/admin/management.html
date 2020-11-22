@@ -35,27 +35,47 @@
     <link rel="stylesheet" href="{% static 'css/dubu_made/a_manage.css' %}">
   </head>
   <style>
-            .searchBox h4{
-                display:inline;
-            }
-            .resultBox{
-                position: relative;
-                width: 1310px;
-                height:250px;
-                overflow:scroll;
-                border:solid 1px black;
-                margin-top:20px;
-            }
-            .resultList{
-                list-style: none;
-            }
-            .resultList li div{
-                display:inline;
-            }
-            table,thead,tbody,th,td{
-                border:solid 1px gray;
-                white-space:nowrap;
-            }
+      .resultBox{
+          position: relative;
+          width: max-content;
+          height:250px;
+          overflow:scroll;
+          border:solid 2px darkgray;
+          margin-top:20px;
+          padding: 2px;
+      }
+      .resultList{
+          list-style: none;
+      }
+      .resultList li div{
+          display:inline;
+      }
+      table,thead,tbody,th,td{
+          border:solid 1px darkgray;
+          white-space:nowrap;
+      }
+
+
+      td, th{
+        padding: 2px 8px;
+      }
+
+      th{
+        font-size:17px;
+        font-weight: 350;
+        text-align:center;
+      }
+
+      td{
+        font-size:15px;
+        font-weight: 300;       
+      }
+
+      .m_r_result th{
+        width:160px;
+      }
+
+
     </style>
   <body>
 
@@ -104,12 +124,11 @@
 <!-- management -->
   <section class="search_mana  row_c">
       <div class="staff_s_div bold_sec">
-        <div class="sub_title ">Manage Staff</div>
+        <div style="display:flex; flex-flow:row; flwx-wrap:nowrap; align-items:center;">
+          <div class="sub_t">Manage Staff</div>
+          <input type="text" placeholder="Name" id="staff_info_search" class="m_s">
+        </div>
         <div class="s_i_s">
-          <div class="searchBox">
-              <h4>search</h4>
-              <input type="text" placeholder=" name" id="staff_info_search">
-          </div>
           <div class="resultBox">
               <table id="staff_result_tab">
                   <thead>
@@ -127,12 +146,12 @@
                       <td>{{data.account}}</td>
                       <td>{{data.phone}}</td>
                       <td>{{data.wide_area_unit}} {{data.basic_unit}} {{data.street}} {{data.si_gu}} {{data.eub_myeon}} {{data.building_number}} {{data.detail_address}}</td>
-                      <td><input type="button" value="edit" class="edit_btn" name="edit_{{data.staff_id}}"></td>
-                      <td><input type="button" value="근무일 보기/수정" class="working_btn" name="working_{{data.staff_id}}"></td>
-                      <td><input type="button" value="휴가일 보기/수정" class="holiday_btn" name="holiday_{{data.staff_id}}"></td>
+                      <td><input type="button" value="edit" class="m_b edit_btn" name="edit_{{data.staff_id}}"></td>
+                      <td><input type="button" value="근무일 보기/수정" class="m_b working_btn" name="working_{{data.staff_id}}"></td>
+                      <td><input type="button" value="휴가일 보기/수정" class="m_b holiday_btn" name="holiday_{{data.staff_id}}"></td>
                       <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
                           <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
-                          <input type="submit" value="delete" class="delete_btn"></form></td>
+                          <input type="submit" value="delete" class="delete_btn m_b"></form></td>
                       </tr>
                   {% endfor %}
                   </tbody>
@@ -141,9 +160,9 @@
           <div class="addStaffBox">
               <form action="{% url 'insert_staff' %}" method="POST">
                   {% for s in names %}
-                  <input type="text" name="{{s}}" placeholder="{{s}}">
+                  <input type="text" name="{{s}}" placeholder="{{s}}" class="i_p_b">
                   {% endfor %}
-                  <input type="submit" value="add">
+                  <input class="m_b_a" type="submit" value="add">
               </form>
           </div>
         </div>
@@ -153,10 +172,9 @@
   <!-- 안녕 나는 방정보를 관리하는 곳이야-->
   <section class="search_p_apply  row_c">
       <div class="staff_s_div bold_sec">
-        <div class="sub_title ">Manage Room</div>
-        <div class="s_i_s">
-          <div class="resultBox">
-              <table>
+        <div class="sub_t">Manage Room</div>
+          <div class="resultBox" style="height: max-content; overflow:auto;">
+              <table class=" m_r_result">
                   <thead>
                   <th>room type</th><th>price</th><th>member limit</th><th>edit</th>
                   </thead>
@@ -166,25 +184,24 @@
                     <td>{{data.room_type}}</td>
                     <td>{{data.price}}</td>
                     <td>{{data.mem_limit}}</td>
-                    <td><input type="button" value="edit" class="room_type_edit_btn" name="edit_{{data.room_type}}"></td>
+                    <td><input type="button" value="edit" class="room_type_edit_btn m_r_b" name="edit_{{data.room_type}}"></td>
                   </tr>
                   {% endfor %}
                   </tbody>
               </table>
           </div>
-        </div>
       </div>
   </section>
 
   <!-- 안녕 나는 예약 정보를 수정하는 곳이야-->
   <section class="search_a_check row_c">
       <div class="bold_test_mana staff_s_div bold_sec">
-        <div class="sub_title ">Manage reservation</div>
+        <div style="display:flex; flex-flow:row; flwx-wrap:nowrap; align-items:center;">
+          <div class="sub_t">Manage reservation</div>
+          <input type="text" placeholder="Id | Name | Phone" id="booking_search" class="m_s" style="width: 175px;">
+        </div> 
+        
         <div class="s_i_s">
-          <div class="searchBox">
-              <h4>search</h4>
-              <input type="text" placeholder=" id/name/phone" id="booking_search">
-          </div>
           <div class="resultBox">
               <table id="booking_result_tab">
                   <thead>
@@ -211,10 +228,10 @@
                       <td>{{data.baby_num}}</td>
                       <td>{{data.breakfast}}</td>
                       <td>{{data.extra_text}}</td>
-                      <td><input type="button" value="edit" class="booking_edit_btn" name="edit_{{data.booking_id}}"></td>
+                      <td><input type="button" value="edit" class="booking_edit_btn m_b" name="edit_{{data.booking_id}}"></td>
                       <td><form action="{% url 'delete_booking' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
                           <input type="text" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
-                          <input type="submit" value="delete" class="delete_btn"></form></td>
+                          <input type="submit" value="delete" class="delete_btn m_b"></form></td>
                     </tr>
                   {% endfor %}
                   </tbody>
@@ -225,24 +242,34 @@
                   {% for s in booking_names %}
                   {% if s != "booking_id" and s != "is_check_in" %}
                     {% if s == "room_type" %}
-                    <div style="display:block">
-                    <label style="margin:0px; margin-top:-3px; height:21px">standard</label>
-                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="standard" name="{{s}}" checked>
-                    <label style="margin:0px; margin-top:-3px; height:21px">superior</label>
-                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="superior" name="{{s}}">
-                    <label style="margin:0px; margin-top:-3px; height:21px">delux</label>
-                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="delux" name="{{s}}">
-                    <label style="margin:0px; margin-top:-3px; height:21px">suite_delux</label>
-                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_delux" name="{{s}}">
-                    <label style="margin:0px; margin-top:-3px; height:21px">suite_royal</label>
-                    <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_royal" name="{{s}}">
+                    <div style="display:flex; flex-flow:row;">
+                      <div class="m_r_room_select">
+                        <label >standard</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="standard" name="{{s}}" checked>
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >superior</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="superior" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >delux</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="delux" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >suite_delux</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_delux" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >suite_royal</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_royal" name="{{s}}">
+                      </div>
                     </div> 
                     {% else %}
-                    <input type="text" name="{{s}}" placeholder="{{s}}">
+                    <input type="text" name="{{s}}" placeholder="{{s}}" class="i_p_b">
                     {% endif %}
                   {% endif %}
                   {% endfor %}
-                  <input type="submit" value="add">
+                  <input type="submit" value="add" class="m_b_a" >
               </form>
           </div>
         </div>
@@ -253,16 +280,15 @@
   <!-- facility_id, facility_name, team_name, check_date, check_limit, status -->
   <section class="search_a_check row_c">
       <div class="bold_test_mana staff_s_div bold_sec">
-        <div class="sub_title ">Manage Engineering</div>
+        <div style="display:flex; flex-flow:row; flwx-wrap:nowrap; align-items:center;">
+          <div class="sub_t">Manage Engineering</div>
+          <input type="text" placeholder="Id | Name | Phone" id="engineering_search"  class="m_s" style="width: 175px;">
+        </div> 
         <div class="s_i_s">
-          <div class="searchBox">
-              <h4>search</h4>
-              <input type="text" placeholder=" id/name/team" id="engineering_search">
-          </div>
           <div class="resultBox">
               <table id="engineering_result_tab">
                   <thead>
-                  <th>facility_id</th><th>facility_name</th><th>team_name</th><th>check_date</th><th>check_limit</th><th>status</th><th>edit</th><th>delete</th>
+                  <th style="padding: 3px 20px">facility_id</th><th style="padding: 3px 20px">facility_name</th><th style="padding: 3px 20px">team_name</th><th style="padding: 3px 22px">check_date</th><th style="padding: 3px 20px">check_limit</th><th style="padding: 3px 20px">status</th><th style="padding: 3px 20px">edit</th><th style="padding: 3px 20px">delete</th>
                   </thead>
                   <tbody>
                   {% for data in engineering_datas %}
@@ -273,21 +299,21 @@
                       <td>{{data.check_date}}</td>
                       <td>{{data.check_limit}}</td>
                       <td>{{data.status}}</td>
-                      <td><input type="button" value="edit" class="engineering_edit_btn" name="edit_{{data.facility_id}}"></td>
+                      <td><input type="button" value="edit" class="engineering_edit_btn m_b" name="edit_{{data.facility_id}}"></td>
                       <td><form action="{% url 'delete_engineering' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
                           <input type="text" value="{{data.facility_id}}" style="display:none" name="facility_id" readonly>
-                          <input type="submit" value="delete" class="delete_btn"></form></td>
+                          <input type="submit" value="delete" class="delete_btn m_b"></form></td>
                     </tr>
                   {% endfor %}
                   </tbody>
               </table>
           </div>
-          <div class="addEngineeringBox">
+          <div class="addEngineeringBox" style="margin:40px 0px">
               <form action="{% url 'insert_engineering' %}" method="POST">
                   {% for s in engineering_names %}
-                  <input type="text" name="{{s}}" placeholder="{{s}}">
+                  <input type="text" name="{{s}}" placeholder="{{s}}" class="i_e_b">
                   {% endfor %}
-                  <input type="submit" value="add">
+                  <input type="submit" value="add" class="e_a">
               </form>
           </div>
         </div>
