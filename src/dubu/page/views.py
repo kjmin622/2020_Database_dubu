@@ -37,9 +37,22 @@ def reservation(request):
     # not login
     if "member_id" not in request.session or request.session["member_id"]==None :
         login = False
+        redirect('login')
     # login
     else:
-        login = True
+       login = True
+    #reserve
+    if request.method == "POST":
+        try:
+            check_in = request.POST['check_in'], check_out = request.POST['check_out'], adult_num = request.POST['adult_num'], child_num= request.POST['child_num'], baby_num= request.POST['baby_num']
+            if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out):
+                print(check_in)
+                return render(request,'main/reservation.html',{'Error': 'Check the date again.'})
+            if(adult_num<=0 or (adult_num+child_num+baby_num)==0):
+                return render(request,'main/reservation.html',{'Error': 'Check the number of the guests again.'})
+        except:
+            return render(request,'main/reservation.html',{})
+        return render(request,'main/reservation2.html',{"login":login})
     return render(request,'main/reservation.html',{"login":login})
 
 def reservation2(request):
