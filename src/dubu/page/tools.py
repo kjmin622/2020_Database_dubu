@@ -345,15 +345,29 @@ class Book():
 
     def insert_booking(dataDir):
         try:
+            check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];baby_num=dataDir['baby_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
             cursor = connection.cursor()
             booking_id = int(time.strftime('%Y%m%d%H%M%S00'))
             FsqlStr = lambda x : f"select * from page_booking where booking_id = '{x}'"
             cursor.execute(FsqlStr(booking_id))
-            while(not cursor.fetchall()):
+            is_booking = cursor.fetchall()
+            while(is_booking):
                 booking_id += 1
                 cursor.execute(FsqlStr(booking_id))
-            booking_id = str(booking_id)
+                is_booking = cursor.fetchall()
 
+            booking_id = str(booking_id)
+            sqlStrs = [f"insert into page_booking(booking_id, is_check_in, check_in, check_out) values('{booking_id}',0,'{check_in}','{check_out}')",
+                        f"insert into page_booking_rooms(booking_id, room_num) values('{booking_id}',{room_num})",
+                        f"insert into page_book_request(booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text) values('{booking_id}','{room_type}',{breakfast},{adult_num},{child_num},{baby_num},'{extra_text}')",
+                        f"insert into page_customer_info(booking_id, first_name, last_name) values('{booking_id}','{first_name}','{last_name}')",
+                        f"insert into page_customer_phone(booking_id, phone) values('{booking_id}','{phone}')"
+                        ]
+
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
+
+            return True
 
         except:
             connection.rollback()
