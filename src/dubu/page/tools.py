@@ -420,6 +420,26 @@ class Book():
             connection.close()
             return False
 
+
+    def get_invoice():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select booking_id, room_num, product_id, name, count, price, order_time from (select booking_id, room_num, product_id, order_time,count from page_booking_rooms natural join page_invoice) natural join (select product_id, name, price from page_product natural join page_product_price)"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({'booking_id':data[0], 'room_num':data[1], 'product_id':data[2], 'name':data[3], 'count':data[4], 'price':data[5], 'order_time':data[6]})
+
+            connection.close()
+            return output
+        except:
+            connection.close()
+            return None
+
+    def get_coupon():
+        pass
+
+
 class Room():
     def get_room_info():
         try:
@@ -461,6 +481,7 @@ class Room():
             connection.rollback()
             connection.close()
             return False
+
 
 
 class OtherTool():
