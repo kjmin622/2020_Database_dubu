@@ -81,9 +81,9 @@
 
 		
 {% comment %} test  {% endcomment %}
-<form method='POST'>
+<form method='POST' action = "{% url 'reservation2' %}">
 {% csrf_token %}
-<input type="text" name="input" class="form-control" value="login" style="display:none" readonly>
+<input type="text" name="method" class="form-control" value="reservation" style="display:none" readonly>
 <section class="test1 row_c">
   <div class = "staff_s_div" style="padding-top: 50px; padding-bottom: 20px;">
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색</div>
@@ -137,7 +137,7 @@
   <div class = "staff_s_div">
     <div style = "padding-bottom: 70px; padding-top:50px;">
     <center>
-    <button class = "btn"> 객실 및 요금 확인 </button>
+    <input type="submit" class="" id="" value="객실 요금 확인">
     </center>
     </div>
   </div>
