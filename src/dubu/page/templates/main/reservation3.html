@@ -82,17 +82,22 @@
 		
 {% comment %} test  {% endcomment %}
 <section class="test1 row_c">
-  <div class = "staff_s_div">
-    <div class= "staff_title">01 객실검색 > 02 객실, 요금, 옵션 선택 > 03 고객정보입력</div>
-  </div>
   
+  <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px;">
+    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실, 요금, 옵션 선택 > 03 고객정보입력</div>
+  </div>
+
   <div class="bold_test_staff staff_s_div bold_sec">
     <div class="staff_title" style = "padding-bottom: 10px;">예약자 정보</div>
       <div class="container" style = "padding-left: 33px;">
         <ul style="list-style-type:none">
-          <li>성명 : <input class = "input" style = "height: 25px;"></input></li>
-          <li>이메일 : <input class = "input" style = "height: 25px;"></input></li>
-          <li>연락처 : <input class = "input" style = "height: 25px;"></input></li>
+          <li>성명 &nbsp; &nbsp; &nbsp; &nbsp; <input class = "input" style = "height: 25px; padding-left: 2px;"></input></li>
+          <li>이메일 &nbsp; &nbsp; <input class = "input" style = "height: 25px; padding-left: 2px;"></input></li>
+          <li>연락처 &nbsp; &nbsp;
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input>
+          </li>
         </ul>
       </div>
   </div>
@@ -102,7 +107,7 @@
       <div class="staff_title" style = "padding-bottom: 10px;">신용카드 정보</div>
       <div class="container" style="padding-left: 33px;">
         <ul style="list-style-type:none">
-          <li>신용카드 종류 : 
+          <li>신용카드 종류 &nbsp; &nbsp;
             <select>
               <option value="">카드 선택</option>
               <option value="신한">신한</option>
@@ -116,15 +121,15 @@
               <option value="BC">BC</option>
             </select>
           </li>
-          <li>신용카드 번호 : 
-            <input class = "input" style = "height: 25px; width: 40px; padding-left: 2px;"></input> -
-            <input class = "input" style = "height: 25px; width: 40px; padding-left: 2px;"></input> -
-            <input class = "input" style = "height: 25px; width: 40px; padding-left: 2px;"></input> -
-            <input class = "input" style = "height: 25px; width: 40px; padding-left: 2px;"></input> 
+          <li>신용카드 번호 &nbsp; &nbsp;
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> 
           </li>
-          <li>유효기간 : 
-            <input class = "input" style = "height: 25px; width: 40px; padding-left: 2px;"></input> /
-            <input class = "input" style = "height: 25px; width: 40px; padding-left: 2px;"></input> (MM/YY)
+          <li>유효 기간 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> /
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> (MM/YY)
           </li>
           </ul>
       </div>
@@ -172,7 +177,7 @@
           <li> 객실 금액 : </li>
           <li> 조식 금액 : </li>
           <li> 세금 및 봉사료 : </li>
-          <li style = "font-weight: bold"> 총 금액 : </li>
+          <li style = "font-weight: bold; padding-top: 15px;"> 총 금액 : </li>
           </ul>
       </div>
   </div>
@@ -192,9 +197,9 @@
 
 
   <div class = "staff_s_div">
-    <div style = "padding-bottom:50px; padding-top:20px;">
+    <div style = "padding-bottom: 70px; padding-top:50px;">
     <center>
-    <button class = "btn" onclick="location.href='{% url 'index' %}'"> 예약완료 </button>
+    <button class = "btn" onclick="location.href='{% url 'index' %}'"> 예약 완료 </button>
     </center>
     </div>
   </div>
