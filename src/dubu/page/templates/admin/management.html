@@ -324,51 +324,54 @@
 
     <div class="fullscreen popup" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.5)"></div>
     <!--스태프 edit 팝업-->
-    <div class="staff_info_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+    <div class="staff_info_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:600px; padding:20px;left:50%; top:50%; transform:translate(-125px,-300px); background-color:rgba(255,255,255,0.8); overflow:scroll;">
         <form action="{% url 'edit_staff' %}" method="POST">
         {% for s in names %}
         {% if s != 'staff_id' %}
         <div style="display:block">
-        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
-        <input type="text" id="staff_edit_input_{{s}}" style="height:21px; padding:1px;" name="{{s}}" placeholder="{{s}}">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px margin-bottom: 1px;">{{s}}</label>
+        <input type="text" id="staff_edit_input_{{s}}" style="height:21px; padding:1px; padding-left:5px; margin-bottom:3px;" name="{{s}}" placeholder="{{s}}">
         </div>
         {% else %}
-        <input type="text" id="staff_edit_input_staff_id" style="height:21px; padding:1px;" name="staff_id" readonly>
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="staff_edit_input_staff_id" style="height:21px; padding:1px; margin-bootom:5px;" name="staff_id" readonly>
         {% endif %}
         {% endfor %}
-        <input type="submit" value="edit">
+        <input type="submit" value="edit" class="m_b" style="margin-top:25px;">
         </form>
     </div>
     <!--스태프 근무일 팝업-->
-    <div class="staff_working popup" style="box-sizing:content-box;display:none;overflow:scroll;z-index:100;position:fixed;width:300px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-150px,-300px);background-color:rgba(255,255,255,0.8);">
+    <div class="staff_working popup" style="box-sizing:content-box;display:none;z-index:100;position:fixed;width:340px;height:470px;padding:30px;left:50%;top:50%;transform:translate(-170px,-235px);background-color:rgba(255,255,255,0.8);">
         <div>
             <table class="working_result_box">
-                <thead><th> start </th><th>end</th><th>Xday</th><th>delete</th></thead>
+                <thead><th style="margin: 3px 30px;"> start </th><th style="margin: 3px 30px;">end</th><th style="margin: 3px 30px;">Xday</th><th style="margin: 3px 30px;">delete</th></thead>
                 <tbody>
 
                 </tbody>
             </table>
         </div>
-        <div>
+        <div style="margin-top:20px;">
             <form action="{% url 'insert_staff_working' %}" method="POST">
                 <input type="text" style="display: none" name="staff_id" class="work_sid" readonly>
-                <input type="text" name="work_time_start" placeholder="starttime(00:00)">
-                <input type="text" name="work_time_end" placeholder="endtime(00:00)"><br>
-                <input type="radio" name="x_day" value="sun_day" checked>sun_day
-                <input type="radio" name="x_day" value="mon_day">mon_day
-                <input type="radio" name="x_day" value="tues_day">tues_day<br>
-                <input type="radio" name="x_day" value="wednes_day">wednes_day
-                <input type="radio" name="x_day" value="thurs_day">thurs_day
-                <input type="radio" name="x_day" value="fri_day">fri_day<br>
-                <input type="radio" name="x_day" value="satur_day">satur_day
-                <input type="submit" value="add">
+                <input class="i_s_w_s" type="text" name="work_time_start" placeholder="starttime(00:00)" style="padding: 0px 10px; width:160px;">
+                <input class="i_s_w_s" type="text" name="work_time_end" placeholder="endtime(00:00)" style="padding: 0px 10px; width:160px;"><br>
+                <div style="display:flex; flex-flow:row; flex-wrap:wrap; margin-top:20px;"> 
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>sun_day</a><input class="i_s_w_s" type="radio" name="x_day" value="sun_day" checked></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>mon_day</a><input class="i_s_w_s" type="radio" name="x_day" value="mon_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>tues_day</a><input class="i_s_w_s" type="radio" name="x_day" value="tues_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>wednes_day</a><input class="i_s_w_s" type="radio" name="x_day" value="wednes_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>thurs_day</a><input class="i_s_w_s" type="radio" name="x_day" value="thurs_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>fri_day</a><input class="i_s_w_s" type="radio" name="x_day" value="fri_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>satur_day</a><input class="i_s_w_s" type="radio" name="x_day" value="satur_day"></div>
+                  <input style="margin:10px 11px; padding: 3px 25px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;" type="submit" value="add">
+                </div>
             </form>
         </div>
     </div>
 
     <!--스태프 휴무일 팝업-->
-    <div class="staff_holiday popup" style="box-sizing:content-box;display:none;overflow:scroll;z-index:100;position:fixed;width:400px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-200px,-300px);background-color:rgba(255,255,255,0.8);">
-        <div>
+    <div class="staff_holiday popup" style="box-sizing:content-box;display:none;overflow:scroll;z-index:100;position:fixed;width:460px;height:250px;padding:80px 20px;left:50%;top:50%;transform:translate(-230px,-125px);background-color:rgba(255,255,255,0.8);">
+        <div style="margin-bottom:30px;">
             <table class="holiday_result_box">
                 <thead><th>start</th><th>end</th><th>type</th><th>paid</th><th>delete</th></thead>
                 <tbody>
@@ -378,92 +381,127 @@
         </div>
         <div>
             <form action="{% url 'insert_staff_holiday' %}" method="POST">
-                <input type="text" style="display: none" name="staff_id" class="holi_sid" readonly>
-                <input type="text" name="off_start" placeholder="startdate(0000-00-00)">
-                <input type="text" name="off_end" placeholder="enddate(0000-00-00)">
-                <input type="text" name="day_off_type" placeholder="병가 연차...">
-                <input type="text" name="is_paid" placeholder="True/False">
-                <input type="submit" value="add">
+              <div style="display:flex; flex-flow:row; justify-content: center; align-items:center;">
+                <div>
+                  <input type="text" style="display: none" name="staff_id" class="holi_sid" readonly>
+                  <input style="padding-left:5px; width:185px; margin:3px 3px 3px 0px;" type="text" name="off_start" placeholder="Startdate(0000-00-00)">
+                  <input style="padding-left:5px; width:185px; margin:3px 3px 3px 0px;" type="text" name="off_end" placeholder="Enddate(0000-00-00)">
+                  <input style="padding-left:5px; width:185px; margin:3px 3px 3px 0px;" type="text" name="day_off_type" placeholder="Type">
+                  <input style="padding-left:5px; width:185px; margin:3px 3px 3px 0px;" type="text" name="is_paid" placeholder="True/False">
+                </div>
+                  <input type="submit" value="add" style="height: 70px;padding: 3px 15px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;" >
+              </div>
             </form>
         </div>
     </div>
 
     <!--객실유형 edit 팝업-->
-    <div class="room_type_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+    <div class="room_type_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:300px; padding:20px;left:50%; top:50%; transform:translate(-125px,-150px); background-color:rgba(255,255,255,0.8)">
         <form action="{% url 'edit_room_type' %}" method="POST">
-        <input type="text" id="room_type_edit_input_room_type" style="height:21px; padding:1px;" name="room_type" readonly>
-        <div style="display:block">
-        <label style="display:block;margin:0px; margin-top:-3px; height:20px">가격</label>
-        <input type="text" id="room_type_edit_input_price" style="height:21px; padding:1px;" name="price" placeholder="price">
+        <div style="margin:10px 0px;">  
+          <label style="display:block;margin:0px; margin-top:-3px; height:20px">Room Type</label>
+          <input type="text" id="room_type_edit_input_room_type" style="height:21px; padding:1px;" name="room_type" readonly>
         </div>
-        <div style="display:block">
-        <label style="display:block;margin:0px; margin-top:-3px; height:20px">최대인원수</label>
-        <input type="text" id="room_type_edit_input_mem_limit" style="height:21px; padding:1px;" name="mem_limit" placeholder="member_limit">
+
+        <div style="margin:10px 0px;">
+          <label style="display:block;margin:0px; margin-top:-3px; height:20px">Price</label>
+          <input type="text" id="room_type_edit_input_price" style="height:21px; padding:1px;" name="price" placeholder="price">
         </div>
-        <input type="submit" value="edit">
+
+        <div style="margin:10px 0px;">
+          <label style="display:block;margin:0px; margin-top:-3px; height:20px">Member Limit</label>
+          <input type="text" id="room_type_edit_input_mem_limit" style="height:21px; padding:1px;" name="mem_limit" placeholder="member_limit">
+        </div>
+
+        <input type="submit" value="edit" style="margin-top:90px; padding: 3px 35px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
         </form>
     </div>
 
     <!--reservation edit 팝업-->
-    <div class="booking_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+    <div class="booking_edit popup" style="overflow:scroll; box-sizing:content-box;display:none;z-index: 100; position:fixed; width:420px; height:650px; padding:20px;left:50%; top:50%; transform:translate(-210px,-325px); background-color:rgba(255,255,255,0.8)">
         <form action="{% url 'edit_booking' %}" method="POST">
         {% for s in booking_names %}
         {% if s == 'room_type' %}
-        <div style="display:block">
-        <label style="margin:0px; margin-top:-3px; height:21px">standard</label>
-        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="standard" name="{{s}}" checked><br>
-        <label style="margin:0px; margin-top:-3px; height:21px">superior</label>
-        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="superior" name="{{s}}"><br>
-        <label style="margin:0px; margin-top:-3px; height:21px">delux</label>
-        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="delux" name="{{s}}"><br>
-        <label style="margin:0px; margin-top:-3px; height:21px">suite_delux</label>
-        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_delux" name="{{s}}"><br>
-        <label style="margin:0px; margin-top:-3px; height:21px">suite_royal</label>
-        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_royal" name="{{s}}">
+        <div style="display:flex; flex-flow:row;">
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">standard</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="standard" name="{{s}}" checked>
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">  
+            <label style="margin:0px; margin-top:-3px; height:21px">superior</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="superior" name="{{s}}">
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">delux</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="delux" name="{{s}}">
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">suite_delux</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_delux" name="{{s}}">
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">suite_royal</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_royal" name="{{s}}">
+          </div>
         </div> 
         {% elif s == 'is_check_in' %}
         <label style="margin:0px; margin-top:-3px; height:21px">is_check_in</label><br>
-        <label style="margin:0px; margin-top:-3px; height:21px">True</label>
-        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="1" name="{{s}}"><br>
-        <label style="margin:0px; margin-top:-3px; height:21px">False</label>
-        <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="0" name="{{s}}" checked>
+        <div style="display:flex; flex-flow:row;">
+          <div style="display:flex; flex-flow:column; align-items:center; width:50px; margin: 0px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">True</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="1" name="{{s}}">
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:50px; margin: 0px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">False</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="0" name="{{s}}" checked>
+          </div>
+        </div>
+        {% elif s == 'extra_text' %}
+        <div style="margin:10px 0px">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="booking_edit_input_{{s}}" style="margin-top:10px; width:350px; height:50px; padding:1px;" name="{{s}}" placeholder="{{s}}">
+        </div>
         {% elif s != 'booking_id' %}
-        <div style="display:block">
+        <div style="margin:10px 0px">
         <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
         <input type="text" id="booking_edit_input_{{s}}" style="height:21px; padding:1px;" name="{{s}}" placeholder="{{s}}">
         </div>
         {% else %}
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
         <input type="text" id="booking_edit_input_booking_id" style="height:21px; padding:1px;" name="booking_id" readonly>
         {% endif %}
         {% endfor %}
-        <input type="submit" value="edit">
+        <input type="submit" value="edit" style="margin-top:20px; padding: 3px 35px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
         </form>
     </div>
      <!--engineering edit 팝업-->
-    <div class="engineering_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+    <div class="engineering_edit popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:400px; padding:20px;left:50%; top:50%; transform:translate(-125px,-200px); background-color:rgba(255,255,255,0.8)">
         <form action="{% url 'edit_engineering' %}" method="POST">
-        <input type="text" id="engineering_edit_input_facility_id" style="height:21px; padding:1px;" name="facility_id" readonly>
-        <div style="display:block">
-        <label style="display:block;margin:0px; margin-top:-3px; height:20px">시설이름</label>
-        <input type="text" id="engineering_edit_input_facility_name" style="height:21px; padding:1px;" name="facility_name" placeholder="facility_name">
-        </div>
-        <div style="display:block">
-        <label style="display:block;margin:0px; margin-top:-3px; height:20px">팀이름</label>
-        <input type="text" id="engineering_edit_input_team_name" style="height:21px; padding:1px;" name="team_name" placeholder="team_name">
-        </div>
-        <div style="display:block">
-        <label style="display:block;margin:0px; margin-top:-3px; height:20px">검사일</label>
-        <input type="text" id="engineering_edit_input_check_date" style="height:21px; padding:1px;" name="check_date" placeholder="check_date">
-        </div>
-        <div style="display:block">
-        <label style="display:block;margin:0px; margin-top:-3px; height:20px">검사제한일</label>
-        <input type="text" id="engineering_edit_input_check_limit" style="height:21px; padding:1px;" name="check_limit" placeholder="check_limit">
-        </div>
-        <div style="display:block">
-        <label style="display:block;margin:0px; margin-top:-3px; height:20px">현상황</label>
-        <input type="text" id="engineering_edit_input_status" style="height:21px; padding:1px;" name="status" placeholder="status">
-        </div>
-        <input type="submit" value="edit">
+          <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">시설 ID</label>
+            <input type="text" id="engineering_edit_input_facility_id" style="height:23px; padding:1px;" name="facility_id" readonly>
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">시설이름</label>
+            <input type="text" id="engineering_edit_input_facility_name" style="height:23px; padding:1px;" name="facility_name" placeholder="facility_name">
+          </div>
+            <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">팀이름</label>
+          <input type="text" id="engineering_edit_input_team_name" style="height:23px; padding:1px;" name="team_name" placeholder="team_name">
+          </div>
+            <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">검사일</label>
+          <input type="text" id="engineering_edit_input_check_date" style="height:23px; padding:1px;" name="check_date" placeholder="check_date">
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">검사제한일</label>
+            <input type="text" id="engineering_edit_input_check_limit" style="height:23px; padding:1px;" name="check_limit" placeholder="check_limit">
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">현상황</label>
+            <input type="text" id="engineering_edit_input_status" style="height:23px; padding:1px;" name="status" placeholder="status">
+          </div>
+          <input type="submit" value="edit" style="margin-top:35px; padding: 3px 35px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
         </form>
     </div>
 
@@ -606,7 +644,7 @@
         $(".work_sid").attr('value',staff_id);
         {% for data in working_datas %}
         if(staff_id == '{{data.staff_id}}'){
-            $('.working_result_box tbody').append("<tr><td>{{data.work_time_start}}</td><td>{{data.work_time_end}}</td><td>{{data.x_day}}</td><td><form action=\"{% url 'delete_staff_working' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete'></form></td></tr>");
+            $('.working_result_box tbody').append("<tr><td>{{data.work_time_start}}</td><td>{{data.work_time_end}}</td><td>{{data.x_day}}</td><td><form action=\"{% url 'delete_staff_working' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete' class='m_b'></form></td></tr>");
         }
         
         {% endfor %}
@@ -620,7 +658,7 @@
         $(".holi_sid").attr('value',staff_id);
         {% for data in holiday_datas %}
         if(staff_id == '{{data.staff_id}}'){
-            $('.holiday_result_box tbody').append("<tr><td>{{data.off_start}}</td><td>{{data.off_end}}</td><td>{{data.day_off_type}}</td><td>{{data.is_paid}}</td><td><form action=\"{% url 'delete_staff_holiday' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete'></form></td></tr>");
+            $('.holiday_result_box tbody').append("<tr><td>{{data.off_start}}</td><td>{{data.off_end}}</td><td>{{data.day_off_type}}</td><td>{{data.is_paid}}</td><td><form action=\"{% url 'delete_staff_holiday' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete' class='m_b'></form></td></tr>");
         }
         
         {% endfor %}
