@@ -53,7 +53,7 @@ def reservation(request):
                 return render(request,'main/reservation.html',{'Error': 'Check the number of the guests again.'})
         except:
             return render(request,'main/reservation.html',{})
-        return render(request,'main/reservation2.html',{"login":login})
+        return render(request,'main/reservation2.html',{})
     return render(request,'main/reservation.html',{"login":login})
 
 def reservation2(request):
