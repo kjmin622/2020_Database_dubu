@@ -70,15 +70,32 @@ def parking(request):
 
 def product(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/product.html',{})
+    if(request.method=="POST"):
+        #product_edit
+        if(request.POST["method"]=="product_edit"):
+            Product.edit_product(request.POST)
+            return redirect('product')
 
-def engineer(request):
-    if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/engineer.html',{})
+        #add_purchase
+        if(request.POST["method"]=="add_purchase"):
+            rp = dict(request.POST)
+            rp["staff_id"]=request.session["staff_id"]
+            Product.insert_purchase(rp)
+            return redirect('product')
+
+        #complete_purchase
+        if(request.POST["method"]=="purchase_complete"):
+            Product.complete_purchase(request.POST)
+            return redirect('product')
+    product_datas = Product.get_product()
+    purchase_datas = Product.get_purchase()
+    return render(request,'admin/product.html',{'product_datas':product_datas,'purchase_datas':purchase_datas})
+
 
 def bill(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/bill.html',{})
+    invoice_datas = Book.get_invoice()
+    return render(request,'admin/bill.html',{'invoice_datas':invoice_datas})
 
 def staff_search(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')

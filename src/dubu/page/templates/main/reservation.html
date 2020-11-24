@@ -85,28 +85,49 @@
 {% csrf_token %}
 <input type="text" name="input" class="form-control" value="login" style="display:none" readonly>
 <section class="test1 row_c">
-  <div class = "staff_s_div">
-    <div class= "staff_title">01 객실검색</div>
+  <div class = "staff_s_div" style="padding-top: 50px; padding-bottom: 20px;">
+    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색</div>
   </div>
   <div class="bold_test_staff staff_s_div bold_sec">
+<<<<<<< HEAD
     <div class="form-group p-4 align-self-stretch d-flex align-items-end">
       <div class="wrap" >
         
         <label for="#">Check-in Date</label>
         <input type="date" name="check_in" class="form-control" placeholder="Check-in date">
+=======
+
+    <div class="staff_title " style="padding-bottom: 10px;">날짜 선택</div>
+
+    <div class = "container" style="display: flex; align-items: center; padding-top: 30px; padding-bottom: 30px;">
+      
+      <div class="container" style = "float:left; width: 230px; margin-right: 0px;">
+        <label for="#">Check-in Date</label>
+        <input type="text" class="form-control checkin_date" placeholder="Check-in date"></input>
+>>>>>>> e73acb64b0909fda5fc9d6dc6feb54b70aeb2eb2
       </div>
-      <div class="wrap">
+    
+      <div class="container" style = "float:left; width: 230px; margin-left: 0px;">
         <label for="#">Check-out Date</label>
+<<<<<<< HEAD
         <input type="date" name="check_out" class="form-control" placeholder="Check-out date">
+=======
+        <input type="text" class="form-control checkin_date" placeholder="Check-out date"></input>
+>>>>>>> e73acb64b0909fda5fc9d6dc6feb54b70aeb2eb2
       </div>
+    
     </div>
+    
   </div>
  
   <div class="bold_test_staff staff_s_div bold_sec">
+
+    <div class="staff_title " style="padding-bottom: 10px;">인원 선택</div>
+
     <div class="s_i_s">
-      <div class="s_i s_i_text">
+      <div class="s_i s_i_text" style="padding-bottom: 30px;">
         <ul style="list-style-type:none">
-          <label for="#">객실 # 1</label>
+          
           <li>어른
             <input class = "num_btn" name = "adult_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
             <input class = "count" value='0' name = "adult_num" readonly>
@@ -124,13 +145,17 @@
           </li>
 
         </ul>
+<<<<<<< HEAD
         <button class = "btn"> + 객실 추가 </button>
+=======
+
+>>>>>>> e73acb64b0909fda5fc9d6dc6feb54b70aeb2eb2
       </div>
     </div>
   </div>
 
   <div class = "staff_s_div">
-    <div style = "padding-bottom:50px; padding-top:20px;">
+    <div style = "padding-bottom: 70px; padding-top:50px;">
     <center>
     <button class = "btn"> 객실 및 요금 확인 </button>
     </center>

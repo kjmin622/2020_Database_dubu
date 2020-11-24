@@ -87,7 +87,6 @@ def mypage(request):
 def signup(request):
     if(request.method=="POST"):
         #last_name, first_name, birth, phone, email, member_id, password, password2, is_sms
-        print(request.POST)
         last_name = request.POST["last_name"];first_name = request.POST["first_name"];birth = request.POST["birth"];phone = request.POST["phone"];email = request.POST["email"];member_id = request.POST["member_id"];password = request.POST["password1"];password2 = request.POST["password2"];is_sms = request.POST["is_sms"]
         
         try:
@@ -117,6 +116,7 @@ def signup(request):
 
 def login(request):
     # not login
+<<<<<<< HEAD
     if "member_id" not in request.session or request.session["member_id"]==None : 
         if request.method == "POST":
             #login start
@@ -177,21 +177,48 @@ def login(request):
                     connection.rollback()
                     connection.close()
                     return render(request,'main/about.html',{})
+=======
+    if('member_id' in request.session and request.session["member_id"]!=None):
+        return redirect('index')
+    
+    if request.method == "POST":
+        try: # 로그인
+            #조건 미충족
+            print(request.POST)
+            member_id = request.POST['member_id']; password = request.POST['password']
+            cursor = connection.cursor()
+            sqlStr = f"select member_id from page_member_info where member_id = '{member_id}' and password = '{password}'"
+            result = cursor.execute(sqlStr)
+            is_member=cursor.fetchall()
+            connection.close()
+            if(is_member):
+                request.session["member_id"]=member_id
+                return redirect('index')
+>>>>>>> e73acb64b0909fda5fc9d6dc6feb54b70aeb2eb2
             else:
                 return redirect('login')
+        except:
+            connection.rollback()
+            connection.close()
+            return redirect('login')
 
-        else:
-            return render(request, 'main/login.html')
-        return redirect('login')
+    member_datas = []
+    try:
+        cursor = connection.cursor()
+        sqlStr = "select member_id, last_name, first_name, phone, email, password from page_member_info"
+        cursor.execute(sqlStr)
+        result=cursor.fetchall()
+        for data in result:
+            member_datas.append({'member_id':data[0], 'last_name':data[1], 'first_name':data[2], 'phone':data[3], 'email':data[4], 'password':data[5]})
+        connection.close()
+    except:
+        connection.close()
+    return render(request, 'main/login.html',{'member_datas':member_datas})
 
-    # already login
-    else : 
-        request.session["member_id"]=None
-        return render(request,'main/index.html',{})
 
 def logout(request):
     request.session["member_id"]=None
-    return render(request,'main/index.html',{})
+    return redirect('index')
        
 # admin
 def staff(request):
