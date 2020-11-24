@@ -82,77 +82,103 @@
 		
 {% comment %} test  {% endcomment %}
 <section class="test1 row_c">
-  <div class = "staff_s_div">
-    <div class= "staff_title">01 객실검색 > 02 객실, 요금, 옵션 선택 > 03 고객정보입력</div>
-  </div>
   
+  <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px;">
+    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실, 요금, 옵션 선택 > 03 고객정보입력</div>
+  </div>
+
   <div class="bold_test_staff staff_s_div bold_sec">
-    <div class="staff_title ">예약자 정보</div>
-      <div class="s_i_s">
-        <div class="s_i s_i_text">
-          <ul style="list-style-type:none">
-            <li>성명 : </li>
-            <li>이메일 : </li>
-            <li>연락처 : </li>
-          </ul>
-        </div>
+    <div class="staff_title" style = "padding-bottom: 10px;">예약자 정보</div>
+      <div class="container" style = "padding-left: 33px;">
+        <ul style="list-style-type:none">
+          <li>성명 &nbsp; &nbsp; &nbsp; &nbsp; <input class = "input" style = "height: 25px; padding-left: 2px;"></input></li>
+          <li>이메일 &nbsp; &nbsp; <input class = "input" style = "height: 25px; padding-left: 2px;"></input></li>
+          <li>연락처 &nbsp; &nbsp;
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input>
+          </li>
+        </ul>
       </div>
   </div>
  
 
   <div class="bold_test_staff staff_s_div bold_sec">
-      <div class="staff_title ">신용카드 정보</div>
-      <div class="s_i_s">
-        <div class="s_i s_i_text">
-          <ul style="list-style-type:none">
-            <li>신용카드 종류 : </li>
-            <li>신용카드 번호 : </li>
-            <li>유효기간 : </li>
+      <div class="staff_title" style = "padding-bottom: 10px;">신용카드 정보</div>
+      <div class="container" style="padding-left: 33px;">
+        <ul style="list-style-type:none">
+          <li>신용카드 종류 &nbsp; &nbsp;
+            <select>
+              <option value="">카드 선택</option>
+              <option value="신한">신한</option>
+              <option value="농협">농협</option>
+              <option value="국민">국민</option>
+              <option value="카카오">카카오</option>
+              <option value="하나">하나</option>
+              <option value="삼성">삼성</option>
+              <option value="롯데">롯데</option>
+              <option value="현대">현대</option>
+              <option value="BC">BC</option>
+            </select>
+          </li>
+          <li>신용카드 번호 &nbsp; &nbsp;
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> -
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> 
+          </li>
+          <li>유효 기간 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> /
+            <input class = "input" style = "height: 25px; width: 45px; padding-left: 2px;"></input> (MM/YY)
+          </li>
           </ul>
-        </div>
       </div>
   </div>
 
   <div class="bold_test_staff staff_s_div bold_sec">
-    <div class="staff_title ">필수적 개인정보수집이용에 대한 동의(객실예약)</div>
+
+    <div class="staff_title ">필수적 개인정보수집이용에 대한 동의</div>
     <div class="s_i_s">
       <div class="s_i s_i_text">
-        <ul style="list-style-type:none">
-          <li>
-          <input type = "checkbox" value = '동의'> 동의 </input></li>
-        </ul>
+        <label for="#">1. 수집 이용 항목</label>
+          <p>성명(국문·영문), 생년월일, 성별, 이메일주소, 휴대폰번호, 구매 및 예약내역, 투숙기간, 아이디, 비밀번호</p>
+          <label for="#">2. 수집 이용 목적</label>
+          <p>본인 식별, 서비스 제공 및 민원처리</p>
+          <label for="#">3. 보유 이용 기간</label>
+          <p>회원 탈퇴 시 까지</p>
+          <p>※ 관련 법령에서 정한 별도 보유 기한이 있는 경우는 그에 따름. 위 사항에 대한 동의를 거부할 수 있으나, 이에 대한 동의가 없을 경우 회원 가입 및 서비스 이용이 불가합니다.</p>
+          <center>
+            <div style="width: 50px; padding-top: 20px;">
+              <input type = "checkbox" value = '동의'> 동의 </input>
+            </div>
+          </center>
       </div>
     </div>
   </div>
 
   <div class="bold_test_staff staff_s_div bold_sec">
 
-    <div class="staff_title ">선택정보</div>
-    <div class="s_i_s">
-      <div class="s_i s_i_text">
-        <ul style="list-style-type:none">
-          <li> 선택한 Room : </li>
-          <li> check-in/check-out : </li>
-          <li> 객실-투숙인원 : </li>
-        </ul>
-      </div>
+    <div class="staff_title " style = "padding-bottom: 10px;">선택정보</div>
+    <div class="container" style="padding-left: 33px;">
+      <ul style="list-style-type:none">
+        <li> 선택한 Room : </li>
+        <li> check-in/check-out : </li>
+        <li> 객실-투숙인원 : </li>
+      </ul>
     </div>
-
   </div>
   
 
   <div class="bold_test_staff staff_s_div bold_sec">
 
-      <div class="staff_title ">객실 요금</div>
-      <div class="s_i_s">
-        <div class="s_i s_i_text">
-          <ul style="list-style-type:none">
-            <li> 객실 금액 : </li>
-            <li> 조식 금액 : </li>
-            <li> 세금 및 봉사료 : </li>
-            <li style = "font-weight: bold"> 총 금액 : </li>
+      <div class="staff_title " style = "padding-bottom: 10px;">객실 요금</div>
+      <div class="container"  style="padding-left: 33px;">
+        <ul style="list-style-type:none">
+          <li> 객실 금액 : </li>
+          <li> 조식 금액 : </li>
+          <li> 세금 및 봉사료 : </li>
+          <li style = "font-weight: bold; padding-top: 15px;"> 총 금액 : </li>
           </ul>
-        </div>
       </div>
   </div>
 
@@ -167,13 +193,13 @@
         <p>예약 취소 및 변경은 체크인 하루 전 18:00(한국시간)까지 가능합니다. 예약하신 일자에 체크인 되지 않거나 또는 위의 지정 시간 이후에 예약을 취소했을 경우에는 예약 사항에 대해 노-쇼 (No Show) 처리되며, 이에 따른 위약금으로 예약 첫날에 해당하는 1박 객실요금이 청구되오니 유의하시기 바랍니다.</p>
       </div>
     </div>
-</div>
+  </div>
 
 
   <div class = "staff_s_div">
-    <div style = "padding-bottom:50px; padding-top:20px;">
+    <div style = "padding-bottom: 70px; padding-top:50px;">
     <center>
-    <button class = "btn" onclick="location.href='{% url 'index' %}'"> 예약완료 </button>
+    <button class = "btn" onclick="location.href='{% url 'index' %}'"> 예약 완료 </button>
     </center>
     </div>
   </div>

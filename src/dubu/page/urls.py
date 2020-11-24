@@ -13,6 +13,7 @@ urlpatterns = [
     path('join',views.join,name="join"),
     path('event',views.event,name="event"),
     path('login',views.login,name="login"),
+    path('logout',views.logout,name="logout"),
     path('mypage',views.mypage,name="mypage"),
     path('signup',views.signup,name="signup"),
 
@@ -37,15 +38,14 @@ urlpatterns = [
     path('admin/management/del_engineering',admin_views.delete_engineering,name="delete_engineering"),
     path('admin/management/edit_engineering',admin_views.edit_engineering,name="edit_engineering"),
     path('admin/management/insert_engineering',admin_views.insert_engineering,name="insert_engineering"),
+    
     # path('admin/staff/bill',admin_views.change_staff_status,name="bill"),
 
     # front admin
     path('admin/staff',admin_views.staff,name="staff"),
-    # path('admin/s_reservation',admin_views.s_reservation,name="s_reservation"),
     path('admin/room_select',admin_views.room_select,name="room_select"),
     path('admin/parking',admin_views.parking,name="parking"),
     path('admin/product',admin_views.product,name="product"),
-    path('admin/engineer',admin_views.engineer,name="engineer"),
     path('admin/staff_search',admin_views.staff_search,name="staff_search"),
     path('admin/bill',admin_views.bill,name="bill"),	
     path('admin/management',admin_views.management,name="management"),  
