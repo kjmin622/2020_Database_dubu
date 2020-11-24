@@ -84,43 +84,57 @@
 	<section class="test1 ">
     <form method="POST">
       {% csrf_token %}
-        <div class="login "> 
-          <input type="text" name="input" class="form-control" value="login" style="display:none" readonly>
-          <div class = "id_in ">
-          <label for="member_id">ID</label>
-          <input type="text" name="member_id" class="form-control" id="member_id">
+
+        <div class="container"> 
+
+          <div class = "container">
+
+            <div class = "container" style = "padding-bottom: 20px;">
+              <div class = "container "> ID
+                <input style="display:none" aria-hidden="true"> <input type="password" style="display:none" aria-hidden="true">
+                <input type="text" name="member_id" class="form-control" id="member_id login_member_id" autocomplete="off">
+              </div>
+
+              <div class = "container "> PASSWORD
+                <input type="password" name="password" class="form-control" id="password">
+              </div>
+            </div>
+
+            <div class = "container">
+              <input type="submit" class="btn" value="Login">
+              <button class = "btn"><a href="{% url 'join' %}">회원가입</a></button>
+              <button class = "btn">ID/PASSWORD 찾기</button>
+            </div>
+
           </div>
-          <div class = "pass_in ">
-          PASSWORD
-          <input type="password" name="password" class="form-control" id="password">
-          </div>
-          <div class = "login_button ">
-          BUTTON
-          <button type="submit" class="btn btn-default">Submit</button>
-          </div>
-          <div class = "join_in"><a href="{% url 'join' %}">회원가입</a></div>
-          <div class = "s_id">아이디/비밀번호 찾기</div>
+
         </div>
+
     </form>    
   </section>
 
+  
   <div class="l_find">
     <section class="t_ser ">  
       <p style="font-size:25px">Find ID</p>
       <div class="s_t ">
-        <div class="ppp id_in ">Name</div>
-        <div class="ppp  pass_in ">Phone_num</div>
-        <div class="ppp  e_in ">Email</div>
-        <div class="send login_button">button</div>
+        <input type="text" class="ppp id_in " id="idfind_name" placeholder="lastname/firstname">
+        <input type="text" class="ppp  pass_in " id="idfind_phone_num" placeholder="Phone_number">
+        <input type="text" class="ppp  e_in " id="idfind_email" placeholder="Email">
+        <input type="button" value="ID찾기" id="idfind_btn" class="send login_button">
       </div>
     </section>
+
+
+
+
     <section class="t_ser ">  
       <p style="font-size:25px">Find PASSWORD</p>
       <div class="s_t ">
-        <div class="ppp id_in ">Name</div>
-        <div class="ppp  pass_in ">ID</div>
-        <div class="ppp  e_in ">Email</div>
-        <div class="send login_button">button</div>
+        <input type="text" class="ppp id_in " id="pwfind_name" placeholder="lastname/firstname">
+        <input type="text" class="ppp  pass_in " id="pwfind_id" placeholder="ID">
+        <input type="text" class="ppp  e_in " id="pwfind_email" placeholder="email">
+        <input type="button" class="send login_button" id="pwfind_btn" value="PW찾기">
       </div>
     </section>
   </div>  
@@ -217,3 +231,49 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 
   </body>
 </html>
+
+<script>
+$(document).ready(function(){
+  $('#idfind_btn').click(function(){
+    var name = $('#idfind_name').val().replace(' ','');
+    var phone_num = $('#idfind_phone_num').val().replace(' ','');
+    var email = $('#idfind_email').val().replace(' ','');
+    if(false);
+    {% for data in member_datas %}
+    else if('{{data.last_name}}'+'{{data.first_name}}'.replace(' ','')==name && '{{data.phone}}'.replace(' ','')==phone_num && '{{data.email}}'.replace(' ','')==email){
+      alert('{{data.member_id}}');
+      flag = false;
+    }
+    {% endfor %}
+    else{
+      alert("일치하지 않는 계정 정보입니다.");
+    }
+
+    $('#idfind_name').val("");
+    $('#idfind_phone_num').val("");
+    $('#idfind_email').val("");
+  });
+
+  $('#pwfind_btn').click(function(){
+    var name = $('#pwfind_name').val().replace(' ','');
+    var member_id = $('#pwfind_id').val().replace(' ','');
+    var email = $('#pwfind_email').val().replace(' ','');
+    if(false);
+    {% for data in member_datas %}
+    else if('{{data.last_name}}'+'{{data.first_name}}'.replace(' ','')==name && '{{data.member_id}}'.replace(' ','')==member_id && '{{data.email}}'.replace(' ','')==email){
+      alert('{{data.password}}');
+      flag = false;
+    }
+    {% endfor %}
+    else{
+      alert("일치하지 않는 계정 정보입니다.");
+    }
+
+    $('#pwfind_name').val("");
+    $('#pwfind_id').val("");
+    $('#pwfind_email').val("");
+  });
+});
+
+
+</script>
