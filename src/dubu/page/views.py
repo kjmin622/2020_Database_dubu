@@ -10,6 +10,7 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.shortcuts import redirect
+from datetime import datetime
 # Create your views here.
 
 def index(request):  
@@ -37,9 +38,22 @@ def reservation(request):
     # not login
     if "member_id" not in request.session or request.session["member_id"]==None :
         login = False
+        redirect('login')
     # login
     else:
-        login = True
+       login = True
+    #reserve
+    if request.method == "POST":
+        try:
+            check_in = request.POST['check_in'], check_out = request.POST['check_out'], adult_num = request.POST['adult_num'], child_num= request.POST['child_num'], baby_num= request.POST['baby_num']
+            if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today()>=check_in):
+                print(check_in)
+                return render(request,'main/reservation.html',{'Error': 'Check the date again.'})
+            if(adult_num<=0 or (adult_num+child_num+baby_num)==0 or (adult_num+child_num+baby_num)>=4):
+                return render(request,'main/reservation.html',{'Error': 'Check the number of the guests again.'})
+        except:
+            return render(request,'main/reservation.html',{})
+        return render(request,'main/reservation2.html',{})
     return render(request,'main/reservation.html',{"login":login})
 
 def reservation2(request):
@@ -74,7 +88,6 @@ def mypage(request):
 def signup(request):
     if(request.method=="POST"):
         #last_name, first_name, birth, phone, email, member_id, password, password2, is_sms
-        print(request.POST)
         last_name = request.POST["last_name"];first_name = request.POST["first_name"];birth = request.POST["birth"];phone = request.POST["phone"];email = request.POST["email"];member_id = request.POST["member_id"];password = request.POST["password1"];password2 = request.POST["password2"];is_sms = request.POST["is_sms"]
         
         try:
@@ -102,82 +115,49 @@ def signup(request):
     else:
         return render(request,'main/tsignup.html',{"Error":"회원가입"})
 
+
 def login(request):
-    # not login
-    if "member_id" not in request.session or request.session["member_id"]==None : 
-        if request.method == "POST":
-            #login start
-            if(request.POST["input"]=="login"):
-                member_id = request.POST['member_id']; password = request.POST['password']
-                try:
-                    #조건 미충족
-                    if request.POST["member_id"] == '' or request.POST["password"] == '':
-                        return render(request,'main/login.html',{'Error': 'Fill all the blanks.'})
-                    cursor = connection.cursor()
-                    sqlStr = f"select member_id, password from page_member_info where member_id = '{member_id}' and password = '{password}'"
-                    result = cursor.execute(sqlStr)
-                    is_member=cursor.fetchall()
-                    if(is_member):
-                        request.session["member_id"]=member_id
-                        return redirect('index')
-                    else:
-                        return render(request, 'main/login.html', {'Error': 'Member ID or PW is incorrect'})
-                except:
-                    connection.rollback()
-                    connection.close()
-                    return render(request,'main/login.html',{})
-            #id
-            elif request.POST["input"]=="find_id":
-                try:
-                    member_id = request.POST['member_id']; last_name = request.POST['last_named']; first_name = request.POST['first_name']; email = request.POST['email']
-                    info = False
-                    cursor = connection.cursor()
-                    sqlStr = f"select member_id from page_member_info where last_name = '{last_name}' and first_name = '{first_name}' and email = '{email}'"
-                    result = cursor.execute(sqlStr)
-                    is_member=cursor.fetchall()
-                    if(is_member): 
-                        info = True
-                        member_id = is_member
-                        return render(request, 'main/login.html', {})
-                    else:
-                        return render(request, 'main/index.html', {'Error': 'Your information is incorrect'})
-                except:
-                    connection.rollback()
-                    connection.close()
-                    return render(request,'main/login.html',{})
-            #pw
-            elif request.POST["input"]=="find_pw":
-                try:
-                    member_id = request.POST['member_id'];last_name = request.POST['last_name'];first_name = request.POST['first_name'];email = request.POST['email']
-                    cursor = connection.cursor()
-                    sqlStr = f"select password from page_member_info where last_name = '{last_name}' and first_name = '{first_name}' and member_id = '{member_id}' and email = '{email}'"
-                    result = cursor.execute(sqlStr)
-                    is_member=cursor.fetchall()
-                    print(is_member)
-                    if(is_member): 
-                        password = str(is_member[0][0])
-                        return render(request, 'main/login.html',{'info':'find_password','password':password})
-                    else:
-                        return render(request, 'main/index.html', {'Error': 'Your information is incorrect'})
-                except:
-                    connection.rollback()
-                    connection.close()
-                    return render(request,'main/about.html',{})
+     # not login
+    if('member_id' in request.session and request.session["member_id"]!=None):
+        return redirect('index')
+    
+    if request.method == "POST":
+        try: # 로그인
+            #조건 미충족
+            print(request.POST)
+            member_id = request.POST['member_id']; password = request.POST['password']
+            cursor = connection.cursor()
+            sqlStr = f"select member_id from page_member_info where member_id = '{member_id}' and password = '{password}'"
+            result = cursor.execute(sqlStr)
+            is_member=cursor.fetchall()
+            connection.close()
+            if(is_member):
+                request.session["member_id"]=member_id
+                return redirect('index')
             else:
                 return redirect('login')
+        except:
+            connection.rollback()
+            connection.close()
+            return redirect('login')
 
-        else:
-            return render(request, 'main/login.html')
-        return redirect('login')
+    member_datas = []
+    try:
+        cursor = connection.cursor()
+        sqlStr = "select member_id, last_name, first_name, phone, email, password from page_member_info"
+        cursor.execute(sqlStr)
+        result=cursor.fetchall()
+        for data in result:
+            member_datas.append({'member_id':data[0], 'last_name':data[1], 'first_name':data[2], 'phone':data[3], 'email':data[4], 'password':data[5]})
+        connection.close()
+    except:
+        connection.close()
+    return render(request, 'main/login.html',{'member_datas':member_datas})
 
-    # already login
-    else : 
-        request.session["member_id"]=None
-        return render(request,'main/index.html',{})
 
 def logout(request):
     request.session["member_id"]=None
-    return render(request,'main/index.html',{})
+    return redirect('index')
        
 # admin
 def staff(request):

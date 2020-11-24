@@ -91,13 +91,11 @@ def product(request):
     purchase_datas = Product.get_purchase()
     return render(request,'admin/product.html',{'product_datas':product_datas,'purchase_datas':purchase_datas})
 
-def engineer(request):
-    if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/engineer.html',{})
 
 def bill(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-    return render(request,'admin/bill.html',{})
+    invoice_datas = Book.get_invoice()
+    return render(request,'admin/bill.html',{'invoice_datas':invoice_datas})
 
 def staff_search(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')

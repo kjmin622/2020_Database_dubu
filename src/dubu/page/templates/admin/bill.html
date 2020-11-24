@@ -108,7 +108,7 @@
       <div class="staff_s_div bold_sec">
         <div class="sub_title_b">
           <a>BILL</a>
-          <input type="text" class="b_input" placeholder="Room Number" style="margin:0px 40px;">
+          <input type="text" id="room_search" class="b_input" placeholder="Room Number" style="margin:0px 40px;">
         </div>
         <div class="s_i_s">
 
@@ -125,15 +125,17 @@
                   <table>
                     <thead><th>Reservation Id</th><th>Room Number</th><th>Product Id</th><th>Product Name</th><th>count</th><th>price</th><th>order time</th></thead>
                     <tbody>
+                      {% for data in invoice_datas %}
                       <tr>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
+                        <td class="b_s_p">{{data.booking_id}}</td>
+                        <td class="searchpivot b_s_p">{{data.room_num}}</td>
+                        <td class="b_s_p">{{data.product_id}}</td>
+                        <td class="b_s_p">{{data.name}}</td>
+                        <td class="b_s_p">{{data.count}}</td>
+                        <td class="b_s_p">{{data.price}}</td>
+                        <td class="b_s_p">{{data.order_time}}</td>
                       </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                 </div>
@@ -155,6 +157,7 @@
                     <thead><th>Member Id</th><th>Coupon Name</th><th>Coupon Id</th><th>Dc Price</th><th>사용 여부</th></thead>
                     <tbody>
                       <tr>
+                        <p style="display:none" class="searchpivot"></p>
                         <td class="b_s_p">여기 변수..</td>
                         <td class="b_s_p">여기 변수..</td>
                         <td class="b_s_p">여기 변수..</td>
@@ -272,3 +275,12 @@
 
   </body>
 </html>
+
+<script>
+{% comment %} $(document).ready(function(){
+  $('#room_search').keyup(function(){
+    var num = $(this).val();
+    $('.searchpivot').
+  });
+}); {% endcomment %}
+</script>
