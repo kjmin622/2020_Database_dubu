@@ -115,6 +115,7 @@ def signup(request):
     else:
         return render(request,'main/tsignup.html',{"Error":"회원가입"})
 
+
 def login(request):
     # not login
     if "member_id" not in request.session or request.session["member_id"]==None : 
