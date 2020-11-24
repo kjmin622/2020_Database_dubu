@@ -81,25 +81,24 @@
 
 		
 {% comment %} test  {% endcomment %}
+<form method='POST'>
+{% csrf_token %}
+<input type="text" name="input" class="form-control" value="login" style="display:none" readonly>
 <section class="test1 row_c">
   <div class = "staff_s_div" style="padding-top: 50px; padding-bottom: 20px;">
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색</div>
   </div>
-  
   <div class="bold_test_staff staff_s_div bold_sec">
-
-    <div class="staff_title " style="padding-bottom: 10px;">날짜 선택</div>
-
-    <div class = "container" style="display: flex; align-items: center; padding-top: 30px; padding-bottom: 30px;">
-      
-      <div class="container" style = "float:left; width: 230px; margin-right: 0px;">
+    <div class="form-group p-4 align-self-stretch d-flex align-items-end">
+      <div class="wrap" >
+        
         <label for="#">Check-in Date</label>
-        <input type="text" class="form-control checkin_date" placeholder="Check-in date"></input>
+        <input type="date" name="check_in" class="form-control" placeholder="Check-in date">
       </div>
     
       <div class="container" style = "float:left; width: 230px; margin-left: 0px;">
         <label for="#">Check-out Date</label>
-        <input type="text" class="form-control checkin_date" placeholder="Check-out date"></input>
+        <input type="date" name="check_out" class="form-control" placeholder="Check-out date">
       </div>
     
     </div>
@@ -115,23 +114,22 @@
         <ul style="list-style-type:none">
           
           <li>어른
-            <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value="1" readonly= "" name = "">
-            <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+            <input class = "num_btn" name = "adult_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+            <input class = "count" value='0' name = "adult_num" readonly>
+            <input class = "num_btn" name = "adult_btn"value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
           <li>어린이
-            <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value="1" readonly= "" name = "">
-            <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+            <input class = "num_btn" name = "child_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+            <input class = "count" value='0' name = "child_num" readonly>
+            <input class = "num_btn" name = "child_btn" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
           <li>유아
-            <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value="1" readonly= "" name = "">
-            <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+            <input class = "num_btn" name = "baby_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+            <input class = "count" value='0' name = "baby_num" readonly>
+            <input class = "num_btn" name = "baby_btn" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li>
 
         </ul>
-
       </div>
     </div>
   </div>
@@ -139,15 +137,12 @@
   <div class = "staff_s_div">
     <div style = "padding-bottom: 70px; padding-top:50px;">
     <center>
-    <button class = "btn" onclick="location.href='{% url 'reservation2' %}'"> 객실 및 요금 확인 </button>
+    <button class = "btn"> 객실 및 요금 확인 </button>
     </center>
     </div>
   </div>
-
- 
-
 </section>
-
+</form>
     
 
 <!-- footer -->
@@ -242,3 +237,53 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 
   </body>
 </html>
+
+  <!-- 인원수 + - 기능 -->
+<script>
+  $(".num_btn").click(function(){
+    var btn_method = $(this).attr("name");
+    var mp_value = $(this).attr("value");
+    
+    if(btn_method=="adult_btn"){
+      var x=$("input[name=adult_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+
+    else if(btn_method=="child_btn"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+
+    else{
+      var x=$("input[name=baby_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+  })
+</script>

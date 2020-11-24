@@ -10,6 +10,7 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.shortcuts import redirect
+from datetime import datetime
 # Create your views here.
 
 def index(request):  
@@ -37,9 +38,22 @@ def reservation(request):
     # not login
     if "member_id" not in request.session or request.session["member_id"]==None :
         login = False
+        redirect('login')
     # login
     else:
-        login = True
+       login = True
+    #reserve
+    if request.method == "POST":
+        try:
+            check_in = request.POST['check_in'], check_out = request.POST['check_out'], adult_num = request.POST['adult_num'], child_num= request.POST['child_num'], baby_num= request.POST['baby_num']
+            if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today()>=check_in):
+                print(check_in)
+                return render(request,'main/reservation.html',{'Error': 'Check the date again.'})
+            if(adult_num<=0 or (adult_num+child_num+baby_num)==0 or (adult_num+child_num+baby_num)>=4):
+                return render(request,'main/reservation.html',{'Error': 'Check the number of the guests again.'})
+        except:
+            return render(request,'main/reservation.html',{})
+        return render(request,'main/reservation2.html',{})
     return render(request,'main/reservation.html',{"login":login})
 
 def reservation2(request):
@@ -101,8 +115,9 @@ def signup(request):
     else:
         return render(request,'main/tsignup.html',{"Error":"회원가입"})
 
+
 def login(request):
-    # not login
+     # not login
     if('member_id' in request.session and request.session["member_id"]!=None):
         return redirect('index')
     
