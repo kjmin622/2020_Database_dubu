@@ -46,10 +46,10 @@ def reservation(request):
     if request.method == "POST":
         try:
             check_in = request.POST['check_in'], check_out = request.POST['check_out'], adult_num = request.POST['adult_num'], child_num= request.POST['child_num'], baby_num= request.POST['baby_num']
-            if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out) or datetime.today()>=check_in:
+            if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today()>=check_in):
                 print(check_in)
                 return render(request,'main/reservation.html',{'Error': 'Check the date again.'})
-            if(adult_num<=0 or (adult_num+child_num+baby_num)==0):
+            if(adult_num<=0 or (adult_num+child_num+baby_num)==0 or (adult_num+child_num+baby_num)>=4):
                 return render(request,'main/reservation.html',{'Error': 'Check the number of the guests again.'})
         except:
             return render(request,'main/reservation.html',{})
