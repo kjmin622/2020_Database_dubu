@@ -57,6 +57,7 @@ class room_type(models.Model):
     room_type = models.CharField(max_length=100, primary_key=True)   
     price = models.IntegerField()  
     mem_limit = models.IntegerField()
+    photo_url = models.CharField(max_length=100)
 
 
 class event(models.Model):
