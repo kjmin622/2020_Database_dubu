@@ -85,12 +85,14 @@
 {% csrf_token %}
 <input type="text" name="input" class="form-control" value="login" style="display:none" readonly>
 <section class="test1 row_c">
+
   <div class = "staff_s_div" style="padding-top: 50px; padding-bottom: 20px;">
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색</div>
   </div>
+
   <div class="bold_test_staff staff_s_div bold_sec">
     <div class="form-group p-4 align-self-stretch d-flex align-items-end">
-      <div class="wrap" >
+      <div class="container" style = "float:left; width: 230px; margin-right: 0px;" >
         
         <label for="#">Check-in Date</label>
         <input type="date" name="check_in" class="form-control" placeholder="Check-in date">
@@ -107,25 +109,23 @@
  
   <div class="bold_test_staff staff_s_div bold_sec">
 
-    <div class="staff_title " style="padding-bottom: 10px;">인원 선택</div>
-
     <div class="s_i_s">
       <div class="s_i s_i_text" style="padding-bottom: 30px;">
         <ul style="list-style-type:none">
           
-          <li>어른
+          <li>어른 &nbsp; &nbsp; &nbsp; &nbsp;
             <input class = "num_btn" name = "adult_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value='0' name = "adult_num" readonly>
+            <input class = "count" value='0' name = "adult_num" readonly style = "width:21px; padding-left:2px;">
             <input class = "num_btn" name = "adult_btn"value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
-          <li>어린이
+          <li>어린이 &nbsp; &nbsp;
             <input class = "num_btn" name = "child_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value='0' name = "child_num" readonly>
+            <input class = "count" value='0' name = "child_num" readonly style = "width:21px; padding-left:2px;">
             <input class = "num_btn" name = "child_btn" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
-          <li>유아
+          <li>유아 &nbsp; &nbsp; &nbsp; &nbsp;
             <input class = "num_btn" name = "baby_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value='0' name = "baby_num" readonly>
+            <input class = "count" value='0' name = "baby_num" readonly style = "width:21px; padding-left:2px;">
             <input class = "num_btn" name = "baby_btn" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li>
 
@@ -137,7 +137,7 @@
   <div class = "staff_s_div">
     <div style = "padding-bottom: 70px; padding-top:50px;">
     <center>
-    <button class = "btn"> 객실 및 요금 확인 </button>
+    <button class = "btn" style="border-radius:10px;"> 객실 및 요금 확인 </button>
     </center>
     </div>
   </div>
