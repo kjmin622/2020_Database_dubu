@@ -116,7 +116,7 @@
           <div class="s_i_s">
             <div class="searchBox">
                 {% comment %} <h4>search</h4> {% endcomment %}
-                <input class="p_input" type="text" placeholder=" depart/room" id="staff_working_search" value="Search">
+                <input class="p_input" type="text" placeholder=" depart/room" id="staff_working_search">
             </div>
             <div class="resultBox">
                 <table id="staff_working_tab">
@@ -128,11 +128,17 @@
                         <tr>
                             <td>{{data.last_name}} {{data.first_name}}</td>
                             <td>{{data.team}}</td>
-                            <td class="working_search">없음</td>
+                            <td class="working_search">
+                            {% if data.rooms == "" %}
+                            없음
+                            {% else %}
+                            {{data.rooms}}
+                            {% endif %}
+                            </td>
                             <td class="working_search">{{data.depart_name}}</td>
                             <td>{{data.depart_position}}</td>
                             <td>{{data.status}}</td>
-                            <td class="working_search">없음</td>
+                            <td class="working_search">{{data.phone}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

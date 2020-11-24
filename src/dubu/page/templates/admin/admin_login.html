@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{% static 'css/dubu_made/s_login.css' %}">
     </head>
     <body >
-        <form method="POST">
+        <form action="{% url 'admin_login' %}" method="POST">
             {% csrf_token %}
             <div class="l_tle">
                 <div class="form-group ttt ">
@@ -16,7 +16,7 @@
                     <div class="l_input">
                         <input type="text" name="staff_id" class="form-control tt ll" id="staff_id">
                     </div>
-                    <button type="submit" class="btn btn-default  tt bu">submit</button>
+                    <button class="btn btn-default  tt bu">submit</button>
                 </div>
             </div>
         </form>

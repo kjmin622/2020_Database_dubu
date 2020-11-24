@@ -48,9 +48,14 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
             <li class="nav-item active"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
-	          <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in/out</a></li>
-            <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">Join/My page</a></li>
-            {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
+            {% if login %} 
+	            <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log out</a></li>
+              <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li>
+            {% else %}
+              <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
+              <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">Join</a></li>
+            {% endif %}
+            {% comment %}  {% endcomment %}
             <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
             {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
 	        </ul>
@@ -100,25 +105,25 @@
     			<div class="col-lg-12">
     				<form action="#" class="booking-form">
 	        		<div class="row">
-	        			<div class="col-md-3 d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
-				    					<label for="#">Check-in Date</label>
-				    					<input type="text" class="form-control checkin_date" placeholder="Check-in">
+	        			<div class="col-md-3 d-flex" style = "height: 160px;">
+	        				<div class="form-group p-4 d-flex align-items-end">
+	        					<div class="wrap" style = "padding-bottom: 40px;">
+				    					<label for="#">Check-in</label>
+				    					<input type="text" class="form-control checkin_date" placeholder="Date">
 			    					</div>
 			    				</div>
 	        			</div>
-	        			<div class="col-md-3 d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
-				    					<label for="#">Check-out Date</label>
-				    					<input type="text" class="form-control checkout_date" placeholder="Check-out">
+	        			<div class="col-md-3 d-flex" style = "height: 160px;">
+	        				<div class="form-group p-4 d-flex align-items-end">
+	        					<div class="wrap" style = "padding-bottom: 40px;">
+				    					<label for="#">Check-out</label>
+				    					<input type="text" class="form-control checkout_date" placeholder="Date">
 			    				</div>
 			    				</div>
 	        			</div>
-	        			<div class="col-md d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
-	        					<div class="wrap">
+	        			<div class="col-md d-flex" style = "height: 160px;">
+	        				<div class="form-group p-4 d-flex align-items-end">
+	        					<div class="wrap" style = "padding-bottom: 40px;">
 			      					<label for="#">Room</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
@@ -134,16 +139,15 @@
                   </div>
                 </div>
 
-	        			<div class="col-md d-flex">
-	        				<div class="form-group p-4 align-self-stretch d-flex align-items-end">
+	        			<div class="col-md d-flex" style = "height: 160px;">
+	        				<div class="form-group p-4 d-flex align-items-end">
 	        					<div class="wrap">
 			      					<label for="#">Customer</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
-                          <p>Adult <input type="text" size = "3px"></input></p>
-                          <p>Child <input type="text" size = "3px"></input></p>
-                          <p>Baby <input type="text" size = "3px"></input></p>
-			  
+                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Adult <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
+                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Child <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
+                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Baby <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
 			                  </div>
 				              </div>
 				            </div>
@@ -162,8 +166,8 @@
     </section>
 
 {% comment %} main section  {% endcomment %}
-<div class="main_a ">
-    <section class="event_info">
+<div class="main_a " style="margin-top: 250px;">
+    <section class="event_info" style="margin-bottom: 250px;">
       <div class="about_main_title">Event</div>
       <div id="slide">
         <input type="radio" name="pos" id="pos1" checked>
@@ -214,88 +218,73 @@
         </p>
       </div>
     </section>
-
-  <!-- 호텔 설명을 입력하는 section-->
-  <section class="hotel_info  row_c sub_footer" >
-
-      <div class="">
-
-        <div class="about_main_title">Our hotel</div>
-          {% comment %} 호텔의 소개문구를 입력합니다. {% endcomment %}
-          <div class="hotel_info_t">
-            여기는 
-          </div>
-          <div class="hotel_info_t">
-            호텔을 소개하는 문구가
-          </div>
-          <div class="hotel_info_t">
-            들어가야 해요
-          </div>
-      </div>
-
-  </section>
 </div>
 <!-- footer -->
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2" style = "text-align: center; font-size: 35px">DuBu Hotel</h2>
-              <p style= "text-align: center;">For a comfortable time.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+<footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "text-align: center; font-size: 40px">DuBu Hotel</h2>
+          <p style= "text-align: center;">For a comfortable time.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 90px;">
 {% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Useful Links</h2>
-              <ul class="list-unstyled">
-                <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
-                <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
-                <li><a href="{% url 'mypage' %}" class="py-2 d-block">Mypage</a></li>
-                <li><a href="{% url 'event' %}" class="py-2 d-block">Events</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Privacy</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Career</a></li>
-                <li><a href="#" class="py-2 d-block">About Us</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                <li><a href="#" class="py-2 d-block">Services</a></li>
-              </ul>
-            </div>
-          </div> -->
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">About Hotel</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
+            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+          </ul>
         </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-5">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">Quick Menu</h2>
+          <ul class="list-unstyled">
+            <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
+            <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+            {% endif %}
+            <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
+            <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-md">
+         <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Privacy</h2>
+          <ul class="list-unstyled">
+            <li><a href="#" class="py-2 d-block">Career</a></li>
+            <li><a href="#" class="py-2 d-block">About Us</a></li>
+            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            <li><a href="#" class="py-2 d-block">Services</a></li>
+          </ul>
+        </div>
+      </div> -->
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">About Hotel</h2>
+          <div class="block-23 mb-3">
+            <ul>
+              <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
+            </ul>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+
+        <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+    </div>
+  </div>
+</footer>
     
   
 

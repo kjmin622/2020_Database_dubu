@@ -47,8 +47,8 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
-            <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in/out</a></li>
-            <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">Join/My page</a></li>
+            <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log out</a></li>
+            <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">My page</a></li>
           {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
             <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
             {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
@@ -66,7 +66,7 @@
         <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
           <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
           	<div class="text">
-	            <h1 class="mb-4 bread">Reservation</h1>
+	            <h1 class="mb-4 bread">Mypage</h1>
             </div>
           </div>
         </div>
@@ -82,44 +82,61 @@
   table{
     width: 100%;
     min-width: 500px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    
+  }
+  thead{
+    text-align: center;
+  }
+
+  td{
+    padding-left: 5px;
   }
 </style>
 
 <section class="test1 row_c">
   
   
-  <div class="bold_test_staff staff_s_div bold_sec">
+  <div class="bold_test_staff staff_s_div bold_sec" style="margin-top: 50px;">
 
     <div class = "staff_s_div">
       <div class= "staff_title">회원 정보</div>
+      <div class = "contanier" style = "padding-left: 30px">
+        <p style = "margin-bottom: 0px;">*수정 불가</p>
+        </div>
     </div>
 
-    <div class = "container" style = "border:1px solid; margin-bottom: 15px;">
+    <div class = "container" style="padding-bottom: 30px; padding-top: 30px;">
 
-      <ul style = "list-style-type:none; margin-top: 15px;">
-        <li>ID : </li>
-        <li>Name : </li>
-        <li>회원 등급 : </li>
-        <li>Point : </li> 
-      </ul>
+      <div class = "container" style = "border:1px solid; float:left; width: 49%; margin-right: 10px;">
 
-      <div style = "float: right; margin-bottom: 10px;">
-        <button class= "btn">수정</button>
+        <ul style = "list-style-type:none; margin-top: 15px;">
+          <li>*ID : </li>
+          <li>*Name : </li>
+          <li>*회원 등급 : </li>
+          <li>*Point : </li> 
+        </ul>
+
+        <div style = "float: right; margin-bottom: 10px;">
+          <button class= "btn">회원 탈퇴</button>
+        </div>
+  
       </div>
-
-    </div>
-    
-    <div class = "container" style = "border:1px solid">
-
-      <ul style = "list-style-type:none; margin-top: 15px;">
-        <li>PASSWORD : </li>
-        <li>PHONE : </li>
-        <li>E-Mail : </li>
-        <li>SMS 동의여부 : </li> 
-      </ul>
       
-      <div style = "float: right; margin-bottom: 10px;">
-        <button class= "btn">수정</button>
+      <div class = "container" style = "border:1px solid; float:left; width: 49%;">
+  
+        <ul style = "list-style-type:none; margin-top: 15px;">
+          <li>PASSWORD : <input class = "input" style = "height: 25px;"></input></li>
+          <li>PHONE : <input class = "input" style = "height: 25px;"></input></li>
+          <li>E-Mail : <input class = "input" style = "height: 25px;"></input></li>
+          <li>SMS 동의여부 : <input type = "checkbox"></input></li> 
+        </ul>
+        
+        <div style = "float: right; margin-bottom: 10px;">
+          <button class= "btn">수정 및 저장</button>
+        </div>
+  
       </div>
 
     </div>
@@ -130,55 +147,87 @@
   <div class="bold_test_staff staff_s_div bold_sec">
 
     <div class = "staff_s_div">
-      <div class= "staff_title">예약 정보<button class= "btn">검색</button></div>
+      <div class= "staff_title">예약 정보</div>
     </div>
 
     
-      <table>
-        <thead>
-          <th>예약 번호</th>
-          <th>check in</th>
-          <th>check out</th>
-          <th>Room name</th>
-          <th>인원</th>
-          <th>예약 취소</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>123</td>
-            <td>1231</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td style = "text-align: center;"><label><input type="checkbox" ></label></td>
-          </tr>           
-        </tbody>
-      </table>
+      <div class = "container" sytle = "overflow:auto;">
+        <table>
+          <thead>
+            <th>예약 번호</th>
+            <th>check in</th>
+            <th>check out</th>
+            <th>Room name</th>
+            <th>인원</th>
+            <th>예약 취소</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>123</td>
+              <td>1231</td>
+              <td>123</td>
+              <td>123</td>
+              <td>123</td>
+              <td style = "text-align: center;"><button class = "btn">click</button></td>
+            </tr>
+            <tr>
+              <td>123</td>
+              <td>1231</td>
+              <td>123</td>
+              <td>123</td>
+              <td>123</td>
+              <td style = "text-align: center;"><button class = "btn">click</button></td>
+            </tr>
+            <tr>
+              <td>123</td>
+              <td>1231</td>
+              <td>123</td>
+              <td>123</td>
+              <td>123</td>
+              <td style = "text-align: center;"><button class = "btn">click</button></td>
+            </tr>           
+          </tbody>
+        </table>
+      </div>
     
   </div>
 
-  <div class="bold_test_staff staff_s_div bold_sec">
+  <div class="bold_test_staff staff_s_div bold_sec" style="margin-bottom: 50px;">
 
     <div class = "staff_s_div">
       <div class= "staff_title">쿠폰 정보</div>
     </div>
 
-      <table>
-        <thead>
-          <th>쿠폰 번호</th>
-          <th>쿠폰 내용</th>
-          <th>쿠폰 기간</th>
-          <th>사용 내역</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>123</td>
-            <td>1231</td>
-            <td>123</td>
-            <td>123</td>
-          </tr>           
-        </tbody>
-      </table>
+      <div class = "container" sytle = "overflow:auto;">
+        <table>
+          <thead>
+            <th>쿠폰 번호</th>
+            <th>쿠폰 내용</th>
+            <th>쿠폰 기간</th>
+            <th>사용 내역</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>123</td>
+              <td>1231</td>
+              <td>123</td>
+              <td>123</td>
+            </tr>
+            <tr>
+              <td>123</td>
+              <td>1231</td>
+              <td>123</td>
+              <td>123</td>
+            </tr>
+            <tr>
+              <td>123</td>
+              <td>1231</td>
+              <td>123</td>
+              <td>123</td>
+            </tr>           
+          </tbody>
+        </table>
+      </div>
     
   </div> 
 
@@ -187,66 +236,71 @@
     
 
 <!-- footer -->
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">DuBu Hotel</h2>
-              <p>Welcome .</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+<footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "text-align: center; font-size: 40px">DuBu Hotel</h2>
+          <p style= "text-align: center;">For a comfortable time.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 90px;">
 {% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Useful Links</h2>
-              <ul class="list-unstyled">
-                <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
-                <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
-                <li><a href="{% url 'mypage' %}" class="py-2 d-block">mypage</a></li>
-                <li><a href="{% url 'event' %}" class="py-2 d-block">Events</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Privacy</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Career</a></li>
-                <li><a href="#" class="py-2 d-block">About Us</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
-                <li><a href="#" class="py-2 d-block">Services</a></li>
-              </ul>
-            </div>
-          </div> -->
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">주소||주소||주소</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+0 000 0000 0000</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">DuBu@hanyang.ac.kr</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
+            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+          </ul>
         </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-5">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">Quick Menu</h2>
+          <ul class="list-unstyled">
+            <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
+            <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+            {% endif %}
+            <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
+            <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-md">
+         <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Privacy</h2>
+          <ul class="list-unstyled">
+            <li><a href="#" class="py-2 d-block">Career</a></li>
+            <li><a href="#" class="py-2 d-block">About Us</a></li>
+            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            <li><a href="#" class="py-2 d-block">Services</a></li>
+          </ul>
+        </div>
+      </div> -->
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">About Hotel</h2>
+          <div class="block-23 mb-3">
+            <ul>
+              <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
+            </ul>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+
+        <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+    </div>
+  </div>
+</footer>
     
   
 

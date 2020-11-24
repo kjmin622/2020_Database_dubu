@@ -33,6 +33,34 @@
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
     <link rel="stylesheet" href="{% static 'css/dubu_made/product.css' %}">
+  
+    <style>
+      .pro_search_result{
+        height:200px;
+        overflow:auto;
+      }
+      th, td{
+        padding: 3px 10px;
+      }
+      table, thead, tbody, th, td, tr{
+        border:1px solid gray;
+        white-space:nowrap;
+      }
+      th{
+        text-align:center;
+        font-size:17px;
+        font-weight:500;
+      }
+
+      .p_output th,td{
+        padding: 3px 20px;
+      }
+
+      .cursor{
+        cursor:pointer;
+      }
+    </style>
+  
   </head>
   <body>
 
@@ -80,10 +108,36 @@
 <div class="product_a">
 <!-- 재고의 정보를 보여주고 수종가능한 section-->
   <section class="search_product  row_c">
-      <div class="staff_s_div bold_sec">
+      <div class="staff_s_div bold_sec" style="height: 450px">
         <div class="sub_title ">재고 현황 및 수정</div>
         <div class="s_i_s">
-          안녕 나는 재고 현황이야
+          
+            <div class="pro_search">
+
+              <div class="s_s_t">Product 재고 확인 및 수정</div>
+
+              <div class="p_s">
+                <input type="text" class="pro_search_input p_input" placeholder="Product Name">
+                <div class="pro_search_result p_output">
+                  <table> 
+                    <thead><th>Product Id</th><th>Product Name</th><th>In storage</th><th>Price</th><th>EDIT</th></thead>
+                    <tbody>
+                      
+                      {% for data in product_datas %}
+                      <tr>
+                        <td class="pro_search_pivot">{{data.product_id}}</td>
+                        <td class="pro_search_pivot">{{data.name}}</td>
+                        <td class="pro_search_pivot">{{data.count}}</td>
+                        <td class="pro_search_pivot">{{data.price}}</td>
+                        <td class="pro_search_pivot"><div name="{{data.product_id}}" class="p_button product_edit_btn">EDIT</div></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
         </div>
       </div>
   </section>
@@ -92,24 +146,105 @@
   <section class="search_p_apply  row_c">
       <div class="staff_s_div bold_sec">
         <div class="sub_title ">발주 신청</div>
-        <div class="s_i_s">
-          안녕 나는 발주 신청이야
-        </div>
+            <div class="park_insert">
+              <div class="s_s_t"></div>
+              <form method="POST" onsubmit="return confirm('발주를 신청하시겠습니까?');">
+              {% csrf_token %}
+                <input type="text" name="method" value="add_purchase" style="display:none" readonly>
+                <table class="purchase_tab">
+                  <thead>
+                    <th>Product Id</th><th>Product Name</th><th>Count</th><th>Delete</th>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+                <div class="p_i_input"> 
+                  <input class="p_i_add p_i_i" type="text" name="purchase_product_id" placeholder="Product Id">
+                  <input class="p_i_add p_i_i" type="text" name="purchase_count" placeholder="Count">
+                  <input class="p_i_add p_button cursor" id="purchase_insert_btn" type="button" value="INSERT">
+                  <input class="p_i_add p_button cursor" type="submit" value="REQUEST">
+                </div>
+              </form>
+            </div>
       </div>
   </section>
 
   <!-- 발주 정보를 확인하고 재고 정보를 갱신가능한 section-->
   <section class="search_a_check row_c">
-      <div class="bold_test_product staff_s_div bold_sec">
+      <div class="bold_test_product staff_s_div bold_sec" style="height: 400px">
         <div class="sub_title ">발주 현황</div>
         <div class="s_i_s">
-          안녕 나는 발주 현황이야
+              <div class="b_s">
+                <div class="b_s_r b_output">
+                  <table style="height: 250px">
+                    <thead><th>Purchase Id</th><th>Order Date</th><th>Delivery Date</th><th>Is Purchase</th><th>Staff ID</th><th>Product List</th><th>납품완료</th></thead>
+                    <tbody>
+                      {% for data in purchase_datas %}
+                      <tr>
+                        <td class="b_s_p">{{data.purchase_id}}</td>
+                        <td class="b_s_p">{{data.order_date}}</td>
+                        <td class="b_s_p">{{data.delivery_date}}</td>
+                        <td class="b_s_p">{{data.is_purchase}}</td>
+                        <td class="b_s_p">{{data.staff_id}}</td>
+                        <td class="b_s_p"><div class="product_list_btn p_button" name="{{data.purchase_id}}">LIST</div></td>                  
+                        {% if not data.is_purchase %}
+                          <td class="b_s_p">
+                          <form method="POST" onsubmit="return confirm('정말 물품을 전부 수령하셨습니까?');">
+                          {% csrf_token %}
+                          <input type="text" style="display:none" name="method" value="purchase_complete" readonly>
+                          <input type="text" style="display:none" name="purchase_id" value="{{data.purchase_id}}" readonly>
+                          <button class="p_button cursor" name="purchased">완료</button>
+                          </form>
+                        </td>
+                        
+                        {% else %}
+                        <td class="b_s_p"><div class="p_button" name="no-purchase" style="color:rgb(200,200,200);">완료</div></td>
+                        {% endif %}
+                        
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
         </div>
       </div>
   </section>
 </div>
 
-    
+<div class="fullscreen popup" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.5)"></div>
+<!--product_edit 팝업-->
+<div class="product_edit_popup popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="method" value="product_edit" style="display:none" readonly>
+      <div style="display:block">
+        <input type="text" id="product_edit_id" name="product_id" style="height:21px; padding:1px;" readonly>
+      </div>
+      <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">이름</label>
+        <input type="text" id="product_edit_name" name="name" placeholder="name" style="height:21px; padding:1px;">
+      </div>
+      <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">개수</label>
+        <input type="text" id="product_edit_count" name="count" placeholder="count" style="height:21px; padding:1px;">
+      </div>
+      <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">가격</label>
+        <input type="text" id="product_edit_price" name="price" placeholder="price" style="height:21px; padding:1px;">
+      </div>
+      <input type="submit" value="edit">
+    </form>
+</div>
+
+<!--product_list 팝업-->
+<div class="product_list_popup popup" style="box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:750px; padding:20px;left:50%; top:50%; transform:translate(-125px,-375px); background-color:rgba(255,255,255,0.8)">
+    <table class="product_list_tab">
+      <thead><th>Product ID</th><th>Name</th><th>Count</th></thead>
+      <tbody>
+      </tbody>
+    </table>
+</div>
 
 
 
@@ -186,3 +321,98 @@
 
   </body>
 </html>
+
+<script>
+  $(document).ready(function() {
+    $(".pro_search_input").keyup(function() {
+        var k = $(this).val();
+        $(".pro_search_result> table > tbody > tr").hide();
+        var temp = $(".pro_search_pivot:contains('" + k + "')");
+
+        $(temp).parent().show();
+    });
+
+    
+    function delete_reload(){
+      $(".purchase_delete_btn").click(function(){
+        $(".purchase_"+$(this).attr("name")).remove();
+      });
+    }
+
+    $("#purchase_insert_btn").click(function(){
+      var t_pid = $("input[name=purchase_product_id]");
+      var t_count = $("input[name=purchase_count]");
+      var pid = t_pid.val();
+      var count = t_count.val();
+      t_pid.val("");t_count.val("");
+      var table_body = $('.purchase_tab>tbody');
+      var table_have_pid = $('.purchase_pid').text().split('_');
+      var flagz = true;
+
+      for(var i=0; i<table_have_pid.length; i++){
+        var tpid = table_have_pid[i];
+        if(tpid==pid){
+          var tnum = 1*$('tr.purchase_'+pid+'>.purchase_count').text() + 1*count;
+          $('tr.purchase_'+pid+'>.purchase_count').text(tnum+"");
+          $('div.purchase_'+pid+'>input[name=count]').attr('value',""+tnum);
+          flagz=false;
+        }
+      }
+      if(flagz){
+        var flag = false;
+        {% for data in product_datas %}
+        if("{{data.product_id}}" == pid){
+          flag = true;
+          table_body.append("<tr class='purchase_{{data.product_id}}'><td class='purchase_pid'>{{data.product_id}}</td><td>{{data.name}}</td><td class='purchase_count'>"+count+"</td><td><input class='purchase_delete_btn p_i_add p_button' name='{{data.product_id}}' type='button' value='delete'></td></tr>");
+          table_body.append("<div style='display:none' class='purchase_{{data.product_id}}'><input type='text' style='display:none' name='product_id' value='{{data.product_id}}' readonly><input type='text' style='display:none' value='"+count+"' name='count' readonly></div>");
+        }
+        {% endfor %}
+        if(flag==false){
+          alert("없는 제품id입니다.");
+        }
+
+        delete_reload();
+      }
+    });
+
+    $(".fullscreen").click(function(){
+        $(".popup").css("display","none");
+    });
+
+    $('.product_list_btn').click(function(){
+        $(".fullscreen").css("display","block");
+        $(".product_list_popup").css("display","block");
+        $(".product_list_tab>tbody>tr").remove();
+        var purchase_id = $(this).attr("name");
+        {% for data in purchase_datas %}
+        if('{{data.purchase_id}}'==purchase_id){
+          
+          {% for p in data.product %}
+            {% for prodata in product_datas %}
+              if('{{p.0}}'=='{{prodata.product_id}}'){
+                $('.product_list_tab>tbody').append("<tr><td>{{p.0}}</td><td>{{prodata.name}}</td><td>{{p.1}}</td></tr>");
+              }
+            {% endfor %}
+          {% endfor %}
+        }
+        {% endfor %}
+    });
+  });
+
+  $('.product_edit_btn').click(function(){
+    $(".fullscreen").css("display","block");
+    $(".product_edit_popup").css("display","block");
+    var product_id = $(this).attr('name');
+    {% for data in product_datas %}
+    if('{{data.product_id}}'==product_id){
+      $('#product_edit_id').attr('value','{{data.product_id}}');
+      $('#product_edit_name').attr('value','{{data.name}}');
+      $('#product_edit_price').attr('value','{{data.price}}');
+      $('#product_edit_count').attr('value','{{data.count}}');
+    }
+    {% endfor %}
+  });
+
+
+</script>
+

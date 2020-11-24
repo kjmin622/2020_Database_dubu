@@ -1,7 +1,18 @@
-/* parking 틀 */
+/* bill 틀 */
 *{
     margin: 0px;
     padding:0px;
+}
+
+.sub_title_b{
+    font-size: 30px;
+    padding-top: 10px;
+    padding-left: 30px;
+    display:  flex;
+    flex-flow:row; 
+    flex-wrap:nowrap; 
+    justify-content: left;
+    align-items: baseline;
 }
 
 body{
@@ -35,14 +46,14 @@ body{
     min-width: 1500px;
 }
 
-.p_input{
+.b_input{
     /* border: 2px solid; */
     /* border-color:blue;   */
     font-size: 17px;
     padding: 10px 3px 10px 13px;
-    width: 150px;
+    width: 180px;
     height: 40px;
-    margin: 0px 20px;
+    /* margin: 0px 20px; */
 }
 
 .p_i_input{
@@ -54,13 +65,13 @@ body{
     padding: 10px 20px;
 }
 
-.pro_search{
+.bill_search{
     /* border: 2px solid; */
     /* border-color: brown;   */
     padding: 40px;
 }
 
-.p_output{
+.b_output{
     border: 2px solid;
     padding: 5px;
     border-color: darkgray;
@@ -73,7 +84,7 @@ body{
     /* border-color: brown; */
     display: flex;
     flex-flow: column;
-    /* justify-content: start; */
+    /* justify-content: space-between; */
     margin-top: 20px;
 }
 
@@ -85,26 +96,19 @@ body{
     margin: 5px;
 }
 
-.s_s_t{
+.b_s_t{
     font-size: 20px;
-    font-weight: 300;
+    /* font-weight: 300; */
     /* margin: 20px; */
 }
 
-.p_s{
-    display: flex;
-    flex-flow: row;
-    flex-wrap: nowrap;
-    margin-top: 20px;
-}
-
-.p_button{
-    padding: 0px 20px;
-    background-color: rgb(95, 95, 95);
-    border: 0px;
-    color: white;
-    border-radius: 5px;
-    font-size: 17px;
+.b_t_o{
+    padding: 2px 20px;
+    border: 2px solid;
+    border-color: darkgray;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
 }
 
 .b_s{
@@ -114,9 +118,22 @@ body{
     margin-top: 20px;
 }
 
-.b_output{
-    border: 2px solid;
-    padding: 5px;
-    border-color: darkgray;
-    margin: 0px 40px;
+.b_button{
+    padding: 0px 20px;
+    background-color: rgb(95, 95, 95);
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.b_p{
+    padding: 5px 0px;
+    background-color: rgb(95, 95, 95);
+    border: 0px;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    width: 200px;
 }
