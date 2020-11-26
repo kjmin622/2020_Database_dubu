@@ -98,11 +98,12 @@
 {% comment %} test  {% endcomment %}
 <section class="test1 row_c">
   <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px;">
-    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실, 요금, 옵션 선택</div>
+    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택</div>
   </div>
   
   <div class="bold_test_staff staff_s_div bold_sec">
-    <div class="form-group p-4 align-self-stretch d-flex align-items-end">
+    <center>
+    <div class="p-4 align-self-stretch d-flex" style="width: 600px;">
       <div class="wrap" style = "margin-right:30px;">
         <label for="#">Check-in Date</label>
       </div>
@@ -111,22 +112,23 @@
       </div>
 
       <div class="wrap" style = "margin-right:30px;">
-        <label for="#">객실 n</label>
+        <label for="#">객실 1</label>
+
       </div>
 
       <div class="wrap" style = "margin-right:30px;">
-        <label for="#">어른 n</label>
+        <label for="#">어른 </label>
+        <div request.GET['adult_num']>
+        </div>
       </div>
 
       <div class="wrap" style = "margin-right:30px;">
         <label for="#">어린이 n</label>
       </div>
 
-      <div class="wrap">
-        <label for="#">유아 n</label>
-      </div>
-
     </div>
+    </center>
+
   </div>
  
 
@@ -136,10 +138,10 @@
         <div class="s_i  col_c">
           <div class="s_i_logo ">Room image</div>
         </div>
-        <div class="s_i s_i_text">
+        <div class="s_i s_i_text" style="padding-top: 80px;">
           <ul style="list-style-type:none">
-            <button class = "popup1_btn btn"> 자세히 보기 </button>
-            <button class = "btn"> 요금보기 </button>
+            <button class = "popup1_btn btn" style="border-radius:10px;"> 자세히 보기 </button>
+            <button class = "btn" style="border-radius:10px;"> 요금 보기 </button>
           </ul>
         </div>
       </div>
@@ -198,10 +200,11 @@
       <div class="s_i_s">
         <div class="s_i s_i_text">
           <ul style="list-style-type:none">
-            <li> 성인 n </li>
-            <li> 가격 0 </li>
-            <li> 인원 <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-              <input class = "count" value="1" readonly= "" name = "">
+            <li style="padding-bottom: 15px;"> 성인 n </li>
+            <li style="padding-bottom: 15px;"> 가격 0 </li>
+            <li> 인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+              <input class = "count" value='0' name = "인원" readonly style = "width:21px; padding-left:2px;">
               <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
             </li><br>
             <p> * 유아와 어린이는 별도로 신청해주세요. </p>
@@ -212,9 +215,7 @@
       <div class="staff_title ">추가 요청</div>
       <div class="s_i_s">
         <div class="s_i s_i_text">
-          <ul style="list-style-type:none">
-            <input class = "input" size = 50></input>
-          </ul>
+          <textarea style= "width: 800px; height: 100px"></textarea>
         </div>
       </div>
 
@@ -225,12 +226,12 @@
 
       <div class="staff_title ">객실 요금</div>
       <div class="s_i_s">
-        <div class="s_i s_i_text">
+        <div class="s_i s_i_text" style="padding-right: 700px;">
           <ul style="list-style-type:none">
             <li> 객실 금액 : </li>
             <li> 조식 금액 : </li>
             <li> 세금 및 봉사료 : </li>
-            <li style = "font-weight: bold"> 총 금액 : </li>
+            <li style = "font-weight: bold; padding-top: 15px;"> 총 금액 : </li>
           </ul>
         </div>
       </div>
@@ -255,7 +256,7 @@
   <div class = "staff_s_div">
     <div style = "padding-bottom:50px; padding-top:20px;">
     <center>
-    <button class = "btn" onclick="location.href='{% url 'reservation3' %}'"> 객실 및 요금 확인 </button>
+    <button class = "btn" onclick="location.href='{% url 'reservation3' %}'" style="border-radius:10px;"> 객실 및 요금 확인 </button>
     </center>
     </div>
   </div>

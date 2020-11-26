@@ -33,6 +33,26 @@
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
     <link rel="stylesheet" href="{% static 'css/dubu_made/m_index.css' %}">
+
+    <style>
+
+      .image { 
+        position:relative;
+        text-align:center;
+        color:#FFFFFF;
+      }
+
+      .image div {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        text-shadow: -1px 0 1px black, 0 1px 1px black, 1px 0 1px black, 0 -1px 1px black;  
+      }
+
+    </style>
+
+
   </head>
   <body>
   
@@ -124,7 +144,7 @@
 	        			<div class="col-md d-flex" style = "height: 160px;">
 	        				<div class="form-group p-4 d-flex align-items-end">
 	        					<div class="wrap" style = "padding-bottom: 40px;">
-			      					<label for="#">Room</label>
+			      					<label for="#">Adult</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
 			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
@@ -132,6 +152,7 @@
 			                    	<option value="">one</option>
 			                      <option value="">two</option>
 			                      <option value="">three</option>
+                            <option value="">four</option>
 			                    </select>
 			                  </div>
 				              </div>
@@ -141,13 +162,17 @@
 
 	        			<div class="col-md d-flex" style = "height: 160px;">
 	        				<div class="form-group p-4 d-flex align-items-end">
-	        					<div class="wrap">
-			      					<label for="#">Customer</label>
+	        					<div class="wrap" style = "padding-bottom: 40px;">
+			      					<label for="#">Child</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
-                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Adult <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
-                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Child <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
-                          <p style = "margin-bottom: 0px; font-weight: 400; color: black;">Baby <input type="text" size = "3px" style="height:20px; font-size: 15px;"></input></p>
+                          <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+			                    <select name="" id="" class="form-control">
+			                    	<option value="">one</option>
+			                      <option value="">two</option>
+			                      <option value="">three</option>
+                            <option value="">four</option>
+			                    </select>
 			                  </div>
 				              </div>
 				            </div>
@@ -177,35 +202,35 @@
         <ul class="t">
           <li>
             <div class="event_s e_test col_c">
-              <div class="sub_title_e">EVENT1</div>
-              <div class="info_e col_c">
-                  내용내용내용내용내용내용내용내용내용내용내용내용<br>
-                  내용내용내용내용내용내용내용내용내용내용내용내용
+        
+              <div class = "image">
+
+                <img src = "{% static 'images/tofustake.jpeg' %}" style = "width: 700px;">
+                <div class="sub_title_e" style="padding-bottom: 100px;">Course Cooking Tofu</div>
+                <div style = "padding-top: 50px;">두부 스테이크를 메인으로한 두부 코스 요리</div>
+
               </div>
             </div>
           </li>
           <li>
             <div class="event_s e_test col_c">
-              <div class="sub_title_e">EVENT2</div>
-              <div class="info_e col_c">
-                  내용내용
-              
+              <div class = "image">
+
+                <img src = "{% static 'images/rooptop.jpg' %}" style = "width: 700px;">
+                <div class="sub_title_e" style="padding-bottom: 100px;">Rooptop HotWater Pool</div>
+                <div style = "padding-top: 50px;">따뜻한 겨울을 보내기 위한 루프탑 온수풀 오픈</div>
+
               </div>
             </div>
           </li>
           <li>
             <div class="event_s e_test col_c">
-              <div class="sub_title_e">EVENT3</div>
-              <div class="info_e col_c">
-                내용내용
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="event_s e_test col_c">
-              <div class="sub_title_e">EVENT4</div>
-              <div class="info_e col_c">
-                내용내용
+              <div class = "image">
+
+                <img src = "{% static 'images/christmas.jpg' %}" style = "width: 700px;">
+                <div class="sub_title_e" style="padding-bottom: 100px;">Christmas Wishes</div>
+                <div style = "padding-top: 50px;">다가오는 크리스마스, 소원을 말해봐~</div>
+
               </div>
             </div>
           </li>
@@ -214,7 +239,6 @@
           <label for="pos1"></label>
           <label for="pos2"></label>
           <label for="pos3"></label>
-          <label for="pos4"></label>
         </p>
       </div>
     </section>
