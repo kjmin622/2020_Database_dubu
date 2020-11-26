@@ -11,11 +11,14 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.shortcuts import redirect
 
+
+
 def example_view1(request):
-    return render(request,"example/example1.html",{'request':request.POST})
+    return render(request,"example/example1.html",{})
 
 def example_view2(request):
     if(request.method=="POST"):
+        # 1에서 받아온 값들을 출력, 이용 및 저장해두기 위해 다음과 같이 템플릿에 보내주자
         return render(request,"example/example2.html",{'request':request.POST})
 
     #POST로 넘어온게 아니면 처음 화면으로

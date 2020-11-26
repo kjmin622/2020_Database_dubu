@@ -6,12 +6,20 @@
 <body>
     <form action="{% url 'example_url3' %}" method="POST">
         {% csrf_token %}
+
+        <!-- 앞서, example_views.py의 example_view2에서 보낸 값들을 템플릿 언어로 출력 가능 - 예를 들어, 파이썬에서 request["key"]라면, 템플릿 언어에선 request.key이다. -->
         <p>앞에서 입력한 값 : {{request.date1 }}, {{request.date2}}, {{request.input1}}</p>
+
+        <!-- 1번에서 받아온 값들 hidden type으로 숨겨서 저장해놓는다. (1에서 입력받은놈도 2의 form에서 POST를 보내줘야할테니) -->
         <input type="hidden" name="date1" value="{{request.date1}}">
         <input type="hidden" name="date2" value="{{request.date2}}">
         <input type="hidden" name="input1" value="{{request.input1}}">
+
+        <!-- 새로운 입력! -->
         <input type="text" placeholder="나는 input2 입니다!" name="input2">
         <input type="text" placeholder="나는 input3 입니다!" name="input3">
+
+        <!-- example_url3, 즉 example_views.example_insert_db로 request 전송 -->
         <input type="submit" value="나는 버튼입니다!">
     </form>
 </body>

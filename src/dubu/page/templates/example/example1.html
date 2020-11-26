@@ -4,16 +4,28 @@
 <head>
 </head>
 <body>
+
+    <!-- 입력받는곳 -->
     <form action="{% url 'example_url2' %}" method="POST">
         {% csrf_token %}
+
+        <!-- jquery로 datepicker가 된 date1과 date2 -->
         <input type="text" name="date1">
         <input type="text" name="date2">
         <input type="text" placeholder="나는 input1 입니다!" name="input1">
+
+
+        <!-- 아래 input-submit을 누름으로, form에 있는 action의 링크로 form 안에 있는 input이 POST형식으로 request -->
+        <!-- 이 예시에서는, urls.py에서 example_url2는 example_view.example_view2의 이름이기 때문에, example_view.py에 있는 example_view2에 request됨 -->
         <input type="submit" value="나는 버튼입니다!">
     </form>
 </body>
 </html>
 
+
+
+
+<!-- 여 밑에는 일단 신경쓰지 말아요오 -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
