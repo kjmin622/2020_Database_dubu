@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+    <form action="{% url 'example_url3' %}" method="POST">
+        {% csrf_token %}
+        <p>앞에서 입력한 값 : {{request.date1 }}, {{request.date2}}, {{request.input1}}</p>
+        <input type="hidden" name="date1" value="{{request.date1}}">
+        <input type="hidden" name="date2" value="{{request.date2}}">
+        <input type="hidden" name="input1" value="{{request.input1}}">
+        <input type="text" placeholder="나는 input2 입니다!" name="input2">
+        <input type="text" placeholder="나는 input3 입니다!" name="input3">
+        <input type="submit" value="나는 버튼입니다!">
+    </form>
+</body>
+</html>

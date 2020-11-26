@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+    <form action="{% url 'example_url2' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="date1">
+        <input type="text" name="date2">
+        <input type="text" placeholder="나는 input1 입니다!" name="input1">
+        <input type="submit" value="나는 버튼입니다!">
+    </form>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
+
+<script>
+
+$(function(){
+    $('input[name=date1]').datepicker({minDate:1, dateFormat:"yy-mm-dd"});
+    $('input[name=date2]').datepicker({minDate:2, dateFormat:"yy-mm-dd"});
+});
+</script>

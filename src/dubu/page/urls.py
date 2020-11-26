@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from . import admin_views
+from . import example_views
 
 urlpatterns = [
     #main
@@ -50,4 +51,7 @@ urlpatterns = [
     path('admin/bill',admin_views.bill,name="bill"),	
     path('admin/management',admin_views.management,name="management"),  
 
+    path('example1',example_views.example_view1,name="example_url1"),
+    path('example2',example_views.example_view2,name="example_url2"),
+    path('example3',example_views.example_insert_db,name="example_url3"),
 ]
