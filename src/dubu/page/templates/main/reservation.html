@@ -124,12 +124,6 @@
             <input class = "count" value='0' name = "child_num" readonly style = "width:21px; padding-left:2px;">
             <input class = "num_btn" name = "child_btn" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
-          <li>유아 이것좀 지우고 함수좀 수정해주세요 ㅠㅠㅠ &nbsp; &nbsp; &nbsp; &nbsp;
-            <input class = "num_btn" name = "baby_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value='0' name = "baby_num" readonly style = "width:21px; padding-left:2px;">
-            <input class = "num_btn" name = "baby_btn" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
-          </li>
-
         </ul>
       </div>
     </div>
@@ -260,22 +254,8 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
       x.attr("value",int+"");
     }
 
-    else if(btn_method=="child_btn"){
-      var x=$("input[name=child_num]");
-      var int=1*x.attr("value");
-      if(mp_value == '-') {
-        if(int>=1){
-          int--;
-        }
-      }
-      else{
-        int++;
-      }
-      x.attr("value",int+"");
-    }
-
     else{
-      var x=$("input[name=baby_num]");
+      var x=$("input[name=child_num]");
       var int=1*x.attr("value");
       if(mp_value == '-') {
         if(int>=1){
