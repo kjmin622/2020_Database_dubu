@@ -468,7 +468,7 @@ class Book():
     def complete_bill(dataDir):
         try:
             cursor = connection.cursor()
-            room_num = dataDir["room_num"];price=dataDir["price"];point=dataDir["point"];coupon_list=dataDir["coupon_list"]
+            room_num = dataDir["room_num"];price=dataDir["price"];point=dataDir["point"];coupon_list=dict(dataDir)["coupon_list"]
             sqlStr = f"select page_booking_rooms.booking_id, member_id from page_booking_rooms inner join page_member_customer on page_booking_rooms.booking_id=page_member_customer.booking_id where room_num={room_num}"
             cursor.execute(sqlStr);result=cursor.fetchall()
             booking_id = result[0][0]
