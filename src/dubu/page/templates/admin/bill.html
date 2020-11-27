@@ -117,23 +117,24 @@
                 <div class="b_s_t">Purchase</div>
                 <div class="sub_title_b"> 
                   <div class="b_s_t" style="margin: 0px 20px;">총 이용 금액: </div>
-                  <div class="b_s_t b_t_o">OUTPUT</div>
+                  <div class="b_s_t b_t_o total_price">0</div>
                 </div>
               </div>
               <div class="b_s">
                 <div class="b_s_r b_output">
-                  <table>
-                    <thead><th>Reservation Id</th><th>Room Number</th><th>Product Id</th><th>Product Name</th><th>count</th><th>price</th><th>order time</th></thead>
+                  <table class="purchase_tab">
+                    <thead><th>Reservation Id</th><th>Room Number</th><th>Product Id</th><th>Product Name</th><th>count</th><th>price</th><th>order time</th><th>offer time</th></thead>
                     <tbody>
                       {% for data in invoice_datas %}
                       <tr>
                         <td class="b_s_p">{{data.booking_id}}</td>
-                        <td class="searchpivot b_s_p">{{data.room_num}}</td>
+                        <td class="searchpivot b_s_p" name="purchase_{{data.room_num}}">{{data.room_num}}</td>
                         <td class="b_s_p">{{data.product_id}}</td>
                         <td class="b_s_p">{{data.name}}</td>
                         <td class="b_s_p">{{data.count}}</td>
                         <td class="b_s_p">{{data.price}}</td>
                         <td class="b_s_p">{{data.order_time}}</td>
+                        <td class="b_s_p">{{data.offer_time}}</td>
                       </tr>
                       {% endfor %}
                     </tbody>
@@ -148,22 +149,23 @@
                 <div class="b_s_t">Coupon List</div>
                 <div class="sub_title_b"> 
                   <div class="b_s_t" style="margin: 0px 20px;">총 할인 금액: </div>
-                  <div class="b_s_t b_t_o">OUTPUT</div>
+                  <div class="b_s_t b_t_o">0</div>
                 </div>
               </div>
               <div class="b_s">
                 <div class="b_s_r b_output">
-                  <table>
+                  <table class="coupon_tab">
                     <thead><th>Member Id</th><th>Coupon Name</th><th>Coupon Id</th><th>Dc Price</th><th>사용 여부</th></thead>
                     <tbody>
-                      <tr>
-                        <p style="display:none" class="searchpivot"></p>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p">여기 변수..</td>
-                        <td class="b_s_p"><input class="b_button" type="submit" value="< USE >"></td>
+                      {% for data in coupon_datas %}
+                      <tr class="coupon_{{data.room_num}}" name="min_price_{{data.min_price}}">
+                        <td class="b_s_p">{{data.member_id}}</td>
+                        <td class="b_s_p">{{data.coupon_name}}</td>
+                        <td class="b_s_p">{{data.coupon_id}}</td>
+                        <td class="b_s_p">{{data.value}}</td>
+                        <td class="b_s_p"><input class="b_button coupon_use_btn" id="{{data.coupon_id}}_no" style="color:gray;" type="button" value="< USE >"></td>
                       </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                 </div>
@@ -277,10 +279,30 @@
 </html>
 
 <script>
-{% comment %} $(document).ready(function(){
+$(".purchase_tab > tbody > tr").hide();
+$(".coupon_tab > tbody > tr").hide();
+$(document).ready(function(){
   $('#room_search').keyup(function(){
     var num = $(this).val();
-    $('.searchpivot').
+    $(".purchase_tab > tbody > tr").hide();
+    var temp = $("td[name=purchase_"+num+"]");
+    temp.parents().show();
+    var price = 0;
+    if(temp.length){
+      {% for data in invoice_datas %}
+      if('{{data.room_num}}' == num){
+        price = price+1*'{{data.price}}'.split('(')[0];
+      }
+      {% endfor %}
+      $('.total_price').text(""+price);
+    }
+    else{
+      $('.total_price').text('0');
+    }
+    $(".coupon_tab > tbody > tr").hide();
+    temp = $('.coupon_'+num);
+    temp.show();
+
   });
-}); {% endcomment %}
+});
 </script>
