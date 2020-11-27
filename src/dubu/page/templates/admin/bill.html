@@ -155,14 +155,15 @@
               <div class="b_s">
                 <div class="b_s_r b_output">
                   <table class="coupon_tab">
-                    <thead><th>Member Id</th><th>Coupon Name</th><th>Coupon Id</th><th>Dc Price</th><th>사용 여부</th></thead>
+                    <thead><th>Member Id</th><th>Coupon Name</th><th>Coupon Id</th><th>Dc Price</th><th>Min Price</th><th>사용 여부</th></thead>
                     <tbody>
                       {% for data in coupon_datas %}
-                      <tr class="coupon_{{data.room_num}}" name="min_price_{{data.min_price}}">
+                      <tr class="coupon_{{data.room_num}}">
                         <td class="b_s_p">{{data.member_id}}</td>
                         <td class="b_s_p">{{data.coupon_name}}</td>
                         <td class="b_s_p">{{data.coupon_id}}</td>
                         <td class="b_s_p">{{data.value}}</td>
+                        <td class="b_s_p">{{data.min_price}}</td>
                         <td class="b_s_p"><input class="b_button coupon_use_btn" id="{{data.coupon_id}}_no" style="color:gray;" type="button" value="< USE >"></td>
                       </tr>
                       {% endfor %}
@@ -170,7 +171,6 @@
                   </table>
                 </div>
               </div>
-
             </div>
 
             <div style="margin-top:40px; margin-bottom:50px; display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
@@ -302,7 +302,6 @@ $(document).ready(function(){
     $(".coupon_tab > tbody > tr").hide();
     temp = $('.coupon_'+num);
     temp.show();
-
   });
 });
 </script>
