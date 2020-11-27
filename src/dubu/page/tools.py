@@ -477,7 +477,7 @@ class Book():
             sqlStr = f"update page_invoice set is_payment=1 where booking_id='{booking_id}'"
             cursor.execute(sqlStr);result=cursor.fetchall()
 
-            sqlStr = f"update page_member_info set point=point-{point} where member_id='member_id'"
+            sqlStr = f"update page_member_info set point=point-{point} where member_id='{member_id}'"
             cursor.execute(sqlStr);result=cursor.fetchall()
 
             now = datetime.datetime.today()
