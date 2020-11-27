@@ -103,7 +103,7 @@
             <div class = "container">
               <input type="submit" class="btn" value="Login">
               <button class = "btn"><a href="{% url 'join' %}">회원가입</a></button>
-              <button class = "btn">ID/PASSWORD 찾기</button>
+              <button class = "popup1_btn btn">ID/PASSWORD 찾기</button>
             </div>
 
           </div>
@@ -113,8 +113,12 @@
     </form>    
   </section>
 
-  
-  <div class="l_find">
+
+  <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
+
+  <div class="popup popup1" style = "display: none;">
+
+    <div class="l_find">
     <section class="t_ser ">  
       <p style="font-size:25px">Find ID</p>
       <div class="s_t ">
@@ -125,9 +129,6 @@
       </div>
     </section>
 
-
-
-
     <section class="t_ser ">  
       <p style="font-size:25px">Find PASSWORD</p>
       <div class="s_t ">
@@ -137,8 +138,15 @@
         <input type="button" class="send login_button" id="pwfind_btn" value="PW찾기">
       </div>
     </section>
-  </div>  
+    </div>
+  </div>
+
+
 </div>
+
+
+
+
 <!-- footer -->
 <footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
   <div class="container">
@@ -233,6 +241,18 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 </html>
 
 <script>
+
+    $('.popup_background').click(function(){
+      $('.popup').css('display', 'none')
+    });
+
+    $('.popup1_btn').click(function(){
+      $('.popup_background').css('display', 'block');
+      $('.popup1').css('display', 'block');
+    });
+</script>
+
+<script>
 $(document).ready(function(){
   $('#idfind_btn').click(function(){
     var name = $('#idfind_name').val().replace(' ','');
@@ -274,6 +294,8 @@ $(document).ready(function(){
     $('#pwfind_email').val("");
   });
 });
+
+
 
 
 </script>
