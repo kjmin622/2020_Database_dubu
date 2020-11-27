@@ -94,9 +94,12 @@ def product(request):
 
 def bill(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
+    if(request.method=="POST"):
+        print(request.POST)
     invoice_datas = Book.get_invoice()
     coupon_datas = Book.get_coupon()
-    return render(request,'admin/bill.html',{'invoice_datas':invoice_datas,'coupon_datas':coupon_datas})
+    point_datas = Book.get_point()
+    return render(request,'admin/bill.html',{'invoice_datas':invoice_datas,'coupon_datas':coupon_datas, 'point_datas':point_datas})
 
 def staff_search(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')

@@ -149,7 +149,7 @@
                 <div class="b_s_t">Coupon List</div>
                 <div class="sub_title_b"> 
                   <div class="b_s_t" style="margin: 0px 20px;">총 할인 금액: </div>
-                  <div class="b_s_t b_t_o">0</div>
+                  <div class="coupon_price b_s_t b_t_o">0</div>
                 </div>
               </div>
               <div class="b_s">
@@ -164,7 +164,7 @@
                         <td class="b_s_p">{{data.coupon_id}}</td>
                         <td class="b_s_p">{{data.value}}</td>
                         <td class="b_s_p">{{data.min_price}}</td>
-                        <td class="b_s_p"><input class="b_button coupon_use_btn" id="{{data.coupon_id}}_no" style="color:gray;" type="button" value="< USE >"></td>
+                        <td class="b_s_p"><input class="b_button coupon_use_btn" id="{{data.coupon_id}}_no_{{data.value}}_{{data.min_price}}" style="color:gray;" type="button" value="< USE >"></td>
                       </tr>
                       {% endfor %}
                     </tbody>
@@ -176,11 +176,11 @@
             <div style="margin-top:40px; margin-bottom:50px; display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
               <div class="sub_title_b"> 
                 <div class="b_s_t" style="margin: 0px 20px;">Point: </div>
-                <div class="b_s_t b_t_o">OUTPUT</div>
+                <div class="b_s_t b_t_o point_value">0</div>
               </div>
               <div class="sub_title_b" style="margin: 0px 40px;"> 
                 <div class="b_s_t" style="margin: 0px 20px;">Point to Use: </div>
-                <div class="b_s_t b_t_o">OUTPUT</div>
+                <input class="b_s_t b_t_o point_price" placeholder="0">
               </div>
             </div>
 
@@ -189,12 +189,15 @@
             <div style="margin-top:50px; display: flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
               <div class="sub_title_b"> 
                 <div class="b_s_t" style="margin: 0px 20px;">Total: </div>
-                <div class="b_s_t b_t_o">OUTPUT</div>
+                <div class="b_s_t b_t_o final_price">0</div>
               </div>
               <div class="sub_title_b" style="margin: 0px 40px;"> 
-                <input class="b_p" type="submit" value="COMPLETE">
+                <input class="b_p submit_btn" type="button" value="COMPLETE">
               </div>
             </div>
+            <form method="POST" name="submit_bill">
+              {% csrf_token %}
+            </form>
 
         </div>
       </div>
@@ -282,26 +285,118 @@
 $(".purchase_tab > tbody > tr").hide();
 $(".coupon_tab > tbody > tr").hide();
 $(document).ready(function(){
+  var is_this = false;
+  var final_price = 0;
+  var num = 0;
+  var point = 0;
+  var coupon_list = [];
   $('#room_search').keyup(function(){
-    var num = $(this).val();
+    $('.coupon_price').text('0');
+    num = $(this).val();
     $(".purchase_tab > tbody > tr").hide();
     var temp = $("td[name=purchase_"+num+"]");
     temp.parents().show();
     var price = 0;
     if(temp.length){
+      is_this = true;
+      $('.coupon_tab > tbody > tr').remove();
+      {% for data in coupon_datas %}
+      $('.coupon_tab > tbody').append('<tr class="coupon_{{data.room_num}}"><td class="b_s_p">{{data.member_id}}</td><td class="b_s_p">{{data.coupon_name}}</td><td class="b_s_p">{{data.coupon_id}}</td><td class="b_s_p">{{data.value}}</td><td class="b_s_p">{{data.min_price}}</td><td class="b_s_p"><input class="b_button coupon_use_btn" id="{{data.coupon_id}}_no_{{data.value}}_{{data.min_price}}" style="color:gray;" type="button" value="< USE >"></td></tr>');
+      {% endfor %}
+
+      {% for data in point_datas %}
+      if('{{data.room_num}}'==num){
+        $(".point_value").text('{{data.point}}');
+      }
+      {% endfor %}
+
       {% for data in invoice_datas %}
       if('{{data.room_num}}' == num){
         price = price+1*'{{data.price}}'.split('(')[0];
       }
       {% endfor %}
       $('.total_price').text(""+price);
+
+      $(".coupon_tab > tbody > tr").hide();
+      temp = $('.coupon_'+num);
+      temp.show();
+
+      final_price = 1*price;
+      $('.final_price').text(final_price);
+      reload();
     }
     else{
+      is_this=false;
       $('.total_price').text('0');
+      $(".point_value").text('0');
+      coupon_list = [];
+      final_price = 0;
+      num=0;
+      point=0;
     }
-    $(".coupon_tab > tbody > tr").hide();
-    temp = $('.coupon_'+num);
-    temp.show();
   });
+
+  $('.point_price').keyup(function(){
+    if(isNaN($(this).val())){
+      $(this).val('');
+    }
+    else if(final_price<1*$('.point_price').val()){
+      $(this).val(final_price);
+    }
+    else if(1*$(this).val() > 1*$('.point_value').text()){
+      $(this).val($('.point_value').text());
+    }
+
+    point = $(this).val();
+    if(point==''){
+      point = 0;
+    }
+    $('.final_price').text(final_price - point);
+  });
+
+  var reload = function(){
+      $('.coupon_use_btn').click(function(){
+      var coupon_info = $(this).attr('id').split('_');
+      var coupon_id = coupon_info[0];
+      var used = coupon_info[1];
+      var value = coupon_info[2];
+      var min_price = coupon_info[3];
+      if(1*min_price > 1*$('.total_price').text()){
+        alert("결제 금액이 "+min_price+"원 이상이여야 사용할 수 있는 쿠폰입니다.");
+      }
+      else if(used=="no"){
+        if(final_price-value-point<0){
+          alert("결제 금액은 음수가 될 수 없습니다.");
+          return;
+        }
+        $('.coupon_price').text(1*$('.coupon_price').text()+1*value);
+        $(this).attr('id',coupon_id+'_yes_'+value+'_'+min_price);
+        $(this).css('color','white');
+        final_price = final_price - 1*value;
+        $('.final_price').text(final_price-point);
+        coupon_list.push(coupon_id);
+      }
+      else if(used=="yes"){
+        $('.coupon_price').text(1*$('.coupon_price').text()-1*value);
+        $(this).attr('id',coupon_id+'_no_'+value+'_'+min_price);
+        $(this).css('color','gray');
+        final_price = final_price + 1*value;
+        $('.final_price').text(final_price-point);
+        coupon_list.splice(coupon_list.indexOf(coupon_id),1);
+      }
+    });
+  }
+
+  $('.submit_btn').click(function(){
+    if(is_this && confirm("정말 결제를 완료하시겠습니까?")){
+      $('form[name=submit_bill]').append("<input type='hidden' name='room_num' value='"+num+"'>");
+      $('form[name=submit_bill]').append("<input type='hidden' name='price' value='"+final_price+"'>");
+      $('form[name=submit_bill]').append("<input type='hidden' name='point' value='"+point+"'>");
+      for(var i=0; i<coupon_list.length; i++){
+        $('form[name=submit_bill]').append("<input type='hidden' name='coupon_list' value='"+coupon_list[i]+"'>");
+      }
+      document.submit_bill.submit();
+    }
+  })
 });
 </script>

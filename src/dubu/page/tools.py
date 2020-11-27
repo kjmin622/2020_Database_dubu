@@ -451,6 +451,22 @@ class Book():
             connection.close()
             return None
 
+    def get_point():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select room_num, point from (select room_num, member_id from page_booking_rooms inner join page_member_customer on page_booking_rooms.booking_id=page_member_customer.booking_id) natural join page_member_info"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({'room_num':data[0],'point':data[1]})
+            connection.close()
+            return output
+        except:
+            connection.close()
+            return None
+
+    def complete_bill(dataDir):
+        pass
         
 
 
