@@ -118,12 +118,12 @@
 
       <div class="wrap" style = "margin-right:30px;">
         <label for="#">어른 </label>
-        <div request.GET['adult_num']>
-        </div>
+        <p>{{request.adult_num}}</p>
       </div>
 
       <div class="wrap" style = "margin-right:30px;">
-        <label for="#">어린이 n</label>
+        <label for="#">어린이</label>
+        <p>{{request.child_num}}</p>
       </div>
 
     </div>
@@ -138,7 +138,7 @@
         <div class="s_i  col_c">
           <div class="s_i_logo ">Room image</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 80px;">
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
           <ul style="list-style-type:none">
             <button class = "popup1_btn btn" style="border-radius:10px;"> 자세히 보기 </button>
             <button class = "btn" style="border-radius:10px;"> 요금 보기 </button>
@@ -194,19 +194,20 @@
 
   <div  class="bold_test_staff staff_s_div bold_sec">
 
-    <div class = "container">
+    
 
       <div class="staff_title ">조식 신청</div>
       <div class="s_i_s">
         <div class="s_i s_i_text">
           <ul style="list-style-type:none">
-            <li style="padding-bottom: 15px;"> 성인 n </li>
-            <li style="padding-bottom: 15px;"> 가격 0 </li>
-            <li> 인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-              <input class = "count" value='0' name = "인원" readonly style = "width:21px; padding-left:2px;">
-              <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+            <li>인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <input class = "num_btn" name = "meal" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+              <input class = "count" value='0' name = "인원" readonly style = "width:40px; padding-left: 13px;">
+              <input class = "num_btn" name = "meal" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
             </li><br>
+            <li style="padding-bottom: 15px;" id= "breakfast_num"> 가격 : </li>
+            
+            <br>
             <p> * 유아와 어린이는 별도로 신청해주세요. </p>
           </ul>
         </div>
@@ -219,7 +220,7 @@
         </div>
       </div>
 
-    </div>
+    
   </div>
 
   <div class="bold_test_staff staff_s_div bold_sec">
@@ -228,9 +229,9 @@
       <div class="s_i_s">
         <div class="s_i s_i_text" style="padding-right: 700px;">
           <ul style="list-style-type:none">
-            <li> 객실 금액 : </li>
-            <li> 조식 금액 : </li>
-            <li> 세금 및 봉사료 : </li>
+            <li> 객실 금액 : </li><br>
+            <li> 조식 금액 : </li><br>
+            <li> 세금 및 봉사료 : </li><br>
             <li style = "font-weight: bold; padding-top: 15px;"> 총 금액 : </li>
           </ul>
         </div>
@@ -356,17 +357,33 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
   <script src="{% static 'js/google-map.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
 
-  <script>
+  </body>
+</html>
 
-    $('.popup_background').click(function(){
-      $('.popup').css('display', 'none')
-    });
+<script>
+  $('.popup_background').click(function(){
+    $('.popup').css('display', 'none')
+  });
 
     $('.popup1_btn').click(function(){
       $('.popup_background').css('display', 'block');
       $('.popup1').css('display', 'block');
     });
+
+  $(".num_btn").click(function(){
+    var mp_value = $(this).attr("value");
+    var x=$("input[name=인원]");
+    var int=1*x.attr("value");
+    if(mp_value == '-') {
+      if(int>=1){
+        int--;
+      }
+    }
+    else{
+      int++;
+    }
+    $("#breakfast_num").text("가격 : "+(int*10000));
+    x.attr("value",int+"");
+  })
   </script>
 
-  </body>
-</html>

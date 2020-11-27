@@ -55,12 +55,12 @@ def reservation2(request):
     
     if(request.method=='POST'):
         if(request.POST['method']=='reservation'):
-            check_in = request.POST['check_in'];check_out = request.POST['check_out'];adult_num = int(request.POST['adult_num']);child_num= int(request.POST['child_num'])
-            if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today().strftime("%Y-%m-%d")>=check_in):
-                return redirect('reservation')
-            if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
-                return redirect('reservation')
-            return render(request,'main/reservation2.html',{"check_in":check_in, "check_out":check_out, "adult_num":adult_num, "child_num": child_num})
+            # check_in = request.POST['check_in'];check_out = request.POST['check_out'];adult_num = int(request.POST['adult_num']);child_num= int(request.POST['child_num'])
+            # if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today().strftime("%Y-%m-%d")>=check_in):
+            #     return redirect('reservation')
+            # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
+            #     return redirect('reservation')
+            return render(request,'main/reservation2.html',{'request':request.POST})
     return redirect('reservation')
 
 def reservation3(request):
