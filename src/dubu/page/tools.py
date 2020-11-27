@@ -466,8 +466,36 @@ class Book():
             return None
 
     def complete_bill(dataDir):
-        pass
-        
+        try:
+            cursor = connection.cursor()
+            room_num = dataDir["room_num"];price=dataDir["price"];point=dataDir["point"];coupon_list=dataDir["coupon_list"]
+            sqlStr = f"select page_booking_rooms.booking_id, member_id from page_booking_rooms inner join page_member_customer on page_booking_rooms.booking_id=page_member_customer.booking_id where room_num={room_num}"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            booking_id = result[0][0]
+            member_id = result[0][1]
+
+            sqlStr = f"update page_invoice set is_payment=1 where booking_id='{booking_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+
+            sqlStr = f"update page_member_info set point=point-{point} where member_id='member_id'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+
+            now = datetime.datetime.today()
+            strnow = now.strftime("%Y-%m-%d %H:%M:%S:%f")[:2]
+            sqlStr = f"update page_bill set paytime={strnow} where booking_id='{booking_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+
+            for coupon_id in coupon_list:
+                sqlStr = f"delete from page_coupon_list where coupon_id = '{coupon_id}'"
+                cursor.execute(sqlStr);result=cursor.fetchall()
+
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
 
 
 class Room():

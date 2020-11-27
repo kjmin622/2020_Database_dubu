@@ -95,7 +95,7 @@ def product(request):
 def bill(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     if(request.method=="POST"):
-        print(request.POST)
+        Book.complete_bill(request.POST)
     invoice_datas = Book.get_invoice()
     coupon_datas = Book.get_coupon()
     point_datas = Book.get_point()
