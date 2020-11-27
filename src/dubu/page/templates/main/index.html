@@ -34,25 +34,7 @@
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
     <link rel="stylesheet" href="{% static 'css/dubu_made/m_index.css' %}">
 
-    <style>
-
-      .image { 
-        position:relative;
-        text-align:center;
-        color:#FFFFFF;
-      }
-
-      .image div {
-        position: absolute;
-        top:50%;
-        left:50%;
-        transform: translate(-50%, -50%);
-        text-shadow: -1px 0 1px black, 0 1px 1px black, 1px 0 1px black, 0 -1px 1px black;  
-      }
-
-    </style>
-
-
+    
   </head>
   <body>
   
@@ -193,7 +175,7 @@
 {% comment %} main section  {% endcomment %}
 <div class="main_a " style="margin-top: 250px;">
     <section class="event_info" style="margin-bottom: 250px;">
-      <div class="about_main_title">Event</div>
+      <div class="about_main_title" style="padding-bottom: 40px;">Event</div>
       <div id="slide">
         <input type="radio" name="pos" id="pos1" checked>
         <input type="radio" name="pos" id="pos2">
@@ -203,22 +185,11 @@
           <li>
             <div class="event_s e_test col_c">
         
-              <div class = "image">
+              <div class = "container">
 
-                <img src = "{% static 'images/tofustake.jpeg' %}" style = "width: 700px;">
-                <div class="sub_title_e" style="padding-bottom: 100px;">Course Cooking Tofu</div>
-                <div style = "padding-top: 50px;">두부 스테이크를 메인으로한 두부 코스 요리</div>
-
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="event_s e_test col_c">
-              <div class = "image">
-
-                <img src = "{% static 'images/rooptop.jpg' %}" style = "width: 700px;">
-                <div class="sub_title_e" style="padding-bottom: 100px;">Rooptop HotWater Pool</div>
-                <div style = "padding-top: 50px;">따뜻한 겨울을 보내기 위한 루프탑 온수풀 오픈</div>
+                <img src = "{% static 'images/tofustake.jpeg' %}" style = "width: 400px; height: 320px;">
+                <div class="sub_title_e" style="padding-top: 30px; padding-bottom: 10px;">Course Cooking Tofu</div>
+                <div style = "padding-top: 0px; margin-bottom: 100px;">두부 스테이크를 메인으로한 두부 코스 요리</div>
 
               </div>
             </div>
@@ -227,15 +198,26 @@
             <div class="event_s e_test col_c">
               <div class = "image">
 
-                <img src = "{% static 'images/christmas.jpg' %}" style = "width: 700px;">
-                <div class="sub_title_e" style="padding-bottom: 100px;">Christmas Wishes</div>
-                <div style = "padding-top: 50px;">다가오는 크리스마스, 소원을 말해봐~</div>
+                <img src = "{% static 'images/rooptop.jpg' %}" style = "width: 400px; height: 320px;">
+                <div class="sub_title_e" style="padding-top: 30px; padding-bottom: 10px;">Rooptop HotWater Pool</div>
+                <div style = "padding-top: 0px; margin-bottom: 100px;">따뜻한 겨울을 보내기 위한 루프탑 온수풀 오픈</div>
+
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="event_s e_test col_c">
+              <div class = "image">
+
+                <img src = "{% static 'images/christmas.jpg' %}" style = "width: 400px; height: 320px;">
+                <div class="sub_title_e" style="padding-top: 30px; padding-bottom: 10px;">Christmas Wishes</div>
+                <div style = "padding-top: 0px; margin-bottom: 100px;">다가오는 크리스마스, 소원을 말해봐~</div>
 
               </div>
             </div>
           </li>
         </ul>
-        <p class="pos">
+        <p class="pos" style="top: 325px;">
           <label for="pos1"></label>
           <label for="pos2"></label>
           <label for="pos3"></label>
