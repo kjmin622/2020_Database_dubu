@@ -48,7 +48,7 @@
 	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
             {% if login %} 
-	            <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log out</a></li>
+	            <li class="nav-item active"><a href="{% url 'logout' %}" class="nav-link">Log out</a></li>
               <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li>
             {% else %}
               <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
@@ -88,7 +88,7 @@
 
   <div class = "staff_s_div" style="padding-top: 50px; padding-bottom: 20px;">
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색</div>
-    <p>당일 예약은 전화예약을 이용해주세요. 한 room에 5명까지 가능합니다</p>
+    <p>당일 예약은 전화예약을 이용해주세요. 한 room에 4명까지 가능합니다</p>
   </div>
 
   <div class="bold_test_staff staff_s_div bold_sec">
