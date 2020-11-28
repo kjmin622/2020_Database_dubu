@@ -82,13 +82,26 @@ def reservation3(request):
             return render(request,'main/reservation3.html',{'request':request.POST})
     return redirect('reservation2')      
 
-def join(request):
-    # not login
-    if "member_id" not in request.session or request.session["member_id"]==None :
-        return render(request,'main/join.html',{})  
-    # login
-    else :
-        return render(request,'main/mypage.html',{})
+def join(request): #status=logout
+    if request.method == "POST":
+        try: # 로그인
+            #조건 미충족
+            print(request.POST)
+            first_name = request.POST['first_name']; last_name = request.POST['last_name']; birth = request.POST['birth_year'+'birth_month'+'birth_day']; email = request.POST['email']; member_id = request.POST['member_id']; password = request.POST['password'];
+            cursor = connection.cursor()
+            sqlStr = f"select member_id from page_member_info where member_id = '{member_id}' and password = '{password}'"
+            result = cursor.execute(sqlStr)
+            is_member=cursor.fetchall()
+            connection.close()
+            if(is_member):
+                request.session["member_id"]=member_id
+                return redirect('index')
+            else:
+                return redirect('login')
+        except:
+            connection.rollback()
+            connection.close()
+            return redirect('login')
 
 def mypage(request):
     return render(request,'main/mypage.html',{})
@@ -124,8 +137,8 @@ def signup(request):
         return render(request,'main/tsignup.html',{"Error":"회원가입"})
 
 
-def login(request):
-     # not login
+def login(request): #status=logout
+     # logout
     if('member_id' in request.session and request.session["member_id"]!=None):
         return redirect('index')
     

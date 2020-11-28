@@ -77,6 +77,9 @@
 {% comment %} end top {% endcomment %}
 
 {% comment %} test  {% endcomment %}
+<form method='POST'>
+{% csrf_token %}
+<input type="text" name="method" class="form-control" value="reservation" style="display:none" readonly>
 	<section class="test1 row_c">
 
     <div class = "staff_s_div" style="padding-top: 30px;">
@@ -202,7 +205,7 @@ ahk@commodore.co.kr<br>
 
             <div class="container" style="text-align: center; padding-top: 20px; padding-bottom: 50px;">
               <p>*귀하는 위와 같은 개인정보의 수집·이용에 대한 동의를 거부할 수 있으나, 동의 거부 시 회원가입이 불가능합니다.</p>
-              <input type = "checkbox" value = '동의'> 동의합니다 </input>
+              <input type = "checkbox" value = '동의'> 동의합니다 
             </div>
 
             <li style="padding-bottom: 15px;">[SMS 수신 동의]</li>
@@ -222,7 +225,7 @@ ahk@commodore.co.kr<br>
 
             <div class="container" style="text-align: center; padding-top: 20px;">
               <p>*귀하는 위와 같은 개인정보의 수집·이용에 대한 동의를 거부할 수 있으나, 동의 거부 시 정보 수신이 불가능합니다.</p>
-              <input type = "checkbox" value = '동의'> 동의합니다 </input>
+              <input type = "checkbox" value = '동의'> 동의합니다 
             </div>
 
           </ul>
@@ -235,23 +238,26 @@ ahk@commodore.co.kr<br>
       <div class="s_i_s">
         <div class="s_i s_i_text">
           <ul style="list-style-type:none">
-            <li>first name &nbsp; &nbsp; &nbsp; <input class = "input" style="width: 104px;"></input></li><br>
-            <li>last name &nbsp; &nbsp; &nbsp; <input class = "input" style="width: 104px;"></input></li><br>
+            <li>first name &nbsp; &nbsp; &nbsp; 
+            <input type = "text" name="first_name" class="form-control" id="first_name" style="width: 104px;"></li><br>
+            <li>last name &nbsp; &nbsp; &nbsp; 
+            <input type = "text" name="last_name" class="form-control" id="last_name" style="width: 104px;"></li><br>
             <li>birth  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              <input class = "input" style="width: 45px; padding-left: 2px;"></input> -
-              <input class = "input" style="width: 45px; padding-left: 2px;"></input> -
-              <input class = "input" style="width: 45px; padding-left: 2px;"></input> (YYYY-MM-DD)
+              <br>
+              <input type = "text" name="birth_year" class="form-control" id="birth_year" style="width: 45px; padding-left: 2px; display:inline">
+              <input type = "text" name="birth_month" class="form-control" id="birth_month" style="width: 45px; padding-left: 2px; display:inline">
+              <input type = "text" name="birth_day" class="form-control" id="birth_day" style="width: 45px; padding-left: 2px; display:inline">(YYYY-MM-DD)
             </li><br>
             <li>email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              <input class = "input" style="width: 167px;"></input>
-              <button class = "btn" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px;"> 확인 </button>
+              <input type="text" name="email" class="form-control" id="email" style="width: 167px; display:inline">
+              <button class = "check_btn" name="check_email" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline"> 확인 </button>
             </li><br>
             <li>I D &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              <input class = "input" style="width: 167px;"></input>
-              <button class = "btn" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px;"> 중복 확인 </button>
+              <input type="text" name="member_id" class="form-control" id="member_id" style="width: 167px; display:inline">
+              <button class = "check_btn" name="check_id" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline"> 중복 확인 </button>
             </li><br>
             <li>PASSWORD &nbsp; &nbsp;
-              <input class = "input" style="width: 167px;"></input>
+              <input type="password" name="password" class="form-control" id="password" style="width: 167px;">
             </li>
           </ul>
         </div>
@@ -264,7 +270,7 @@ ahk@commodore.co.kr<br>
         <div class="s_i s_i_text">
           <ul style="list-style-type:none">
             <li>추천인 ID &nbsp; &nbsp;
-              <input class = "input" style="width: 167px;"></input>
+              <input class = "input" style="width: 167px;">
               <button class = "btn" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px;"> 확인 </button>
             </li>
           </ul>
@@ -281,7 +287,7 @@ ahk@commodore.co.kr<br>
     </div>
 
   </section>
-
+</form>
     
 <!-- footer -->
 <footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
