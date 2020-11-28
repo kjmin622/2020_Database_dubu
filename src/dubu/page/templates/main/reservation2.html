@@ -98,6 +98,7 @@
 {% comment %} test  {% endcomment %}
 <form method='POST' action = "{% url 'reservation3' %}">
 {% csrf_token %}
+<input type="text" name="method" class="form-control" value="reservation2" style="display:none" readonly>
 <section class="test1 row_c">
   <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px;">
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택</div>
@@ -204,7 +205,7 @@
           <ul style="list-style-type:none">
             <li>인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               <input class = "num_btn" name = "meal" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-              <input class = "count" value='0' name = "인원" readonly style = "width:40px; padding-left: 13px;">
+              <input class = "count" value='0' name = "breakfast_num" readonly style = "width:40px; padding-left: 13px;">
               <input class = "num_btn" name = "meal" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
             </li><br>
             <li style="padding-bottom: 15px;" id= "breakfast_num"> 가격 : </li>
@@ -218,7 +219,7 @@
       <div class="staff_title ">추가 요청</div>
       <div class="s_i_s">
         <div class="s_i s_i_text">
-          <textarea style= "width: 800px; height: 100px"></textarea>
+          <textarea name="extra_text" style= "width: 800px; height: 100px"></textarea>
         </div>
       </div>
 
@@ -373,7 +374,7 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 
   $(".num_btn").click(function(){
     var mp_value = $(this).attr("value");
-    var x=$("input[name=인원]");
+    var x=$("input[name=breakfast_num]");
     var int=1*x.attr("value");
     if(mp_value == '-') {
       if(int>=1){
@@ -385,6 +386,7 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
     }
     $("#breakfast_num").text("가격 : "+(int*10000));
     x.attr("value",int+"");
+
   })
   </script>
 

@@ -72,6 +72,7 @@ def reservation3(request):
         login = True
 
     if(request.method=='POST'):
+        print(request.POST)
         if(request.POST['method']=='reservation2'):
             # check_in = request.POST['check_in'];check_out = request.POST['check_out'];adult_num = int(request.POST['adult_num']);child_num= int(request.POST['child_num'])
             # if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today().strftime("%Y-%m-%d")>=check_in):
