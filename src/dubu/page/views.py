@@ -102,6 +102,7 @@ def join(request): #status=logout
             connection.rollback()
             connection.close()
             return redirect('login')
+    return render(request, 'main/join.html',{'request':request.POST})
 
 def mypage(request):
     return render(request,'main/mypage.html',{})
