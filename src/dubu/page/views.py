@@ -93,19 +93,15 @@ def join(request):
             #조건 미충족
             if (request.POST["last_name"] == '' or request.POST["first_name"] == '' or request.POST['phone_1']+request.POST['phone_2']+request.POST['phone_3'] == '' or request.POST['birth_year']+'-'+request.POST['birth_month']+'-'+request.POST['birth_day'] == '' or  request.POST["email"] == '' or request.POST["member_id"] == '' or request.POST["password"] == '' or request.POST["password2"] == ''):
                 return redirect('join')
-            print(1)
             if(password!=password2): 
                 return redirect('join')
-            print(2)
             cursor = connection.cursor()
             sqlStr = f"select member_id from page_member_info where member_id = '{member_id}'"
             result = cursor.execute(sqlStr)
             is_member_id=cursor.fetchall()
-            print(3)
             if(is_member_id):
                 return redirect('join')
             sqlStr = f"insert into page_member_info(last_name, first_name, birth, phone, email, member_id, password, is_sms, membership, point) values('{last_name}','{first_name}','{birth}','{phone}','{email}','{member_id}','{password}','{1 if is_sms=='on' else 0}',0,0)"
-            print(sqlStr)
             result = cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
             connection.close()
