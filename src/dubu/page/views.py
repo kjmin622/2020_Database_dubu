@@ -83,15 +83,60 @@ def reservation3(request):
     return redirect('reservation2')      
 
 def join(request): #status=logout
+    if(request.method=="POST"):
+        #is_sms, last_name, first_name, birth, phone, email, member_id, password, password2, recommender, is_sms, 
+        print(request.POST)
+        first_name = request.POST['first_name']; last_name = request.POST['last_name']; phone=request.POST['phone_1'+'phone_2'+'phone_3']; birth = request.POST['birth_year'+'birth_month'+'birth_day']; email = request.POST['email']; member_id = request.POST['member_id']; password = request.POST['password']; password2 = request.POST['password2']; recommender = request.POST['recommender'];is_sms = request.POST["is_sms"]
+        
+        try:
+            #조건 미충족
+            if (request.POST["last_name"] == '' or request.POST["first_name"] == '' or request.POST["birth"] == '' or request.POST["phone"] == '' or request.POST["email"] == '' or request.POST["member_id"] == '' or request.POST["password1"] == '' or request.POST["password2"] == ''):
+                return render(request,'main/join.html',{})
+            #비번 불일치
+            if(password!=password2): 
+                return render(request,'main/join.html',{})
+            
+            cursor = connection.cursor()
+            sqlStr1 = f"select phone from page_member_info where phone = '{phone}' or email = '{email}'"
+            result1 = cursor.execute(sqlStr1)
+            is_member=cursor.fetchall()
+            if(is_member):
+                return redirect('join')
+            sqlStr = f"insert into page_member_info(last_name, first_name, birth, phone, email, member_id, password, is_sms, membership) values('{last_name}','{first_name}','{birth}','{phone}','{email}','{member_id}','{password}','{1 if is_sms=='on' else 0}',0)"
+            result = cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return redirect('login')
+        
+        except:
+            connection.rollback()
+            connection.close()
+            return render(request,'main/join.html',{'Error': sqlStr})
+    else:
+        return render(request,'main/join.html',{})
+
     if request.method == "POST":
         try: # 로그인
             #조건 미충족
             print(request.POST)
-            first_name = request.POST['first_name']; last_name = request.POST['last_name']; birth = request.POST['birth_year'+'birth_month'+'birth_day']; email = request.POST['email']; member_id = request.POST['member_id']; password = request.POST['password'];
+            first_name = request.POST['first_name']; last_name = request.POST['last_name']; phone_num=request.POST['phone_1'+'phone_2'+'phone_3']; birth = request.POST['birth_year'+'birth_month'+'birth_day']; email = request.POST['email']; member_id = request.POST['member_id']; password = request.POST['password']; recommender = request.POST['recommender']
             cursor = connection.cursor()
-            sqlStr = f"select member_id from page_member_info where member_id = '{member_id}' and password = '{password}'"
-            result = cursor.execute(sqlStr)
-            is_member=cursor.fetchall()
+            sqlStr1 = f"select phone_num from page_member_info where phone_num = '{phone_num}'"
+            result1 = cursor.execute(sqlStr1)
+            is_member = cursor.fetchall()
+            connection.close()
+            sqlStr2 = f"select member_id from page_member_info where member_id = '{member_id}'"
+            result = cursor.execute(sqlStr2)
+            is_used = cursor.fetchall()
+            connection.close()
+            if(is_member): # 이미 회원
+                return redirect('join')
+            else: # 신규 회원
+                sqlStr = f"insert first_name, last_name, phone_num, birth, email, member_id, password into page_member_info"
+                return render(request, 'main/login.html',{})
+            sqlStr2 = f"select member_id from page_member_info where member_id = '{member_id}'"
+            result = cursor.execute(sqlStr2)
+            is_used=cursor.fetchall()
             connection.close()
             if(is_member):
                 request.session["member_id"]=member_id
@@ -107,7 +152,7 @@ def join(request): #status=logout
 def mypage(request):
     return render(request,'main/mypage.html',{})
 
-def signup(request):
+def tsignup(request):
     if(request.method=="POST"):
         #last_name, first_name, birth, phone, email, member_id, password, password2, is_sms
         last_name = request.POST["last_name"];first_name = request.POST["first_name"];birth = request.POST["birth"];phone = request.POST["phone"];email = request.POST["email"];member_id = request.POST["member_id"];password = request.POST["password1"];password2 = request.POST["password2"];is_sms = request.POST["is_sms"]
@@ -115,15 +160,15 @@ def signup(request):
         try:
             #조건 미충족
             if (request.POST["last_name"] == '' or request.POST["first_name"] == '' or request.POST["birth"] == '' or request.POST["phone"] == '' or request.POST["email"] == '' or request.POST["member_id"] == '' or request.POST["password1"] == '' or request.POST["password2"] == ''):
-                return render(request,'main/tsignup.html',{'Error': 'Fill all the blanks.'})
+                return render(request,'main/join.html',{'Error': 'Fill all the blanks.'})
             if(password!=password2): 
-                return render(request,'main/tsignup.html',{'Error': 'Password is not correctly checked.'})
+                return render(request,'main/join.html',{'Error': 'Password is not correctly checked.'})
             cursor = connection.cursor()
             sqlStr = f"select member_id from page_member_info where member_id = '{member_id}'"
             result = cursor.execute(sqlStr)
             is_member_id=cursor.fetchall()
             if(is_member_id):
-                return render(request,'main/tsignup.html',{'Error': 'This ID is already in use.'})
+                return render(request,'main/join.html',{'Error': 'This ID is already in use.'})
             sqlStr = f"insert into page_member_info(last_name, first_name, birth, phone, email, member_id, password, is_sms, membership) values('{last_name}','{first_name}','{birth}','{phone}','{email}','{member_id}','{password}','{1 if is_sms=='on' else 0}',0)"
             result = cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
@@ -133,9 +178,9 @@ def signup(request):
         except:
             connection.rollback()
             connection.close()
-            return render(request,'main/tsignup.html',{'Error': sqlStr})
+            return render(request,'main/join.html',{'Error': sqlStr})
     else:
-        return render(request,'main/tsignup.html',{"Error":"회원가입"})
+        return render(request,'main/join.html',{})
 
 
 def login(request): #status=logout

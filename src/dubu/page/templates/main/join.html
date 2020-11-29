@@ -205,7 +205,7 @@ ahk@commodore.co.kr<br>
 
             <div class="container" style="text-align: center; padding-top: 20px; padding-bottom: 50px;">
               <p>*귀하는 위와 같은 개인정보의 수집·이용에 대한 동의를 거부할 수 있으나, 동의 거부 시 회원가입이 불가능합니다.</p>
-              <input type = "checkbox" value = '동의'> 동의합니다 
+              <input type = "checkbox" class="form-control" value = 'agree'> 동의합니다 
             </div>
 
             <li style="padding-bottom: 15px;">[SMS 수신 동의]</li>
@@ -225,7 +225,7 @@ ahk@commodore.co.kr<br>
 
             <div class="container" style="text-align: center; padding-top: 20px;">
               <p>*귀하는 위와 같은 개인정보의 수집·이용에 대한 동의를 거부할 수 있으나, 동의 거부 시 정보 수신이 불가능합니다.</p>
-              <input type = "checkbox" value = '동의'> 동의합니다 
+              <input type = "checkbox" name="is_sms" class="form-control" id="is_sms" value = 'agree'> 동의합니다 
             </div>
 
           </ul>
@@ -239,26 +239,35 @@ ahk@commodore.co.kr<br>
         <div class="s_i s_i_text">
           <ul style="list-style-type:none">
             <li>first name &nbsp; &nbsp; &nbsp; 
-            <input type = "text" name="first_name" class="form-control" id="first_name" style="width: 104px;"></li><br>
+            <input type = "text" name="first_name" class="form-control" id="first_name" style="width: 104px; display:inline"></li><br>
             <li>last name &nbsp; &nbsp; &nbsp; 
-            <input type = "text" name="last_name" class="form-control" id="last_name" style="width: 104px;"></li><br>
+            <input type = "text" name="last_name" class="form-control" id="last_name" style="width: 104px; display:inline"></li><br>
+            <li>phone  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <input type = "text" name="phone_1" class="form-control" id="phone_1" style="width: 60px; padding-left: 2px; display:inline"> -
+              <input type = "text" name="phone_2" class="form-control" id="phone_2" style="width: 60px; padding-left: 2px; display:inline"> -
+              <input type = "text" name="phone_3" class="form-control" id="phone_3" style="width: 60px; padding-left: 2px; display:inline">
+            </li><br>
             <li>birth  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              <br>
-              <input type = "text" name="birth_year" class="form-control" id="birth_year" style="width: 45px; padding-left: 2px; display:inline">
-              <input type = "text" name="birth_month" class="form-control" id="birth_month" style="width: 45px; padding-left: 2px; display:inline">
-              <input type = "text" name="birth_day" class="form-control" id="birth_day" style="width: 45px; padding-left: 2px; display:inline">(YYYY-MM-DD)
+              <input type = "text" name="birth_year" class="form-control" id="birth_year" style="width: 60px; padding-left: 2px; display:inline">
+              <input type = "text" name="birth_month" class="form-control" id="birth_month" style="width: 40px; padding-left: 2px; display:inline">
+              <input type = "text" name="birth_day" class="form-control" id="birth_day" style="width: 40px; padding-left: 2px; display:inline">(YYYY-MM-DD)
             </li><br>
             <li>email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               <input type="text" name="email" class="form-control" id="email" style="width: 167px; display:inline">
-              <button class = "check_btn" name="check_email" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline"> 확인 </button>
+              <input type="button" class="check_btn" id="emailcheck_btn" value="확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline">
             </li><br>
-            <li>I D &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <li>ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               <input type="text" name="member_id" class="form-control" id="member_id" style="width: 167px; display:inline">
-              <button class = "check_btn" name="check_id" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline"> 중복 확인 </button>
+              <input type="button" class="check_btn" id="idcheck_btn" value="중복 확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline">
             </li><br>
             <li>PASSWORD &nbsp; &nbsp;
-              <input type="password" name="password" class="form-control" id="password" style="width: 167px;">
-            </li>
+              <input type="password" name="password" class="form-control" id="password" style="width: 167px; display:inline">
+              &nbsp; * PASSWORD는 영문,숫자 포함 8자 이상이어야 합니다.
+            </li><br>
+            <li>PASSWORD Check &nbsp; &nbsp;
+              <input type="password" name="password2" class="form-control" id="password2" style="width: 167px; display:inline">
+              &nbsp;
+              <input type="button" class="check_btn" id="pwcheck_btn" value="확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline">
           </ul>
         </div>
       </div>
@@ -270,7 +279,7 @@ ahk@commodore.co.kr<br>
         <div class="s_i s_i_text">
           <ul style="list-style-type:none">
             <li>추천인 ID &nbsp; &nbsp;
-              <input class = "input" style="width: 167px;">
+              <input type="text" name="recommender" class="form-control" id="recommender" style="width: 167px; display:inline">
               <button class = "btn" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px;"> 확인 </button>
             </li>
           </ul>
@@ -281,7 +290,7 @@ ahk@commodore.co.kr<br>
     <div class = "staff_s_div">
       <div style = "padding-bottom:50px; padding-top:20px;">
       <center>
-        <button class = "btn" style="border-radius:10px;"> 가입 완료 </button>
+        <button type="submit" class = "btn" style="border-radius:10px;"> 가입 완료 </button>
       </center>
       </div>
     </div>
@@ -377,8 +386,49 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
   <script src="{% static 'js/scrollax.min.js' %}"></script>
   <script src="{% static 'js/google-map.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
-
-
-
   </body>
 </html>
+
+<script>
+$(document).ready(function(){
+  $('#idfind_btn').click(function(){
+    var name = $('#idfind_name').val().replace(' ','');
+    var phone_num = $('#idfind_phone_num').val().replace(' ','');
+    var email = $('#idfind_email').val().replace(' ','');
+    if(false);
+    {% for data in member_datas %}
+    else if('{{data.last_name}}'+'{{data.first_name}}'.replace(' ','')==name && '{{data.phone}}'.replace(' ','')==phone_num && '{{data.email}}'.replace(' ','')==email){
+      alert('{{data.member_id}}');
+      flag = false;
+    }
+    {% endfor %}
+    else{
+      alert("일치하지 않는 계정 정보입니다.");
+    }
+
+    $('#idfind_name').val("");
+    $('#idfind_phone_num').val("");
+    $('#idfind_email').val("");
+  });
+
+  $('#pwfind_btn').click(function(){
+    var name = $('#pwfind_name').val().replace(' ','');
+    var member_id = $('#pwfind_id').val().replace(' ','');
+    var email = $('#pwfind_email').val().replace(' ','');
+    if(false);
+    {% for data in member_datas %}
+    else if('{{data.last_name}}'+'{{data.first_name}}'.replace(' ','')==name && '{{data.member_id}}'.replace(' ','')==member_id && '{{data.email}}'.replace(' ','')==email){
+      alert('{{data.password}}');
+      flag = false;
+    }
+    {% endfor %}
+    else{
+      alert("일치하지 않는 계정 정보입니다.");
+    }
+
+    $('#pwfind_name').val("");
+    $('#pwfind_id').val("");
+    $('#pwfind_email').val("");
+  });
+});
+</script>
