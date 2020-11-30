@@ -96,9 +96,12 @@
 
 		
 {% comment %} test  {% endcomment %}
+<form method='POST' action = "{% url 'reservation3' %}">
+{% csrf_token %}
+<input type="text" name="method" class="form-control" value="reservation2" style="display:none" readonly>
 <section class="test1 row_c">
   <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px;">
-    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택</div>
+    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금 맞게 작성해 주세요!ㆍ옵션 선택</div>
   </div>
   
   <div class="bold_test_staff staff_s_div bold_sec">
@@ -106,24 +109,26 @@
     <div class="p-4 align-self-stretch d-flex" style="width: 600px;">
       <div class="wrap" style = "margin-right:30px;">
         <label for="#">Check-in Date</label>
+        <p>{{request.check_in}}</p>
       </div>
       <div class="wrap" style = "margin-right:30px;">
         <label for="#">Check-out Date</label>
+        <p>{{request.check_out}}</p>
       </div>
 
       <div class="wrap" style = "margin-right:30px;">
-        <label for="#">객실 1</label>
-
+        <label for="#">객실</label>
+        <p>1</p>
       </div>
 
       <div class="wrap" style = "margin-right:30px;">
         <label for="#">어른 </label>
-        <div request.GET['adult_num']>
-        </div>
+        <p>{{request.adult_num}}</p>
       </div>
 
       <div class="wrap" style = "margin-right:30px;">
-        <label for="#">어린이 n</label>
+        <label for="#">어린이</label>
+        <p>{{request.child_num}}</p>
       </div>
 
     </div>
@@ -133,15 +138,150 @@
  
 
   <div  class="bold_test_staff staff_s_div bold_sec">
-      <div class="staff_title ">객실 유형(이름) + Bed Type</div>
+      <div class="staff_title ">standard_single</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">Room image</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 80px;">
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
           <ul style="list-style-type:none">
-            <button class = "popup1_btn btn" style="border-radius:10px;"> 자세히 보기 </button>
-            <button class = "btn" style="border-radius:10px;"> 요금 보기 </button>
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">standard_double</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">superior_single</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">superior_double</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">delux_double</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">delux_queen</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">suite_delux_queen</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">suite_delux_king</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">suite_royal_queen</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
+          </ul>
+        </div>
+      </div>
+  </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">suite_royal_king</div>
+      <div class="s_i_s">
+        <div class="s_i  col_c">
+          <div class="s_i_logo ">Room image</div>
+        </div>
+        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+          <ul style="list-style-type:none">
+            요금 맞게 작성해 주세요!<br>
+            <input type="button" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
           </ul>
         </div>
       </div>
@@ -194,19 +334,19 @@
 
   <div  class="bold_test_staff staff_s_div bold_sec">
 
-    <div class = "container">
+    
 
       <div class="staff_title ">조식 신청</div>
       <div class="s_i_s">
         <div class="s_i s_i_text">
           <ul style="list-style-type:none">
-            <li style="padding-bottom: 15px;"> 성인 n </li>
-            <li style="padding-bottom: 15px;"> 가격 0 </li>
-            <li> 인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              <input value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-              <input class = "count" value='0' name = "인원" readonly style = "width:21px; padding-left:2px;">
-              <input value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+            <li>인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <input class = "num_btn" name = "meal" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+              <input class = "count" value='0' name = "breakfast_num" readonly style = "width:40px; padding-left: 13px;">
+              <input class = "num_btn" name = "meal" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
             </li><br>
+            <li style="padding-bottom: 15px;" id= "breakfast_num"> 가격 : </li>
+            <br>
             <p> * 유아와 어린이는 별도로 신청해주세요. </p>
           </ul>
         </div>
@@ -215,22 +355,22 @@
       <div class="staff_title ">추가 요청</div>
       <div class="s_i_s">
         <div class="s_i s_i_text">
-          <textarea style= "width: 800px; height: 100px"></textarea>
+          <textarea name="extra_text" style= "width: 800px; height: 100px"></textarea>
         </div>
       </div>
 
-    </div>
+    
   </div>
 
   <div class="bold_test_staff staff_s_div bold_sec">
 
-      <div class="staff_title ">객실 요금</div>
+      <div class="staff_title ">객실 요금 맞게 작성해 주세요!</div>
       <div class="s_i_s">
         <div class="s_i s_i_text" style="padding-right: 700px;">
           <ul style="list-style-type:none">
-            <li> 객실 금액 : </li>
-            <li> 조식 금액 : </li>
-            <li> 세금 및 봉사료 : </li>
+            <li> 객실 금액 : </li><br>
+            <li style="padding-bottom: 15px;" id= "breakfast_num2"> 조식 금액 : </li><br>
+            <li> 세금 및 봉사료 : </li><br>
             <li style = "font-weight: bold; padding-top: 15px;"> 총 금액 : </li>
           </ul>
         </div>
@@ -239,13 +379,13 @@
 
   <div class="bold_test_staff staff_s_div bold_sec">
 
-    <div class="staff_title ">요금 정책 & 취소 규정</div>
+    <div class="staff_title ">요금 맞게 작성해 주세요! 정책 & 취소 규정</div>
     <div class="s_i_s">
       <div class="s_i s_i_text">
-        <label for="#">- 요금 정책</label>
-        <p>해당 요금에 부가세 10%와 봉사료 10% (총 21%)가 부과됩니다.</p>
+        <label for="#">- 요금 맞게 작성해 주세요! 정책</label>
+        <p>해당 요금 맞게 작성해 주세요!에 부가세 10%와 봉사료 10% (총 20%)가 부과됩니다.</p>
         <label for="#">- 취소 규정</label>
-        <p>예약 취소 및 변경은 체크인 하루 전 18:00(한국시간)까지 가능합니다. 예약하신 일자에 체크인 되지 않거나 또는 위의 지정 시간 이후에 예약을 취소했을 경우에는 예약 사항에 대해 노-쇼 (No Show) 처리되며, 이에 따른 위약금으로 예약 첫날에 해당하는 1박 객실요금이 청구되오니 유의하시기 바랍니다.</p>
+        <p>예약 취소 및 변경은 체크인 하루 전 18:00(한국시간)까지 가능합니다. 예약하신 일자에 체크인 되지 않거나 또는 위의 지정 시간 이후에 예약을 취소했을 경우에는 예약 사항에 대해 노-쇼 (No Show) 처리되며, 이에 따른 위약금으로 예약 첫날에 해당하는 1박 객실요금 맞게 작성해 주세요!이 청구되오니 유의하시기 바랍니다.</p>
       </div>
     </div>
 </div>
@@ -256,14 +396,13 @@
   <div class = "staff_s_div">
     <div style = "padding-bottom:50px; padding-top:20px;">
     <center>
-    <button class = "btn" onclick="location.href='{% url 'reservation3' %}'" style="border-radius:10px;"> 객실 및 요금 확인 </button>
+    <button class = "btn" onclick="location.href='{% url 'reservation3' %}'" style="border-radius:10px;"> 객실 및 요금 맞게 작성해 주세요! 확인 </button>
     </center>
     </div>
   </div>
 
- 
-
 </section>
+</form>
 
     
 
@@ -356,17 +495,35 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
   <script src="{% static 'js/google-map.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
 
-  <script>
+  </body>
+</html>
 
-    $('.popup_background').click(function(){
-      $('.popup').css('display', 'none')
-    });
+<script>
+  $('.popup_background').click(function(){
+    $('.popup').css('display', 'none')
+  });
 
     $('.popup1_btn').click(function(){
       $('.popup_background').css('display', 'block');
       $('.popup1').css('display', 'block');
     });
+
+  $(".num_btn").click(function(){
+    var mp_value = $(this).attr("value");
+    var x=$("input[name=breakfast_num]");
+    var int=1*x.attr("value");
+    if(mp_value == '-') {
+      if(int>=1){
+        int--;
+      }
+    }
+    else{
+      int++;
+    }
+    $("#breakfast_num").text("가격 : "+(int*10000));
+
+    $("#breakfast_num2").text("조식 금액 : "+(int*10000));
+    x.attr("value",int+"");
+  })
   </script>
 
-  </body>
-</html>

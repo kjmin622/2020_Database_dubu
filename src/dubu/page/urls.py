@@ -15,7 +15,6 @@ urlpatterns = [
     path('login',views.login,name="login"),
     path('logout',views.logout,name="logout"),
     path('mypage',views.mypage,name="mypage"),
-    path('signup',views.signup,name="signup"),
 
     #admin
     path('admin/login',admin_views.adminLogin,name="admin_login"),

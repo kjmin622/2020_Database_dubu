@@ -48,7 +48,7 @@
 	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
             {% if login %} 
-	            <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log out</a></li>
+	            <li class="nav-item active"><a href="{% url 'logout' %}" class="nav-link">Log out</a></li>
               <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li>
             {% else %}
               <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
@@ -88,13 +88,13 @@
 
   <div class = "staff_s_div" style="padding-top: 50px; padding-bottom: 20px;">
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색</div>
-    <p>*당일 예약은 전화예약을 이용해주세요. 한 room에 5명까지 가능합니다*</p>
+    <p>당일 예약은 전화예약을 이용해주세요. 한 room에 4명까지 가능합니다</p>
   </div>
 
   <div class="bold_test_staff staff_s_div bold_sec">
     <div class="form-group p-4 align-self-stretch d-flex align-items-end">
-      <div class="container" style = "float:left; width: 230px; margin-right: 0px;" >
-        
+
+      <div class="container" style = "float:left; width: 230px; margin-right: 0px;" >       
         <label for="#">Check-in Date</label>
         <input type="date" name="check_in" class="form-control" placeholder="Check-in date">
       </div>
@@ -112,16 +112,16 @@
 
     <div class="s_i_s">
       <div class="s_i s_i_text" style="padding-bottom: 30px;">
-        <ul style="list-style-type:none">
+        <ul style="list-style-type:none; margin-top: 16px;">
           
-          <li>성인 &nbsp; &nbsp; &nbsp; &nbsp;
+          <li>성인 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <input class = "num_btn" name = "adult_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value='0' name = "adult_num" readonly style = "width:21px; padding-left:2px;">
+            <input class = "count" value='0' name = "adult_num" readonly style = "width:40px; padding-left: 13px;">
             <input class = "num_btn" name = "adult_btn"value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
-          <li>어린이 &nbsp; &nbsp;
+          <li>어린이 &nbsp; &nbsp; &nbsp;
             <input class = "num_btn" name = "child_btn" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
-            <input class = "count" value='0' name = "child_num" readonly style = "width:21px; padding-left:2px;">
+            <input class = "count" value='0' name = "child_num" readonly style = "width:40px; padding-left: 13px;">
             <input class = "num_btn" name = "child_btn" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
         </ul>

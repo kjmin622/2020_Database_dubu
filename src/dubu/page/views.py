@@ -43,7 +43,7 @@ def reservation(request):
     else:
        login = True
     # #reserve
-    return render(request,'main/reservation.html',{})
+    return render(request,'main/reservation.html',{"login":login})
 
 def reservation2(request):
     # not login
@@ -55,12 +55,12 @@ def reservation2(request):
     
     if(request.method=='POST'):
         if(request.POST['method']=='reservation'):
-            check_in = request.POST['check_in'];check_out = request.POST['check_out'];adult_num = int(request.POST['adult_num']);child_num= int(request.POST['child_num'])
-            if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today().strftime("%Y-%m-%d")>=check_in):
-                return redirect('reservation')
-            if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
-                return redirect('reservation')
-            return render(request,'main/reservation2.html',{"check_in":check_in, "check_out":check_out, "adult_num":adult_num, "child_num": child_num})
+            # check_in = request.POST['check_in'];check_out = request.POST['check_out'];adult_num = int(request.POST['adult_num']);child_num= int(request.POST['child_num'])
+            # if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today().strftime("%Y-%m-%d")>=check_in):
+            #     return redirect('reservation')
+            # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
+            #     return redirect('reservation')
+            return render(request,'main/reservation2.html',{'request':request.POST})
     return redirect('reservation')
 
 def reservation3(request):
@@ -70,37 +70,38 @@ def reservation3(request):
     # login
     else:
         login = True
-    return render(request,'main/reservation3.html',{"login":login})    
 
-def join(request):
-    # not login
-    if "member_id" not in request.session or request.session["member_id"]==None :
-        return render(request,'main/join.html',{})  
-    # login
-    else :
-        return render(request,'main/mypage.html',{})
+    if(request.method=='POST'):
+        print(request.POST)
+        if(request.POST['method']=='reservation2'):
+            # check_in = request.POST['check_in'];check_out = request.POST['check_out'];adult_num = int(request.POST['adult_num']);child_num= int(request.POST['child_num'])
+            # if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today().strftime("%Y-%m-%d")>=check_in):
+            #     return redirect('reservation')
+            # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
+            #     return redirect('reservation')
+            return render(request,'main/reservation3.html',{'request':request.POST})
+    return redirect('reservation2')      
 
 def mypage(request):
     return render(request,'main/mypage.html',{})
 
-def signup(request):
+def join(request):
     if(request.method=="POST"):
         #last_name, first_name, birth, phone, email, member_id, password, password2, is_sms
-        last_name = request.POST["last_name"];first_name = request.POST["first_name"];birth = request.POST["birth"];phone = request.POST["phone"];email = request.POST["email"];member_id = request.POST["member_id"];password = request.POST["password1"];password2 = request.POST["password2"];is_sms = request.POST["is_sms"]
-        
+        last_name = request.POST["last_name"];first_name = request.POST["first_name"];phone=request.POST['phone_1']+request.POST['phone_2']+request.POST['phone_3'];birth = request.POST['birth_year']+'-'+request.POST['birth_month']+'-'+request.POST['birth_day'];email = request.POST["email"];member_id = request.POST["member_id"];password = request.POST["password"];password2 = request.POST["password2"];is_sms = request.POST["is_sms"]
         try:
             #조건 미충족
-            if (request.POST["last_name"] == '' or request.POST["first_name"] == '' or request.POST["birth"] == '' or request.POST["phone"] == '' or request.POST["email"] == '' or request.POST["member_id"] == '' or request.POST["password1"] == '' or request.POST["password2"] == ''):
-                return render(request,'main/tsignup.html',{'Error': 'Fill all the blanks.'})
+            if (request.POST["last_name"] == '' or request.POST["first_name"] == '' or request.POST['phone_1']+request.POST['phone_2']+request.POST['phone_3'] == '' or request.POST['birth_year']+'-'+request.POST['birth_month']+'-'+request.POST['birth_day'] == '' or  request.POST["email"] == '' or request.POST["member_id"] == '' or request.POST["password"] == '' or request.POST["password2"] == ''):
+                return redirect('join')
             if(password!=password2): 
-                return render(request,'main/tsignup.html',{'Error': 'Password is not correctly checked.'})
+                return redirect('join')
             cursor = connection.cursor()
             sqlStr = f"select member_id from page_member_info where member_id = '{member_id}'"
             result = cursor.execute(sqlStr)
             is_member_id=cursor.fetchall()
             if(is_member_id):
-                return render(request,'main/tsignup.html',{'Error': 'This ID is already in use.'})
-            sqlStr = f"insert into page_member_info(last_name, first_name, birth, phone, email, member_id, password, is_sms, membership) values('{last_name}','{first_name}','{birth}','{phone}','{email}','{member_id}','{password}','{1 if is_sms=='on' else 0}',0)"
+                return redirect('join')
+            sqlStr = f"insert into page_member_info(last_name, first_name, birth, phone, email, member_id, password, is_sms, membership, point) values('{last_name}','{first_name}','{birth}','{phone}','{email}','{member_id}','{password}','{1 if is_sms=='on' else 0}',0,0)"
             result = cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
             connection.close()
@@ -109,13 +110,13 @@ def signup(request):
         except:
             connection.rollback()
             connection.close()
-            return render(request,'main/tsignup.html',{'Error': sqlStr})
+            return redirect('join')
     else:
-        return render(request,'main/tsignup.html',{"Error":"회원가입"})
+        return render(request,'main/join.html',{})
 
 
-def login(request):
-     # not login
+def login(request): #status=logout
+     # logout
     if('member_id' in request.session and request.session["member_id"]!=None):
         return redirect('index')
     

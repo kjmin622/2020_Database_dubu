@@ -424,11 +424,11 @@ class Book():
     def get_invoice():
         try:
             cursor = connection.cursor()
-            sqlStr = "select booking_id, room_num, product_id, name, count, price, order_time from (select booking_id, room_num, product_id, order_time,count from page_booking_rooms natural join page_invoice) natural join (select product_id, name, price from page_product natural join page_product_price)"
+            sqlStr = "select booking_id, room_num, product_id, name, count, price, order_time, offer_time from ((select offer_time, page_invoice.booking_id booking_id, room_num, product_id, order_time, count, is_payment from page_booking_rooms inner join page_invoice on page_booking_rooms.booking_id = page_invoice.booking_id) natural join (select product_id, name, price from page_product natural join page_product_price)) where is_payment=0"
             cursor.execute(sqlStr);result=cursor.fetchall()
             output = []
             for data in result:
-                output.append({'booking_id':data[0], 'room_num':data[1], 'product_id':data[2], 'name':data[3], 'count':data[4], 'price':data[5], 'order_time':data[6]})
+                output.append({'booking_id':data[0], 'room_num':data[1], 'product_id':data[2], 'name':data[3], 'count':data[4], 'price':(str(int(data[5])*int(data[4]))+"("+str(data[5])+"*"+str(data[4])+")"), 'order_time':data[6], 'offer_time':data[7]})
 
             connection.close()
             return output
@@ -437,7 +437,65 @@ class Book():
             return None
 
     def get_coupon():
-        pass
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select room_num, member_id, coupon_id, coupon_type, coupon_name, value, min_price from page_coupon_list inner join (select room_num, member_id mid from page_booking_rooms inner join page_member_customer on page_booking_rooms.booking_id=page_member_customer.booking_id) on mid = member_id"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({'room_num':data[0], 'member_id':data[1], 'coupon_id':data[2], 'coupon_type':data[3], 'coupon_name':data[4], 'value':data[5], 'min_price':data[6]})
+            connection.close()
+            return output
+
+        except:
+            connection.close()
+            return None
+
+    def get_point():
+        try:
+            cursor = connection.cursor()
+            sqlStr = "select room_num, point from (select room_num, member_id from page_booking_rooms inner join page_member_customer on page_booking_rooms.booking_id=page_member_customer.booking_id) natural join page_member_info"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({'room_num':data[0],'point':data[1]})
+            connection.close()
+            return output
+        except:
+            connection.close()
+            return None
+
+    def complete_bill(dataDir):
+        try:
+            cursor = connection.cursor()
+            room_num = dataDir["room_num"];price=dataDir["price"];point=dataDir["point"];coupon_list=dict(dataDir)["coupon_list"]
+            sqlStr = f"select page_booking_rooms.booking_id, member_id from page_booking_rooms inner join page_member_customer on page_booking_rooms.booking_id=page_member_customer.booking_id where room_num={room_num}"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            booking_id = result[0][0]
+            member_id = result[0][1]
+
+            sqlStr = f"update page_invoice set is_payment=1 where booking_id='{booking_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+
+            sqlStr = f"update page_member_info set point=point-{point} where member_id='{member_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+
+            now = datetime.datetime.today()
+            strnow = now.strftime("%Y-%m-%d %H:%M:%S:%f")[:2]
+            sqlStr = f"update page_bill set paytime={strnow} where booking_id='{booking_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+
+            for coupon_id in coupon_list:
+                sqlStr = f"delete from page_coupon_list where coupon_id = '{coupon_id}'"
+                cursor.execute(sqlStr);result=cursor.fetchall()
+
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
 
 
 class Room():
