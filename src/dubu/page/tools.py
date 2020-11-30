@@ -497,6 +497,49 @@ class Book():
             connection.close()
             return False
 
+    def get_room_list():
+        try:
+            cursor=connection.cursor()
+            sqlStr = "select room_num, team_name, room_type from page_rooms"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            output = []
+            for data in result:
+                output.append({"room_num":data[0],"team_name":data[1],"room_type":data[2], "check_in_out":[]})
+                sqlStr = f"select booking_id from page_booking_rooms where room_num = {data[0]}"
+                cursor.execute(sqlStr);bookid_list=cursor.fetchall()
+                for booking_id in bookid_list:
+                    sqlStr = f"select check_in, check_out from page_booking where booking_id='{booking_id[0]}'"
+                    cursor.execute(sqlStr);t=cursor.fetchall()
+                    output[-1]["check_in_out"].append([t[0][0],t[0][1]])
+            connection.close()
+            return output
+
+        except:
+            connection.close()
+            return None
+
+    def select_room(dataDir):
+        try:
+            booking_id=dataDir["booking_id"]
+            room_num=dataDir["room_num"]
+            cursor = connection.cursor()
+            sqlStr = f"select room_num from page_booking_rooms where booking_id='{booking_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            if(len(result)==0):
+                sqlStr = f"insert into page_booking_rooms(booking_id,room_num) values('{booking_id}',{room_num})"
+                cursor.execute(sqlStr);cursor.fetchall()
+            else:
+                sqlStr = f"update page_booking_rooms set room_num={room_num} where booking_id='{booking_id}'"
+                cursor.execute(sqlStr);cursor.fetchall()
+            
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
 
 class Room():
     def get_room_info():

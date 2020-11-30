@@ -49,8 +49,11 @@ def staff(request):
 
 def room_select(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
-
-    return render(request,'admin/room_select.html',{})
+    if(request.method=="POST"):
+        Book.select_room(request.POST)
+    booking_datas = Book.get_booking_info()
+    room_datas = Book.get_room_list()
+    return render(request,'admin/room_select.html',{"booking_datas":booking_datas,'room_datas':room_datas})
 
 
 @csrf_exempt
