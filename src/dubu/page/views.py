@@ -35,26 +35,27 @@ def rooms(request):
     return render(request,'main/rooms-single.html',{})
 
 def get_room(room_type=""):
-        try:
-            cursor = connection.cursor()
-            #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
-            sqlStr = "select room_type, price, mem_limit, photo_url from page_room_type"
-            result = cursor.execute(sqlStr)
-            datas = cursor.fetchall()
-            output_data = []
+    try:
+        cursor = connection.cursor()
+        #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
+        sqlStr = "select room_type, price, mem_limit, photo_url, bed_type, bed_num from page_room_type natural join page_room_type_bed"
+        result = cursor.execute(sqlStr)
+        datas = cursor.fetchall()
+        output_data = []
+        for data in datas:
+            output_data.append({'room_type':data[0], 'price':data[1], 'mem_limit':data[2], 'photo_url':data[3], 'bed_type':data[4], 'bed_num':data[5]})
 
-            for data in datas:
-                output_data.append({'room_type':data[0], 'price':data[1], 'mem_limit':data[2], 'photo_url':data[3]})
-            if(room_type!=""):
-                for data in output_data:
-                    if(data["roop_type"]==room_type):
-                        return data
-                raise ValueError
-            return output_data
-        except:
-            connection.rollback()
-            connection.close()
-        return None
+        sqlStr = "select count(room_num), room_type from (select room_num, room_type from page_rooms where room_num not in (select room_num from page_booking_rooms)) group by room_type"
+        cursor.execute(sqlStr);result=cursor.fetchall()
+        output2 = []
+        for data in result:
+            output2.append({"room_num":data[0],"room_type":data[1]})
+            
+        return output_data, output2
+    except:
+        connection.rollback()
+        connection.close()
+    return None
 
 def reservation(request):
     # not login
@@ -82,8 +83,14 @@ def reservation2(request):
             #     return redirect('reservation')
             # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
             #     return redirect('reservation')
-            room_datas = get_room()
-            return render(request,'main/reservation2.html',{'request':request.POST, 'room_datas': room_datas})
+            room_datas, room_info = get_room()
+            print(room_info)
+            repost = dict(request.POST)
+            tmp = ["check_in","check_out","adult_num","child_num"]
+            for t in tmp:
+                repost[t] = repost[t][0]
+            repost["total_num"] = int(repost["adult_num"])+int(repost["child_num"])
+            return render(request,'main/reservation2.html',{'request':repost, 'room_datas': room_datas, 'room_info':room_info})
 
     return redirect('reservation')
 
