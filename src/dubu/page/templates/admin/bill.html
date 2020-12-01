@@ -140,6 +140,16 @@
                     </tbody>
                   </table>
                 </div>
+                <div class="insert_purchase">
+                  <form method="POST" name="insert_purchase">
+                    {% csrf_token %}
+                    <input type="hidden" name="method" value="insert_purchase">
+                    <input type="text" class="insert_booking_id" name="booking_id" placeholder="booking_id" readonly>
+                    <input type="text" name="name" placeholder="product_id">
+                    <input type="text" name="count" placeholder="count">
+                    <input class="insert_purchase_btn" type="button" value="insert">
+                  </form>
+                </div>
               </div>
 
             </div>
@@ -299,6 +309,13 @@ $(document).ready(function(){
     var price = 0;
     if(temp.length){
       is_this = true;
+
+      {% for data in invoice_datas %}
+      if('{{data.room_num}}'==num){
+        $('.insert_booking_id').val('{{data.booking_id}}');
+      }
+      {% endfor %}
+
       $('.coupon_tab > tbody > tr').remove();
       {% for data in coupon_datas %}
       $('.coupon_tab > tbody').append('<tr class="coupon_{{data.room_num}}"><td class="b_s_p">{{data.member_id}}</td><td class="b_s_p">{{data.coupon_name}}</td><td class="b_s_p">{{data.coupon_id}}</td><td class="b_s_p">{{data.value}}</td><td class="b_s_p">{{data.min_price}}</td><td class="b_s_p"><input class="b_button coupon_use_btn" id="{{data.coupon_id}}_no_{{data.value}}_{{data.min_price}}" style="color:gray;" type="button" value="< USE >"></td></tr>');
@@ -329,6 +346,7 @@ $(document).ready(function(){
       is_this=false;
       $('.total_price').text('0');
       $(".point_value").text('0');
+      $(".insert_booking_id").val('');
       coupon_list = [];
       final_price = 0;
       num=0;
@@ -398,5 +416,11 @@ $(document).ready(function(){
       document.submit_bill.submit();
     }
   })
+
+  $('.insert_purchase_btn').click(function(){
+    if(is_this && confirm("주문을 추가하시겠습니까?")){
+      document.insert_purchase.submit();
+    }
+  });
 });
 </script>

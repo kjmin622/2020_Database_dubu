@@ -465,6 +465,31 @@ class Book():
             connection.close()
             return None
 
+
+    def insert_purchase(dataDir):
+        try:
+            booking_id=dataDir["booking_id"]
+            product_id=dataDir["name"]
+            order_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%H:%S:%f")[:-4]
+            count=dataDir["count"]
+            cursor = connection.cursor()
+
+            sqlStr = f"select name from page_product where product_id='{product_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            if(len(result)==0):
+                raise ValueError
+            if(not count.isdigit()):
+                raise ValueError
+            sqlStr = f"insert into page_invoice(booking_id,product_id,count,order_time,offer_time,is_payment) values('{booking_id}','{product_id}',{count},'{order_time}','',0)"
+            cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
     def complete_bill(dataDir):
         try:
             cursor = connection.cursor()
