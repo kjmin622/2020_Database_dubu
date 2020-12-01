@@ -96,13 +96,13 @@ def reservation3(request):
         login = True
 
     if(request.method=='POST'):
-        print(request.POST)
         if(request.POST['method']=='reservation2'):
             # check_in = request.POST['check_in'];check_out = request.POST['check_out'];adult_num = int(request.POST['adult_num']);child_num= int(request.POST['child_num'])
             # if(request.POST['check_in']=='' or request.POST['check_out']=='' or check_in>=check_out or datetime.today().strftime("%Y-%m-%d")>=check_in):
             #     return redirect('reservation')
             # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
             #     return redirect('reservation')
+            print(request.POST)
             return render(request,'main/reservation3.html',{'request':request.POST})
     return redirect('reservation2')      
 

@@ -99,6 +99,10 @@
 <form method='POST' action = "{% url 'reservation3' %}">
 {% csrf_token %}
 <input type="text" name="method" class="form-control" value="reservation2" style="display:none" readonly>
+<input type="hidden" name="check_in" class="form-control" value='{{request.check_in}}' placeholder="Check-in date">
+<input type="hidden" name="check_out" class="form-control" value='{{request.check_out}}' placeholder="Check-out date">
+<input type="hidden" name = "adult_num" class = "count" value='{{request.adult_num}}' readonly style = "width:40px; padding-left: 13px;">
+<input type="hidden"  name = "child_num"class = "count" value='{{request.child_num}}' readonly style = "width:40px; padding-left: 13px;">
 <section class="test1 row_c">
   <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px;">
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택</div>
@@ -133,7 +137,6 @@
   <br>
   <br>
   <center>
-  {for data in}
   <div style="overflow:scroll; width:1700px; height:450px; margin: 0px auto;">
     <div  class="bold_test_staff staff_s_div bold_sec">
       <div class="staff_title ">standard_single</div>
