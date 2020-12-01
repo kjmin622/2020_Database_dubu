@@ -114,7 +114,7 @@
 	        				<div class="form-group p-4 d-flex align-items-end">
 	        					<div class="wrap" style = "padding-bottom: 40px;">
 				    					<label for="#">Check-in</label>
-				    					<input type="date" name="check_in" class="form-control" placeholder="Check-in date">
+				    					<input type="date" name="check_in" class="form-control" placeholder="Check-in date" style="width: 219px;">
 			    					</div>
 			    				</div>
 	        			</div>
@@ -122,18 +122,18 @@
 	        				<div class="form-group p-4 d-flex align-items-end">
 	        					<div class="wrap" style = "padding-bottom: 40px;">
 				    					<label for="#">Check-out</label>
-				    					<input type="date" name="check_out" class="form-control" placeholder="Check-out date">
+				    					<input type="date" name="check_out" class="form-control" placeholder="Check-out date" style="width: 219px;">
 			    				</div>
 			    				</div>
 	        			</div>
-	        			<div class="col-md d-flex" style = "height: 160px;">
+	        			<div class="d-flex" style = "height: 160px;">
 	        				<div class="form-group p-4 d-flex align-items-end">
 	        					<div class="wrap" style = "padding-bottom: 40px;">
 			      					<label for="#">Adult</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
-			                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                    <select name="adult_num" id="" class="form-control">
+			                    
+			                    <select name="adult_num" id="" class="form-control" style="width: 126px;">
 			                    	<option value="1">1</option>
 			                      <option value="2">2</option>
 			                      <option value="3">3</option>
@@ -145,14 +145,14 @@
                   </div>
                 </div>
 
-	        			<div class="col-md d-flex" style = "height: 160px;">
+	        			<div class="d-flex" style = "height: 160px;">
 	        				<div class="form-group p-4 d-flex align-items-end">
 	        					<div class="wrap" style = "padding-bottom: 40px;">
 			      					<label for="#">Child</label>
 			      					<div class="form-field">
 			        					<div class="select-wrap">
-                          <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-			                    <select name="child_num" id="" class="form-control">
+                          
+			                    <select name="child_num" id="" class="form-control" style="width: 126px;">
                             <option value="0">0</option>
 			                    	<option value="1">1</option>
 			                      <option value="2">2</option>
@@ -166,7 +166,7 @@
 	        			</div>
 	        			<div class="col-md d-flex">
 	        				<div class="form-group d-flex align-self-stretch">
-			              <input type="submit" value="Check Availability" class="btn btn-primary py-3 px-4 align-self-stretch">
+			              <input type="submit" value="Check Availability" class="btn btn-primary py-3 px-4 align-self-stretch" style="height: 70px; margin-top: 20px; margin-left: 15px;">
 			            </div>
 	        			</div>
 	        		</div>
@@ -238,7 +238,7 @@
         <div class="ftco-footer-widget mb-4">
           <h2 class="ftco-heading-2" style = "text-align: center; font-size: 40px">DuBu Hotel</h2>
           <p style= "text-align: center;">For a comfortable time.</p>
-          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 90px;">
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 85px;">
 {% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -255,7 +255,7 @@
             {% if login %} 
               <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
             {% else %}
-              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+              <li><a href="{% url 'join' %}" class="py-2 d-block">Join</a></li>
             {% endif %}
             <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
             <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
