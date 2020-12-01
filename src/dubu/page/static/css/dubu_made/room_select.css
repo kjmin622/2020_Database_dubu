@@ -6,12 +6,13 @@
 
 body{
     /* background-color: black; */
+    min-width: 1000px;
 }
 .s_i_s{
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 .bold_sec{
@@ -22,7 +23,7 @@ body{
     display: flex;
     flex-flow: column;
     padding-top: 30px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }
 
 .sub_title_select{
@@ -53,8 +54,10 @@ body{
 .room_select_input{
     display: flex;
     flex-flow: row;
-    justify-content: space-around;
+    padding:20px 20px;
+    /* justify-content: space-around; */
     flex-wrap: wrap;
+    /* font-size: 100px; */
 }
 /* room들의 정보를 정리하는 css */
 .output_room_list{
