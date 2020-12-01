@@ -263,7 +263,7 @@ ahk@commodore.co.kr<br>
             <li>email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               <input type="text" name="email" class="form-control" id="email" style="width: 270px; display:inline; zoom: 0.7; margin-left: 2px; padding-left: 3px;">
               &nbsp;
-              <input type="button" class="check_btn" id="emailcheck_btn" value="확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline; display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;">
+              <input type="button" class="check_btn" id="emailcheck_btn" value="중복 확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline; display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;">
             </li><br>
             <li>ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               <input type="text" name="member_id" class="form-control" id="member_id" style="width: 270px; display:inline; zoom: 0.7; margin-left: 8px; padding-left: 3px;">
@@ -280,9 +280,9 @@ ahk@commodore.co.kr<br>
               <input type="button" class="check_btn" id="pwcheck_btn" value="확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline; display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;">
             </li><br>
             <li>Referrer ID &nbsp; &nbsp;
-              <input type="text" name="recommender" class="form-control" id="recommender" style="width: 270px; display:inline; zoom: 0.7; padding-left: 3px; margin-left: 10px;">
+              <input type="text" name="referrer" class="form-control" id="referrer" style="width: 270px; display:inline; zoom: 0.7; padding-left: 3px; margin-left: 10px;">
               &nbsp;
-              <button class = "btn" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px;"> 확인 </button>
+              <input type="button" class="referrer_btn" value="확인" id="referrer_btn" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px;">
               &nbsp; * 미입력 가능(기능구현되면 또 고칠듯!)
             </li>
           </ul>
@@ -394,44 +394,77 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 
 <script>
 $(document).ready(function(){
-  $('#idfind_btn').click(function(){
-    var name = $('#idfind_name').val().replace(' ','');
-    var phone_num = $('#idfind_phone_num').val().replace(' ','');
-    var email = $('#idfind_email').val().replace(' ','');
-    if(false);
+  $('#emailcheck_btn').click(function(){
+    var email= $('input[name=email]').val();
+    var flag = false;
     {% for data in member_datas %}
-    else if('{{data.last_name}}'+'{{data.first_name}}'.replace(' ','')==name && '{{data.phone}}'.replace(' ','')==phone_num && '{{data.email}}'.replace(' ','')==email){
-      alert('{{data.member_id}}');
-      flag = false;
+    if('{{data.email}}'==email){
+      flag=true;
     }
     {% endfor %}
-    else{
-      alert("일치하지 않는 계정 정보입니다.");
+    if(flag==true){
+      alert("이 E-mail은 사용 중 입니다.");
     }
-
-    $('#idfind_name').val("");
-    $('#idfind_phone_num').val("");
-    $('#idfind_email').val("");
+    else{
+      alert("사용가능한 E-mail입니다.");
+    }
+  });
+  
+  $('#idcheck_btn').click(function(){
+    var id= $('input[name=member_id]').val();
+    var flag = false;
+    {% for data in member_datas %}
+    if('{{data.id}}'==id){
+      flag=true;
+    }
+    {% endfor %}
+    if(flag==true){
+      alert("이 ID는 사용 중 입니다.");
+    }
+    else{
+      alert("사용가능한 ID입니다.");
+    }
   });
 
-  $('#pwfind_btn').click(function(){
-    var name = $('#pwfind_name').val().replace(' ','');
-    var member_id = $('#pwfind_id').val().replace(' ','');
-    var email = $('#pwfind_email').val().replace(' ','');
-    if(false);
+  $('#pwcheck_btn').click(function(){
+    if($('input[name=password]').val()!=$('input[name=password2]').val()){
+      alert("PASSWORD를 확인해주세요.");
+    }
+    else{
+      alert("PASSWORD가 일치합니다.");
+    }
+  });
+
+  $('#referrer_btn').click(function(){
+    var referrer =$('input[name=referrer]').val();
+    var flag = false;
     {% for data in member_datas %}
-    else if('{{data.last_name}}'+'{{data.first_name}}'.replace(' ','')==name && '{{data.member_id}}'.replace(' ','')==member_id && '{{data.email}}'.replace(' ','')==email){
-      alert('{{data.password}}');
-      flag = false;
+    if('{{data.member_id}}'==referrer){
+      flag=true;
     }
     {% endfor %}
-    else{
-      alert("일치하지 않는 계정 정보입니다.");
+    if(flag==true){
+      alert("추천인 확인이 완료되었습니다.");
     }
+    else{
+      alert("이 ID는 존재하지 않습니다.");
+    }
+  });
 
-    $('#pwfind_name').val("");
-    $('#pwfind_id').val("");
-    $('#pwfind_email').val("");
+  $('#idcheck_btn').click(function(){
+    var id= $('input[name=member_id]').val();
+    var flag = false;
+    {% for data in member_datas %}
+    if('{{data.id}}'==id){
+      flag=true;
+    }
+    {% endfor %}
+    if(flag==true){
+      alert("이 ID는 사용 중 입니다.");
+    }
+    else{
+      alert("사용가능한 ID입니다.");
+    }
   });
 });
 </script>
