@@ -95,7 +95,46 @@ def reservation3(request):
     return redirect('reservation2')      
 
 def mypage(request):
-    return render(request,'main/mypage.html',{})
+    if("member_id" not in request.session or request.session["member_id"]==None): return redirect('login')
+    try:
+        member_id = request.session["member_id"]
+        member_datas = get_member(member_id)
+        if(member_datas == None): 
+            return redirect('logout')
+        return render(request,'main/mypage.html',{'datas':member_datas})
+
+    except:
+        connection.close()
+        return redirect('logout')
+
+
+
+def get_member(member_id=""):
+        try:
+            cursor = connection.cursor()
+            #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
+            sqlStr = "select member_id, membership, birth, is_sms, password, email, first_name, last_name, phone, point from page_member_info"
+            result = cursor.execute(sqlStr)
+            datas = cursor.fetchall()
+
+            output_data = []
+
+            for data in datas:
+                output_data.append({'member_id':data[0], 'membership':data[1], 'birth':data[2], 'is_sms':data[3],
+                                    'password':data[4], 'email':data[5], 'first_name':data[6], 'last_name':data[7],
+                                    'phone':data[8],'point':data[9]})
+            if(member_id!=""):
+                for data in output_data:
+                    if(data["member_id"]==member_id):
+                        return data
+                raise ValueError
+
+            return output_data
+
+        except:
+            connection.rollback()
+            connection.close()
+        return None
 
 def join(request):
     if(request.method=="POST"):
@@ -113,7 +152,7 @@ def join(request):
             is_member_id=cursor.fetchall()
             if(is_member_id):
                 return redirect('join')
-            sqlStr = f"insert into page_member_info(last_name, first_name, birth, phone, email, member_id, password, is_sms, membership, point) values('{last_name}','{first_name}','{birth}','{phone}','{email}','{member_id}','{password}','{1 if is_sms=='on' else 0}',0,0)"
+            sqlStr = f"insert into page_member_info(last_name, first_name, birth, phone, email, member_id, password, is_sms, membership, point) values('{last_name}','{first_name}','{birth}','{phone}','{email}','{member_id}','{password}','{1 if is_sms=='on' else 0}','classic',0)"
             result = cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
             connection.close()
