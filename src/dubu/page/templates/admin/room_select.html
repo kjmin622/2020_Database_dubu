@@ -88,12 +88,11 @@
         <div class="sub_title">Reservation Input</div>
         <div class="room_select_input">
           {% comment %} 예약정보를 입력합니다. {% endcomment %}
-          <div class="reservation_input">Name</div>
-          <div class="reservation_input">Phone_num</div>
-          <div class="reservation_input">Reservation_num</div>
-          <div class="reservation_input">Click!</div>
+          <input type="text" name="book_phone" class="reservation_input" placeholder="phone">
+          <label>체크인 날짜</label>
+          <input type="date" name="book_date" class="reservation_input">
+          <input type="button" name="book_btn" class="reservation_input" value="Click">
         </div>
-
       </div>
 
   </section>
@@ -110,9 +109,10 @@
 
             {% comment %} 예약자의 예약정보를 출력합니다. {% endcomment %}
             <div class="reservation_output">
-              <div>인원</div>
-              <div>객실 수</div>
-              <div>추가 요첨 사항</div>
+              <div class="reser_room_num">객실번호:</div>
+              <div class="reser_people">인원:</div>
+              <div class="reser_type">객실 종류:</div>
+              <div class="reser_text">추가 요청 사항:</div>
             </div>
 
           </div>
@@ -125,13 +125,13 @@
           <div class="bold_sec o_1">
 
             <div class="sub_title_select">Room List</div>
-
-            <div class="output_room_list">
-              <div>Room Num</div>
-              <div>Room Num</div>
-              <div>Room Num</div>
-            </div>
-
+            <form name="reser_POST" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="booking_id" value="">
+            <input type="hidden" name="room_num" value="">
+            <ul class="output_room_list">
+            </ul>
+            </form>
           </div>
 
       </section>
@@ -214,3 +214,68 @@
 
   </body>
 </html>
+
+<script>
+$(document).ready(function(){
+  $('input[name=book_btn]').click(function(){
+    var phone = $('input[name=book_phone]').val();
+    var check_in = 1*$('input[name=book_date]').val().replace('-','').replace('-','');
+    var room_type = "";
+    var check_out = "";
+    var isit = false;
+
+    {% for data in booking_datas %}
+    if('{{data.phone}}'==phone && '{{data.check_in}}'.slice(0,8)==check_in){
+      $('.reser_room_num').text("객실번호: {{data.room_num}}");
+      $('.reser_people').text("인원: "+({{data.adult_num}}+{{data.child_num}}));
+      $('.reser_type').text("객실 종류: {{data.room_type}}");
+      $('.reser_text').text("추가 요청 사항: {{data.extra_text}}");
+      $('input[name=booking_id]').attr('value','{{data.booking_id}}');
+      room_type = '{{data.room_type}}';
+      check_out = {{data.check_out}};
+      isit = true;
+    }
+    {% endfor %}
+    
+    if(!isit){
+      $('.reser_room_num').text("객실번호: ");
+      $('.reser_people').text("인원: ");
+      $('.reser_type').text("객실 종류: ");
+      $('.reser_text').text("추가 요청 사항:");
+      $('.output_room_list > li').remove();
+      $('input[name=booking_id]').attr('value','');
+      $('input[name=room_num]').attr('value','');
+    }
+
+    {% for data in room_datas %}
+    if('{{data.room_type}}'==room_type){
+      var flag = false;
+      {% for date in data.check_in_out %}
+        var dcheck_in = {{date.0}};
+        var dcheck_out = {{date.1}};
+        if((dcheck_in<=check_in && check_out<dcheck_out) || (check_in<=dcheck_out && dcheck_out<check_out) || (check_in<=dcheck_in && dcheck_in<check_out)){
+          flag = true;
+        }
+      {% endfor %}
+      if(!flag){
+        $('.output_room_list').append('<li><input type="button" class="room_select_btn" value="{{data.room_num}}"></li>');
+      }
+    }
+    {% endfor %}
+    post_reload();
+  });
+
+  var post_reload = function(){
+      $('.room_select_btn').click(function(){
+      if(confirm('이 방으로 배정하시겠습니까?')){
+        $('input[name=room_num]').attr('value',$(this).attr('value'));
+        document.reser_POST.submit();
+      }
+    });
+  }
+})
+
+
+
+
+</script>

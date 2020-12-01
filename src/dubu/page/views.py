@@ -61,6 +61,18 @@ def reservation2(request):
             # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
             #     return redirect('reservation')
             return render(request,'main/reservation2.html',{'request':request.POST})
+
+    room_datas = []
+    try:
+        cursor = connection.cursor()
+        sqlStr = "select room_type, price from page_room_type"
+        cursor.execute(sqlStr)
+        result=cursor.fetchall()
+        for data in result:
+            room_datas.append({'room_type':data[0], 'price':data[1]})
+        connection.close()
+    except:
+        connection.close() 
     return redirect('reservation')
 
 def reservation3(request):
