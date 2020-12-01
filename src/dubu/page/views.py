@@ -34,6 +34,28 @@ def about(request):
 def rooms(request):
     return render(request,'main/rooms-single.html',{})
 
+def get_room(room_type=""):
+        try:
+            cursor = connection.cursor()
+            #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
+            sqlStr = "select room_type, price, mem_limit, photo_url from page_room_type"
+            result = cursor.execute(sqlStr)
+            datas = cursor.fetchall()
+            output_data = []
+
+            for data in datas:
+                output_data.append({'room_type':data[0], 'price':data[1], 'mem_limit':data[2], 'photo_url':data[3]})
+            if(room_type!=""):
+                for data in output_data:
+                    if(data["roop_type"]==room_type):
+                        return data
+                raise ValueError
+            return output_data
+        except:
+            connection.rollback()
+            connection.close()
+        return None
+
 def reservation(request):
     # not login
     if "member_id" not in request.session or request.session["member_id"]==None :
@@ -60,19 +82,9 @@ def reservation2(request):
             #     return redirect('reservation')
             # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
             #     return redirect('reservation')
-            return render(request,'main/reservation2.html',{'request':request.POST})
+            room_datas = get_room()
+            return render(request,'main/reservation2.html',{'request':request.POST, 'room_datas': room_datas})
 
-    room_datas = []
-    try:
-        cursor = connection.cursor()
-        sqlStr = "select room_type, price from page_room_type"
-        cursor.execute(sqlStr)
-        result=cursor.fetchall()
-        for data in result:
-            room_datas.append({'room_type':data[0], 'price':data[1]})
-        connection.close()
-    except:
-        connection.close() 
     return redirect('reservation')
 
 def reservation3(request):
@@ -94,6 +106,8 @@ def reservation3(request):
             return render(request,'main/reservation3.html',{'request':request.POST})
     return redirect('reservation2')      
 
+
+
 def mypage(request):
     if("member_id" not in request.session or request.session["member_id"]==None): return redirect('login')
     try:
@@ -106,8 +120,6 @@ def mypage(request):
     except:
         connection.close()
         return redirect('logout')
-
-
 
 def get_member(member_id=""):
         try:
