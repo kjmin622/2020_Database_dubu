@@ -4,12 +4,12 @@
     {% comment %} dubu_make {% endcomment %}
     {% load static %}
         <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-        <link rel="stylesheet" href="{% static 'css/dubu_made/s_login.css' %}">
+        <link rel="stylesheet" href="{% static 'css/dubu_made/slogin.css' %}">
     </head>
     <body >
         <form action="{% url 'admin_login' %}" method="POST">
             {% csrf_token %}
-            <div class="l_tle">
+            <div class="l_tle" style="">
                 <div class="form-group ttt ">
                     <div class="s_l_t ">Login</div>
                     <div class="s_l_in">staff_id</div>
