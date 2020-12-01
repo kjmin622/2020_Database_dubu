@@ -112,10 +112,10 @@
       <div class = "container" style = "border:1px solid; float:left; width: 49%; margin-right: 10px;">
 
         <ul style = "list-style-type:none; margin-top: 15px;">
-          <li>*ID : </li>
-          <li>*Name : </li>
-          <li>*회원 등급 : </li>
-          <li>*Point : </li> 
+          <li id="member_id">*ID : {{datas.member_id}}</li>
+          <li id="name">*Name : {{datas.last_name}} {{datas.first_name}}</li>
+          <li id="membership">*회원 등급 : {{datas.membership}}</li>
+          <li id="point">*Point : {{datas.point}}</li> 
         </ul>
 
         <div style = "float: right; margin-bottom: 10px;">
@@ -327,3 +327,23 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 
   </body>
 </html>
+<script>
+  $(".num_btn").click(function(){
+    var mp_value = $(this).attr("value");
+    var x=$("input[name=breakfast_num]");
+    var int=1*x.attr("value");
+    if(mp_value == '-') {
+      if(int>=1){
+        int--;
+      }
+    }
+    else{
+      int++;
+    }
+    $("#breakfast_num").text("가격 : "+(int*10000));
+
+    $("#breakfast_num2").text("조식 금액 : "+(int*10000));
+    x.attr("value",int+"");
+  })
+
+</script>
