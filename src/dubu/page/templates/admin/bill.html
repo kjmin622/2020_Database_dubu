@@ -113,6 +113,17 @@
         <div class="s_i_s">
 
             <div class="bill_search">
+              <div class="b_s_t">Add order info</div>
+              <div class="insert_purchase" style="margin: 20px 40px 40px 30px;">
+                <form method="POST" name="insert_purchase">
+                  {% csrf_token %}
+                  <input  style="margin: 10px ;" type="hidden" name="method" value="insert_purchase">
+                  <input  style="margin: 10px ;" type="text" class="insert_booking_id" name="booking_id" placeholder="booking_id" readonly>
+                  <input  style="margin: 10px ;" type="text" name="name" placeholder="product_id">
+                  <input  style="margin: 10px ;" type="text" name="count" placeholder="count">
+                  <input  class="insert_purchase_btn" type="button" value="insert" style="padding: 3px 45px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
+                </form>
+              </div>
               <div style="display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
                 <div class="b_s_t">Purchase</div>
                 <div class="sub_title_b"> 
@@ -142,7 +153,7 @@
                             <input type="hidden" name="booking_id" value="{{data.booking_id}}">
                             <input type="hidden" name="product_id" value="{{data.product_id}}">
                             <input type="hidden" name="order_time" value="{{data.order_time}}">
-                            <input type="submit" value="제공완료">
+                            <input type="submit" value="제공완료" style=" padding: 2px 55px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 13px;">
                           </form>
                         </td>
                         {% else %}
@@ -152,16 +163,6 @@
                       {% endfor %}
                     </tbody>
                   </table>
-                </div>
-                <div class="insert_purchase">
-                  <form method="POST" name="insert_purchase">
-                    {% csrf_token %}
-                    <input type="hidden" name="method" value="insert_purchase">
-                    <input type="text" class="insert_booking_id" name="booking_id" placeholder="booking_id" readonly>
-                    <input type="text" name="name" placeholder="product_id">
-                    <input type="text" name="count" placeholder="count">
-                    <input class="insert_purchase_btn" type="button" value="insert">
-                  </form>
                 </div>
               </div>
 
