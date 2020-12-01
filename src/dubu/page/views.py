@@ -34,6 +34,29 @@ def about(request):
 def rooms(request):
     return render(request,'main/rooms-single.html',{})
 
+def get_member(member_id=""):
+        try:
+            cursor = connection.cursor()
+            #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
+            sqlStr="select member_id, membership, birth, is_sms, password, email, first_name, last_name, phone, point from page_member_info"
+            result=cursor.execute(sqlStr)
+            datas=cursor.fetchall()
+            output_data=[]
+            for data in datas:
+                output_data.append({'member_id':data[0], 'membership':data[1], 'birth':data[2], 'is_sms':data[3],
+                                    'password':data[4], 'email':data[5], 'first_name':data[6], 'last_name':data[7],
+                                    'phone':data[8],'point':data[9]})
+            if(member_id!=""):
+                for data in output_data:
+                    if(data["member_id"]==member_id):
+                        return data
+                raise ValueError
+            return output_data
+        except:
+            connection.rollback()
+            connection.close()
+        return None
+
 def get_room(room_type=""):
     try:
         cursor = connection.cursor()
@@ -108,32 +131,10 @@ def reservation3(request):
             #     return redirect('reservation')
             # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
             #     return redirect('reservation')
-            print(request.POST)
-            return render(request,'main/reservation3.html',{'request':request.POST})
+            member_id = request.session["member_id"]
+            member_datas = get_member(member_id)
+            return render(request,'main/reservation3.html',{'request':request.POST, 'login': login, 'member_datas':member_datas})
     return redirect('reservation2')      
-
-def get_member(member_id=""):
-        try:
-            cursor = connection.cursor()
-            #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
-            sqlStr="select member_id, membership, birth, is_sms, password, email, first_name, last_name, phone, point from page_member_info"
-            result=cursor.execute(sqlStr)
-            datas=cursor.fetchall()
-            output_data=[]
-            for data in datas:
-                output_data.append({'member_id':data[0], 'membership':data[1], 'birth':data[2], 'is_sms':data[3],
-                                    'password':data[4], 'email':data[5], 'first_name':data[6], 'last_name':data[7],
-                                    'phone':data[8],'point':data[9]})
-            if(member_id!=""):
-                for data in output_data:
-                    if(data["member_id"]==member_id):
-                        return data
-                raise ValueError
-            return output_data
-        except:
-            connection.rollback()
-            connection.close()
-        return None
 
 def mypage(request):
     if("member_id" not in request.session or request.session["member_id"]==None): return redirect('login')
