@@ -101,7 +101,7 @@
 <input type="text" name="method" class="form-control" value="reservation2" style="display:none" readonly>
 <section class="test1 row_c">
   <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px;">
-    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금 맞게 작성해 주세요!ㆍ옵션 선택</div>
+    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택</div>
   </div>
   
   <div class="bold_test_staff staff_s_div bold_sec">
@@ -133,6 +133,7 @@
   <br>
   <br>
   <center>
+  {for data in}
   <div style="overflow:scroll; width:1700px; height:450px; margin: 0px auto;">
     <div  class="bold_test_staff staff_s_div bold_sec">
       <div class="staff_title ">standard_single</div>
@@ -353,7 +354,6 @@
           <ul style="list-style-type:none">
             <li style="padding-bottom: 15px;" id= "room_cost"> 객실 금액 : </li><br>
             <li style="padding-bottom: 15px;" id= "breakfast_num2"> 조식 금액 : </li><br>
-            <li style="padding-bottom: 15px;" id= "tax"> 세금 및 봉사료 : </li><br>
             <li style="font-weight: bold; padding-top: 15px;" id="total"> 총 금액 : </li>
           </ul>
         </div>
@@ -508,21 +508,26 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 
     $("#breakfast_num2").text("조식 금액 : "+(int*10000));
     x.attr("value",int+"");
+    if($("#total").text()!=" 총 금액 : "){
+      var y= 1* $("#room_cost").text().slice(8);
+      $("#total").text("총 금액 : "+(y+int*10000));
+
+    }
   })
 
 $(document).ready(function(){
   $(".select").click(function(){
     var int;
+    var value = $(this).attr("value");
+
     {% for data in room_datas %}
     if(value=='{{data.room_type}}'){
-      int=1*'{{data.price}}'
+      int=1*'{{data.price}}';
     }
     {% endfor %}
-    
+    var x= 1* $("#breakfast_num2").text().slice(8);
     $("#room_cost").text("객실 금액 : "+int);
-    $("#tax").text("세금 및 봉사료 : "+(int/5));
-    $("#total").text("총 금액 : "+(int*6/5));
-    x.attr("value",int+"");
+    $("#total").text("총 금액 : "+(int*6/5 +x));
   })
 })
 
@@ -530,7 +535,6 @@ $(document).ready(function(){
 
   $(".popup1_btn btn").click(function(){
     var room = $(this).attr("name");
-    
     if(room=="st_s.r"){
       var x=$("input[name=adult_num]");
       var int=1*x.attr("value");
@@ -544,7 +548,6 @@ $(document).ready(function(){
       }
       x.attr("value",int+"");
     }
-
     else if(room=="st_ d.r"){
       var x=$("input[name=child_num]");
       var int=1*x.attr("value");

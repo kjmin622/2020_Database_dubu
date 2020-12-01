@@ -103,7 +103,7 @@
             <div class = "container">
               <input type="submit" class="btn" value="Login">
               <button class = "btn"><a href="{% url 'join' %}">회원가입</a></button>
-              <button class = "popup1_btn btn">ID/PASSWORD 찾기</button>
+              <input type="button" class = "popup1_btn btn" value="ID/PASSWORD 찾기">
             </div>
 
           </div>
@@ -116,7 +116,7 @@
 
   <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
 
-  <div class="popup popup1" style = "display: inline;">
+  <div class="popup popup1" style = "display: none;">
 
     <div class="l_find">
     <section class="t_ser ">  
@@ -241,7 +241,6 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
 </html>
 
 <script>
-
     $('.popup_background').click(function(){
       $('.popup').css('display', 'none')
     });
