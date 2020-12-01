@@ -44,7 +44,8 @@
     border: 2px solid;
     border-color: darkgray;
     border-radius: 10px;
-    width: max-content;
+    width: 500px;
+    height: 300px;
     padding: 40px 20px;
     /*  */
     background-color: white;

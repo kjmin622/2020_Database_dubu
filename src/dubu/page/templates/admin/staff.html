@@ -32,7 +32,15 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dubu_made/staff.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/staff_h.css' %}">
+    <style>
+      th{
+        padding : 5px;
+      }
+      td{
+        padding : 20px 0px;
+      }
+    </style>
   </head>
   <body>
 
@@ -85,17 +93,17 @@
         <div class="staff_title ">Staff_info</div>
         <div class="s_i_s">
           <div class="s_i  col_c">
-            <div class="s_i_logo ">Staff</div>
+            <div class="s_i_logo "style="padding: 60px 100px;">STAFF</div>
           </div>
           <div class="s_i s_i_text">
             <ul style="list-style-type:none">
-              <li>이름 : {{datas.last_name}} {{datas.first_name}}</li>
-              <li>직원 ID : {{datas.staff_id}}</li>
-              <li>연락처 : {{datas.phone}}</li>
-              <li>직급 : {{datas.rank}}</li>
-              <li>부서 : {{datas.depart_id}}</li>
-              <li>팀 : {{datas.team}}</li>
-              <li>주소 : {{datas.wide_area_unit}} {{datas.basic_unit}} {{datas.street}} {{datas.si_gu}} {{datas.eub_myeon}} {{datas.building_number}} {{datas.detail_address}}</li>
+              <li style="margin:5px 0px">이름 :  {{datas.last_name}} {{datas.first_name}}</li>
+              <li style="margin:5px 0px">직원 ID :  {{datas.staff_id}}</li>
+              <li style="margin:5px 0px">연락처 :  {{datas.phone}}</li>
+              <li style="margin:5px 0px">직급 :  {{datas.rank}}</li>
+              <li style="margin:5px 0px">부서 :  {{datas.depart_id}}</li>
+              <li style="margin:5px 0px">팀 :  {{datas.team}}</li>
+              <li style="margin:5px 0px">주소 :  {{datas.wide_area_unit}} {{datas.basic_unit}} {{datas.street}} {{datas.si_gu}} {{datas.eub_myeon}} {{datas.building_number}} {{datas.detail_address}}</li>
             </ul>
           </div>
         </div>
@@ -103,28 +111,29 @@
   </section>
 
 <!-- 직원의 현재 상태를 입력하는 section -->
+
   <section class="staff_status row_c">
       <div  class="bold_test_staff staff_s_div bold_sec">
         <div class="staff_title ">Staff Status</div>
         <div class="s_s">
           <div class="s_s_s status_btn" name="off"
           {% if datas.status == 'off' %} 
-          style="background-color: rgb(204, 255, 238);" 
+          style="background-color:rgb(179, 230, 204);" 
           {% endif %}
           > 퇴근 </div>
           <div class="s_s_s status_btn" name="wait"
           {% if datas.status == 'wait' %} 
-          style="background-color: rgb(204, 255, 238);" 
+          style="background-color:rgb(179, 230, 204);" 
           {% endif %}
           > 대기 </div>
           <div class="s_s_s status_btn" name="working"
           {% if datas.status == 'working' %} 
-          style="background-color: rgb(204, 255, 238);" 
+          style="background-color:rgb(179, 230, 204);" 
           {% endif %}
           > 업무 </div>
           <div class="s_s_s status_btn" name="rest"
           {% if datas.status == 'rest' %} 
-          style="background-color: rgb(204, 255, 238);" 
+          style="background-color:rgb(179, 230, 204);" 
           {% endif %}
           > 휴식 </div>
         </div>
@@ -144,7 +153,7 @@
             <th>목</th>
             <th>금</th>
             <th>토</th>
-            <tr>
+            <tr >
                 <td>
                 {% if working_datas.sun %}
                   {% for s in working_datas.sun %}
@@ -227,7 +236,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">DuBu Hotel</h2>
-              <p>Welcome .</p>
+              <p>Hotel Information System .</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
 {% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -251,9 +260,9 @@
             	<h2 class="ftco-heading-2">DuBu hotel</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">주소||주소||주소</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+0 000 0000 0000</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">DuBu@hanyang.ac.kr</span></a></li>
+                  <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
