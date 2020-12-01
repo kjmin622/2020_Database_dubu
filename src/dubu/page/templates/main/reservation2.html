@@ -381,7 +381,7 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
     {% endfor %}
     {% for data in room_info %}
     if('{{data.room_type}}'==$(this).attr('name')){
-      $('popup_people').text('{{data.room_num}}')
+      $('.popup_count').text('{{data.room_num}}');
     }
     {% endfor %}
   });

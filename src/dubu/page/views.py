@@ -84,7 +84,6 @@ def reservation2(request):
             # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
             #     return redirect('reservation')
             room_datas, room_info = get_room()
-            print(room_info)
             repost = dict(request.POST)
             tmp = ["check_in","check_out","adult_num","child_num"]
             for t in tmp:
