@@ -27,8 +27,8 @@
 }
 
 .bold_test_staff{
-    border: 2px dotted;
-    border-color: aqua;
+    /* border: 2px dotted;
+    border-color: aqua; */
 }
 
 .s_i_text{
@@ -72,11 +72,13 @@ body{
 
 .s_s_s{
     border: 2px solid;
-    border-color: darkgray;
+    border-color: rgb(226,203,197);
     border-radius: 10px;
     font-size: 16px;
     padding: 5px 30px;
     margin: 10px;
+    color: rgb(226,203,197);
+    font-weight: 700;
     /* font-weight: 4000; */
 
     /* background-color: rgb(95, 187, 156); */
