@@ -60,7 +60,7 @@ def reservation(request):
     # not login
     if "member_id" not in request.session or request.session["member_id"]==None :
         login = False
-        redirect('login')
+        return redirect('login')
     # login
     else:
        login = True
@@ -83,7 +83,7 @@ def reservation2(request):
             # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
             #     return redirect('reservation')
             room_datas = get_room()
-            return render(request,'main/reservation2.html',{'request':request.POST, 'room_datas': room_datas})
+            return render(request,'main/reservation2.html',{'request':request.POST, 'room_datas': room_datas, 'login':login})
 
     return redirect('reservation')
 
