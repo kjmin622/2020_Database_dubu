@@ -116,26 +116,26 @@
 
   <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
 
-  <div class="popup popup1" style = "display: none;">
+  <div class="popup popup1" style = "display: none; padding-bottom: 120px;">
 
     <div class="l_find">
-    <section class="t_ser ">  
+    <section class="t_ser " style="z-index: 0; margin-right: 10px;">  
       <p style="font-size:25px">Find ID</p>
       <div class="s_t ">
-        <input type="text" class="ppp id_in " id="idfind_name" placeholder="lastname/firstname">
-        <input type="text" class="ppp  pass_in " id="idfind_phone_num" placeholder="Phone_number">
-        <input type="text" class="ppp  e_in " id="idfind_email" placeholder="Email">
-        <input type="button" value="ID찾기" id="idfind_btn" class="send login_button">
+        &nbsp; &nbsp;Name<br><br><input type="text" class="ppp id_in " id="idfind_name" placeholder="ex) 홍길동" style="top:0px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        &nbsp; &nbsp;Phone<br><br><input type="text" class="ppp  pass_in " id="idfind_phone_num" placeholder="ex) 01011112222" style="top:53px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        &nbsp; &nbsp;Email<br><br><input type="text" class="ppp  e_in " id="idfind_email" placeholder="ex) dubu@gmail.com" style="top:108px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        <input type="button" value="확인" id="idfind_btn" class="send login_button btn" style="background-color: rgb(239, 239, 239); color: black; left: 155px; height: 42px; width: 72px; bottom: 0px; top:152px;">
       </div>
     </section>
 
-    <section class="t_ser ">  
+    <section class="t_ser " style="z-index: 0; margin-left: 10px;">
       <p style="font-size:25px">Find PASSWORD</p>
       <div class="s_t ">
-        <input type="text" class="ppp id_in " id="pwfind_name" placeholder="lastname/firstname">
-        <input type="text" class="ppp  pass_in " id="pwfind_id" placeholder="ID">
-        <input type="text" class="ppp  e_in " id="pwfind_email" placeholder="email">
-        <input type="button" class="send login_button" id="pwfind_btn" value="PW찾기">
+        &nbsp; &nbsp;Name<br><br><input type="text" class="ppp id_in " id="pwfind_name" placeholder="ex) 홍길동" style="top:0px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        &nbsp; &nbsp;ID<br><br><input type="text" class="ppp  pass_in " id="pwfind_id" placeholder="ex) hong123" style="top:53px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        &nbsp; &nbsp;Email<br><br><input type="text" class="ppp  e_in " id="pwfind_email" placeholder="ex) dubu@gmail.com" style="top:108px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        <input type="button" class="send login_button btn" id="pwfind_btn" value="확인" style="background-color: rgb(239, 239, 239); color: black; left: 155px; height: 42px; width: 72px; bottom: 0px; top:152px;">
       </div>
     </section>
     </div>
