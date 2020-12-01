@@ -134,7 +134,18 @@
                         <td class="b_s_p">{{data.count}}</td>
                         <td class="b_s_p">{{data.price}}</td>
                         <td class="b_s_p">{{data.order_time}}</td>
+                        {% if data.offer_time is '' %}
+                        <td class="b_s_p">
+                          <form method="POST">
+                            <input type="hidden" name="method" value="offer_complete">
+                            <input type="hidden" name="booking_id" value="{{data.booking_id}}">
+                            <input type="hidden" name="product_id" value="{{data.product_id}}">
+                            <input type="submit" value="제공완료">
+                          </form>
+                        </td>
+                        {% else %}
                         <td class="b_s_p">{{data.offer_time}}</td>
+                        {% endif %}
                       </tr>
                       {% endfor %}
                     </tbody>

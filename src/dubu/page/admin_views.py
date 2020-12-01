@@ -99,7 +99,7 @@ def bill(request):
     if(not Staff.staff_login_check(request)): return redirect('admin_login')
     if(request.method=="POST"):
         if("method" in request.POST and request.POST["method"]=="insert_purchase"):
-            print(Book.insert_purchase(request.POST))
+            Book.insert_purchase(request.POST)
         else:
             Book.complete_bill(request.POST)
 

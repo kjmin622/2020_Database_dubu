@@ -480,8 +480,15 @@ class Book():
                 raise ValueError
             if(not count.isdigit()):
                 raise ValueError
-            sqlStr = f"insert into page_invoice(booking_id,product_id,count,order_time,offer_time,is_payment) values('{booking_id}','{product_id}',{count},'{order_time}','',0)"
-            cursor.execute(sqlStr);cursor.fetchall()
+
+            sqlStr = f"select booking_id from page_invoice where booking_id='{booking_id}' and product_id='{product_id}'"
+            cursor.execute(sqlStr);result=cursor.fetchall()
+            if(len(result)==0):
+                sqlStr = f"insert into page_invoice(booking_id,product_id,count,order_time,offer_time,is_payment) values('{booking_id}','{product_id}',{count},'{order_time}','',0)"
+                cursor.execute(sqlStr);cursor.fetchall()
+            else:
+                sqlStr = f"update page_invoice set count=count+{count} where booking_id='{booking_id}' and product_id='{product_id}'"
+                cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
             connection.close()
             return True
