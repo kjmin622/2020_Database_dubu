@@ -100,6 +100,8 @@ def bill(request):
     if(request.method=="POST"):
         if("method" in request.POST and request.POST["method"]=="insert_purchase"):
             Book.insert_purchase(request.POST)
+        if("method" in request.POST and request.POST["method"]=="offer_complete"):
+            Book.offer_complete(request.POST)
         else:
             Book.complete_bill(request.POST)
 

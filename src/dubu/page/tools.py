@@ -481,14 +481,25 @@ class Book():
             if(not count.isdigit()):
                 raise ValueError
 
-            sqlStr = f"select booking_id from page_invoice where booking_id='{booking_id}' and product_id='{product_id}'"
-            cursor.execute(sqlStr);result=cursor.fetchall()
-            if(len(result)==0):
-                sqlStr = f"insert into page_invoice(booking_id,product_id,count,order_time,offer_time,is_payment) values('{booking_id}','{product_id}',{count},'{order_time}','',0)"
-                cursor.execute(sqlStr);cursor.fetchall()
-            else:
-                sqlStr = f"update page_invoice set count=count+{count} where booking_id='{booking_id}' and product_id='{product_id}'"
-                cursor.execute(sqlStr);cursor.fetchall()
+            sqlStr = f"insert into page_invoice(booking_id,product_id,count,order_time,offer_time,is_payment) values('{booking_id}','{product_id}',{count},'{order_time}','',0)"
+            cursor.execute(sqlStr);cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return True
+        except:
+            connection.rollback()
+            connection.close()
+            return False
+
+    def offer_complete(dataDir):
+        try:
+            cursor = connection.cursor()
+            booking_id = dataDir["booking_id"]
+            product_id = dataDir["product_id"]
+            order_time = dataDir["order_time"]
+            offer_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%H:%S:%f")[:-4]
+            sqlStr = f"update page_invoice set offer_time = '{offer_time}' where booking_id='{booking_id}' and product_id='{product_id}' and order_time='{order_time}'"
+            cursor.execute(sqlStr);cursor.fetchall()
             connection.commit()
             connection.close()
             return True

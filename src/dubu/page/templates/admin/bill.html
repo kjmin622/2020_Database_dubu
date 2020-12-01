@@ -134,12 +134,14 @@
                         <td class="b_s_p">{{data.count}}</td>
                         <td class="b_s_p">{{data.price}}</td>
                         <td class="b_s_p">{{data.order_time}}</td>
-                        {% if data.offer_time is '' %}
+                        {% if data.offer_time == '' %}
                         <td class="b_s_p">
                           <form method="POST">
+                            {% csrf_token %}
                             <input type="hidden" name="method" value="offer_complete">
                             <input type="hidden" name="booking_id" value="{{data.booking_id}}">
                             <input type="hidden" name="product_id" value="{{data.product_id}}">
+                            <input type="hidden" name="order_time" value="{{data.order_time}}">
                             <input type="submit" value="제공완료">
                           </form>
                         </td>
