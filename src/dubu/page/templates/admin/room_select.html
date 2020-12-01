@@ -32,7 +32,7 @@
 
     {% comment %} dubu_make {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dubu_made/room_s.css' %}">  
+    <link rel="stylesheet" href="{% static 'css/dubu_made/room_select.css' %}">  
 
   </head>
   <body>
@@ -88,10 +88,17 @@
         <div class="sub_title">Reservation Input</div>
         <div class="room_select_input">
           {% comment %} 예약정보를 입력합니다. {% endcomment %}
-          <input type="text" name="book_phone" class="reservation_input" placeholder="phone">
-          <label>체크인 날짜</label>
-          <input type="date" name="book_date" class="reservation_input">
-          <input type="button" name="book_btn" class="reservation_input" value="Click">
+          <div style="display:flex; flex-flow:row; margin:10px 0px;">
+            <div style="padding:0px 10px;">
+              <label>phone number</label>
+              <input type="text" name="book_phone" class="reservation_input" placeholder="" style="width:150px; padding-left:5px;margin: 0px 10px;">
+            </div>
+            <div style="padding:0px 5px;">  
+              <label>check in date</label>
+              <input type="date" name="book_date" class="reservation_input"style="width:150px; padding-left:5px;margin: 0px 10px;">
+            </div>
+          </div>
+          <input type="button" name="book_btn" class="reservation_input" value="search"style="margin:10px 30px; padding: 0px 30px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px; height:35px;" >
         </div>
       </div>
 
@@ -103,16 +110,16 @@
       <!-- 손님의 예약 정보 -->
       <section class="reservation_info" >
 
-          <div class="bold_sec o_1">
+          <div class="bold_sec o_1" style="height:500px;">
 
             <div class="sub_title_select">reservation Info</div>
 
             {% comment %} 예약자의 예약정보를 출력합니다. {% endcomment %}
             <div class="reservation_output">
-              <div class="reser_room_num">객실번호:</div>
-              <div class="reser_people">인원:</div>
-              <div class="reser_type">객실 종류:</div>
-              <div class="reser_text">추가 요청 사항:</div>
+              <div style="padding:10px 0px;"class="reser_room_num">객실번호:</div>
+              <div style="padding:10px 0px;"class="reser_people">인원:</div>
+              <div style="padding:10px 0px;"class="reser_type">객실 종류:</div>
+              <div style="padding:10px 0px;"class="reser_text">추가 요청 사항:</div>
             </div>
 
           </div>
@@ -122,16 +129,18 @@
       
       <section class="room_info" >
 
-          <div class="bold_sec o_1">
+          <div class="bold_sec o_1" style="height:500px;">
 
             <div class="sub_title_select">Room List</div>
-            <form name="reser_POST" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="booking_id" value="">
-            <input type="hidden" name="room_num" value="">
-            <ul class="output_room_list">
-            </ul>
-            </form>
+            <div style="height: 540px; overflow:scroll; padding:20px 0px;">
+              <form name="reser_POST" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="booking_id" value="">
+                <input type="hidden" name="room_num" value="">
+                <ul class="output_room_list">
+                </ul>
+              </form>
+            </div>
           </div>
 
       </section>
@@ -258,7 +267,7 @@ $(document).ready(function(){
         }
       {% endfor %}
       if(!flag){
-        $('.output_room_list').append('<li><input type="button" class="room_select_btn" value="{{data.room_num}}"></li>');
+        $('.output_room_list').append('<li><input type="button" class="room_select_btn" value="{{data.room_num}}" style="width:150px; text-align:center; margin:3px;"></li>');
       }
     }
     {% endfor %}
