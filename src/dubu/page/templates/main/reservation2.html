@@ -30,8 +30,8 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     {% comment %} dubu_make {% endcomment %}
-    <link rel="stylesheet" href="{% static 'css/dubu_made/staff.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/main.css' %}">>
+
 
     <style>
       .popup1{
@@ -110,7 +110,7 @@
   
   <div class="bold_test_staff staff_s_div bold_sec">
     <center>
-    <div class="p-4 align-self-stretch d-flex" style="width: 600px;">
+    <div class="p-4 align-self-stretch d-flex" style="width: 448px;">
       <div class="wrap" style = "margin-right:30px;">
         <label for="#">Check-in Date</label>
         <p>{{request.check_in}}</p>
@@ -121,12 +121,12 @@
       </div>
 
       <div class="wrap" style = "margin-right:30px;">
-        <label for="#">어른 </label>
+        <label for="#">Adult</label>
         <p>{{request.adult_num}}</p>
       </div>
 
-      <div class="wrap" style = "margin-right:30px;">
-        <label for="#">어린이</label>
+      <div class="wrap" style = "margin-right:0px;">
+        <label for="#">Child</label>
         <p>{{request.child_num}}</p>
       </div>
 
@@ -137,14 +137,15 @@
   <br>
   <br>
   <center>
-  <div style="overflow:scroll; width:1700px; height:450px; margin: 0px auto;">
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    
+  <div class = "container" style="overflow:auto; width:1700px; height:450px; padding-left: 0px;">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">standard_single</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="standard_single" class="select"> 선택</input><br>
             <input type="button" name="st_s.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -153,13 +154,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">standard_double</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="standard_double" class="select"> 선택</input><br>
             <input type="button" name="st_d.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -168,13 +169,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">superior_single</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="superior_single" class="select"> 선택</input><br>
             <input type="button" name="su_s.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -183,13 +184,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">superior_double</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="superior_double" class="select"> 선택</input><br>
             <input type="button" name="su_d.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -198,13 +199,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">delux_double</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="delux_double" class="select"> 선택</input><br>
             <input type="button" name="d_d.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -213,13 +214,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">delux_queen</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="delux_queen" class="select"> 선택</input><br>
             <input type="button" name="d_q.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -228,13 +229,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">suite_delux_queen</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="suite_delux_queen" class="select"> 선택</input><br>
             <input type="button" name="s_d_q.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -243,13 +244,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">suite_delux_king</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="suite_delux_king" class="select"> 선택</input><br>
             <input type="button" name="s_d_k.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -258,13 +259,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">suite_royal_queen</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="suite_royal_queen" class="select"> 선택</input><br>
             <input type="button" name="s_r_q.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -273,13 +274,13 @@
       </div>
     </div>
 
-    <div  class="bold_test_staff staff_s_div bold_sec">
+    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
       <div class="staff_title ">suite_royal_king</div>
       <div class="s_i_s">
         <div class="s_i  col_c">
           <div class="s_i_logo ">이미지 넣어주세요</div>
         </div>
-        <div class="s_i s_i_text" style="padding-top: 200px; padding-bottom: 0px;">
+        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
           <ul style="list-style-type:none">요금 맞게 작성해 주세요!<br>
             <input type="radio" value="suite_royal_king" class="select"> 선택</input><br>
             <input type="button" name="s_r_k.r" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
@@ -350,7 +351,7 @@
   </div>
 
   <div class="bold_test_staff staff_s_div bold_sec">
-    <center>
+    
       <div class="staff_title ">객실 요금</div>
       <div class="s_i_s">
         <div class="s_i s_i_text" style="padding-right: 700px;">
@@ -361,7 +362,7 @@
           </ul>
         </div>
       </div>
-    </center>
+    
   </div>
 
   <div class="bold_test_staff staff_s_div bold_sec">

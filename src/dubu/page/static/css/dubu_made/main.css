@@ -1,0 +1,149 @@
+/* div 기본 셋팅 */
+.staff_s_div{
+    padding: 10px;
+    width:60%;
+    
+}
+/* sub title 틀  */
+.sub_title{
+    font-size: 30px;
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+.m_back{
+    background-color: dimgray;
+}
+
+*{
+    margin:0px;
+    padding: 0px;
+}
+/* div의 테두리를 그려주는 css */
+.bold_test{
+    border: 2px dotted;
+    border-color: aqua;
+}
+
+/* test */
+.test{
+    width: 200px;
+    height: 200px;
+}
+
+.row_c{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* 가로 정렬해주는 css */
+.row_set{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* 세로 중앙에 좋아 주는해주는 css */
+.col_c{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+/* 텍스트 가로 중앙에 놓아주는 css */
+.t_row_c{
+    text-align: center;
+}
+
+*{
+    margin: 0px;
+    padding:0px;
+}
+
+.s_i_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.s_i{
+    width: max-content;
+    display: flex;
+    flex-flow: column;
+    padding: 10px ;
+}
+
+.s_i_logo{
+    font-size: 60px;
+    /* padding: 50px; */
+    padding: 60px 100px;
+    background-color : rgba(169, 169, 169, 0.123);
+    border-radius: 10px;
+
+}
+
+.bold_test_staff{
+    border: 2px dotted;
+    border-color: aqua;
+}
+
+.s_i_text{
+    padding: 30px 100px 20px 100px;
+    font-size: 15px;
+}
+
+.bold_sec{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid;
+    /* border-color: darkgray; */
+    display: flex;
+    flex-flow: column;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+.staff_title{
+    font-size: 30px;
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+body{
+    /* background-color: rgb(182, 182, 182); */
+}
+
+
+/* staff status */
+
+.s_s{
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 30px;
+    font-size: 25px;
+}
+
+.s_s_s{
+    border: 3px solid;
+    border-color: rgb(107, 216, 180);
+    border-radius: 10px;
+
+    padding: 10px 40px;
+    margin: 10px;
+    /* background-color: rgb(95, 187, 156); */
+}
+
+/* Staff Schedule */
+
+.s_c{
+    /* padding:10px;  */
+    font-size:15px; 
+    text-align: center;
+    margin: 30px;
+    /* min-height: 250px; */
+}
