@@ -247,12 +247,20 @@
       <div class="s_i_s">
         <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px;">
           <ul style="list-style-type:none">
-            <li style="padding-bottom: 15px; display: inline;" id= "room_cost"> 객실 금액 : 0</li> <p style="display: inline;">&nbsp;￦</p>
+            <li>
+              <input type="hidden" name = "room_cost" value="" style="padding-bottom: 15px; display: inline;"> <p id ="room_cost" style="display: inline;">객실 금액 : 0</p> <p style="display: inline;">&nbsp;￦</p></li>
             <li>&nbsp;</li>
-            <li style="padding-bottom: 15px; display: inline;" id= "breakfast_num2"> 조식 금액 : 0 </li><p style="display: inline;">&nbsp;￦</p>
+
+            <li>
+              <input type="hidden" name = "breakfast_cost" value="" style="padding-bottom: 15px; display: inline;"> <p id ="breakfast_cost" style="display: inline;"> 조식 금액 : 0</p> <p style="display: inline;">&nbsp;￦</p></li>
+            <li>&nbsp;</li>
+
             <li>&nbsp;</li>
             <li>&nbsp;</li>
-            <li style="font-weight: bold; padding-top: 15px; font-size: 20px; display: inline;" id="total">총 금액 : 0 </li><p style="display: inline;">&nbsp;￦</p>
+
+            <li>
+              <input type="hidden" name = "total" value="" style="padding-bottom: 15px; display: inline;"> <p id ="total" style="display: inline; font-weight: bold; font-size: 20px;">총 금액 : 0</p> <p style="display: inline; font-weight: bold; font-size: 20px;">&nbsp;￦</p></li>
+            <li>&nbsp;</li>
             <br>
           </ul>
         </div>
@@ -409,13 +417,20 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
     else{
       int++;
     }
-    $("#breakfast_num").text("금액 : "+(int*10000));
+    
 
-    $("#breakfast_num2").text("조식 금액 : "+(int*10000));
+    $("#breakfast_num").text("금액 : "+(int*10000));
+    $("input[name=breakfast_num]").attr("value", ""+ int);
+
+    $("#breakfast_cost").text("조식 금액 : "+(int*10000));
+    $("input[name=breakfast_cost]").attr("value", ""+ (int*10000));
+
+
     x.attr("value",int+"");
     if($("#total").text()!="총 금액 : "){
       var y= 1* $("#room_cost").text().slice(8);
       $("#total").text("총 금액 : "+(y+int*10000));
+      $("input[name=total]").attr("value", ""+ int);
 
     }
   })
@@ -430,9 +445,20 @@ $(document).ready(function(){
       int=1*'{{data.price}}';
     }
     {% endfor %}
-    var x= 1* $("#breakfast_num2").text().slice(8);
+
+
+
+    var x= 1* $("#breakfast_cost").text().slice(8);
     $("#room_cost").text("객실 금액 : "+int);
+    $("input[name=room_cost]").attr("value", ""+ int);
+
+
+
+
     $("#total").text("총 금액 : "+(int +x));
+    $("input[name=total]").attr("value", ""+ int);
+
+   
   })
 })
 
