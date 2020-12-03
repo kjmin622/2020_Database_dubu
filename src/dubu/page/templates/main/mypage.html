@@ -203,14 +203,14 @@
           </thead>
           <tbody>
             {% for data in coupon_datas %}
-              {% if member_datas.member_id==data.member_id%}
+              {% if member_datas.member_id == data.member_id %}
               <tr>
                 <td>{{data.coupon_id}}</td>
                 <td>{{data.coupon_type}}</td>
                 <td>{{data.value}}</td>
                 <td>{{data.min_price}}</td>
               </tr>
-              {%endif%}
+              {% endif %}
             {% endfor %} 
           </tbody>
         </table>
