@@ -137,66 +137,78 @@
   <br>
   <br>
   <center>
-    
-  <div class = "container" style="overflow:auto; width:1700px; height:700px; padding-left: 0px;">
 
-    {% for data in room_datas %}
-    {% if request.total_num <= data.mem_limit %}
-    {% for room in room_info %}
-    {% if room.room_type == data.room_type %}
-    {% if room.room_num > 0 %}
-    <div  class="bold_test_staff staff_s_div bold_sec" style="width:1123px; margin-top: 0px;">
-      <div class="staff_title ">{{data.room_type}}</div>
-      <div class="s_i_s">
-        <div class="s_i  col_c">
-          <div class="s_i_logo "><img width="350px" src="{% static data.photo_url %}"></div>
-        </div>
-        <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
-          <ul style="list-style-type:none">{{data.price}}<br>
-            <input type="radio" name="room_type" value="{{data.room_type}}" class="select"> 선택<br>
-            <input type="button" name="{{data.room_type}}" class = "popup1_btn btn" style="border-radius:10px;" value="자세히 보기">
-          </ul>
+  <div class="container" style="border: 2px solid gray;">
+    <div class = "container" style="overflow:auto; width:1125px; height:700px; padding-left: 0px;">
+
+      {% for data in room_datas %}
+      {% if request.total_num <= data.mem_limit %}
+      {% for room in room_info %}
+      {% if room.room_type == data.room_type %}
+      {% if room.room_num > 0 %}
+      <div  class="bold_test_staff staff_s_div bold_sec" style="width:1094px; margin-top: 20px; background-color:#dee2e63b; border: 0px;">
+        <div class="staff_title " style="padding-bottom: 20px;">{{data.room_type}}</div>
+        <div class="s_i_s">
+          <div class="s_i  col_c">
+            <div class="s_i_logo " style="padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; background-color: rgb(0 0 0 / 0%);"><img width="580px" src="{% static data.photo_url %}"></div>
+          </div>
+
+          <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
+            <ul style="list-style-type:none">
+              <input type="button" name="{{data.room_type}}" class = "popup1_btn btn" style="border-radius:10px; width: 176px; height: 64px;" value="자세히 보기"><br><br><br><br>
+              <p style="font-size: 20px;"> 금액 : {{data.price}}   &nbsp; ￦</p><br><br>
+              <input type="checkbox" value="{{data.room_type}}" class="select" style= "width: 20px; height: 20px; vertical-align: -2.3px;"> <a style="font-size: 20px;">선택</a>
+            </ul>
+          </div>
+
         </div>
       </div>
-    </div>
-    {% endif %}
+
+      {% endif %}
     {% endif %}
     {% endfor %}
     {% endif %}
     {% endfor %}
 
+    
+    </div>
   </div>
+    
+  
 </center>
 
   <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
   <div class="popup popup1" style = "display: none;">
-    <div class = "container">
-      <div class = "s_i_logo" style = "margin-top:10px;"></div>
-      <div class = "s_i s_i text">
+    <div class = "container" style = "padding-bottom: 30px;">
+      <div class = "s_i_logo" style = "margin-top:10px; padding-bottom: 30px; padding-top:30px; padding-left:50px; padding-right:50px;">
+      <img src = "{% static 'images/moreroom.jpg' %}" style = "width: 700px; height: 420px;">
+      </div>
+      <div class = "s_i s_i text" style="width: 890px;">
         <ul style = "list-style-type: none">
           <li> Room name : <p style="display:inline" class="popup_room_name"></p></li>
-          <li> 객실 설명 : </li>
+          <li> 객실 설명 : DUBU 디럭스 룸은 3~4명 정도의 인원을 위한 객실입니다. DUBU 디럭스 룸은 마치 내 집 같은 편안함과 안락한 분위기를 느낄 수 있도록 설계하고, 보다 큰 침대와 큰 욕조로 구성된 공간입니다. </li>
         </ul>
       </div>
 
-      <div class = "container" style = "border:2px solid gray; margin-bottom: 30px;" >
+      <div class = "container" style = "border:2px solid gray; margin-bottom: 30px; " >
         <label for="#">객실개요</label>
-        <div class = "s_i s_i text">
+        <div class = "s_i s_i text" style="margin-left: 310px;">
           <ul style = "list-style-type: none">
             <li>bed type : <p style="display:inline" class="popup_bed_type"></p></li>
             <li> 최대 인원 : <p style="display:inline" class="popup_people"></p></li>
             <li>남은 개수 : <p style="display:inline" class="popup_count"></p></li>
+            <li> check-in/check-out : 15:00/12:00</li>
           </ul>
         </div>
       </div>
 
       <div class = "container" style = "border:2px solid gray">
         <label for="#">어메니티</label>
-        <div class = "s_i s_i text">
+        <div class = "s_i s_i text" style="width: 820px; margin-left: 25px;" >
           <ul style = "list-style-type: none">
-            <li> 일반 : </li>
-            <li> 욕실 : </li>
-            <li> 기타 : </li>
+            <li> 일반 : 42’’ LCD TV / 55” UHD TV / 손전등 / 슬리퍼 / 전화기 / 티포트 / 금고 / 구둣주걱 / 구두클리너 / 미니바</li>
+            <li> 욕실 : 세면대 2개 / 1회용 칫솔 및 치약 / 면도기 / 목욕 가운 / 비데 / 헤어드라이어 / 욕실용품 / 샤워 캡 / 슬리퍼 / 에머리보드 / 욕조 / 위생봉지 / 면봉</li>
+            <li> 기타 : 케이블/위성 TV 채널 / 무료 생수 1일 2병 / 보이스 메일 서비스 / 커피 및 티 메이커 / 무료 일간 신문 / 셔츠 무료 다림질서비스(1일 2개) / 옷솔 / 구두 광택 서비스</li>
           </ul>
         </div>
       </div>
@@ -206,16 +218,21 @@
   <div class="bold_test_staff staff_s_div bold_sec">
     <div class="staff_title ">조식 신청</div>
     <div class="s_i_s">
-      <div class="s_i s_i_text">
-        <ul style="list-style-type:none">
-          <li>인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <div class="s_i s_i_text" style="padding-left: 0px; padding-right: 0px;">
+        <ul style="list-style-type:none; padding-left: 400px;">
+          <li style="padding-left: 50px;">인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <input class = "num_btn" name = "meal" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
             <input class = "count" value='0' name = "breakfast_num" readonly style = "width:40px; padding-left: 13px;">
             <input class = "num_btn" name = "meal" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
-          <li style="padding-bottom: 15px;" id= "breakfast_num"> 가격 : </li>
+          <li style="padding-bottom: 15px; padding-left: 50px;" id= "breakfast_num">가격 : 0 </li>
           <br>
-          <p> * 유아와 어린이는 별도로 신청해주세요. </p>
+          <p style="padding-left: 30px;"> * 유아와 어린이는 별도로 신청해주세요. </p>
+        </ul>
+      </div>
+      <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px; margin-right: 400px;">
+        <ul style="list-style-type:none">
+          <br><br><li style="padding-bottom: 15px; padding-top: 3px;" id= "breakfast_num"> ￦ </li>
         </ul>
       </div>
     </div>
@@ -231,11 +248,18 @@
     
       <div class="staff_title ">객실 요금</div>
       <div class="s_i_s">
-        <div class="s_i s_i_text" style="padding-right: 700px;">
+        <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px; margin-left: 450px;">
           <ul style="list-style-type:none">
-            <li style="padding-bottom: 15px;" id= "room_cost"> 객실 금액 : </li><br>
-            <li style="padding-bottom: 15px;" id= "breakfast_num2"> 조식 금액 : </li><br>
-            <li style="font-weight: bold; padding-top: 15px;" id="total"> 총 금액 : </li>
+            <li style="padding-bottom: 15px;" id= "room_cost"> 객실 금액 : 0 </li><br> 
+            <li style="padding-bottom: 15px;" id= "breakfast_num2"> 조식 금액 : 0 </li><br>
+            <li style="font-weight: bold; padding-top: 15px; font-size: 20px;" id="total"> 총 금액 : 0 </li>
+          </ul>
+        </div>
+        <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px; margin-right: 450px;">
+          <ul style="list-style-type:none">
+            <li style="padding-bottom: 15px;" id= "room_cost"> ￦ </li><br> 
+            <li style="padding-bottom: 15px;" id= "breakfast_num2"> ￦ </li><br>
+            <li style="font-weight: bold; padding-top: 15px; font-size: 20px;" id="total"> ￦ </li>
           </ul>
         </div>
       </div>
@@ -246,7 +270,7 @@
     <div class="s_i_s">
       <div class="s_i s_i_text">
         <label for="#">- 요금 정책</label>
-        <p>해당 요금에 부가세 10%와 봉사료 10% (총 20%)가 부과됩니다.</p>
+        <p>객실 금액에 부가세 10%와 봉사료 10%(총 20%)가 포함됩니다.</p>
         <label for="#">- 취소 규정</label>
         <p>예약 취소 및 변경은 체크인 하루 전 18:00(한국시간)까지 가능합니다. 예약하신 일자에 체크인 되지 않거나 또는 위의 지정 시간 이후에 예약을 취소했을 경우에는 예약 사항에 대해 노-쇼 (No Show) 처리되며, 이에 따른 위약금으로 예약 첫날에 해당하는 1박 객실요금이 청구되오니 유의하시기 바랍니다.</p>
       </div>
