@@ -158,6 +158,7 @@
             <th>check out</th>
             <th>Room name</th>
             <th>성인 / 어린이</th>
+            <th>조식</th>
             <th>추가 사항</th>
             <th>예약 취소</th>
           </thead>
@@ -172,7 +173,7 @@
                 <td>{{data.breakfast}}</td>
                 <td>{{data.extra_text}}</td>
                 <td>
-                  <form action="{% url 'delete_booking' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                  <form method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
                     <input type="submit" value="delete" class="delete_btn m_b">
                     <input type="hidden" name="method" value="delete">
                     <input type="hidden" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
