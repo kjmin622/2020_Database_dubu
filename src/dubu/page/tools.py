@@ -322,7 +322,7 @@ class Book():
 
     def edit_booking(dataDir):
         try:
-            booking_id=dataDir['booking_id'];is_check_in=dataDir['is_check_in'];check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];baby_num=dataDir['baby_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
+            booking_id=dataDir['booking_id'];is_check_in=dataDir['is_check_in'];check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
             cursor = connection.cursor()
             sqlStr = f"select * from page_rooms where room_num={room_num} and room_type='{room_type}'"
             cursor.execute(sqlStr)
@@ -331,7 +331,7 @@ class Book():
             sqlStrs = [
                 f"update page_booking set is_check_in={is_check_in}, check_in='{check_in}', check_out='{check_out}' where booking_id='{booking_id}'",
                 f"update page_booking_rooms set room_num={room_num} where booking_id='{booking_id}'",
-                f"update page_book_request set room_type='{room_type}',breakfast='{breakfast}',adult_num='{adult_num}',child_num='{child_num}',baby_num='{baby_num}',extra_text='{extra_text}' where booking_id='{booking_id}'",
+                f"update page_book_request set room_type='{room_type}',breakfast='{breakfast}',adult_num='{adult_num}',child_num='{child_num}',baby_num='0',extra_text='{extra_text}' where booking_id='{booking_id}'",
                 f"update page_customer_info set first_name='{first_name}',last_name='{last_name}' where booking_id='{booking_id}'",
                 f"update page_customer_phone set phone='{phone}' where booking_id='{booking_id}'"
             ]
@@ -347,7 +347,7 @@ class Book():
 
     def insert_booking(dataDir):
         try:
-            check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];baby_num=dataDir['baby_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
+            check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_num=dataDir['room_num'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];extra_text=dataDir['extra_text'];first_name=dataDir['first_name'];last_name=dataDir['last_name'];phone=dataDir['phone']
             cursor = connection.cursor()
             booking_id = int(time.strftime('%Y%m%d%H%M%S00'))
             FsqlStr = lambda x : f"select * from page_booking where booking_id = '{x}'"
@@ -361,7 +361,7 @@ class Book():
             booking_id = str(booking_id)
             sqlStrs = [f"insert into page_booking(booking_id, is_check_in, check_in, check_out) values('{booking_id}',0,'{check_in}','{check_out}')",
                         f"insert into page_booking_rooms(booking_id, room_num) values('{booking_id}',{room_num})",
-                        f"insert into page_book_request(booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text) values('{booking_id}','{room_type}',{breakfast},{adult_num},{child_num},{baby_num},'{extra_text}')",
+                        f"insert into page_book_request(booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text) values('{booking_id}','{room_type}',{breakfast},{adult_num},{child_num},0,'{extra_text}')",
                         f"insert into page_customer_info(booking_id, first_name, last_name) values('{booking_id}','{first_name}','{last_name}')",
                         f"insert into page_customer_phone(booking_id, phone) values('{booking_id}','{phone}')"
                         ]
