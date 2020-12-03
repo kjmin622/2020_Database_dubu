@@ -4,21 +4,23 @@
     {% comment %} dubu_make {% endcomment %}
     {% load static %}
         <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
-        <link rel="stylesheet" href="{% static 'css/dubu_made/slogin.css' %}">
+        <link rel="stylesheet" href="{% static 'css/dubu_made/s_login.css' %}">
     </head>
-    <body >
-        <form action="{% url 'admin_login' %}" method="POST">
-            {% csrf_token %}
-            <div class="l_tle" style="">
-                <div class="form-group ttt ">
-                    <div class="s_l_t ">Login</div>
-                    <div class="s_l_in">staff_id</div>
-                    <div class="l_input">
-                        <input type="text" name="staff_id" class="form-control tt ll" id="staff_id">
+    <body>
+        <div>
+            <form action="{% url 'admin_login' %}" method="POST">
+                {% csrf_token %}
+                <div class="l_tle" style="">
+                    <div class="form-group ttt ">
+                        <div class="s_l_t ">Login</div>
+                        <div class="s_l_in">staff_id</div>
+                        <div class="l_input">
+                            <input type="text" name="staff_id" class="form-control tt ll" id="staff_id">
+                        </div>
+                        <button class="btn btn-default  tt bu">submit</button>
                     </div>
-                    <button class="btn btn-default  tt bu">submit</button>
                 </div>
-            </div>
-        </form>
+            </form>
+        <div>
     </body>
 </html>
