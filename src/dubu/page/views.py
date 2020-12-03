@@ -174,8 +174,8 @@ def mypage(request):
         if(member_datas == None): 
             return redirect('logout')
         booking_datas=Book.get_booking_info(member_id)
-        print(booking_datas)
-        return render(request,'main/mypage.html',{'member_datas':member_datas, 'booking_datas':booking_datas})
+        coupon_datas=Book.get_coupon()
+        return render(request,'main/mypage.html',{'member_datas':member_datas, 'booking_datas':booking_datas, 'coupon_datas':coupon_datas})
     except:
         connection.close()
         return redirect('logout')
