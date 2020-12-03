@@ -91,7 +91,7 @@ class member_info(models.Model):
 
 
 class card_info(models.Model):
-    card_id = models.CharField(max_length=100, primary_key=True)   
+    card_id = models.CharField(max_length=100)   
     bank = models.CharField(max_length=30)    
     cvc = models.IntegerField()  
     expiration_date = models.CharField(max_length=20)  

@@ -375,6 +375,9 @@ class Book():
 
             for sqlStr in sqlStrs:
                 cursor.execute(sqlStr);cursor.fetchall()
+            
+            connection.commit()
+            connection.close()
 
             return True
 
@@ -388,8 +391,8 @@ class Book():
             #'bank': ['카카오'], 'card_1': ['1234'], 'card_2': ['2345'], 'card_3': ['3456'], 'card_4': ['4567'], 'cvc': ['123'], 'date_1': ['11'], 'date_2': ['24'],
             check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast_num'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];extra_text=dataDir['extra_text']
             bank=dataDir["bank"];card_1=dataDir["card_1"];card_2=dataDir["card_2"];card_3=dataDir["card_3"];card_4=dataDir["card_4"];cvc=dataDir["cvc"];date=dataDir["date_1"]+"/"+dataDir["date_2"]
+            
             cursor = connection.cursor()
-            print(1)
             sqlStr= f"select first_name, last_name, phone from page_member_info where member_id='{member_id}'"
             cursor.execute(sqlStr)
             result= cursor.fetchall()
@@ -423,6 +426,8 @@ class Book():
             for sqlStr in sqlStrs:
                 cursor.execute(sqlStr);cursor.fetchall()
 
+            connection.commit()
+            connection.close()
             return True
 
         except:
