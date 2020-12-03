@@ -157,7 +157,7 @@
             <th>check in</th>
             <th>check out</th>
             <th>Room name</th>
-            <th>인원</th>
+            <th>성인 / 어린이</th>
             <th>추가 사항</th>
             <th>예약 취소</th>
           </thead>
@@ -168,14 +168,16 @@
                 <td>{{data.check_in}}</td>
                 <td>{{data.check_out}}</td>
                 <td class="booking_search_td">{{data.room_type}}</td>
-                <td>{{data.adult_num}}</td>
-                <td>{{data.child_num}}</td>
+                <td>{{data.adult_num}} / {{data.child_num}}</td>
                 <td>{{data.breakfast}}</td>
                 <td>{{data.extra_text}}</td>
-                <td><form action="{% url 'delete_booking' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
-                <input type="hidden" name="method" value="delete
-                <input type="hidden" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
-                <input type="submit" value="delete" class="delete_btn m_b"></form></td>
+                <td>
+                  <form action="{% url 'delete_booking' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                    <input type="submit" value="delete" class="delete_btn m_b">
+                    <input type="hidden" name="method" value="delete">
+                    <input type="hidden" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
+                  </form>
+                </td>
               </tr>
             {% endfor %}           
           </tbody>

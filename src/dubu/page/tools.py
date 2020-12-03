@@ -265,11 +265,11 @@ class Book():
         try:
             cursor = connection.cursor()
             member_booking = []
-            if(member_id==""):
+            if(member_id!=""):
                 sqlStr = f"select booking_id from page_member_customer where member_id = '{member_id}'"
                 cursor.execute(sqlStr);result=cursor.fetchall()
                 for data in result:
-                    member_booking.append(data[0])
+                    member_booking.append(data[0])         
             sqlStr = "select booking_id from page_booking"
             cursor.execute(sqlStr);result=cursor.fetchall()
             booking_ids = []

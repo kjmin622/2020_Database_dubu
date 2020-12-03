@@ -166,14 +166,16 @@ def reservation3(request):
 def mypage(request):
     if("member_id" not in request.session or request.session["member_id"]==None): return redirect('login')
     if(request.method=="POST"):
-        Book.delete_booking(request.POST)
+        if(request.POST['method']=='delete'):
+            Book.delete_booking(request.POST)
     try:
         member_id = request.session["member_id"]
         member_datas = get_member(member_id)
         if(member_datas == None): 
             return redirect('logout')
-        return render(request,'main/mypage.html',{'member_datas':member_datas})
-
+        booking_datas=Book.get_booking_info(member_id)
+        print(booking_datas)
+        return render(request,'main/mypage.html',{'member_datas':member_datas, 'booking_datas':booking_datas})
     except:
         connection.close()
         return redirect('logout')
