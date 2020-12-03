@@ -197,15 +197,17 @@
         <table>
           <thead>
             <th>쿠폰 번호</th>
+            <th>쿠폰 이름</th>
             <th>쿠폰 내용</th>
             <th>쿠폰 비용</th>
-            <th>사용 내역</th>
+            <th>최소 사용 금액</th>
           </thead>
           <tbody>
             {% for data in coupon_datas %}
               {% if member_datas.member_id == data.member_id %}
               <tr>
                 <td>{{data.coupon_id}}</td>
+                <td>{{data.coupon_name}}</td>
                 <td>{{data.coupon_type}}</td>
                 <td>{{data.value}}</td>
                 <td>{{data.min_price}}</td>
