@@ -263,6 +263,7 @@
                         <input type="radio" id="booking_edit_input_{{s}}"  value="suite_royal" name="{{s}}">
                       </div>
                     </div> 
+                    {% elif s == 'baby_num' %}
                     {% else %}
                     <input type="text" name="{{s}}" placeholder="{{s}}" class="i_p_b">
                     {% endif %}
@@ -460,6 +461,11 @@
         <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
         <input type="text" id="booking_edit_input_{{s}}" style="margin-top:10px; width:350px; height:50px; padding:1px;" name="{{s}}" placeholder="{{s}}">
         </div>
+        {% elif s == 'baby_num' %}
+        {% comment %} <div style="margin:10px 0px">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="booking_edit_input_{{s}}" style="margin-top:10px; width:350px; height:50px; padding:1px;" name="{{s}}" placeholder="{{s}}">
+        </div> {% endcomment %}
         {% elif s != 'booking_id' %}
         <div style="margin:10px 0px">
         <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
