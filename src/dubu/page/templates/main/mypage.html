@@ -90,6 +90,7 @@
   }
 
   td{
+    text-align: center;
     padding-left: 5px;
   }
 </style>
@@ -118,7 +119,7 @@
         </ul>
 
         <div style = "float: right; margin-bottom: 10px;">
-          <button class= "btn">회원 탈퇴</button>
+          <button class= "btn" style = "border-radius:10px">회원 탈퇴</button>
         </div>
   
       </div>
@@ -133,7 +134,7 @@
         </ul>
         
         <div style = "float: right; margin-bottom: 10px;">
-          <button class= "btn">수정 및 저장</button>
+          <button class= "btn" style = "border-radius: 10px">수정 및 저장</button>
         </div>
   
       </div>
@@ -174,7 +175,7 @@
                 <td>{{data.extra_text}}</td>
                 <td>
                   <form method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
-                    <input type="submit" value="delete" class="delete_btn m_b">
+                    <input type="submit" value="delete" class="delete_btn m_b btn" style = "border-radius: 10px; margin-top:5px; margin-bottom:5px;">
                     <input type="hidden" name="method" value="delete">
                     <input type="hidden" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
                   </form>
