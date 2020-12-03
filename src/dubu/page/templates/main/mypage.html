@@ -158,33 +158,26 @@
             <th>check out</th>
             <th>Room name</th>
             <th>인원</th>
+            <th>추가 사항</th>
             <th>예약 취소</th>
           </thead>
           <tbody>
-            <tr>
-              <td>123</td>
-              <td>1231</td>
-              <td>123</td>
-              <td>123</td>
-              <td>123</td>
-              <td style = "text-align: center;"><button class = "btn">click</button></td>
-            </tr>
-            <tr>
-              <td>123</td>
-              <td>1231</td>
-              <td>123</td>
-              <td>123</td>
-              <td>123</td>
-              <td style = "text-align: center;"><button class = "btn">click</button></td>
-            </tr>
-            <tr>
-              <td>123</td>
-              <td>1231</td>
-              <td>123</td>
-              <td>123</td>
-              <td>123</td>
-              <td style = "text-align: center;"><button class = "btn">click</button></td>
-            </tr>           
+            {% for data in booking_datas %}
+              <tr>
+                <td class="booking_search_td">{{data.booking_id}}</td>
+                <td>{{data.check_in}}</td>
+                <td>{{data.check_out}}</td>
+                <td class="booking_search_td">{{data.room_type}}</td>
+                <td>{{data.adult_num}}</td>
+                <td>{{data.child_num}}</td>
+                <td>{{data.breakfast}}</td>
+                <td>{{data.extra_text}}</td>
+                <td><form action="{% url 'delete_booking' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                <input type="hidden" name="method" value="delete
+                <input type="hidden" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
+                <input type="submit" value="delete" class="delete_btn m_b"></form></td>
+              </tr>
+            {% endfor %}           
           </tbody>
         </table>
       </div>
@@ -206,24 +199,7 @@
             <th>사용 내역</th>
           </thead>
           <tbody>
-            <tr>
-              <td>123</td>
-              <td>1231</td>
-              <td>123</td>
-              <td>123</td>
-            </tr>
-            <tr>
-              <td>123</td>
-              <td>1231</td>
-              <td>123</td>
-              <td>123</td>
-            </tr>
-            <tr>
-              <td>123</td>
-              <td>1231</td>
-              <td>123</td>
-              <td>123</td>
-            </tr>           
+                  
           </tbody>
         </table>
       </div>

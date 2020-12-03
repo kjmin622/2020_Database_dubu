@@ -79,7 +79,7 @@
 
 		
 {% comment %} test  {% endcomment %}
-<form method='POST' action = "{% url 'reservation2' %}">
+<form method='POST'>
 {% csrf_token %}
 <input type="text" name="method" class="form-control" value="reservation" style="display:none" readonly>
 <input type="hidden" name="check_in" class="form-control" value='{{request.check_in}}' placeholder="Check-in date">
