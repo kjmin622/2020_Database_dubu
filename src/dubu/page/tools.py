@@ -261,9 +261,15 @@ class Book():
             connection.close()
             return None
         
-    def get_booking_info():
+    def get_booking_info(member_id=""):
         try:
             cursor = connection.cursor()
+            member_booking = []
+            if(member_id==""):
+                sqlStr = f"select booking_id from page_member_customer where member_id = '{member_id}'"
+                cursor.execute(sqlStr);result=cursor.fetchall()
+                for data in result:
+                    member_booking.append(data[0])
             sqlStr = "select booking_id from page_booking"
             cursor.execute(sqlStr);result=cursor.fetchall()
             booking_ids = []
@@ -272,18 +278,19 @@ class Book():
 
             output = []
             for booking_id in booking_ids:
-                sqlStr = f"select room_num from page_booking_rooms where booking_id = '{booking_id}'"
-                cursor.execute(sqlStr);is_room=cursor.fetchall()
-                if(is_room):
-                    sqlStr = f"select booking_id, is_check_in, check_in, check_out,room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone,room_num from page_booking natural join (select booking_id, room_num from page_booking_rooms) natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
-                else:
-                    sqlStr = f"select booking_id, is_check_in, check_in, check_out, room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone from page_booking natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
-                cursor.execute(sqlStr)
-                data=cursor.fetchall()[0]
+                if(member_id=="" or booking_id in member_booking):
+                    sqlStr = f"select room_num from page_booking_rooms where booking_id = '{booking_id}'"
+                    cursor.execute(sqlStr);is_room=cursor.fetchall()
+                    if(is_room):
+                        sqlStr = f"select booking_id, is_check_in, check_in, check_out,room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone,room_num from page_booking natural join (select booking_id, room_num from page_booking_rooms) natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
+                    else:
+                        sqlStr = f"select booking_id, is_check_in, check_in, check_out, room_type,breakfast,adult_num,child_num,baby_num,extra_text,first_name,last_name,phone from page_booking natural join (select booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text from page_book_request) natural join (select booking_id, first_name, last_name from page_customer_info) natural join (select booking_id, phone from page_customer_phone) where booking_id='{booking_id}'"
+                    cursor.execute(sqlStr)
+                    data=cursor.fetchall()[0]
 
-                output.append({'booking_id':data[0], 'is_check_in':data[1], 'check_in':data[2], 'check_out':data[3],'room_type':data[4],'breakfast':data[5],'adult_num':data[6],'child_num':data[7],'baby_num':data[8],'extra_text':data[9],'first_name':data[10],'last_name':data[11],'phone':data[12],'room_num': ""})
-                if(is_room):
-                    output[-1]["room_num"] = data[13]
+                    output.append({'booking_id':data[0], 'is_check_in':data[1], 'check_in':data[2], 'check_out':data[3],'room_type':data[4],'breakfast':data[5],'adult_num':data[6],'child_num':data[7],'baby_num':data[8],'extra_text':data[9],'first_name':data[10],'last_name':data[11],'phone':data[12],'room_num': ""})
+                    if(is_room):
+                        output[-1]["room_num"] = data[13]
 
             connection.close()
             return output
