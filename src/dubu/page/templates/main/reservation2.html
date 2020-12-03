@@ -63,7 +63,7 @@
 	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
             {% if login %} 
-	            <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log out</a></li>
+	            <li class="nav-item active"><a href="{% url 'logout' %}" class="nav-link">Log out</a></li>
               <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li>
             {% else %}
               <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
@@ -186,7 +186,6 @@
             <li>bed type : <p style="display:inline" class="popup_bed_type"></p></li>
             <li> 최대 인원 : <p style="display:inline" class="popup_people"></p></li>
             <li>남은 개수 : <p style="display:inline" class="popup_count"></p></li>
-            <li> check-in/check-out : </li>
           </ul>
         </div>
       </div>
@@ -421,7 +420,7 @@ $(document).ready(function(){
     {% endfor %}
     var x= 1* $("#breakfast_num2").text().slice(8);
     $("#room_cost").text("객실 금액 : "+int);
-    $("#total").text("총 금액 : "+(int*6/5 +x));
+    $("#total").text("총 금액 : "+(int +x));
   })
 })
 

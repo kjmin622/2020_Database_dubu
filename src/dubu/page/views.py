@@ -10,7 +10,9 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.shortcuts import redirect
-from datetime import datetime
+from datetime import date
+import time
+import datetime
 # Create your views here.
 
 def index(request):  
@@ -33,6 +35,29 @@ def about(request):
 
 def rooms(request):
     return render(request,'main/rooms-single.html',{})
+
+def get_member(member_id=""):
+        try:
+            cursor = connection.cursor()
+            #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
+            sqlStr="select member_id, membership, birth, is_sms, password, email, first_name, last_name, phone, point from page_member_info"
+            result=cursor.execute(sqlStr)
+            datas=cursor.fetchall()
+            output_data=[]
+            for data in datas:
+                output_data.append({'member_id':data[0], 'membership':data[1], 'birth':data[2], 'is_sms':data[3],
+                                    'password':data[4], 'email':data[5], 'first_name':data[6], 'last_name':data[7],
+                                    'phone':data[8],'point':data[9]})
+            if(member_id!=""):
+                for data in output_data:
+                    if(data["member_id"]==member_id):
+                        return data
+                raise ValueError
+            return output_data
+        except:
+            connection.rollback()
+            connection.close()
+        return None
 
 def get_room(room_type=""):
     try:
@@ -61,7 +86,7 @@ def reservation(request):
     # not login
     if "member_id" not in request.session or request.session["member_id"]==None :
         login = False
-        redirect('login')
+        return redirect('login')
     # login
     else:
        login = True
@@ -89,7 +114,7 @@ def reservation2(request):
             for t in tmp:
                 repost[t] = repost[t][0]
             repost["total_num"] = int(repost["adult_num"])+int(repost["child_num"])
-            return render(request,'main/reservation2.html',{'request':repost, 'room_datas': room_datas, 'room_info':room_info})
+            return render(request,'main/reservation2.html',{'request':repost, 'room_datas': room_datas, 'room_info':room_info, 'login':login})
 
     return redirect('reservation')
 
@@ -108,32 +133,32 @@ def reservation3(request):
             #     return redirect('reservation')
             # if(adult_num<=0 or (adult_num+child_num)==0 or (adult_num+child_num)>=4):
             #     return redirect('reservation')
-            print(request.POST)
-            return render(request,'main/reservation3.html',{'request':request.POST})
-    return redirect('reservation2')      
 
-def get_member(member_id=""):
-        try:
-            cursor = connection.cursor()
-            #sqlStr = "select staff_id, first_name, last_name, rank,depart_id, status,bank,account, phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon, building_number, detail_address, team_name from page_staff  natural join (select * from page_team_staff natural join (select page_staff_info.staff_id, first_name, last_name, bank,account,phone,wide_area_unit,basic_unit,street,si_gu,eub_myeon,building_number,detail_address from page_staff_address inner join page_staff_info on page_staff_info.staff_id = page_staff_address.staff_id))"
-            sqlStr="select member_id, membership, birth, is_sms, password, email, first_name, last_name, phone, point from page_member_info"
-            result=cursor.execute(sqlStr)
-            datas=cursor.fetchall()
-            output_data=[]
-            for data in datas:
-                output_data.append({'member_id':data[0], 'membership':data[1], 'birth':data[2], 'is_sms':data[3],
-                                    'password':data[4], 'email':data[5], 'first_name':data[6], 'last_name':data[7],
-                                    'phone':data[8],'point':data[9]})
-            if(member_id!=""):
-                for data in output_data:
-                    if(data["member_id"]==member_id):
-                        return data
-                raise ValueError
-            return output_data
-        except:
-            connection.rollback()
-            connection.close()
-        return None
+            member_id = request.session["member_id"]
+            member_datas = get_member(member_id)
+            return render(request,'main/reservation3.html',{'request':request.POST, 'login': login, 'member_datas':member_datas})
+    else:
+        member_id = request.session["member_id"]; phone = request.session["phone"]; last_name = request.POST["last_name"];first_name = request.POST["first_name"]
+        check_in = request.POST["check_in"];check_out = request.POST["check_out"]; adult_num = request.POST["adult_num"];child_num = request.POST["child_num"];room_type = request.POST["room_type"];breakfast = request.POST["breakfast_num"];room_cost=request.POST["room_cost"];total=request.POST["total"];extra_text = request.POST["extra_text"];bank= request.POST["bank"];card_number1= request.POST["card1"]; card_number2= request.POST["card2"]; card_number3= request.POST["card3"]; card_number4= request.POST["card4"]; cvc= request.POST["cvc"]; expiration_date= request.POST["date_1"] + request.POST["date_2"]
+        booking_id=datetime.datetime.now().strftime("%Y-%m-%d %H:%H:%S:%f")
+        cursor = connection.cursor()
+        sqlStr1 = f"insert into page_booking(booking_id, is_check_in, check_in, check_out) values('{booking_id}',0,'{request.check_in}','{request.check_out}'"
+        sqlStr2 = f"insert into page_customer_phone(booking_id, phone) values('{booking_id}','{request.phone}'"
+        sqlStr3 = f"insert into page_customer_info(booking_id, first_name, last_name) values('{booking_id}','{request.first_name}' ,'{request.last_name}''"
+        sqlStr4 = f"insert into page_book_request(booking_id, room_type, breakfast, adult_num, child_num, extra_text) values('{booking_id}','{request.oom_type}', '{request.breakfast}', '{request.adult_num}', '{request.child_num}', '{request.extra_text}'"
+        result1 = cursor.execute(sqlStr1)
+        result2 = cursor.execute(sqlStr2)
+        result3 = cursor.execute(sqlStr3)
+        result4 = cursor.execute(sqlStr4)
+        cursor.execute(sqlStr1)
+        cursor.execute(sqlStr2)
+        cursor.execute(sqlStr3)
+        cursor.execute(sqlStr4)
+        cursor.fetchall()
+        connection.commit()
+        connection.close()
+        return redirect('login')
+    return redirect('reservation2')      
 
 def mypage(request):
     if("member_id" not in request.session or request.session["member_id"]==None): return redirect('login')
