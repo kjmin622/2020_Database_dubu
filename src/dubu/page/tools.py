@@ -383,6 +383,52 @@ class Book():
             connection.close()
             return False
 
+    def insert_book(dataDir, member_id):
+        try:
+            #'bank': ['카카오'], 'card_1': ['1234'], 'card_2': ['2345'], 'card_3': ['3456'], 'card_4': ['4567'], 'cvc': ['123'], 'date_1': ['11'], 'date_2': ['24'],
+            check_in=dataDir['check_in'];check_out=dataDir['check_out'];room_type=dataDir['room_type'];breakfast=dataDir['breakfast_num'];adult_num=dataDir['adult_num'];child_num=dataDir['child_num'];extra_text=dataDir['extra_text']
+            bank=dataDir["bank"];card_1=dataDir["card_1"];card_2=dataDir["card_2"];card_3=dataDir["card_3"];card_4=dataDir["card_4"];cvc=dataDir["cvc"];date=dataDir["date_1"]+"/"+dataDir["date_2"]
+            cursor = connection.cursor()
+            print(1)
+            sqlStr= f"select first_name, last_name, phone from page_member_info where member_id='{member_id}'"
+            cursor.execute(sqlStr)
+            result= cursor.fetchall()
+            first_name=result[0][0];last_name=result[0][1];phone=result[0][2]
+            
+            dbsqlStr= f"insert into page_card_info(card_id, bank, card_number1, card_number2, card_number3, card_number4, cvc, expiration_date) values('{card_1}{card_2}{card_3}{card_4}','{bank}', '{card_1}', '{card_2}', '{card_3}', '{card_4}', '{cvc}', '{date}')"
+            print(dbsqlStr)
+            cursor.execute(dbsqlStr)
+            cursor.fetchall()
+            print(1)
+            booking_id = int(time.strftime('%Y%m%d%H%M%S00'))
+            FsqlStr = lambda x : f"select * from page_booking where booking_id = '{x}'"
+            cursor.execute(FsqlStr(booking_id))
+            is_booking = cursor.fetchall()
+            while(is_booking):
+                booking_id += 1
+                cursor.execute(FsqlStr(booking_id))
+                is_booking = cursor.fetchall()
+            print(1)
+            booking_id = str(booking_id)
+            sqlStr=f"insert into page_bill(booking_id, paytime, payment, card_id) values('{booking_id}','','card','{card_1}{card_2}{card_3}{card_4}')"
+            cursor.execute(sqlStr)
+            cursor.fetchall()
+            print(1)
+            sqlStrs  = [f"insert into page_booking(booking_id, is_check_in, check_in, check_out) values('{booking_id}',0,'{check_in}','{check_out}')",
+                        f"insert into page_book_request(booking_id, room_type, breakfast, adult_num, child_num, baby_num, extra_text) values('{booking_id}','{room_type}',{breakfast},{adult_num},{child_num},0,'{extra_text}')",
+                        f"insert into page_customer_info(booking_id, first_name, last_name) values('{booking_id}','{first_name}','{last_name}')",
+                        f"insert into page_customer_phone(booking_id, phone) values('{booking_id}','{phone}')"
+                        ]
+
+            for sqlStr in sqlStrs:
+                cursor.execute(sqlStr);cursor.fetchall()
+
+            return True
+
+        except:
+            connection.rollback()
+            connection.close()
+            return False
 
     def insert_parking(dataDir):
         # car_number room_num spot team_name

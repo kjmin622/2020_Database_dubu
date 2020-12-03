@@ -139,27 +139,8 @@ def reservation3(request):
             member_datas = get_member(member_id)
             return render(request,'main/reservation3.html',{'request':request.POST, 'login': login, 'member_datas':member_datas})
         else:
-            member_id = request.session["member_id"]; phone=request.POST['phone_1']+request.POST['phone_2']+request.POST['phone_3']; last_name = request.POST["last_name"];first_name = request.POST["first_name"]
-            check_in = request.POST["check_in"];check_out = request.POST["check_out"]; adult_num = request.POST["adult_num"];child_num = request.POST["child_num"]
-            room_type = request.POST["room_type"];breakfast = request.POST["breakfast_num"];room_cost=request.POST["room_cost"];total=request.POST["total"];extra_text = request.POST["extra_text"]
-            bank= request.POST["bank"];card_number1= request.POST["card1"]; card_number2= request.POST["card2"]; card_number3= request.POST["card3"]; card_number4= request.POST["card4"]; cvc= request.POST["cvc"]; expiration_date= request.POST["date_1"] + request.POST["date_2"]
-            booking_id=datetime.datetime.now().strftime("%Y-%m-%d %H:%H:%S:%f")
-            cursor = connection.cursor()
-            sqlStr1 = f"insert into page_booking(booking_id, is_check_in, check_in, check_out) values('{booking_id}',0,'{request.check_in}','{request.check_out}'"
-            sqlStr2 = f"insert into page_customer_phone(booking_id, phone) values('{booking_id}','{request.phone}'"
-            sqlStr3 = f"insert into page_customer_info(booking_id, first_name, last_name) values('{booking_id}','{request.first_name}' ,'{request.last_name}''"
-            sqlStr4 = f"insert into page_book_request(booking_id, room_type, breakfast, adult_num, child_num, extra_text) values('{booking_id}','{request.room_type}', '{request.breakfast}', '{request.adult_num}', '{request.child_num}', '{request.extra_text}'"
-            result1 = cursor.execute(sqlStr1)
-            result2 = cursor.execute(sqlStr2)
-            result3 = cursor.execute(sqlStr3)
-            result4 = cursor.execute(sqlStr4)
-            cursor.execute(sqlStr1)
-            cursor.execute(sqlStr2)
-            cursor.execute(sqlStr3)
-            cursor.execute(sqlStr4)
-            cursor.fetchall()
-            connection.commit()
-            connection.close()
+            member_id = request.session["member_id"]
+            print(Book.insert_book(request.POST, member_id))
             return redirect('login')
     return redirect('reservation2')      
 
