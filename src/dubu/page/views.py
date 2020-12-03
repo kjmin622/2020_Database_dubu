@@ -13,6 +13,7 @@ from django.shortcuts import redirect
 from datetime import date
 import time
 import datetime
+from .tools import *
 # Create your views here.
 
 def index(request):  
@@ -164,6 +165,8 @@ def reservation3(request):
 
 def mypage(request):
     if("member_id" not in request.session or request.session["member_id"]==None): return redirect('login')
+    if(request.method=="POST"):
+        Book.delete_booking(request.POST)
     try:
         member_id = request.session["member_id"]
         member_datas = get_member(member_id)
