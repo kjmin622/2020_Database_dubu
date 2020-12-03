@@ -136,17 +136,18 @@
   </div>
   <br>
   <br>
-  <center>
+  
+  
 
-  <div class="container" style="border: 2px solid gray;">
-    <div class = "container" style="overflow:auto; width:1125px; height:700px; padding-left: 0px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style="padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; margin-top: 0px;">
+    <div class = "bold_test_staff staff_s_div bold_sec" style="overflow:auto; width:1125px; height:700px; padding-left: 0px; border: rgb(0 0 0 / 0%); margin-top: 0px; margin-bottom: 0px;">
 
       {% for data in room_datas %}
       {% if request.total_num <= data.mem_limit %}
       {% for room in room_info %}
       {% if room.room_type == data.room_type %}
       {% if room.room_num > 0 %}
-      <div  class="bold_test_staff staff_s_div bold_sec" style="width:1094px; margin-top: 20px; background-color:#dee2e63b; border: 0px;">
+      <div  class="bold_test_staff staff_s_div bold_sec" style="width:1094px; margin-top: 20px; background-color:#dee2e63b; border: 0px; padding-top: 20px; padding-bottom: 20px;">
         <div class="staff_title " style="padding-bottom: 20px;">{{data.room_type}}</div>
         <div class="s_i_s">
           <div class="s_i  col_c">
@@ -154,10 +155,10 @@
           </div>
 
           <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
-            <ul style="list-style-type:none">
+            <ul style="list-style-type:none; text-align: center;">
               <input type="button" name="{{data.room_type}}" class = "popup1_btn btn" style="border-radius:10px; width: 176px; height: 64px;" value="자세히 보기"><br><br><br><br>
-              <p style="font-size: 20px;"> 금액 : {{data.price}}   &nbsp; ￦</p><br><br>
-              <input type="checkbox" value="{{data.room_type}}" class="select" style= "width: 20px; height: 20px; vertical-align: -2.3px;"> <a style="font-size: 20px;">선택</a>
+              <p style="font-size: 20px;"> 금액 : {{data.price}}   &nbsp;￦</p><br><br>
+              <input type="checkbox" name = "room_type" value="{{data.room_type}}" class="select" style= "width: 20px; height: 20px; vertical-align: -2.3px;"> <a style="font-size: 20px;">선택</a>
             </ul>
           </div>
 
@@ -173,9 +174,9 @@
     
     </div>
   </div>
+  
     
   
-</center>
 
   <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
   <div class="popup popup1" style = "display: none;">
@@ -219,20 +220,16 @@
     <div class="staff_title ">조식 신청</div>
     <div class="s_i_s">
       <div class="s_i s_i_text" style="padding-left: 0px; padding-right: 0px;">
-        <ul style="list-style-type:none; padding-left: 400px;">
+        <ul style="list-style-type:none;">
           <li style="padding-left: 50px;">인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <input class = "num_btn" name = "meal" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
             <input class = "count" value='0' name = "breakfast_num" readonly style = "width:40px; padding-left: 13px;">
             <input class = "num_btn" name = "meal" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
           </li><br>
-          <li style="padding-bottom: 15px; padding-left: 50px;" id= "breakfast_num">가격 : 0 </li>
+          <li style="padding-bottom: 15px; padding-left: 50px; display: inline;" id= "breakfast_num">금액 : 0 </li><p style="display: inline;">&nbsp;￦</p>
+          <li>&nbsp;</li>
           <br>
           <p style="padding-left: 30px;"> * 유아와 어린이는 별도로 신청해주세요. </p>
-        </ul>
-      </div>
-      <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px; margin-right: 400px;">
-        <ul style="list-style-type:none">
-          <br><br><li style="padding-bottom: 15px; padding-top: 3px;" id= "breakfast_num"> ￦ </li>
         </ul>
       </div>
     </div>
@@ -248,18 +245,15 @@
     
       <div class="staff_title ">객실 요금</div>
       <div class="s_i_s">
-        <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px; margin-left: 450px;">
+        <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px;">
           <ul style="list-style-type:none">
-            <li style="padding-bottom: 15px;" id= "room_cost"> 객실 금액 : 0 </li><br> 
-            <li style="padding-bottom: 15px;" id= "breakfast_num2"> 조식 금액 : 0 </li><br>
-            <li style="font-weight: bold; padding-top: 15px; font-size: 20px;" id="total"> 총 금액 : 0 </li>
-          </ul>
-        </div>
-        <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px; margin-right: 450px;">
-          <ul style="list-style-type:none">
-            <li style="padding-bottom: 15px;" id= "room_cost"> ￦ </li><br> 
-            <li style="padding-bottom: 15px;" id= "breakfast_num2"> ￦ </li><br>
-            <li style="font-weight: bold; padding-top: 15px; font-size: 20px;" id="total"> ￦ </li>
+            <li style="padding-bottom: 15px; display: inline;" id= "room_cost"> 객실 금액 : 0</li> <p style="display: inline;">&nbsp;￦</p>
+            <li>&nbsp;</li>
+            <li style="padding-bottom: 15px; display: inline;" id= "breakfast_num2"> 조식 금액 : 0 </li><p style="display: inline;">&nbsp;￦</p>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+            <li style="font-weight: bold; padding-top: 15px; font-size: 20px; display: inline;" id="total">총 금액 : 0 </li><p style="display: inline;">&nbsp;￦</p>
+            <br>
           </ul>
         </div>
       </div>
@@ -415,11 +409,11 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
     else{
       int++;
     }
-    $("#breakfast_num").text("가격 : "+(int*10000));
+    $("#breakfast_num").text("금액 : "+(int*10000));
 
     $("#breakfast_num2").text("조식 금액 : "+(int*10000));
     x.attr("value",int+"");
-    if($("#total").text()!=" 총 금액 : "){
+    if($("#total").text()!="총 금액 : "){
       var y= 1* $("#room_cost").text().slice(8);
       $("#total").text("총 금액 : "+(y+int*10000));
 
