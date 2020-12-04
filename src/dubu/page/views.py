@@ -174,6 +174,7 @@ def mypage(request):
 
 def join(request):
     if(request.method=="POST"):
+        print(1)
         #last_name, first_name, birth, phone, email, member_id, password, password2, is_sms
         last_name = request.POST["last_name"];first_name = request.POST["first_name"];phone=request.POST['phone_1']+request.POST['phone_2']+request.POST['phone_3'];birth = request.POST['birth_year']+'-'+request.POST['birth_month']+'-'+request.POST['birth_day'];email = request.POST["email"];member_id = request.POST["member_id"];password = request.POST["password"];password2 = request.POST["password2"];is_sms = request.POST["is_sms"]
         try:
@@ -183,8 +184,9 @@ def join(request):
  
             cursor = connection.cursor()
             sqlStr = f"insert into page_member_info(last_name, first_name, birth, phone, email, member_id, password, is_sms, membership, point) values('{last_name}','{first_name}','{birth}','{phone}','{email}','{member_id}','{password}','{1 if is_sms=='on' else 0}','classic',0)"
-            sqlStr2= f"update point+5000 from page_member_info where member_id='{request.POST['referrer']}'"
-            result = cursor.execute(sqlStr)
+            sqlStr2= f"update page_member_info set point=point+5000 where member_id='{request.POST['referrer']}'"
+            cursor.execute(sqlStr)
+            cursor.fetchall()
             cursor.execute(sqlStr2)
             cursor.fetchall()
             connection.commit()
@@ -198,7 +200,6 @@ def join(request):
         member_datas = get_member()
         if(member_datas == None): 
             return redirect('join')
-        print(member_datas)
         return render(request,'main/join.html',{'member_datas':member_datas})
 
 
