@@ -104,11 +104,11 @@
 <input type="hidden" name = "adult_num" class = "count" value='{{request.adult_num}}' readonly style = "width:40px; padding-left: 13px;">
 <input type="hidden"  name = "child_num"class = "count" value='{{request.child_num}}' readonly style = "width:40px; padding-left: 13px;">
 <section class="test1 row_c">
-  <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px;">
+  <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px; min-width: 500px;">
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택</div>
   </div>
   
-  <div class="bold_test_staff staff_s_div bold_sec">
+  <div class="bold_test_staff staff_s_div bold_sec" style= "min-width: 500px;">
     <center>
     <div class="p-4 align-self-stretch d-flex" style="width: 448px;">
       <div class="wrap" style = "margin-right:30px;">
@@ -139,7 +139,7 @@
   
   
 
-  <div class="bold_test_staff staff_s_div bold_sec" style="padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; margin-top: 0px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style="padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; margin-top: 0px; min-width: 500px;">
     <div class = "bold_test_staff staff_s_div bold_sec" style="overflow:auto; width:auto; height:700px; padding-left: 0px; border: rgb(0 0 0 / 0%); margin-top: 0px; margin-bottom: 0px;">
 
       {% for data in room_datas %}
@@ -178,8 +178,8 @@
     
   
 
-  <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
-  <div class="popup popup1" style = "display: none;">
+  <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); min-width: 500px;"></div>
+  <div class="popup popup1" style = "display: none; min-width: 500px;">
     <div class = "container" style = "padding-bottom: 30px; padding-top: 10px;">
       <div class = "s_i_logo" style = "margin-top:10px; padding-bottom: 30px; padding-top:30px; padding-left:50px; padding-right:50px; margin-bottom: 10px;">
       <img src = "{% static 'images/moreroom.jpg' %}" style = "width: 800px; height: 500px;">
@@ -216,7 +216,7 @@
     </div>
   </div>
 
-  <div class="bold_test_staff staff_s_div bold_sec">
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
     <div class="staff_title ">조식 신청</div>
     <div class="s_i_s">
       <div class="s_i s_i_text" style="padding-left: 0px; padding-right: 0px;">
@@ -241,7 +241,7 @@
     </div>
   </div>
 
-  <div class="bold_test_staff staff_s_div bold_sec">
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
     
       <div class="staff_title ">객실 요금</div>
       <div class="s_i_s">
@@ -267,7 +267,7 @@
       </div>
   </div>
 
-  <div class="bold_test_staff staff_s_div bold_sec">
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
     <div class="staff_title ">요금 정책 & 취소 규정</div>
     <div class="s_i_s">
       <div class="s_i s_i_text">

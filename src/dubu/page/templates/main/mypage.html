@@ -100,20 +100,20 @@
 <section class="test1 row_c">
   
   
-  <div class="bold_test_staff staff_s_div bold_sec" style="margin-top: 50px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style="margin-top: 50px; min-width: 680px;">
 
-    <div class = "staff_s_div">
+    <div class = "staff_s_div" style="min-width: 680px;">
       <div class= "staff_title">회원 정보</div>
       <div class = "contanier" style = "padding-left: 30px">
         <p style = "margin-bottom: 0px;">*수정 불가</p>
-        </div>
+      </div>
     </div>
 
-    <div class = "container" style="padding-bottom: 30px; padding-top: 30px;">
+    <div class = "container" style="padding-bottom: 30px; padding-top: 30px; min-width: 680px;">
 
-      <div class = "container" style = "border:1px solid; float:left; width: 49%; margin-right: 10px;">
+      <div class = "container" style = "border:1px solid; float:left; width: 49%; margin-right: 10px;min-width: 500px;">
 
-        <ul style = "list-style-type:none; margin-top: 15px;">
+        <ul style = "list-style-type:none; margin-top: 15px;min-width: 680px;" >
           <li id="member_id">*ID : {{member_datas.member_id}}</li>
           <li id="name">*Name : {{member_datas.last_name}} {{member_datas.first_name}}</li>
           <li id="membership">*회원 등급 : {{member_datas.membership}}</li>
@@ -131,10 +131,10 @@
   
       </div>
       
-      <div class = "container" style = "border:1px solid; float:left; width: 49%; height: 199px;">
+      <div class = "container" style = "border:1px solid; float:left; width: 49%; height: 199px; min-width: 500px;">
         <form method="POST" onsubmit="return confirm('정말 수정하시겠습니까?');">
             {% csrf_token %}
-        <ul style = "list-style-type:none; margin-top: 15px;">
+        <ul style = "list-style-type:none; margin-top: 15px; min-width: 680px;">
           <input type="hidden" name="method" value="ㅗ">
           <li>PASSWORD : <input class = "input" name = "password" value="" id = "member_password" style = "height: 25px;" placeholder="{{member_datas.member_password}}"> </li>
           <li>PHONE : <input class = "input" name = "phone" value="" id = "member_phone" style = "height: 25px;" placeholder="{{member_datas.member_phone_num}}"> </li>
@@ -154,15 +154,15 @@
   </div>
 
 
-  <div class="bold_test_staff staff_s_div bold_sec">
+  <div class="bold_test_staff staff_s_div bold_sec" style="min-width: 680px;">
 
-    <div class = "staff_s_div">
+    <div class = "staff_s_div" style="min-width: 680px;">
       <div class= "staff_title">예약 정보</div>
     </div>
 
     
-      <div class = "container" sytle = "overflow:auto;">
-        <table>
+      <div class = "container" sytle = "overflow:auto; height:300px; min-width: 680px;">
+        <table style="min-width: 400px;">
           <thead>
             <th>예약 번호</th>
             <th>check in</th>
@@ -199,14 +199,14 @@
     
   </div>
 
-  <div class="bold_test_staff staff_s_div bold_sec" style="margin-bottom: 50px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style="margin-bottom: 50px; min-width: 680px;">
 
-    <div class = "staff_s_div">
-      <div class= "staff_title">쿠폰 정보</div>
+    <div class = "staff_s_div " style="min-width: 680px;">
+      <div class= "staff_title" style="min-width: 500px;">쿠폰 정보</div>
     </div>
 
-      <div class = "container" sytle = "overflow:auto;">
-        <table>
+      <div class = "container" sytle = "overflow:auto; min-width: 680px;">
+        <table style="min-width: 500px;">
           <thead>
             <th>쿠폰 번호</th>
             <th>쿠폰 이름</th>
