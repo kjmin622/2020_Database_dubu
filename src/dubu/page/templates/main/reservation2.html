@@ -429,8 +429,8 @@ Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p
     x.attr("value",int+"");
     if($("#total").text()!="총 금액 : "){
       var y= 1* $("#room_cost").text().slice(8);
-      $("#total").text("총 금액 : "+(y+int*10000));
-      $("input[name=total]").attr("value", ""+ int);
+      $("#total").text("총 금액 : "+(  y + (int*10000) ));
+      $("input[name=total]").attr("value", ""+ ( y + (int * 10000)) );
 
     }
   })
@@ -455,9 +455,7 @@ $(document).ready(function(){
 
 
 
-    $("#total").text("총 금액 : "+(int +x));
-    $("input[name=total]").attr("value", ""+ int);
-
+    
    
   })
 })
