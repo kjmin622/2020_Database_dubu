@@ -409,23 +409,6 @@ $(document).ready(function(){
       alert("사용가능한 E-mail입니다.");
     }
   });
-  
-  $('#idcheck_btn').click(function(){
-    var id= $('input[name=member_id]').val();
-    var flag = false;
-    {% for data in member_datas %}
-    if('{{data.id}}'==id){
-      flag=true;
-    }
-    {% endfor %}
-    if(flag==true){
-      alert("이 ID는 사용 중 입니다.");
-    }
-    else{
-      alert("사용가능한 ID입니다.");
-    }
-  });
-
   $('#pwcheck_btn').click(function(){
     if($('input[name=password]').val()!=$('input[name=password2]').val()){
       alert("PASSWORD를 확인해주세요.");
@@ -455,7 +438,7 @@ $(document).ready(function(){
     var id= $('input[name=member_id]').val();
     var flag = false;
     {% for data in member_datas %}
-    if('{{data.id}}'==id){
+    if('{{data.member_id}}'==id){
       flag=true;
     }
     {% endfor %}
