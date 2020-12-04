@@ -99,8 +99,6 @@
       </div>
   </section>
 {% comment %} top : title + background {% endcomment %}
-<div style="background-color: dimgray; min-height:200px;">
-</div>
 {% comment %} 검색 입력 기능 시작 {% endcomment %}
 <form method='POST' action = "{% url 'reservation2' %}">
 {% csrf_token %}
@@ -177,7 +175,8 @@
     	</div>
     </section>
 </form>
-
+<div style="background-color: dimgray; min-height:200px;">
+</div>
 {% comment %} main section  {% endcomment %}
 <div class="main_a " style="margin-top: 250px;">
     <section class="event_info" style="margin-bottom: 250px;">
