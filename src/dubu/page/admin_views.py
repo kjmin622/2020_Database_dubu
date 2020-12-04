@@ -177,7 +177,7 @@ def delete_staff(request):
 @csrf_exempt
 def insert_staff(request):
     if(request.method=="POST"):
-        print(Staff.insert_staff(request.POST))
+        Staff.insert_staff(request.POST)
     
     return redirect('management')
 
