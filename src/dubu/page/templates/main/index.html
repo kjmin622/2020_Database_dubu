@@ -67,7 +67,7 @@
 <!-- END nav -->
 
 {% comment %} top : title + background {% endcomment %}
-  <section class=" home-slider owl-carousel " style="min-height:1200px" >
+  <section class=" home-slider owl-carousel " style="min-height:1000px" >
     {% comment %} style=" background-image:url({% static 'images/bg_1.jpg' %});" {% endcomment %}
       <div class="slider-item m_back " style="min-height:1000px" >
         <div class="overlay "></div>
@@ -84,7 +84,7 @@
       </div>
 
     {% comment %} style=" background-image:url({% static 'images/bg_1.jpg' %});" {% endcomment %}
-      <div class="slider-item m_back  " style="min-height:1200px">
+      <div class="slider-item m_back  " style="min-height:1000px">
         <div class="overlay "></div>
         <div class="container ">
           <div class="row no-gutters slider-text align-items-center justify-content-center ">
@@ -99,7 +99,8 @@
       </div>
   </section>
 {% comment %} top : title + background {% endcomment %}
-
+<div style="background-color: dimgray; min-height:200px;">
+</div>
 {% comment %} 검색 입력 기능 시작 {% endcomment %}
 <form method='POST' action = "{% url 'reservation2' %}">
 {% csrf_token %}
