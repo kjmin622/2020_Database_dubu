@@ -131,7 +131,7 @@
   
       </div>
       
-      <div class = "container" style = "border:1px solid; float:left; width: 49%;">
+      <div class = "container" style = "border:1px solid; float:left; width: 49%; height: 199px;">
         <form method="POST" onsubmit="return confirm('정말 수정하시겠습니까?');">
             {% csrf_token %}
         <ul style = "list-style-type:none; margin-top: 15px;">
@@ -142,7 +142,7 @@
         
         </ul>
         
-        <div style = "float: right; margin-bottom: 10px;">
+        <div style = "float: right; margin-bottom: 0px; margin-top: 25px;">
           <input type="submit" value="수정 및 저장" class="delete_btn m_b btn" style = "border-radius: 10px; margin-top:5px; margin-bottom:5px;" name = "수정">
         </div>
         </form>
