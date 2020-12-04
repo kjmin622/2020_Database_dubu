@@ -131,18 +131,21 @@
   
       </div>
       
-      <div class = "container" style = "border:1px solid; float:left; width: 49%;">
-  
+      <div class = "container" style = "border:1px solid; float:left; width: 49%; height: 199px;">
+        <form method="POST" onsubmit="return confirm('정말 수정하시겠습니까?');">
+            {% csrf_token %}
         <ul style = "list-style-type:none; margin-top: 15px;">
-          <li>PASSWORD : <input class = "input" name = "password" id = "member_password" style = "height: 25px;" placeholder="{{member_datas.member_password}}"> </input></li>
-          <li>PHONE : <input class = "input" name = "phone" id = "member_phone_num" style = "height: 25px;" placeholder="{{member_datas.member_phone_num}}"> </input></li>
-          <li>E-Mail : <input class = "input" name= "email" id = "member_email" style = "height: 25px;" placeholder="{{member_datas.member_email}}"> </input></li>
-          <li>SMS 동의여부 : <input type = "checkbox" name = "sms" id ="member_is_sms" placeholder="{{member_datas.member_is_sms}}"> </input></li> 
+          <input type="hidden" name="method" value="ㅗ">
+          <li>PASSWORD : <input class = "input" name = "password" value="" id = "member_password" style = "height: 25px;" placeholder="{{member_datas.member_password}}"> </li>
+          <li>PHONE : <input class = "input" name = "phone" value="" id = "member_phone" style = "height: 25px;" placeholder="{{member_datas.member_phone_num}}"> </li>
+          <li>E-Mail : <input class = "input" name= "email" value="" id = "member_email" style = "height: 25px;" placeholder="{{member_datas.member_email}}"> </li>
+        
         </ul>
         
-        <div style = "float: right; margin-bottom: 10px;">
+        <div style = "float: right; margin-bottom: 0px; margin-top: 25px;">
           <input type="submit" value="수정 및 저장" class="delete_btn m_b btn" style = "border-radius: 10px; margin-top:5px; margin-bottom:5px;" name = "수정">
         </div>
+        </form>
   
       </div>
 

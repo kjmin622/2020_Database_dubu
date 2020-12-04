@@ -149,6 +149,17 @@ def mypage(request):
     if(request.method=="POST"):
         if(request.POST['method']=='delete'):
             Book.delete_booking(request.POST)
+
+        elif(request.POST['password']!='' and request.POST['phone']!='' and request.POST['email']!=''):
+            cursor = connection.cursor()
+            member_id = request.session["member_id"]
+            sqlStr = f"update page_member_info set password='{request.POST['password']}', phone='{request.POST['phone']}', email='{request.POST['email']}' where member_id='{member_id}'"
+            print(sqlStr)
+            cursor.execute(sqlStr)
+            cursor.fetchall()
+            connection.commit()
+            connection.close()
+            return redirect('mypage')
     try:
         member_id = request.session["member_id"]
         member_datas = get_member(member_id)
