@@ -25,7 +25,7 @@ SECRET_KEY = '+vs)+iyokb8qeupdg8ux2_%rhoq7uc-%(9+%=t47fz5j3dm!sx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["dubu.pythonanywhere.com"]
+ALLOWED_HOSTS = ["ericadubu.pythonanywhere.com"]
 
 
 # Application definition
