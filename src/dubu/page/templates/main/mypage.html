@@ -119,7 +119,11 @@
         </ul>
 
         <div style = "float: right; margin-bottom: 10px;">
-          <button class= "btn" style = "border-radius:10px">회원 탈퇴</button>
+          <form method="POST" onsubmit="return confirm('정말 탈퇴하시겠습니까?');">
+            <input type="submit" value="회원 탈퇴" class="delete_btn m_b btn" style = "border-radius: 10px; margin-top:5px; margin-bottom:5px;">
+            <input type="hidden" name="method" value="delete">
+            <input type="hidden" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
+          </form>
         </div>
   
       </div>
@@ -127,14 +131,14 @@
       <div class = "container" style = "border:1px solid; float:left; width: 49%;">
   
         <ul style = "list-style-type:none; margin-top: 15px;">
-          <li>PASSWORD : <input class = "input" style = "height: 25px;"></input></li>
-          <li>PHONE : <input class = "input" style = "height: 25px;"></input></li>
-          <li>E-Mail : <input class = "input" style = "height: 25px;"></input></li>
-          <li>SMS 동의여부 : <input type = "checkbox"></input></li> 
+          <li>PASSWORD : <input class = "input" name = "password" id = "member_password" style = "height: 25px;" placeholder="{{member_datas.member_password}}"> </input></li>
+          <li>PHONE : <input class = "input" name = "phone" id = "member_phone_num" style = "height: 25px;" placeholder="{{member_datas.member_phone_num}}"> </input></li>
+          <li>E-Mail : <input class = "input" name= "email" id = "member_email" style = "height: 25px;" placeholder="{{member_datas.member_email}}"> </input></li>
+          <li>SMS 동의여부 : <input type = "checkbox" name = "sms" id ="member_is_sms" placeholder="{{member_datas.member_is_sms}}"> </input></li> 
         </ul>
         
         <div style = "float: right; margin-bottom: 10px;">
-          <button class= "btn" style = "border-radius: 10px">수정 및 저장</button>
+          <input type="submit" value="수정 및 저장" class="delete_btn m_b btn" style = "border-radius: 10px; margin-top:5px; margin-bottom:5px;" name = "수정">
         </div>
   
       </div>
