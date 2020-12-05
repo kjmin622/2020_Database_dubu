@@ -160,7 +160,11 @@
           <div class="addStaffBox">
               <form action="{% url 'insert_staff' %}" method="POST">
                   {% for s in names %}
-                  <input type="text" name="{{s}}" placeholder="{{s}}" class="i_p_b">
+                  {% if s == 'staff_id' %}
+                    <input type="text" name="{{s}}" value="{{s}}" class="i_p_b" readonly>
+                  {% else %}
+                    <input type="text" name="{{s}}" placeholder="{{s}}" class="i_p_b">
+                  {% endif %}
                   {% endfor %}
                   <input class="m_b_a" type="submit" value="add">
               </form>
@@ -333,7 +337,11 @@
           <div class="addEngineeringBox" style="margin:40px 0px">
               <form action="{% url 'insert_engineering' %}" method="POST">
                   {% for s in engineering_names %}
+                  {% if s == 'facility_id' %}
+                  <input type="text" name="{{s}}" value="{{s}}" class="i_e_b" readonly>
+                  {% else %}
                   <input type="text" name="{{s}}" placeholder="{{s}}" class="i_e_b">
+                  {% endif %}
                   {% endfor %}
                   <input type="submit" value="add" class="e_a">
               </form>

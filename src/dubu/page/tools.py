@@ -43,7 +43,7 @@ class Staff():
         # staff_id, rank, status, depart_id,/ staff_id, first_name, last_name, phone, bank, account,
         # / staff_id, wide_area_unit, street, basic_unit, si_gu, eub_myeon, building_number, detail_address
         try:
-            staff_id = dataDir["staff_id"];team=dataDir["team"];rank = dataDir["rank"];status = dataDir["status"];depart_id = dataDir["depart_id"];first_name = dataDir["first_name"];last_name = dataDir["last_name"];phone = dataDir["phone"];bank = dataDir["bank"];account = dataDir["account"];wide_area_unit = dataDir["wide_area_unit"];street = dataDir["street"];basic_unit = dataDir["basic_unit"];si_gu = dataDir["si_gu"];eub_myeon = dataDir["eub_myeon"];building_number = dataDir["building_number"];detail_address = dataDir["detail_address"]
+            staff_id = datetime.datetime.now().strftime("s%Y%m%d%H%M%S%f")[:-6];team=dataDir["team"];rank = dataDir["rank"];status = dataDir["status"];depart_id = dataDir["depart_id"];first_name = dataDir["first_name"];last_name = dataDir["last_name"];phone = dataDir["phone"];bank = dataDir["bank"];account = dataDir["account"];wide_area_unit = dataDir["wide_area_unit"];street = dataDir["street"];basic_unit = dataDir["basic_unit"];si_gu = dataDir["si_gu"];eub_myeon = dataDir["eub_myeon"];building_number = dataDir["building_number"];detail_address = dataDir["detail_address"]
             cursor = connection.cursor()
             sqlStr1 = f"insert into page_staff(staff_id,rank,status,depart_id) values('{staff_id}','{rank}','{status}','{depart_id}')"
             sqlStr2 = f"insert into page_staff_info(staff_id,first_name,last_name,phone,bank,account) values('{staff_id}','{first_name}','{last_name}','{phone}','{bank}','{account}')"
@@ -527,7 +527,7 @@ class Book():
         try:
             booking_id=dataDir["booking_id"]
             product_id=dataDir["name"]
-            order_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%H:%S:%f")[:-4]
+            order_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S:%f")[:-4]
             count=dataDir["count"]
             cursor = connection.cursor()
 
@@ -749,7 +749,7 @@ class OtherTool():
     def insert_engineering(dataDir):
         try:
             cursor = connection.cursor()
-            facility_id=dataDir["facility_id"];facility_name=dataDir["facility_name"];team_name=dataDir["team_name"];check_date=dataDir["check_date"];check_limit=dataDir["check_limit"];status=dataDir["status"]
+            facility_id=datetime.datetime.now().strftime("%Y%m%d");facility_name=dataDir["facility_name"];team_name=dataDir["team_name"];check_date=dataDir["check_date"];check_limit=dataDir["check_limit"];status=dataDir["status"]
             
             for date in [check_date,check_limit]:
                 y,m,d = date.split('-')
