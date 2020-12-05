@@ -243,24 +243,46 @@
                     {% if s == "room_type" %}
                     <div style="display:flex; flex-flow:row;">
                       <div class="m_r_room_select">
-                        <label >standard</label>
-                        <input type="radio" id="booking_edit_input_{{s}}"  value="standard" name="{{s}}" checked>
+                        <label >standard_single</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="standard_single" name="{{s}}" checked>
                       </div>
                       <div class="m_r_room_select">
-                        <label >superior</label>
-                        <input type="radio" id="booking_edit_input_{{s}}"  value="superior" name="{{s}}">
+                        <label >superior_single</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="superior_single" name="{{s}}">
                       </div>
                       <div class="m_r_room_select">
-                        <label >delux</label>
-                        <input type="radio" id="booking_edit_input_{{s}}"  value="delux" name="{{s}}">
+                        <label >delux_double</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="delux_double" name="{{s}}">
                       </div>
                       <div class="m_r_room_select">
-                        <label >suite_delux</label>
-                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_delux" name="{{s}}">
+                        <label >suite_delux_queen</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_delux_queen" name="{{s}}">
                       </div>
                       <div class="m_r_room_select">
-                        <label >suite_royal</label>
-                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_royal" name="{{s}}">
+                        <label >suite_royal_queen</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_royal_queen" name="{{s}}">
+                      </div>
+                    </div>
+                    <div style="display:flex; flex-flow:row;">
+                      <div class="m_r_room_select">
+                        <label >standard_double</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="standard_double" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >superior_double</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="superior_double" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >delux_queen</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="delux_queen" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >suite_delux_king</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_delux_king" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >suite_royal_king</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_royal_king" name="{{s}}">
                       </div>
                     </div> 
                     {% elif s == 'baby_num' %}
@@ -425,25 +447,27 @@
         <div style="display:flex; flex-flow:row;">
           <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
             <label style="margin:0px; margin-top:-3px; height:21px">standard</label>
-            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="standard" name="{{s}}" checked>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="standard_single" name="{{s}}" checked>
           </div>
           <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">  
             <label style="margin:0px; margin-top:-3px; height:21px">superior</label>
-            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="superior" name="{{s}}">
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="superior_single" name="{{s}}">
           </div>
           <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
             <label style="margin:0px; margin-top:-3px; height:21px">delux</label>
-            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="delux" name="{{s}}">
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="delux_double" name="{{s}}">
           </div>
           <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
             <label style="margin:0px; margin-top:-3px; height:21px">suite_delux</label>
-            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_delux" name="{{s}}">
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_delux_queen" name="{{s}}">
           </div>
           <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
             <label style="margin:0px; margin-top:-3px; height:21px">suite_royal</label>
-            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_royal" name="{{s}}">
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_royal_king" name="{{s}}">
           </div>
-        </div> 
+        </div>
+
+
         {% elif s == 'is_check_in' %}
         <label style="margin:0px; margin-top:-3px; height:21px">is_check_in</label><br>
         <div style="display:flex; flex-flow:row;">
