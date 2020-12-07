@@ -116,8 +116,15 @@
           <div class="s_i_s">
             <div class="searchBox">
                 {% comment %} <h4>search</h4> {% endcomment %}
+                <div class=searchBox>
                 <input class="p_input" type="text" placeholder=" depart/room" id="staff_working_search">
+                </div>
+                <div>
+                <label style="font-size:20px;margin-left:30px;margin-right:-10px">off 보기</label>
+                <input class="off_view" style="width:50px" name="off_view" type="checkbox" checked>
+                </div>
             </div>
+            
             <div class="resultBox">
                 <table id="staff_working_tab">
                     <thead>
@@ -125,7 +132,7 @@
                     </thead>
                     <tbody>
                         {% for data in datas %}
-                        <tr>
+                        <tr class="staff_status_{{data.status}}">
                             <td>{{data.last_name}} {{data.first_name}}</td>
                             <td>{{data.team}}</td>
                             <td class="working_search">
@@ -234,8 +241,28 @@
             $("#staff_working_tab > tbody > tr").hide();
             var temp = $(".working_search:contains('" + k + "')");
             $(temp).parent().show();
+            if(!$('.off_view').is(":checked")){
+              $('.staff_status_off').hide();
+            }
         })
-    })
 
+
+        $(".off_view").click(function(){
+          onoff();
+        })
+
+        var onoff = function(){
+          if(!$('.off_view').is(":checked")){
+            $('.staff_status_off').hide();
+          }
+          else{
+            $('.staff_status_off').show();
+            var k = $("#staff_working_search").val();
+            $("#staff_working_tab > tbody > tr").hide();
+            var temp = $(".working_search:contains('" + k + "')");
+            $(temp).parent().show();
+          }
+        }
+    })
 
 </script>
