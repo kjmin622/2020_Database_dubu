@@ -108,7 +108,7 @@
     <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택</div>
   </div>
   
-  <div class="bold_test_staff staff_s_div bold_sec" style= "min-width: 500px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style= "min-width: 1200px;">
     <center>
     <div class="p-4 align-self-stretch d-flex" style="width: 448px;">
       <div class="wrap" style = "margin-right:30px;">
@@ -139,15 +139,15 @@
   
   
 
-  <div class="bold_test_staff staff_s_div bold_sec" style="padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; margin-top: 0px; min-width: 500px;">
-    <div class = "bold_test_staff staff_s_div bold_sec" style="overflow:auto; width:auto; height:700px; padding-left: 0px; border: rgb(0 0 0 / 0%); margin-top: 0px; margin-bottom: 0px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style="padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; margin-top: 0px; min-width: 1200px;">
+    <div class = "bold_test_staff staff_s_div bold_sec" style="overflow:auto; height:700px; padding-left: 0px; border: rgb(0 0 0 / 0%); margin-top: 0px; margin-bottom: 0px; min-width: 1180px;">
 
       {% for data in room_datas %}
       {% if request.total_num <= data.mem_limit %}
       {% for room in room_info %}
       {% if room.room_type == data.room_type %}
       {% if room.room_num > 0 %}
-      <div  class="bold_test_staff staff_s_div bold_sec" style="width:1094px; margin-top: 20px; background-color:#dee2e63b; border: 0px; padding-top: 20px; padding-bottom: 20px;">
+      <div  class="bold_test_staff staff_s_div bold_sec" style="width:1094px; margin-top: 20px; background-color:#dee2e63b; border: 0px; padding-top: 20px; padding-bottom: 20px; min-width: 1150px;">
         <div class="staff_title " style="padding-bottom: 20px;">{{data.room_type}}</div>
         <div class="s_i_s">
           <div class="s_i  col_c">
@@ -178,22 +178,23 @@
     
   
 
-  <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); min-width: 500px;"></div>
-  <div class="popup popup1" style = "display: none; min-width: 500px;">
+  <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); min-width: 1200px;"></div>
+  <center>
+  <div class="popup popup1" style = "display: none; min-width: 1200px;">
     <div class = "container" style = "padding-bottom: 30px; padding-top: 10px;">
       <div class = "s_i_logo" style = "margin-top:10px; padding-bottom: 30px; padding-top:30px; padding-left:50px; padding-right:50px; margin-bottom: 10px;">
       <img src = "{% static 'images/moreroom.jpg' %}" style = "width: 800px; height: 500px;">
       </div>
-      <div class = "s_i s_i text" style="width: 890px;">
+      <div class = "s_i s_i text" style="width: 1100px; min-width: 1100px;">
         <ul style = "list-style-type: none">
           <li> Room name : <p style="display:inline" class="popup_room_name"></p></li>
           <li> 객실 설명 : DUBU 디럭스 룸은 3~4명 정도의 인원을 위한 객실입니다. DUBU 디럭스 룸은 마치 내 집 같은 편안함과 안락한 분위기를 느낄 수 있도록 설계하고, 보다 큰 침대와 큰 욕조로 구성된 공간입니다. </li>
         </ul>
       </div>
 
-      <div class = "container" style = "border:2px solid gray; margin-bottom: 30px; " >
+      <div class = "container" style = "border:2px solid gray; margin-bottom: 30px; width: 1100px; min-width: 1100px; ">
         <label for="#">객실개요</label>
-        <div class = "s_i s_i text" style="margin-left: 310px;">
+        <div class = "container" style="text-algin:center;">
           <ul style = "list-style-type: none">
             <li>bed type : <p style="display:inline" class="popup_bed_type"></p></li>
             <li> 최대 인원 : <p style="display:inline" class="popup_people"></p></li>
@@ -203,9 +204,9 @@
         </div>
       </div>
 
-      <div class = "container" style = "border:2px solid gray">
+      <div class = "container" style = "border:2px solid gray; width: 1100px; min-width: 1100px; text-algin:center;">
         <label for="#">어메니티</label>
-        <div class = "s_i s_i text" style="width: 820px; margin-left: 25px;" >
+        <div class = "container" style="width: 820px; text-algin:center;" >
           <ul style = "list-style-type: none">
             <li> 일반 : 42’’ LCD TV / 55” UHD TV / 손전등 / 슬리퍼 / 전화기 / 티포트 / 금고 / 구둣주걱 / 구두클리너 / 미니바</li>
             <li> 욕실 : 세면대 2개 / 1회용 칫솔 및 치약 / 면도기 / 목욕 가운 / 비데 / 헤어드라이어 / 욕실용품 / 샤워 캡 / 슬리퍼 / 에머리보드 / 욕조 / 위생봉지 / 면봉</li>
@@ -215,8 +216,9 @@
       </div>
     </div>
   </div>
+  </center>
 
-  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 1200px;">
     <div class="staff_title ">조식 신청</div>
     <div class="s_i_s">
       <div class="s_i s_i_text" style="padding-left: 0px; padding-right: 0px;">
@@ -241,7 +243,7 @@
     </div>
   </div>
 
-  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 1200px;">
     
       <div class="staff_title ">객실 요금</div>
       <div class="s_i_s">
@@ -267,7 +269,7 @@
       </div>
   </div>
 
-  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 1200px;">
     <div class="staff_title ">요금 정책 & 취소 규정</div>
     <div class="s_i_s">
       <div class="s_i s_i_text">
