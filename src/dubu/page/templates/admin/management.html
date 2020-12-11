@@ -1,0 +1,754 @@
+{% comment %} Product {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/a_manage.css' %}">
+  </head>
+  <style>
+      .resultBox{
+          position: relative;
+          width: max-content;
+          height:250px;
+          overflow:scroll;
+          border:solid 2px darkgray;
+          margin-top:20px;
+          padding: 2px;
+      }
+      .resultList{
+          list-style: none;
+      }
+      .resultList li div{
+          display:inline;
+      }
+      table,thead,tbody,th,td{
+          border:solid 1px darkgray;
+          white-space:nowrap;
+      }
+
+
+      td, th{
+        padding: 2px 8px;
+      }
+
+      th{
+        font-size:17px;
+        font-weight: 350;
+        text-align:center;
+      }
+
+      td{
+        font-size:15px;
+        font-weight: 300;       
+      }
+
+      .m_r_result th{
+        width:160px;
+      }
+
+
+    </style>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'staff' %}">Staff</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
+            {% comment %} Log out {% endcomment %}
+              <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log-out</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
+	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room-select</a></li>
+	          <li class="nav-item active"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
+	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
+	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
+	          <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+              <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
+          </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+    <div class="hero-wrap m_back">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Management</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+<div class="mana_a">
+<!-- management -->
+  <section class="search_mana  row_c">
+      <div class="staff_s_div bold_sec">
+        <div style="display:flex; flex-flow:row; flwx-wrap:nowrap; align-items:center;">
+          <div class="sub_t">Manage Staff</div>
+          <input type="text" placeholder="Name" id="staff_info_search" class="m_s">
+        </div>
+        <div class="s_i_s">
+          <div class="resultBox">
+              <table id="staff_result_tab">
+                  <thead>
+                  <th>staff_id</th><th>name</th><th>rank</th><th>depart_id</th><th>team</th><th>status</th><th>bank</th><th>account</th><th>phone</th><th>address</th><th>edit</th><th>working_time</th><th>holiday</th><th>delete</th>
+                  </thead>
+                  <tbody>
+                  {% for data in datas %}
+                  <tr><td>{{data.staff_id}}</td>
+                      <td class="staff_info_name">{{data.last_name}} {{data.first_name}}</td>
+                      <td>{{data.rank}}</td>
+                      <td>{{data.depart_id}}</td>
+                      <td>{{data.team}}</td>
+                      <td>{{data.status}}</td>
+                      <td>{{data.bank}}</td>
+                      <td>{{data.account}}</td>
+                      <td>{{data.phone}}</td>
+                      <td>{{data.wide_area_unit}} {{data.basic_unit}} {{data.street}} {{data.si_gu}} {{data.eub_myeon}} {{data.building_number}} {{data.detail_address}}</td>
+                      <td><input type="button" value="edit" class="m_b edit_btn" name="edit_{{data.staff_id}}"></td>
+                      <td><input type="button" value="근무일 보기/수정" class="m_b working_btn" name="working_{{data.staff_id}}"></td>
+                      <td><input type="button" value="휴가일 보기/수정" class="m_b holiday_btn" name="holiday_{{data.staff_id}}"></td>
+                      <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                          <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
+                          <input type="submit" value="delete" class="delete_btn m_b"></form></td>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+          <div class="addStaffBox">
+              <form action="{% url 'insert_staff' %}" method="POST">
+                  {% for s in names %}
+                  {% if s == 'staff_id' %}
+                    <input type="text" name="{{s}}" value="{{s}}" class="i_p_b" readonly>
+                  {% else %}
+                    <input type="text" name="{{s}}" placeholder="{{s}}" class="i_p_b">
+                  {% endif %}
+                  {% endfor %}
+                  <input class="m_b_a" type="submit" value="add">
+              </form>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- 안녕 나는 방정보를 관리하는 곳이야-->
+  <section class="search_p_apply  row_c">
+      <div class="staff_s_div bold_sec">
+        <div class="sub_t">Manage Room</div>
+          <div class="resultBox" style="height: max-content; overflow:auto;">
+              <table class=" m_r_result">
+                  <thead>
+                  <th>room type</th><th>price</th><th>member limit</th><th>edit</th>
+                  </thead>
+                  <tbody>
+                  {% for data in room_type_datas %}
+                  <tr>
+                    <td>{{data.room_type}}</td>
+                    <td>{{data.price}}</td>
+                    <td>{{data.mem_limit}}</td>
+                    <td><input type="button" value="edit" class="room_type_edit_btn m_r_b" name="edit_{{data.room_type}}"></td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </section>
+
+  <!-- 안녕 나는 예약 정보를 수정하는 곳이야-->
+  <section class="search_a_check row_c">
+      <div class="bold_test_mana staff_s_div bold_sec">
+        <div style="display:flex; flex-flow:row; flwx-wrap:nowrap; align-items:center;">
+          <div class="sub_t">Manage reservation</div>
+          <input type="text" placeholder="Id | Name | Phone" id="booking_search" class="m_s" style="width: 175px;">
+        </div> 
+        
+        <div class="s_i_s">
+          <div class="resultBox">
+              <table id="booking_result_tab">
+                  <thead>
+                  <th>booking_id</th><th>name</th><th>phone</th><th>is_check_in</th><th>check_in</th><th>check_out</th>
+                  <th>room_num</th><th>room_type</th><th>adult_num</th><th>child_num</th>
+                  <th>breakfast</th><th>extra_text</th><th>edit</th><th>delete</th>
+                  </thead>
+                  <tbody>
+                  <!--booking_id, first_name,last_name,
+                      is_check_in, check_in, check_out, room_num,room_type,breakfast,
+                      adult_num,child_num,baby_num,extra_text,phone-->
+                  {% for data in booking_datas %}
+                    <tr>
+                      <td class="booking_search_td">{{data.booking_id}}</td>
+                      <td class="booking_search_td">{{data.last_name}} {{data.first_name}}</td>
+                      <td class="booking_search_td">{{data.phone}}</td>
+                      <td>{{data.is_check_in}}</td>
+                      <td>{{data.check_in}}</td>
+                      <td>{{data.check_out}}</td>
+                      <td class="booking_search_td">{{data.room_num}}</td>
+                      <td class="booking_search_td">{{data.room_type}}</td>
+                      <td>{{data.adult_num}}</td>
+                      <td>{{data.child_num}}</td>
+                      <td>{{data.breakfast}}</td>
+                      <td>{{data.extra_text}}</td>
+                      <td><input type="button" value="edit" class="booking_edit_btn m_b" name="edit_{{data.booking_id}}"></td>
+                      <td><form action="{% url 'delete_booking' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                          <input type="text" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
+                          <input type="submit" value="delete" class="delete_btn m_b"></form></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+          <div class="addBookingBox">
+              <form action="{% url 'insert_booking' %}" method="POST">
+                  {% for s in booking_names %}
+                  {% if s != "booking_id" and s != "is_check_in" %}
+                    {% if s == "room_type" %}
+                    <div style="display:flex; flex-flow:row;">
+                      <div class="m_r_room_select">
+                        <label >standard_single</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="standard_single" name="{{s}}" checked>
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >superior_single</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="superior_single" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >delux_double</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="delux_double" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >suite_delux_queen</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_delux_queen" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >suite_royal_queen</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_royal_queen" name="{{s}}">
+                      </div>
+                    </div>
+                    <div style="display:flex; flex-flow:row;">
+                      <div class="m_r_room_select">
+                        <label >standard_double</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="standard_double" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >superior_double</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="superior_double" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >delux_queen</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="delux_queen" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >suite_delux_king</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_delux_king" name="{{s}}">
+                      </div>
+                      <div class="m_r_room_select">
+                        <label >suite_royal_king</label>
+                        <input type="radio" id="booking_edit_input_{{s}}"  value="suite_royal_king" name="{{s}}">
+                      </div>
+                    </div> 
+                    {% elif s == 'baby_num' %}
+                    {% else %}
+                    <input type="text" name="{{s}}" placeholder="{{s}}" class="i_p_b">
+                    {% endif %}
+                  {% endif %}
+                  {% endfor %}
+                  <input type="submit" value="add" class="m_b_a" >
+              </form>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- 안녕 나는 기계들을 관리하는 공간이야-->
+  <!-- facility_id, facility_name, team_name, check_date, check_limit, status -->
+  <section class="search_a_check row_c">
+      <div class="bold_test_mana staff_s_div bold_sec">
+        <div style="display:flex; flex-flow:row; flwx-wrap:nowrap; align-items:center;">
+          <div class="sub_t">Manage Engineering</div>
+          <input type="text" placeholder="Id | Name | Phone" id="engineering_search"  class="m_s" style="width: 175px;">
+        </div> 
+        <div class="s_i_s">
+          <div class="resultBox">
+              <table id="engineering_result_tab">
+                  <thead>
+                  <th style="padding: 3px 20px">facility_id</th><th style="padding: 3px 20px">facility_name</th><th style="padding: 3px 20px">team_name</th><th style="padding: 3px 22px">check_date</th><th style="padding: 3px 20px">check_limit</th><th style="padding: 3px 20px">status</th><th style="padding: 3px 20px">edit</th><th style="padding: 3px 20px">delete</th>
+                  </thead>
+                  <tbody>
+                  {% for data in engineering_datas %}
+                    <tr>
+                      <td class="engineering_search_td">{{data.facility_id}}</td>
+                      <td class="engineering_search_td">{{data.facility_name}}</td>
+                      <td class="engineering_search_td">{{data.team_name}}</td>
+                      <td>{{data.check_date}}</td>
+                      <td>{{data.check_limit}}</td>
+                      <td>{{data.status}}</td>
+                      <td><input type="button" value="edit" class="engineering_edit_btn m_b" name="edit_{{data.facility_id}}"></td>
+                      <td><form action="{% url 'delete_engineering' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                          <input type="text" value="{{data.facility_id}}" style="display:none" name="facility_id" readonly>
+                          <input type="submit" value="delete" class="delete_btn m_b"></form></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+          <div class="addEngineeringBox" style="margin:40px 0px">
+              <form action="{% url 'insert_engineering' %}" method="POST">
+                  {% for s in engineering_names %}
+                  {% if s == 'facility_id' %}
+                  <input type="text" name="{{s}}" value="{{s}}" class="i_e_b" readonly>
+                  {% else %}
+                  <input type="text" name="{{s}}" placeholder="{{s}}" class="i_e_b">
+                  {% endif %}
+                  {% endfor %}
+                  <input type="submit" value="add" class="e_a">
+              </form>
+          </div>
+        </div>
+      </div>
+  </section>
+
+</div>
+
+    <div class="fullscreen popup" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.5)"></div>
+    <!--스태프 edit 팝업-->
+    <div class="staff_info_edit popup" style="border-radius:2px; box-shadow: 0px 0px 20px rgb(56, 56, 56); box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:600px; padding:20px;left:50%; top:50%; transform:translate(-125px,-300px); background-color:rgba(255,255,255,0.8); overflow:scroll;">
+        <form action="{% url 'edit_staff' %}" method="POST">
+        {% for s in names %}
+        {% if s != 'staff_id' %}
+        <div style="display:block">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px margin-bottom: 1px;">{{s}}</label>
+        <input type="text" id="staff_edit_input_{{s}}" style="height:21px; padding:1px; padding-left:5px; margin-bottom:3px;" name="{{s}}" placeholder="{{s}}">
+        </div>
+        {% else %}
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="staff_edit_input_staff_id" style="height:21px; padding:1px; margin-bootom:5px;" name="staff_id" readonly>
+        {% endif %}
+        {% endfor %}
+        <input type="submit" value="edit" class="m_b" style="margin-top:25px;">
+        </form>
+    </div>
+    <!--스태프 근무일 팝업-->
+    <div class="staff_working popup" style="border-radius:2px; box-shadow: 0px 0px 20px rgb(56, 56, 56); box-sizing:content-box;display:none;z-index:100;position:fixed;width:340px;height:470px;padding:30px;left:50%;top:50%;transform:translate(-170px,-235px);background-color:rgba(255,255,255,0.8);">
+        <div>
+            <table class="working_result_box">
+                <thead><th style="margin: 3px 30px;"> start </th><th style="margin: 3px 30px;">end</th><th style="margin: 3px 30px;">Xday</th><th style="margin: 3px 30px;">delete</th></thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top:20px;">
+            <form action="{% url 'insert_staff_working' %}" method="POST">
+                <input type="text" style="display: none" name="staff_id" class="work_sid" readonly>
+                <input class="i_s_w_s" type="text" name="work_time_start" placeholder="starttime(00:00)" style="padding: 0px 10px; width:160px;">
+                <input class="i_s_w_s" type="text" name="work_time_end" placeholder="endtime(00:00)" style="padding: 0px 10px; width:160px;"><br>
+                <div style="display:flex; flex-flow:row; flex-wrap:wrap; margin-top:20px;"> 
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>sun_day</a><input class="i_s_w_s" type="radio" name="x_day" value="sun_day" checked></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>mon_day</a><input class="i_s_w_s" type="radio" name="x_day" value="mon_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>tues_day</a><input class="i_s_w_s" type="radio" name="x_day" value="tues_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>wednes_day</a><input class="i_s_w_s" type="radio" name="x_day" value="wednes_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>thurs_day</a><input class="i_s_w_s" type="radio" name="x_day" value="thurs_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>fri_day</a><input class="i_s_w_s" type="radio" name="x_day" value="fri_day"></div>
+                  <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin-bottom:10px;"><a>satur_day</a><input class="i_s_w_s" type="radio" name="x_day" value="satur_day"></div>
+                  <input style="margin:10px 11px; padding: 3px 25px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;" type="submit" value="add">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--스태프 휴무일 팝업-->
+    <div class="staff_holiday popup" style="border-radius:2px; box-shadow: 0px 0px 20px rgb(56, 56, 56); box-sizing:content-box;display:none;overflow:scroll;z-index:100;position:fixed;width:460px;height:250px;padding:30px 20px;left:50%;top:50%;transform:translate(-230px,-125px);background-color:rgba(255,255,255,0.8);">
+        <div style="margin-bottom:30px;">
+            <table class="holiday_result_box">
+                <thead><th>start</th><th>end</th><th>type</th><th>paid</th><th>delete</th></thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <form action="{% url 'insert_staff_holiday' %}" method="POST">
+              <div style="display:flex; flex-flow:row; justify-content: center; align-items:center;">
+                <div>
+                  <input type="text" style="display: none" name="staff_id" class="holi_sid" readonly>
+                  <input style="padding-left:5px; width:185px; margin:3px 3px 3px 0px;" type="text" name="off_start" placeholder="Startdate(0000-00-00)">
+                  <input style="padding-left:5px; width:185px; margin:3px 3px 3px 0px;" type="text" name="off_end" placeholder="Enddate(0000-00-00)">
+                  <input style="padding-left:5px; width:185px; margin:3px 3px 3px 0px;" type="text" name="day_off_type" placeholder="Type">
+                  <input style="padding-left:5px; width:185px; margin:3px 3px 3px 0px;" type="text" name="is_paid" placeholder="True/False">
+                </div>
+                  <input type="submit" value="add" style="height: 70px;padding: 3px 15px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;" >
+              </div>
+            </form>
+        </div>
+    </div>
+
+    <!--객실유형 edit 팝업-->
+    <div class="room_type_edit popup" style="border-radius:2px; box-shadow: 0px 0px 20px rgb(56, 56, 56); box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:300px; padding:20px;left:50%; top:50%; transform:translate(-125px,-150px); background-color:rgba(255,255,255,0.8)">
+        <form action="{% url 'edit_room_type' %}" method="POST">
+        <div style="margin:10px 0px;">  
+          <label style="display:block;margin:0px; margin-top:-3px; height:20px">Room Type</label>
+          <input type="text" id="room_type_edit_input_room_type" style="height:21px; padding:1px;" name="room_type" readonly>
+        </div>
+
+        <div style="margin:10px 0px;">
+          <label style="display:block;margin:0px; margin-top:-3px; height:20px">Price</label>
+          <input type="text" id="room_type_edit_input_price" style="height:21px; padding:1px;" name="price" placeholder="price">
+        </div>
+
+        <div style="margin:10px 0px;">
+          <label style="display:block;margin:0px; margin-top:-3px; height:20px">Member Limit</label>
+          <input type="text" id="room_type_edit_input_mem_limit" style="height:21px; padding:1px;" name="mem_limit" placeholder="member_limit">
+        </div>
+
+        <input type="submit" value="edit" style="margin-top:90px; padding: 3px 35px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
+        </form>
+    </div>
+
+    <!--reservation edit 팝업-->
+    <div class="booking_edit popup" style="border-radius:2px; box-shadow: 0px 0px 20px rgb(56, 56, 56); overflow:scroll; box-sizing:content-box;display:none;z-index: 100; position:fixed; width:420px; height:650px; padding:20px;left:50%; top:50%; transform:translate(-210px,-325px); background-color:rgba(255,255,255,0.8)">
+        <form action="{% url 'edit_booking' %}" method="POST">
+        {% for s in booking_names %}
+        {% if s == 'room_type' %}
+        <div style="display:flex; flex-flow:row;">
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">standard</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="standard_single" name="{{s}}" checked>
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">  
+            <label style="margin:0px; margin-top:-3px; height:21px">superior</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="superior_single" name="{{s}}">
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">delux</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="delux_double" name="{{s}}">
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">suite_delux</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_delux_queen" name="{{s}}">
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:100px; margin:10px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">suite_royal</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="suite_royal_king" name="{{s}}">
+          </div>
+        </div>
+
+
+        {% elif s == 'is_check_in' %}
+        <label style="margin:0px; margin-top:-3px; height:21px">is_check_in</label><br>
+        <div style="display:flex; flex-flow:row;">
+          <div style="display:flex; flex-flow:column; align-items:center; width:50px; margin: 0px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">True</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="1" name="{{s}}">
+          </div>
+          <div style="display:flex; flex-flow:column; align-items:center; width:50px; margin: 0px 5px;">
+            <label style="margin:0px; margin-top:-3px; height:21px">False</label>
+            <input type="radio" id="booking_edit_input_{{s}}" style="height:21px;" value="0" name="{{s}}" checked>
+          </div>
+        </div>
+        {% elif s == 'extra_text' %}
+        <div style="margin:10px 0px">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="booking_edit_input_{{s}}" style="margin-top:10px; width:350px; height:50px; padding:1px;" name="{{s}}" placeholder="{{s}}">
+        </div>
+        {% elif s == 'baby_num' %}
+        {% comment %} <div style="margin:10px 0px">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="booking_edit_input_{{s}}" style="margin-top:10px; width:350px; height:50px; padding:1px;" name="{{s}}" placeholder="{{s}}">
+        </div> {% endcomment %}
+        {% elif s != 'booking_id' %}
+        <div style="margin:10px 0px">
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="booking_edit_input_{{s}}" style="height:21px; padding:1px;" name="{{s}}" placeholder="{{s}}">
+        </div>
+        {% else %}
+        <label style="display:block;margin:0px; margin-top:-3px; height:20px">{{s}}</label>
+        <input type="text" id="booking_edit_input_booking_id" style="height:21px; padding:1px;" name="booking_id" readonly>
+        {% endif %}
+        {% endfor %}
+        <input type="submit" value="edit" style="margin-top:20px; padding: 3px 35px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
+        </form>
+    </div>
+     <!--engineering edit 팝업-->
+    <div class="engineering_edit popup" style="border-radius:2px; box-shadow: 0px 0px 20px rgb(56, 56, 56); box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:400px; padding:20px;left:50%; top:50%; transform:translate(-125px,-200px); background-color:rgba(255,255,255,0.8)">
+        <form action="{% url 'edit_engineering' %}" method="POST">
+          <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">시설 ID</label>
+            <input type="text" id="engineering_edit_input_facility_id" style="height:23px; padding:1px;" name="facility_id" readonly>
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">시설이름</label>
+            <input type="text" id="engineering_edit_input_facility_name" style="height:23px; padding:1px;" name="facility_name" placeholder="facility_name">
+          </div>
+            <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">팀이름</label>
+          <input type="text" id="engineering_edit_input_team_name" style="height:23px; padding:1px;" name="team_name" placeholder="team_name">
+          </div>
+            <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">검사일</label>
+          <input type="text" id="engineering_edit_input_check_date" style="height:23px; padding:1px;" name="check_date" placeholder="check_date">
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">검사제한일</label>
+            <input type="text" id="engineering_edit_input_check_limit" style="height:23px; padding:1px;" name="check_limit" placeholder="check_limit">
+          </div>
+          <div style="margin-bottom:10px;">
+            <label style="display:block;margin:0px; margin-top:-3px; height:20px">현상황</label>
+            <input type="text" id="engineering_edit_input_status" style="height:23px; padding:1px;" name="status" placeholder="status">
+          </div>
+          <input type="submit" value="edit" style="margin-top:35px; padding: 3px 35px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
+        </form>
+    </div>
+
+<!-- footer -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">DuBu Hotel</h2>
+              <p>Hotel Information System .</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick menu</h2>
+              <ul class="list-unstyled">
+              {% comment %} log out 버튼 {% endcomment %}
+                <li><a href="{% url 'admin_logout' %}" class="py-2 d-block">Log out</a></li>
+                <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
+                <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">DuBu hotel</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+                  <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+
+  </body>
+</html>
+
+<script>
+    $(document).ready(function() {
+        $("#staff_info_search").keyup(function() {
+            var k = $(this).val();
+            $("#staff_result_tab > tbody > tr").hide();
+            var temp = $(".staff_info_name:contains('" + k + "')");
+
+            $(temp).parent().show();
+        })
+        $("#booking_search").keyup(function() {
+            var k = $(this).val();
+            $("#booking_result_tab > tbody > tr").hide(); 
+            var temp = $(".booking_search_td:contains('" + k + "')");
+
+            $(temp).parent().show();
+        })
+        $("#engineering_search").keyup(function() {
+            var k = $(this).val();
+            $("#engineering_result_tab > tbody > tr").hide();
+            var temp = $(".engineering_search_td:contains('" + k + "')");
+
+            $(temp).parent().show();
+        })
+    })
+
+
+    $(".fullscreen").click(function(){
+        $(".popup").css("display","none");
+    })
+
+    $(".edit_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_info_edit").css("display","block");
+        var staff_id = $(this).attr('name').slice(5);
+        {% for data in datas %}
+        if(staff_id == '{{data.staff_id}}'){
+            $('#staff_edit_input_staff_id').attr('value','{{data.staff_id}}')
+            $('#staff_edit_input_rank').attr('value','{{data.rank}}')
+            $('#staff_edit_input_status').attr('value','{{data.status}}')
+            $('#staff_edit_input_depart_id').attr('value','{{data.depart_id}}')
+            $('#staff_edit_input_team').attr('value','{{data.team}}')
+            $('#staff_edit_input_first_name').attr('value','{{data.first_name}}')
+            $('#staff_edit_input_last_name').attr('value','{{data.last_name}}')
+            $('#staff_edit_input_phone').attr('value','{{data.phone}}')
+            $('#staff_edit_input_bank').attr('value','{{data.bank}}')
+            $('#staff_edit_input_account').attr('value','{{data.account}}')
+            $('#staff_edit_input_wide_area_unit').attr('value','{{data.wide_area_unit}}')
+            $('#staff_edit_input_street').attr('value','{{data.street}}')
+            $('#staff_edit_input_basic_unit').attr('value','{{data.basic_unit}}')
+            $('#staff_edit_input_si_gu').attr('value','{{data.si_gu}}')
+            $('#staff_edit_input_eub_myeon').attr('value','{{data.eub_myeon}}')
+            $('#staff_edit_input_building_number').attr('value','{{data.building_number}}')
+            $('#staff_edit_input_detail_address').attr('value','{{data.detail_address}}')
+        }
+        {% endfor %}
+    })
+
+    $(".working_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_working").css("display","block");
+        $(".working_result_box tbody").empty();
+        var staff_id = $(this).attr('name').slice(8);
+        $(".work_sid").attr('value',staff_id);
+        {% for data in working_datas %}
+        if(staff_id == '{{data.staff_id}}'){
+            $('.working_result_box tbody').append("<tr><td>{{data.work_time_start}}</td><td>{{data.work_time_end}}</td><td>{{data.x_day}}</td><td><form action=\"{% url 'delete_staff_working' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete' class='m_b'></form></td></tr>");
+        }
+        
+        {% endfor %}
+    })
+
+    $(".holiday_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_holiday").css("display","block");
+        $(".holiday_result_box tbody").empty();
+        var staff_id = $(this).attr('name').slice(8);
+        $(".holi_sid").attr('value',staff_id);
+        {% for data in holiday_datas %}
+        if(staff_id == '{{data.staff_id}}'){
+            $('.holiday_result_box tbody').append("<tr><td>{{data.off_start}}</td><td>{{data.off_end}}</td><td>{{data.day_off_type}}</td><td>{{data.is_paid}}</td><td><form action=\"{% url 'delete_staff_holiday' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete' class='m_b'></form></td></tr>");
+        }
+        
+        {% endfor %}
+    })
+
+    $(".room_type_edit_btn").click(function(){
+      $(".fullscreen").css("display","block");
+      $(".room_type_edit").css("display","block");
+      var room_type = $(this).attr('name').slice(5)
+      {% for data in room_type_datas %}
+        if(room_type == '{{data.room_type}}'){
+            $('#room_type_edit_input_room_type').attr('value','{{data.room_type}}')
+            $('#room_type_edit_input_price').attr('value','{{data.price}}')
+            $('#room_type_edit_input_mem_limit').attr('value','{{data.mem_limit}}')
+        }
+      {% endfor %}
+    });
+    
+    $(".booking_edit_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".booking_edit").css("display","block");
+        var booking_id = $(this).attr('name').slice(5);
+        {% for data in booking_datas %}
+        if(booking_id == '{{data.booking_id}}'){
+            $('#booking_edit_input_booking_id').attr('value','{{data.booking_id}}')
+            $('#booking_edit_input_first_name').attr('value','{{data.first_name}}')
+            $('#booking_edit_input_last_name').attr('value','{{data.last_name}}')
+            $('#booking_edit_input_phone').attr('value','{{data.phone}}')
+            $('#booking_edit_input_check_in').attr('value','{{data.check_in}}')
+            $('#booking_edit_input_check_out').attr('value','{{data.check_out}}')
+            $('#booking_edit_input_room_num').attr('value','{{data.room_num}}')
+            $('#booking_edit_input_adult_num').attr('value','{{data.adult_num}}')
+            $('#booking_edit_input_child_num').attr('value','{{data.child_num}}')
+            $('#booking_edit_input_baby_num').attr('value','{{data.baby_num}}')
+            $('#booking_edit_input_breakfast').attr('value','{{data.breakfast}}')
+            $('#booking_edit_input_extra_text').attr('value','{{data.extra_text}}')
+        }
+        {% endfor %}
+    })
+
+    $(".engineering_edit_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".engineering_edit").css("display","block");
+        var facility_id = $(this).attr('name').slice(5);
+        {% for data in engineering_datas %}
+        if(facility_id == '{{data.facility_id}}'){
+            $('#engineering_edit_input_facility_id').attr('value','{{data.facility_id}}')
+            $('#engineering_edit_input_facility_name').attr('value','{{data.facility_name}}')
+            $('#engineering_edit_input_team_name').attr('value','{{data.team_name}}')
+            $('#engineering_edit_input_check_date').attr('value','{{data.check_date}}')
+            $('#engineering_edit_input_check_limit').attr('value','{{data.check_limit}}')
+            $('#engineering_edit_input_status').attr('value','{{data.status}}')
+        }
+        {% endfor %}
+    })
+
+</script>

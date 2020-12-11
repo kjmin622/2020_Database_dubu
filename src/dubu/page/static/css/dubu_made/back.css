@@ -1,0 +1,61 @@
+
+
+/* div 기본 셋팅 */
+.staff_s_div{
+    padding: 10px;
+    width:60%;
+    
+}
+/* sub title 틀  */
+.sub_title{
+    font-size: 30px;
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+.m_back{
+    background-color: dimgray;
+}
+
+*{
+    margin:0px;
+    padding: 0px;
+}
+/* div의 테두리를 그려주는 css */
+.bold_test{
+    border: 2px dotted;
+    border-color: aqua;
+}
+
+/* test */
+.test{
+    width: 200px;
+    height: 200px;
+}
+
+.row_c{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* 가로 정렬해주는 css */
+.row_set{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* 세로 중앙에 좋아 주는해주는 css */
+.col_c{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+/* 텍스트 가로 중앙에 놓아주는 css */
+.t_row_c{
+    text-align: center;
+}

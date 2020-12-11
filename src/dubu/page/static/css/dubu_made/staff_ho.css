@@ -1,0 +1,100 @@
+*{
+    margin: 0px;
+    padding:0px;
+}
+
+.s_i_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    /* justify-content: ; */
+}
+.s_i{
+    width: max-content;
+    display: flex;
+    flex-flow: column;
+    padding: 10px ;
+}
+
+.s_i_logo{
+    font-size: 60px;
+    /* padding: 50px; */
+    padding: 60px 100px;
+    border: 3px solid;
+    border-color: rgb(226,203,197);;
+    border-radius: 10px;
+    margin: 0px 70px;
+    color: rgb(226,203,197);
+
+
+}
+
+.bold_test_staff{
+    /* border: 2px dotted;
+    border-color: aqua; */
+}
+
+.s_i_text{
+    padding: 30px 50px 20px 50px;
+    font-size: 15px;
+}
+
+.bold_sec{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid;
+    /* border-color: darkgray; */
+    display: flex;
+    flex-flow: column;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.staff_title{
+    font-size: 30px;
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+body{
+    /* background-color: rgb(182, 182, 182); */
+    min-width:1000px;
+}
+
+
+/* staff status */
+
+.s_s{
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 30px;
+    font-size: 20px;
+}
+
+.s_s_s{
+    border: 2px solid;
+    border-color: rgb(226,203,197);
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 5px 30px;
+    margin: 10px;
+    color: rgb(226,203,197);
+    font-weight: 700;
+    /* font-weight: 4000; */
+
+    /* background-color: rgb(95, 187, 156); */
+    
+}
+
+/* Staff Schedule */
+
+.s_c{
+    /* padding:10px;  */
+    font-size:15px; 
+    text-align: center;
+    margin: 30px;
+    /* min-height: 250px; */  
+}
+

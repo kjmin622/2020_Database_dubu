@@ -1,0 +1,453 @@
+{% comment %} 회원가입 {% endcomment %}
+
+{% comment %}  예약#1 {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/main.css' %}">
+
+    <style>
+    .bold_test_staff{
+      min-width:890px;
+    }
+    </style>
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'index' %}">DuBu</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	            <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+                <li class="nav-item active"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
+                <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
+                <li class="nav-item"><a href="{% url 'join' %}" class="nav-link">Join</a></li>
+            {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
+                <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
+                {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+{% comment %} style="background-image: url({% static 'images/bg_1.jpg'%});" {% endcomment %}
+    <div class="hero-wrap m_back" >
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Join</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+{% comment %} test  {% endcomment %}
+<form method='POST'>
+{% csrf_token %}
+<input type="text" name="method" class="form-control" value="reservation" style="display:none" readonly>
+	<section class="test1 row_c">
+
+    <div class = "staff_s_div" style="padding-top: 30px;">
+      
+      <div class= "staff_title"></div>
+      
+    </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">약관동의</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <li style="padding-bottom: 15px;">[개인 정보 이용동의]</li>
+
+
+            <div style = "overflow:auto; width:500px; height: 150px; width: 800px;">
+              DUBU 호텔은 귀하의 개인정보 보호를 매우 중요시하며,‘개인정보보호법’을 준수하고 있습니다. 호텔은 개인정보 처리방침을 통하여 귀하께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.<br>
+1. 개인정보의 처리 항목<br>
+호텔은 객실 및 패키지 예약 접수, 예약문의, 고객의 소리 의견을 받기 위해 필요한 최소한의 개인정보만을 수집합니다. 선택 항목은 입력하지 않더라도 서비스 이용에는 제한이 없습니다.<br>
+1) 객실 및 패키지 예약시 수집항목<br>
+가. 필수항목 : 이름, 휴대전화번호<br>
+나. 선택항목 : 유선전화번호, 이메일주소<br>
+2) 예약문의 및 고객의 소리 의견 접수시 수집항목<br>
+가. 필수항목 : 이름, 휴대전화번호, 이메일주소<br>
+3) 온라인 서비스 이용 과정이나 서비스 제공 업무 처리 과정에서 다음과 같은 정보들이 자동으로 생성되어 수집될 수 있습니다.(서비스 이용기록, 접속 로그, 쿠키, 접속IP 정보)<br>
+2. 개인정보의 처리 목적<br>
+호텔은 수집한 개인정보를 다음의 목적을 위해 활용합니다. 고객이 제공한 모든 정보는 다음에 기술한 목적 이외로는 사용되지 않으며, 이용 목적이 변경될 시에는 사전 동의를 구할 것 입니다.<br>
+1) 이름, 휴대전화번호 및 유선전화번호, E-mail은 객실 및 패키지 예약, 예약문의 또는 고객의 소리 의견 접수 서비스를 이용할 때 본인확인을 위한 목적으로 수집됩니다.<br>
+2) 그외 호텔 및 호텔 계열사의 영업상 호텔 이용고객의 통계 및 마케팅 분석 등을 목적으로 활용합니다.<br>
+3. 개인정보 수집에 대한 동의<br>
+호텔이 고객 개인정보를 수집할 시 반드시 적법한 절차를 통해 동의를 받는 것을 원칙으로 하며, 호텔 현장에서 멤버십 가입 혹은 인터넷 상에서 이용약관 및 개인정보 취급방침에 동의하는 절차를 거칩니다. 고객께서 (예, 동의합니다) 문구 확인을 통하여 개인정보 수집에 대해 동의한 것으로 간주합니다.<br>
+4. 개인정보의 목적 외 사용 및 제3자에 대한 정보 공유<br>
+고객의 개인정보는 이용자의 사전 동의 없이 [개인정보의 처리 항목] 및 [개인정보의 처리 목적]에서 고지한 범위 내에서 사용하며, 동 범위를 초과하여 이용하거나 타인 또는 타기업, 기관에 제공하지 않습니다. 단, 고객의 동의가 있거나 다음사항의 경우 예외로 합니다<br>
+1) 서비스 제공에 따른 요금 정산을 위해 필요한 경우<br>
+2) 서비스의 제공에 관한 계약의 이행을 위해 필요한 개인정보로서 경제적, 기술적인 사유로 통상의 동의를 받는 것이 현저히 곤란한 경우<br>
+3) 법적, 수사상의 목적으로 관련 기관의 요구가 있는 경우 또는 관계법령에 특별한 규정이 있는 경우, 법률에 규정된 바에 따라 적법한 절차를 따라 제공<br>
+5. 개인정보의 보유 및 이용기간<br>
+개인정보의 수집목적 또는 제공받은 목적이 달성된 때에는 고객의 개인정보를 지체 없이 파기합니다.<br>
+단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다. (단, 고객들이 사전 동의한 경우, 다른 법령에 특별한 규정이 있을 경우 관련 법령에 따라 보관)<br>
+1) 제공 정보의 보유 및 이용 기간<br>
+가. 이용기간: 객실 및 패키지 예약 접수, 에약문의 서비스의 계약 종료일, 고객의 소리의 경우 서비스 홍보 및 마케팅 업무를 위해 2년간 이용<br>
+나. 보존기간: 이용기간 종료 후 파기 (단, 서비스 홍보 및 마케팅 업무를 위한 이용: 2년)<br>
+2) 상거래 관련 보존 개인정보<br>
+가. 보존항목: 상거래이력<br>
+나. 보존근거: 상법, 전자상거래 등에서의 소비자보호에 관한 법률<br>
+다. 보존기간<br>
+- 소송이나 법적 분쟁 관련 사항의 근거자료에 관한 기록: 10년<br>
+- 계약 또는 청약철회 등에 관한 기록: 5년<br>
+- 대금결제 및 재화 등의 공급에 관한 기록: 5년<br>
+- 소비자의 불만 또는 분쟁처리에 관한 기록: 3년 (전자상거래 등의 소비자보호에 관한 법률)<br>
+- 신용정보의 수집/처리 및 이용 등에 관한 기록: 3년 (신용정보의 이용 및 보호에 관한 법률)<br>
+- 요금의 과납 또는 미납이 있을 경우와 분쟁이 있을 경우 해결 시까지 보유 합니다.<br>
+6. 개인정보의 파기절차 및 방법<br>
+1) 파기절차<br>
+가. 호텔은 개인정보 처리 목적이 달성되거나 처리 및 보유기간이 경과한 후에는 내부 방침 및 기타 관련 법령에 의한 정보 보호 사유에 따라(보유 및 이용기간 참조) 일정 기간 저장된 후 파기 됩니다.<br>
+나. 파기대상: 보유 및 이용기간, 관련법령에 따른 보존기간이 종료된 고객정보<br>
+2) 파기방법<br>
+가. 전자적 파일형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용<br>
+나. 종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각을 통하여 파기합니다.<br>
+7. 개인정보의 위탁 처리<br>
+호텔은 서비스 향상을 위해 아래와 같이 개인정보 취급 업무를 외부 전문업체에 위탁하여 운영하고 있습니다.<br>
+1) 서버 호스팅 및 관리대행서비스: ㈜픽스<br>
+2) 홈페이지 유지 보수 관리: ㈜픽스<br>
+3) 위탁 계약 시 개인정보보호의 안전을 기하기 위하여 개인정보보호 관련 지시 엄수<br>
+개인정보에 관한 금지 및 사고시의 책임부담 등을 명확히 규정하고 당해 계약내용을 서면 및 전자적으로 보관하고 있습니다. 동 업체가 변경될 경우 변경된 업체명을 홈페이지 내 개인정보 취급방침 화면에 공지합니다.<br>
+8. 개인정보 자동수집 장치의 설치 운영 및 그 거부에 관한 사항<br>
+호텔은 고객의 정보를 수시로 저장하고 찾아내는 '쿠키(cookie)'를 설치 운용 합니다. 쿠키란 호텔의 웹사이트를 운영하는데 이용되는 서버가 고객의 브라우저에 보내는 작은 텍스트 파일로서 고객의 컴퓨터 하드디스크에 저장됩니다. 호텔은 다음과 같은 목적을 위해 쿠키 등을 사용합니다.<br>
+1) 쿠키 등 사용 목적<br>
+가. 홈페이지 접속 빈도나 방문 시간 등을 분석, 고객의 취향과 관심분야를 파악 및 자취 추적, 각종 이벤트 참여 정도 및 방문 회수 파악 등을 통한 타깃 마케팅 및 개인 맞춤 서비스 제공<br>
+나. 고객은 쿠키 설치에 대한 선택권을 가지고 있습니다. 따라서, 고객은 웹 브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.<br>
+2) 쿠키 설정 거부 방법<br>
+가. 쿠키 설정을 거부하는 방법으로는 고객님이 사용하는 웹 브라우저의 옵션을 선택함으로써 모든 쿠키를 허용하거나 쿠키를 저장할 때마다 확인을 거치거나, 모든 쿠키의 저장을 거부할 수 있습니다.<br>
+나. 설정방법 예(인터넷 익스플로어의 경우): 웹 브라우저 상단의 도구 > 인터넷 옵션 > 개인정보<br>
+3) 단, 고객께서 쿠키 설치를 거부하였을 경우 서비스 제공에 어려움이 있을 수 있습니다.<br>
+9. 링크사이트<br>
+호텔은 고객에게 다른 호텔의 웹사이트 또는 자료에 대한 링크를 제공할 수 있습니다. 이 경우 호텔은 외부사이트 및 자료에 대한 아무런 통제권이 없으므로 그로부터 제공받는 서비스나 자료의 유용성에 대해 책임질 수 없으며, 보증할 수 없습니다. 호텔이 포함하고 있는 링크를 클릭 (Click)하여 타 사이트 (Site)의 페이지로 옮겨갈 경우, 해당 사이트의 개인정보 보호정책은 호텔과 무관하므로 새로 방문한 사이트의 정책을 검토해 보시기 바랍니다.<br>
+10. 게시물<br>
+1) 호텔은 귀하의 게시물을 소중하게 생각하며 변조, 훼손, 삭제되지 않도록 최선을 다하여 보호합니다. 그러나 다음의 경우는 제외됩니다.<br>
+가. 스팸(spam)성 게시물 (예 : 행운의 편지, 8억 메일, 특정사이트 광고 등)<br>
+나. 타인을 비방할 목적으로 허위 사실을 유포하여 타인의 명예를 훼손하는 글<br>
+다. 동의 없는 타인의 신상공개, 제 3자의 저작권 등 권리를 침해하는 내용, 기타 게시판 주제와 다른 내용의 게시물<br>
+라. 호텔은 바람직한 게시판 문화를 활성화하기 위하여 동의 없는 타인의 신상공개 시 특정 부분을 삭제하거나 기호 등으로 수정하여 게시할 수 있습니다.<br>
+마. 다른 주제의 게시판으로 이동 가능한 내용일 경우, 해당 게시물에 이동 경로를 밝혀 오해가 없도록 하고 있습니다.<br>
+바. 그 외의 경우 명시적 또는 개별적인 경고 후 삭제 조치할 수 있습니다.<br>
+2) 근본적으로 게시물에 관련된 제반 권리와 책임은 작성자 개인에게 있습니다. 또 게시물을 통해 자발적으로 공개된 정보는 보호받기 어려우므로 정보 공개 전에 심사 숙고하시기 바랍니다.<br>
+11. 정보주체의 권리, 의무 및 그 행사방법에 관한 사항<br>
+1) 고객은 개인정보의 수집, 이용 및 제공에 대해 동의하신 내용을 언제든지 철회할 수 있습니다. 홈페이지 객실 예약 및 문의, 고객의 소리 등을 통해 개인정보를 기록한 경우 개인정보의 열람, 정정, 처리정지, 또는 삭제 요청을 할 수 있으며, 개인정보 보호책임자에게 서면, 전화, FAX또는 E-mail 등으로 연락하시면 지체 없이 파기하는 등 필요한 조치가 이루어집니다. 단, 법에서 정한 의무 사항이 있으면 권리 행사가 제한 될 수 있습니다.<br>
+2) 이용자가 입력한 부정확한 정보로 인해 발생하는 사고의 책임은 이용자 본인에게 있으며, 타인 정보의 도용 등 허위정보를 입력할 경우 모든 법적인 책임은 도용 또는 허위정보를 입력한 자의 책임으로 됩니다.<br>
+3) 고객은 개인정보를 보호받을 권리와 함께 스스로를 보호하고 타인의 정보를 침해하지 않을 의무도 가지고 있습니다. 비밀번호를 포함한 고객의 개인정보가 유출되지 않도록 조심하시고 게시물을 포함한 타인의 개인정보를 훼손하지 않도록 유의해 주십시오. 만약 이 같은 책임을 다하지 못하고 타인의 정보 및 존엄성을 훼손할 시에는 ‘정보통신망 이용 촉진 및 정보보호 등에 관한 법률’ 등에 의해 처벌받을 수 있습니다.<br>
+4) 만 14세 미만 아동(이하 “아동”이라 함)의 개인정보 수집 시 반드시 법정대리인의 동의를 구하고 있습니다. 호텔은 법정대리인의 동의를 받기 위하여 아동으로부터 법정대리인의 성명과 연락 등 최소한의 정보를 요구할 수 있으며, 아동의 법정대리인은 서면, 전화, E-mail, FAX 등을 통하여 아동의 개인정보에 대한 열람, 정정 및 삭제를 요청할 수 있으며, 이러한 요청이 있는 경우 호텔은 지체 없이 필요한 조치를 취합니다.<br>
+12. 고객 의견수렴불만처리 및 개인정보 보호책임자<br>
+1) 호텔은 개인정보 보호와 관련하여 언제든지 고객께서 의견 및 불만을 제기할 수 있는 창구를 마련하고 있으며, 호텔 홈페이지 및 고객관리부서 담당자와의 연락을 통해 신속한 처리 및 결과를 알려드립니다.<br>
+2) 호텔은 고객의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 아래와 같이 개인정보보호 책임자를 두고 있습니다.<br>
+개인정보보호 책임자<br>
+안호건	전산	051-461-9123<br>
+ahk@commodore.co.kr<br>
+13. 개인정보 보호를 위한 안전성 확보조치<br>
+호텔은 고객의 개인정보를 취급함에 있어 개인정보가 분실, 도난, 누출, 변조 또는 훼손되지 않도록 안전성 확보를 위하여 아래와 같은 대책들을 강구하고 있습니다.<br>
+1) 기술적 대책: 호텔은 귀하의 개인정보를 취급함에 있어 개인정보가 분실, 도난, 누출, 변조 또는 훼손되지 않도록 안전성 확보를 위하여 다음과 같은 기술적 대책을 강구하고 있습니다.<br>
+가. 귀하의 개인정보는 비밀번호에 의해 보호되며, 파일 및 전송 데이터를 암호화하여 중요한 데이터는 별도의 보안기능을 통해 보호되고 있습니다.<br>
+나. 응용 프로그램의 공격을 통한 정보 유출을 막기 위한 보안 장치(웹 보안 및 VPN 등)을 가동하고 있습니다.<br>
+다. 호텔은 백신 및 패치 자동 설치 프로그램을 이용하여, 컴퓨터 바이러스에 의한 피해를 방지하기 위한 조치를 취하고 있습니다. 해당 프로그램은 주기적으로 업데이트되며 갑작스런 바이러스가 출현할 경우, 즉시 패치를 적용함으로써 개인정보가 침해되는 것을 방지하고 있습니다.<br>
+라. 해킹 등 외부로부터 고객님의 개인정보가 유출되는 것을 방지하기 위해 각 서버마다 침입차단시스템 및 취약점 분석 시스템(방화벽, IPS 및 서버보안 등)등의 보안 장치를 사용하여 침입의 차단 및 모니터링을 수행하고 있습니다.<br>
+2) 관리적 대책<br>
+가. 호텔은 귀하의 개인정보에 대한 접근권한을 최소한의 인원으로 제한하고 있으며 그에 해당하는 자는 다음과 같습니다.<br>
+- 개인정보 관리책임자 및 담당자 등 개인정보 관리업무를 수행하는 자<br>
+- 이용자를 직접상대로 하여 마케팅 업무를 수행하는 자<br>
+- 기타 업무상 개인정보의 취급이 불가피한 자<br>
+나. 개인정보를 취급하는 직원을 대상으로 새로운 보안기술습득 및 개인정보보호의무 등에 관해 정기적인 사내 교육 및 외부 위탁교육을 실시하고 있습니다.<br>
+다. 입사시, 전 직원의 보안서약서를 통하여 사람에 의한 정보유출을 사전에 방지하고 개인정보 보호정책에 대한 이행사항 및 직원의 준수 여부를 감사하기 위한 내부절차를 마련하고 있습니다.<br>
+라. 개인정보 관련 취급자의 업무 인수인계는 보안이 유지된 상태에서 철저하게 이뤄지고 있으며, 입사/퇴사 후 개인 정보 사고에 대한 책임을 명확히 하고 있습니다.<br>
+마. 개인정보와 일반 데이터를 혼합하여 보관하지 않고, 별도의 서버를 통해 분리하여 보관하고 있습니다.<br>
+바. 전산실 및 자료 보관실은 특별 보호구역으로 설정하여 출입을 통제하고 있습니다.<br>
+사. 호텔은 이용자 개인의 실수나 기본적인 인터넷의 위험성 때문에 일어나는 일들에 대해 책임을 지지 않습니다.<br>
+아. 그 외 내부 관리자의 실수나 기술관리 상의 사고로 인해 개인정보의 상실, 유출, 변조, 훼손이 유발될 경우 호텔은 즉각 귀하께 사실을 알리고 적절한 대책을 강구할 것입니다.<br>
+14. 개인정보 처리방침 변경에 관한 사항<br>
+이 개인정보 처리방침은 2014년 1월 1일에 제정되었으며 법령정책 또는 보안기술의 변경에 따라 내용의 추가삭제 및 수정이 있을 시에는 시행하기 최소 7일전에 호텔 홈페이지를 통해 변경사유 및 내용 등을 공지하도록 하겠습니다.<br>
+- 공고일자: 2014년 1월 1일 / 시행일자: 2014년 1월 1일<br>
+- 개인정보처리방침 변경일자: 2018년 07월 13일
+
+            </div>
+
+            <div class="container" style="text-align: center; padding-top: 20px; padding-bottom: 50px;">
+              <p>*귀하는 위와 같은 개인정보의 수집·이용에 대한 동의를 거부할 수 있으나, 동의 거부 시 회원가입이 불가능합니다.</p>
+                
+                <input type = "checkbox" class="form-control" value = 'agree' style="zoom:0.3; display: inline; width: 52px; vertical-align:-5.5px;">     동의합니다
+                            
+            </div>
+
+            <li style="padding-bottom: 15px;">[SMS 수신 동의]</li>
+            <div style = "overflow:auto; width:500px; height: 150px; width: 800px;">
+              DUBU 호텔의 회원서비스 관련정보, 할인상품 및 신상품 안내, 마케팅 서비스를 위하여 DUBU 호텔에 개인정보를 수집 및 이용하는 것에 동의 합니다.<br>
+
+개인정보 수집항목<br>
+- 위 2항 및 5항과 같이 귀하의 동의를 받아 수집한 개인정보<br>
+- 필수사항 : 성명(영문), 국가, 생년월일, 연락처(모바일 또는 자택), 이메일, 아이디, 비밀번호, 리워즈 회원번호(자동생성), 롯데호텔(국내 및 해외 체인호텔 포함, 이하 “롯데호텔”) 예약 및 투숙정보(투숙기간, 숙박료, 구매금액 포함), 포인트 적립 및 사용내역, 할인내역, IP/쿠키정보<br>
+- 선택사항 : 성명(한글)<br>
+개인정보 수집 및 이용목적<br>
+- DUBU 호텔의 회원서비스 관련 정보, 할인 상품 및 신상품 안내, 마케팅 활용을 위한 이용<br>
+개인정보 보유기간<br>
+- 수집이용 동의일로부터 회원 탈회시 까지 보유됩니다.<br>
+동의를 거부할 권리가 있으나 동의를 거부할 경우 상기 DUBU 호텔 할인상품 및 신상품 안내 서비스이용에 제약이 있습니다.          
+            </div>
+
+            <div class="container" style="text-align: center; padding-top: 20px;">
+              <p>*귀하는 위와 같은 개인정보의 수집·이용에 대한 동의를 거부할 수 있으나, 동의 거부 시 정보 수신이 불가능합니다.</p>
+              <input type = "checkbox" name="is_sms" class="form-control" id="is_sms" value = 'agree' style="zoom:0.3; display: inline; width: 52px; vertical-align:-5.5px;">     동의합니다
+            </div>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div  class="bold_test_staff staff_s_div bold_sec">
+      <div class="staff_title ">회원정보 입력</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text">
+          <ul style="list-style-type:none">
+            <li>first name &nbsp; &nbsp; &nbsp; 
+            <input type = "text" name="first_name" class="form-control" id="first_name" style="width: 144px; display:inline; zoom: 0.7; padding-left: 3px;"></li><br>
+            <li>last name &nbsp; &nbsp; &nbsp; 
+            <input type = "text" name="last_name" class="form-control" id="last_name" style="width: 144px; display:inline; zoom: 0.7; padding-left: 3px;"></li><br>
+            <li>phone  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <input type = "text" name="phone_1" class="form-control" id="phone_1" style="width: 60px; padding-left: 3px; display:inline; zoom: 0.7; margin-left: 5px; padding-right: 3px;"> -
+              <input type = "text" name="phone_2" class="form-control" id="phone_2" style="width: 60px; padding-left: 3px; display:inline; zoom: 0.7; padding-right: 3px;"> -
+              <input type = "text" name="phone_3" class="form-control" id="phone_3" style="width: 60px; padding-left: 3px; display:inline; zoom: 0.7; padding-right: 3px;">
+            </li><br>
+            <li>birth  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <input type = "text" name="birth_year" class="form-control" id="birth_year" style="width: 60px; padding-left: 3px; display:inline; zoom: 0.7; margin-left: 2px; padding-right: 3px;"> -
+              <input type = "text" name="birth_month" class="form-control" id="birth_month" style="width: 40px; padding-left: 3px; display:inline; zoom: 0.7; padding-right: 3px;"> -
+              <input type = "text" name="birth_day" class="form-control" id="birth_day" style="width: 40px; padding-left: 3px; display:inline; zoom: 0.7; padding-right: 3px;">
+              &nbsp; (YYYY-MM-DD)
+            </li><br>
+            <li>email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <input type="text" name="email" class="form-control" id="email" style="width: 270px; display:inline; zoom: 0.7; margin-left: 2px; padding-left: 3px;">
+              &nbsp;
+              <input type="button" class="check_btn" id="emailcheck_btn" value="중복 확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline; display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;">
+            </li><br>
+            <li>ID &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <input type="text" name="member_id" class="form-control" id="member_id" style="width: 270px; display:inline; zoom: 0.7; margin-left: 8px; padding-left: 3px;">
+              &nbsp;
+              <input type="button" class="check_btn" id="idcheck_btn" value="중복 확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline; display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;">
+            </li><br>
+            <li>PASSWORD &nbsp; &nbsp;
+              <input type="password" name="password" class="form-control" id="password" style="width: 270px; display:inline; zoom: 0.7; padding-left: 3px; margin-left: 2px;">
+              &nbsp; &nbsp; &nbsp; * PASSWORD는 영문, 숫자 포함 8자 이상이어야 합니다.
+            </li><br>
+            <li>PW Check &nbsp; &nbsp;
+              <input type="password" name="password2" class="form-control" id="password2" style="width: 270px; display:inline; zoom: 0.7; padding-left: 3px; margin-left: 13px;">
+              &nbsp;
+              <input type="button" class="check_btn" id="pwcheck_btn" value="확인" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline; display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;">
+            </li><br>
+            <li>Referrer ID &nbsp; &nbsp;
+              <input type="text" name="referrer" class="form-control" id="referrer" style="width: 270px; display:inline; zoom: 0.7; padding-left: 3px; margin-left: 10px;">
+              &nbsp;
+              <input type="button" class="referrer_btn" value="확인" id="referrer_btn" style="border-radius:10px; padding-top: 3px; padding-bottom: 3px; margin-left: 15px; display:inline; display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;">
+              &nbsp; &nbsp; * 미입력 가능
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class = "staff_s_div">
+      <div style = "padding-bottom:50px; padding-top:20px;">
+      <center>
+        <button type="submit" class = "btn" style="border-radius:10px;"> 가입 완료 </button>
+      </center>
+      </div>
+    </div>
+
+  </section>
+</form>
+    
+<!-- footer -->
+<footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "text-align: center; font-size: 40px">DuBu Hotel</h2>
+          <p style= "text-align: center;">For a comfortable time.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 85px;">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-5">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">Quick Menu</h2>
+          <ul class="list-unstyled">
+            <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
+            <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-block">Join</a></li>
+            {% endif %}
+            <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
+            <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-md">
+         <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Privacy</h2>
+          <ul class="list-unstyled">
+            <li><a href="#" class="py-2 d-block">Career</a></li>
+            <li><a href="#" class="py-2 d-block">About Us</a></li>
+            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            <li><a href="#" class="py-2 d-block">Services</a></li>
+          </ul>
+        </div>
+      </div> -->
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">About Hotel</h2>
+          <div class="block-23 mb-3">
+            <ul>
+              <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+
+        <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+    </div>
+  </div>
+</footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
+
+<script>
+$(document).ready(function(){
+  $('#emailcheck_btn').click(function(){
+    var email= $('input[name=email]').val();
+    var flag = false;
+    {% for data in member_datas %}
+    if('{{data.email}}'==email){
+      flag=true;
+    }
+    {% endfor %}
+    if(flag==true){
+      alert("이 E-mail은 사용 중 입니다.");
+    }
+    else{
+      alert("사용가능한 E-mail입니다.");
+    }
+  });
+  $('#pwcheck_btn').click(function(){
+    if($('input[name=password]').val()!=$('input[name=password2]').val()){
+      alert("PASSWORD를 확인해주세요.");
+    }
+    else{
+      alert("PASSWORD가 일치합니다.");
+    }
+  });
+
+  $('#referrer_btn').click(function(){
+    var referrer =$('input[name=referrer]').val();
+    var flag = false;
+    {% for data in member_datas %}
+    if('{{data.member_id}}'==referrer){
+      flag=true;
+    }
+    {% endfor %}
+    if(flag==true){
+      alert("추천인 확인이 완료되었습니다.");
+    }
+    else{
+      alert("이 ID는 존재하지 않습니다.");
+    }
+  });
+
+  $('#idcheck_btn').click(function(){
+    var id= $('input[name=member_id]').val();
+    var flag = false;
+    {% for data in member_datas %}
+    if('{{data.member_id}}'==id){
+      flag=true;
+    }
+    {% endfor %}
+    if(flag==true){
+      alert("이 ID는 사용 중 입니다.");
+    }
+    else{
+      alert("사용가능한 ID입니다.");
+    }
+  });
+});
+</script>

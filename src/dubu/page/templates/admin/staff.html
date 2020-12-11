@@ -1,0 +1,326 @@
+{% comment %} staff home {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/staff_ho.css' %}">
+    <style>
+      th{
+        padding : 5px;
+      }
+      td{
+        padding : 20px 0px;
+      }
+    </style>
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'staff' %}">Staff</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item "><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
+            <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
+            {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
+	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
+	          <li class="nav-item active"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
+	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
+	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
+	          <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+            <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
+          </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+    <div class="hero-wrap m_back">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Staff Home</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+{% comment %} main section  {% endcomment %}
+
+<div  class="staff_home_a">
+<!-- 직원정보를 보여주는 section-->
+  <section class="search_staff_room  row_c">
+      <div  class="bold_test_staff staff_s_div bold_sec">
+        <div class="staff_title ">Staff_info</div>
+        <div class="s_i_s">
+          <div class="s_i  col_c">
+            <div class="s_i_logo "style="padding: 60px 100px;">STAFF</div>
+          </div>
+          <div class="s_i s_i_text">
+            <ul style="list-style-type:none">
+              <li style="margin:5px 0px">이름 :  {{datas.last_name}} {{datas.first_name}}</li>
+              <li style="margin:5px 0px">직원 ID :  {{datas.staff_id}}</li>
+              <li style="margin:5px 0px">연락처 :  {{datas.phone}}</li>
+              <li style="margin:5px 0px">직급 :  {{datas.rank}}</li>
+              <li style="margin:5px 0px">부서 :  {{datas.depart_id}}</li>
+              <li style="margin:5px 0px">팀 :  {{datas.team}}</li>
+              <li style="margin:5px 0px">주소 :  {{datas.wide_area_unit}} {{datas.basic_unit}} {{datas.street}} {{datas.si_gu}} {{datas.eub_myeon}} {{datas.building_number}} {{datas.detail_address}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </section>
+
+<!-- 직원의 현재 상태를 입력하는 section -->
+
+  <section class="staff_status row_c">
+      <div  class="bold_test_staff staff_s_div bold_sec">
+        <div class="staff_title ">Staff Status</div>
+        <div class="s_s">
+          <div class="s_s_s status_btn" name="off"
+          {% if datas.status == 'off' %} 
+          style="background-color:rgb(179,113,97); color: white; font-weight:700; border-color: rgb(179,113,97);" 
+          {% endif %}
+          > 퇴근 </div>
+          <div class="s_s_s status_btn" name="wait"
+          {% if datas.status == 'wait' %} 
+          style="background-color:rgb(179,113,97); color: white; font-weight:700; border-color: rgb(179,113,97);" 
+          {% endif %}
+          > 대기 </div>
+          <div class="s_s_s status_btn" name="working"
+          {% if datas.status == 'working' %} 
+          style="background-color:rgb(179,113,97); color: white; font-weight:700; border-color: rgb(179,113,97);" 
+          {% endif %}
+          > 업무 </div>
+          <div class="s_s_s status_btn" name="rest"
+          {% if datas.status == 'rest' %} 
+          style="background-color:rgb(179,113,97); color: white; font-weight:700; border-color: rgb(179,113,97);" 
+          {% endif %}
+          > 휴식 </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- 직원의 업무일정을 보여주는 section -->
+  <section class="staff_Schedule  row_c">
+      <div  class="bold_test_staff staff_s_div bold_sec">
+        <div class="staff_title ">Staff Schedule</div>
+        <div class="s_c col_c">
+          <table border="2" height="80%" bordercolor= "darkgrey"; >
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+            <tr >
+                <td>
+                {% if working_datas.sun %}
+                  {% for s in working_datas.sun %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.mon %}
+                  {% for s in working_datas.mon %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.tues %}
+                  {% for s in working_datas.tues %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.wednes %}
+                  {% for s in working_datas.wednes %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.thurs %}
+                  {% for s in working_datas.thurs %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.fri %}
+                  {% for s in working_datas.fri %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+                <td>
+                {% if working_datas.satur %}
+                  {% for s in working_datas.satur %}
+                  {{s}}<br>
+                  {% endfor %}
+                {% else %}
+                  근무 시간 없음
+                {% endif %}
+                </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+  </section>
+</div>
+    
+
+
+
+
+
+<!-- footer -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">DuBu Hotel</h2>
+              <p>Hotel Information System .</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick menu</h2>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'admin_logout' %}" class="py-2 d-block">Log out</a></li>
+                <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
+                <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">DuBu hotel</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+                  <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <script>
+    $(".status_btn").click(function(){
+      var form = document.createElement('form');
+      form.setAttribute('method','post');
+      form.setAttribute('action', '{% url "change_staff_status" %}');
+      document.charset = 'utf-8';
+      var hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type','hidden');
+      hiddenField.setAttribute('name','staff_id');
+      hiddenField.setAttribute('value','{{datas.staff_id}}');
+      form.appendChild(hiddenField);
+      
+      hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type','hidden');
+      hiddenField.setAttribute('name','status');
+      hiddenField.setAttribute('value',$(this).attr('name'));
+      form.appendChild(hiddenField);
+
+      document.body.appendChild(form);
+      form.submit();
+    });
+    
+  </script>
+
+  </body>
+</html>

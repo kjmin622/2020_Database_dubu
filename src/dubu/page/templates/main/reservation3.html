@@ -1,0 +1,321 @@
+{% comment %}  예약#7 {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/main.css' %}">
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'index' %}">DuBu</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
+            {% if login %} 
+	            <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log out</a></li>
+              <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li>
+            {% else %}
+              <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
+              <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">Join</a></li>
+            {% endif %}
+          {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
+            <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
+            {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+{% comment %} style="background-image: url({% static 'images/bg_1.jpg'%});" {% endcomment %}
+  <div class="hero-wrap m_back" >
+    <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Reservation</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+		
+{% comment %} test  {% endcomment %}
+<form method='POST'>
+{% csrf_token %}
+<input type="text" name="method" class="form-control" value="reservation" style="display:none" readonly>
+<input type="hidden" name="check_in" class="form-control" value='{{request.check_in}}' placeholder="Check-in date">
+<input type="hidden" name="check_out" class="form-control" value='{{request.check_out}}' placeholder="Check-out date">
+<input type="hidden" name="adult_num" class="count" value='{{request.adult_num}}' readonly style = "width:40px; padding-left: 13px;">
+<input type="hidden" name="child_num" class="count" value='{{request.child_num}}' readonly style = "width:40px; padding-left: 13px;">
+<input type="hidden" name="breakfast_num" class="count" value='{{request.breakfast_num}}' readonly style = "width:40px; padding-left: 13px;">
+<input type="hidden" name="room_type" value='{{request.room_type}}'>
+<input type="hidden" name="extra_text" value='{{request.extra_text}}'>
+<section class="test1 row_c">
+  <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px; min-width: 500px;">
+    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택 > 03 고객정보입력</div>
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
+    <div class="staff_title" style = "padding-bottom: 10px;">예약자 정보</div>
+      <div class="container" style = "padding-left: 0px; padding-top: 0px; text-align:center;">
+        <ul style="list-style-type:none">
+          <li>성명 : {{member_datas.last_name}} {{member_datas.first_name}}</li>
+          <li>이메일 : {{member_datas.email}}</li>
+          <li>연락처 : {{member_datas.phone}}</li>
+        </ul>
+      </div>
+  </div>
+ 
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
+      <div class="staff_title" style = "padding-bottom: 10px;">신용카드 정보</div>
+
+      <div class="container" style="padding-left: 33px;">
+        <ul style="list-style-type:none">
+          <li style="display:inline; margin-right: 20px;">신용카드 종류 &nbsp; &nbsp;
+            <select name="bank" id="" class="form-control" style="display: inline; width: 125px;">
+              <option value="">카드 선택</option>
+              <option value="신한" >신한</option>
+              <option value="농협" >농협</option>
+              <option value="국민" >국민</option>
+              <option value="카카오" >카카오</option>
+              <option value="하나" >하나</option>
+              <option value="삼성" >삼성</option>
+              <option value="롯데" >롯데</option>
+              <option value="현대" >현대</option>
+              <option value="BC" >BC</option>
+            </select>
+          </li>
+          <li style="display: inline; margin-right: 20px;">신용카드 번호 &nbsp; &nbsp;
+            <input type= "text" name = "card_1" class = "form-control" id = "card_1" style = "height: 25px; width: 70px;padding-left: 2px;display: inline; text-align:center; padding-right: 2px;">
+            <input type= "text" name = "card_2" class = "form-control" id = "card_2" style = "height: 25px; width: 70px;padding-left: 2px;display: inline; text-align:center; padding-right: 2px;">
+            <input type= "text" name = "card_3" class = "form-control" id = "card_3" style = "height: 25px; width: 70px;padding-left: 2px;display: inline; text-align:center; padding-right: 2px;">
+            <input type= "text" name = "card_4" class = "form-control" id = "card_4" style = "height: 25px; width: 70px;padding-left: 2px;display: inline; text-align:center; padding-right: 2px;">
+          </li>
+          <br><br>
+          <li style="display: inline; margin-right: 20px;">CVC &nbsp; &nbsp; 
+            <input type= "text" name = "cvc" class = "form-control" id = "cvc" style = "height: 25px; width: 80px; padding-left: 2px; padding-right: 2px; display: inline; text-align:center; ">
+          </li>
+          <li style="display: inline;">유효 기간 &nbsp; &nbsp; 
+            <input type= "text" name = "date_1" class = "form-control" id = "date_1" style = "height: 25px; width: 60px;  display: inline; text-align:center; ">
+            <input type= "text" name = "date_2" class = "form-control" id = "date_2" style = "height: 25px; width: 60px;  display: inline; text-align:center; margin:0px 5px">(MM/YY)
+          </li>
+          </ul> 
+      </div>
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec" style= "min-width: 500px;">
+
+    <div class="staff_title ">필수적 개인정보수집이용에 대한 동의</div>
+    <div class="s_i_s">
+      <div class="s_i s_i_text">
+        <label for="#">1. 수집 이용 항목</label>
+          <p>성명(국문·영문), 생년월일, 성별, 이메일주소, 휴대폰번호, 구매 및 예약내역, 투숙기간, 아이디, 비밀번호</p>
+          <label for="#">2. 수집 이용 목적</label>
+          <p>본인 식별, 서비스 제공 및 민원처리</p>
+          <label for="#">3. 보유 이용 기간</label>
+          <p>회원 탈퇴 시 까지</p>
+          <p>※ 관련 법령에서 정한 별도 보유 기한이 있는 경우는 그에 따름. 위 사항에 대한 동의를 거부할 수 있으나, 이에 대한 동의가 없을 경우 회원 가입 및 서비스 이용이 불가합니다.</p>
+          <center>
+            <div style="width: 100px; padding-top: 20px;">
+              <input type = "checkbox" name="agree" class="form_control" id="agree" value = 'agree'> 동의합니다
+            </div>
+          </center>
+      </div>
+    </div>
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 500px;">
+
+    <div class="staff_title " style = "padding-bottom: 10px;">선택정보</div>
+    <div class="container" style="padding-left: 0px; text-align:center;">
+      <ul style="list-style-type:none; padding-left: 0px; padding-top:30px;">
+        <li> 선택한 Room : {{request.room_type}} </li>
+        <li> check-in/check-out : {{request.check_in}} / {{request.check_out}}</li>
+        <li> 객실-투숙인원 </li>
+        <p> 성인 : {{request.adult_num}} 어린이 : {{request.child_num}}</p>
+      </ul>
+    </div>
+  </div>
+  
+
+  <div class="bold_test_staff staff_s_div bold_sec" style= "min-width: 500px;">
+
+      <div class="staff_title " style = "padding-bottom: 10px;">객실 요금</div>
+      <div class="container"  style="padding-left: 0px; padding-top:0px; text-align:center;">
+        <ul style="list-style-type:none">
+          <li style = "padding-bottom: 15px;"> 객실 금액 : {{request.room_cost}} ￦</li>
+          <li style = "padding-bottom: 15px;"> 조식 금액 : {{request.breakfast_cost}} ￦</li>
+          <li style = "font-weight: bold; padding-top: 15px; font-size: 20px;"> 총 금액 : {{request.total}} ￦</li>
+          </ul>
+      </div>
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec" style="min-width: 500px;">
+
+    <div class="staff_title ">요금 정책 & 취소 규정</div>
+    <div class="s_i_s">
+      <div class="s_i s_i_text">
+        <label for="#">- 요금 정책</label>
+        <p>해당 요금에 부가세 10%와 봉사료 10% (총 20%)가 부과됩니다.</p>
+        <label for="#">- 취소 규정</label>
+        <p>예약 취소 및 변경은 체크인 하루 전 18:00(한국시간)까지 가능합니다. 예약하신 일자에 체크인 되지 않거나 또는 위의 지정 시간 이후에 예약을 취소했을 경우에는 예약 사항에 대해 노-쇼 (No Show) 처리되며, 이에 따른 위약금으로 예약 첫날에 해당하는 1박 객실요금이 청구되오니 유의하시기 바랍니다.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class = "staff_s_div">
+    <div style = "padding-bottom: 70px; padding-top:50px;">
+    <center>
+    <button type="submit" class = "btn" style="border-radius:10px;"> 예약 완료 </button>
+    </center>
+    </div>
+  </div>
+
+</div>
+ 
+
+</section>
+</form>
+    
+
+<!-- footer -->
+<footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "text-align: center; font-size: 40px">DuBu Hotel</h2>
+          <p style= "text-align: center;">For a comfortable time.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 85px;">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-5">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">Quick Menu</h2>
+          <ul class="list-unstyled">
+            <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
+            <!-- <li><a href="#" class="py-2 d-block"            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-blockk">Join</a></li>
+            {% endif %}>Rooms</a></li> -->
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-block">Join</a></li>
+            {% endif %}
+            <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
+            <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-md">
+         <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Privacy</h2>
+          <ul class="list-unstyled">
+            <li><a href="#" class="py-2 d-block">Career</a></li>
+            <li><a href="#" class="py-2 d-block">About Us</a></li>
+            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            <li><a href="#" class="py-2 d-block">Services</a></li>
+          </ul>
+        </div>
+      </div> -->
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">About Hotel</h2>
+          <div class="block-23 mb-3">
+            <ul>
+              <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+
+        <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+    </div>
+  </div>
+</footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  
+
+  </body>
+</html>
+{{request}}
+
+<script>
+console.log('{{request}}')
+</script>

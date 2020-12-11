@@ -1,0 +1,350 @@
+{% comment %}  예약#1 {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/main.css' %}">
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'index' %}">DuBu</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
+            <li class="nav-item active"><a href="{% url 'logout' %}" class="nav-link">Log out</a></li>
+            <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li>
+          {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
+            <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
+            {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+{% comment %} style="background-image: url({% static 'images/bg_1.jpg'%});" {% endcomment %}
+  <div class="hero-wrap m_back" >
+    <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Mypage</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+		
+{% comment %} test  {% endcomment %}
+
+<style>
+  table,thead,th,tbody,tr,td{border:1px solid gray;}
+  table{
+    width: 100%;
+    min-width: 500px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    
+  }
+  thead{
+    text-align: center;
+  }
+
+  td{
+    text-align: center;
+    padding-left: 5px;
+    height: 60px;
+  }
+
+</style>
+
+<section class="test1 row_c">
+  
+  
+  <div class="bold_test_staff staff_s_div bold_sec" style="margin-top: 50px; min-width: 1030px;">
+
+    <div class = "staff_s_div" style="min-width: 680px;">
+      <div class= "staff_title">회원 정보</div>
+      <div class = "contanier" style = "padding-left: 30px">
+        <p style = "margin-bottom: 0px;">*수정 불가</p>
+      </div>
+    </div>
+
+    <div class = "container" style="padding-bottom: 30px; padding-top: 30px; min-width: 1020px;">
+
+      <div class = "container" style = "border:1px solid; float:left; width: 49%; margin-right: 10px;min-width: 490px; min-height: 197px;">
+
+        <ul style = "list-style-type:none; margin-top: 15px;min-width: 680px;" >
+          <li id="member_id">*ID : {{member_datas.member_id}}</li>
+          <li id="name">*Name : {{member_datas.last_name}} {{member_datas.first_name}}</li>
+          <li id="membership">*회원 등급 : {{member_datas.membership}}</li>
+          <li id="point">*Point : {{member_datas.point}}</li> 
+        </ul>
+
+        <div style = "float: right; margin-bottom: 10px;">
+          <form method="POST" onsubmit="return confirm('정말 탈퇴하시겠습니까?');">
+            {% csrf_token %}
+            <input type="submit" value="회원 탈퇴" class="delete_btn m_b btn" style = "border-radius: 10px; margin-top:5px; margin-bottom:5px; ">
+            <input type="hidden" name="method" value="delete">
+            <input type="hidden" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
+          </form>
+        </div>
+  
+      </div>
+      
+      <div class = "container" style = "border:1px solid; float:left; width: 49%; height: 198.5px; min-width: 490px; min-height: 197px;">
+        <form method="POST" onsubmit="return confirm('정말 수정하시겠습니까?');">
+            {% csrf_token %}
+        <ul style = "list-style-type:none; margin-top: 15px; min-width: 680px;">
+          <input type="hidden" name="method" value="ㅗ">
+          <li>PASSWORD : <input class = "input" name = "password" value="" id = "member_password" style = "height: 25px;" placeholder="{{member_datas.member_password}}"> </li>
+          <li>PHONE : <input class = "input" name = "phone" value="" id = "member_phone" style = "height: 25px;" placeholder="{{member_datas.member_phone_num}}"> </li>
+          <li>E-Mail : <input class = "input" name= "email" value="" id = "member_email" style = "height: 25px;" placeholder="{{member_datas.member_email}}"> </li>
+        
+        </ul>
+        
+        <div style = "float: right; margin-bottom: 0px; margin-top: 25px;">
+          <input type="submit" value="수정 및 저장" class="delete_btn m_b btn" style = "border-radius: 10px; margin-top:5px; margin-bottom:5px;" name = "수정">
+        </div>
+        </form>
+  
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="bold_test_staff staff_s_div bold_sec" style="min-width: 1030px;">
+
+    <div class = "staff_s_div" style="min-width: 680px;">
+      <div class= "staff_title">예약 정보</div>
+    </div>
+
+    
+      <div class = "container" sytle = "overflow:auto; height:300px; min-width: 1000px;">
+        <table style="min-width: 400px;">
+          <thead>
+            <th>예약 번호</th>
+            <th>check in</th>
+            <th>check out</th>
+            <th>Room name</th>
+            <th>성인 / 어린이</th>
+            <th>조식</th>
+            <th>추가 사항</th>
+            <th>예약 취소</th>
+          </thead>
+          <tbody>
+            {% for data in booking_datas %}
+              <tr>
+                <td class="booking_search_td">{{data.booking_id}}</td>
+                <td>{{data.check_in}}</td>
+                <td>{{data.check_out}}</td>
+                <td class="booking_search_td">{{data.room_type}}</td>
+                <td>{{data.adult_num}} / {{data.child_num}}</td>
+                <td>{{data.breakfast}}</td>
+                <td>{{data.extra_text}}</td>
+                <td>
+                  <form method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                    {% csrf_token %}
+                    <input type="submit" value="delete" class="delete_btn m_b btn" style = "border-radius: 10px; margin-top:5px; margin-bottom:5px;">
+                    <input type="hidden" name="method" value="delete">
+                    <input type="hidden" value="{{data.booking_id}}" style="display:none" name="booking_id" readonly>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}           
+          </tbody>
+        </table>
+      </div>
+    
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec" style="margin-bottom: 50px; min-width: 1030px;">
+
+    <div class = "staff_s_div " style="min-width: 680px;">
+      <div class= "staff_title" style="min-width: 500px;">쿠폰 정보</div>
+    </div>
+
+      <div class = "container" sytle = "overflow:auto; min-width: 1000px;">
+        <table style="min-width: 500px;">
+          <thead>
+            <th>쿠폰 번호</th>
+            <th>쿠폰 이름</th>
+            <th>쿠폰 내용</th>
+            <th>쿠폰 비용</th>
+            <th>최소 사용 금액</th>
+          </thead>
+          <tbody>
+            {% for data in coupon_datas %}
+              {% if member_datas.member_id == data.member_id %}
+              <tr>
+                <td>{{data.coupon_id}}</td>
+                <td>{{data.coupon_name}}</td>
+                <td>{{data.coupon_type}}</td>
+                <td>{{data.value}}</td>
+                <td>{{data.min_price}}</td>
+              </tr>
+              {% endif %}
+            {% endfor %} 
+          </tbody>
+        </table>
+      </div>
+    
+  </div> 
+
+</section>
+
+    
+
+<!-- footer -->
+<footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "text-align: center; font-size: 40px">DuBu Hotel</h2>
+          <p style= "text-align: center;">For a comfortable time.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 85px;">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-5">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">Quick Menu</h2>
+          <ul class="list-unstyled">
+            <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
+            <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-block">Join</a></li>
+            {% endif %}
+            <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
+            <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-md">
+         <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Privacy</h2>
+          <ul class="list-unstyled">
+            <li><a href="#" class="py-2 d-block">Career</a></li>
+            <li><a href="#" class="py-2 d-block">About Us</a></li>
+            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            <li><a href="#" class="py-2 d-block">Services</a></li>
+          </ul>
+        </div>
+      </div> -->
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">About Hotel</h2>
+          <div class="block-23 mb-3">
+            <ul>
+              <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+
+        <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+    </div>
+  </div>
+</footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  
+
+  </body>
+</html>
+<script>
+  $(".num_btn").click(function(){
+    var mp_value = $(this).attr("value");
+    var x=$("input[name=breakfast_num]");
+    var int=1*x.attr("value");
+    if(mp_value == '-') {
+      if(int>=1){
+        int--;
+      }
+    }
+    else{
+      int++;
+    }
+    $("#breakfast_num").text("가격 : "+(int*10000));
+
+    $("#breakfast_num2").text("조식 금액 : "+(int*10000));
+    x.attr("value",int+"");
+  })
+
+</script>

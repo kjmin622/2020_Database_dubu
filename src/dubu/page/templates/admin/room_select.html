@@ -1,0 +1,289 @@
+{% comment %} Room select {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/room_select.css' %}">  
+
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'staff' %}">Staff</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
+            {% comment %} Log out {% endcomment %}
+              <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
+	          <li class="nav-item"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
+	          <li class="nav-item active"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
+	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
+	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
+	          <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+            <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
+          </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+    <div class="hero-wrap m_back">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Room select</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+{% comment %} main section  {% endcomment %}
+<div class="staff_s_a">
+<!-- 예약자에 대한 대한 정보를 입력하는 section-->
+  <section class="search_room  row_c" >
+
+      <div class="staff_s_div bold_sec">
+
+        <div class="sub_title">Reservation Input</div>
+        <div class="room_select_input">
+          {% comment %} 예약정보를 입력합니다. {% endcomment %}
+          <div style="display:flex; flex-flow:row; margin:10px 0px;">
+            <div style="padding:0px 10px;">
+              <label>phone number</label>
+              <input type="text" name="book_phone" class="reservation_input" placeholder="" style="width:150px; padding-left:5px;margin: 0px 10px;">
+            </div>
+            <div style="padding:0px 5px;">  
+              <label>check in date</label>
+              <input type="date" name="book_date" class="reservation_input"style="width:150px; padding-left:5px;margin: 0px 10px;">
+            </div>
+          </div>
+          <input type="button" name="book_btn" class="reservation_input" value="search"style="margin:10px 30px; padding: 0px 30px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px; height:35px;" >
+        </div>
+      </div>
+
+  </section>
+
+  <div class="row_c">
+    <div class="room_select_output staff_s_div">
+
+      <!-- 손님의 예약 정보 -->
+      <section class="reservation_info" >
+
+          <div class="bold_sec o_1" style="height:500px;">
+
+            <div class="sub_title_select">reservation Info</div>
+
+            {% comment %} 예약자의 예약정보를 출력합니다. {% endcomment %}
+            <div class="reservation_output">
+              <div style="padding:10px 0px;"class="reser_room_num">객실번호:</div>
+              <div style="padding:10px 0px;"class="reser_people">인원:</div>
+              <div style="padding:10px 0px;"class="reser_type">객실 종류:</div>
+              <div style="padding:10px 0px;"class="reser_text">추가 요청 사항:</div>
+            </div>
+
+          </div>
+
+      </section>
+      <!-- 투숙 가능한 방의 정보 -->
+      
+      <section class="room_info" >
+
+          <div class="bold_sec o_1" style="height:500px;">
+
+            <div class="sub_title_select">Room List</div>
+            <div style="height: 540px; overflow:scroll; padding:20px 0px;">
+              <form name="reser_POST" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="booking_id" value="">
+                <input type="hidden" name="room_num" value="">
+                <ul class="output_room_list">
+                </ul>
+              </form>
+            </div>
+          </div>
+
+      </section>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- footer -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">DuBu Hotel</h2>
+              <p>Hotel Information System .</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick menu</h2>
+              <ul class="list-unstyled">
+              {% comment %} log out 버튼 {% endcomment %}
+                <li><a href="{% url 'admin_logout' %}" class="py-2 d-block">Log out</a></li>
+                <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
+                <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">DuBu hotel</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+                  <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+
+  </body>
+</html>
+
+<script>
+$(document).ready(function(){
+  $('input[name=book_btn]').click(function(){
+    var phone = $('input[name=book_phone]').val();
+    var check_in = 1*$('input[name=book_date]').val().replace('-','').replace('-','');
+    var room_type = "";
+    var check_out = "";
+    var isit = false;
+
+    {% for data in booking_datas %}
+    if('{{data.phone}}'==phone && '{{data.check_in}}'.slice(0,8)==check_in){
+      $('.reser_room_num').text("객실번호: {{data.room_num}}");
+      $('.reser_people').text("인원: "+({{data.adult_num}}+{{data.child_num}}));
+      $('.reser_type').text("객실 종류: {{data.room_type}}");
+      $('.reser_text').text("추가 요청 사항: {{data.extra_text}}");
+      $('input[name=booking_id]').attr('value','{{data.booking_id}}');
+      room_type = '{{data.room_type}}';
+      check_out = {{data.check_out}};
+      isit = true;
+    }
+    {% endfor %}
+    
+    if(!isit){
+      $('.reser_room_num').text("객실번호: ");
+      $('.reser_people').text("인원: ");
+      $('.reser_type').text("객실 종류: ");
+      $('.reser_text').text("추가 요청 사항:");
+      $('.output_room_list > li').remove();
+      $('input[name=booking_id]').attr('value','');
+      $('input[name=room_num]').attr('value','');
+    }
+
+    {% for data in room_datas %}
+    if('{{data.room_type}}'==room_type){
+      var flag = false;
+      {% for date in data.check_in_out %}
+        var dcheck_in = {{date.0}};
+        var dcheck_out = {{date.1}};
+        if((dcheck_in<=check_in && check_out<dcheck_out) || (check_in<=dcheck_out && dcheck_out<check_out) || (check_in<=dcheck_in && dcheck_in<check_out)){
+          flag = true;
+        }
+      {% endfor %}
+      if(!flag){
+        $('.output_room_list').append('<li><input type="button" class="room_select_btn" value="{{data.room_num}}" style="width:150px; text-align:center; margin:3px;"></li>');
+      }
+    }
+    {% endfor %}
+    post_reload();
+  });
+
+  var post_reload = function(){
+      $('.room_select_btn').click(function(){
+      if(confirm('이 방으로 배정하시겠습니까?')){
+        $('input[name=room_num]').attr('value',$(this).attr('value'));
+        document.reser_POST.submit();
+      }
+    });
+  }
+})
+
+
+
+
+</script>

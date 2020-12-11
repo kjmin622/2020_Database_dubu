@@ -9,8 +9,8 @@ class account_info(models.Model):
 
 class purchase_slip(models.Model):
     purchase_id = models.CharField(max_length=100, primary_key=True)   
-    order_date = models.DateTimeField()    
-    delivery_date = models.DateTimeField()    
+    order_date = models.CharField(max_length=20)   
+    delivery_date = models.CharField(max_length=20)    
     is_purchase = models.BooleanField()    
     staff_id = models.CharField(max_length=100)    
 
@@ -36,13 +36,13 @@ class rooms(models.Model):
 class engineering(models.Model):
     facility_id = models.CharField(max_length=100, primary_key=True)   
     facility_name = models.CharField(max_length=30)    
-    check_date = models.DateTimeField()    
-    check_limit = models.DateTimeField()    
+    check_date = models.CharField(max_length=20)    
+    check_limit = models.CharField(max_length=20)  
     status = models.CharField(max_length=100) 
 
 
 class depart(models.Model):
-    depart_id = models.CharField(max_length=100, primary_key=True)   
+    depart_id = models.CharField(max_length=100)   
     depart_name = models.CharField(max_length=100)   
     position = models.CharField(max_length=100)   
 
@@ -56,21 +56,23 @@ class parking(models.Model):
 class room_type(models.Model):
     room_type = models.CharField(max_length=100, primary_key=True)   
     price = models.IntegerField()  
+    mem_limit = models.IntegerField()
+    photo_url = models.CharField(max_length=100)
 
 
 class event(models.Model):
     event_id = models.CharField(max_length=100, primary_key=True)   
     event_name = models.CharField(max_length=30)   
-    start_date = models.DateTimeField()    
-    end_date = models.DateTimeField()    
+    start_date = models.CharField(max_length=20) 
+    end_date = models.CharField(max_length=20)   
     contents = models.CharField(max_length=2000) 
 
 
 class booking(models.Model):
     booking_id = models.CharField(max_length=100, primary_key=True)   
     is_check_in = models.BooleanField()    
-    check_in = models.DateTimeField()    
-    check_out = models.DateTimeField()   
+    check_in = models.CharField(max_length=20)    
+    check_out = models.CharField(max_length=20)  
 
 
 class member_info(models.Model):
@@ -81,21 +83,22 @@ class member_info(models.Model):
     first_name = models.CharField(max_length=30)
     phone = models.CharField(max_length=100) 
     membership = models.CharField(max_length=30)    
-    birth = models.DateTimeField()    
+    point = models.IntegerField()
+    birth = models.CharField(max_length=20)  
     is_sms = models.BooleanField()    
        
     
 
 
 class card_info(models.Model):
-    card_id = models.CharField(max_length=100, primary_key=True)   
+    card_id = models.CharField(max_length=100)   
     bank = models.CharField(max_length=30)    
     cvc = models.IntegerField()  
-    expiration_date = models.DateTimeField()    
-    card_number1 = models.BooleanField()    
-    card_number2 = models.BooleanField()    
-    card_number3 = models.BooleanField()    
-    card_number4 = models.BooleanField()    
+    expiration_date = models.CharField(max_length=20)  
+    card_number1 = models.CharField(max_length=10)  
+    card_number2 = models.CharField(max_length=10)
+    card_number3 = models.CharField(max_length=10)
+    card_number4 = models.CharField(max_length=10)
 
 
 class product(models.Model):
@@ -121,7 +124,7 @@ class room_type_bed(models.Model):
 
 
 class book_request(models.Model):
-    booking_id = models.ForeignKey(booking, on_delete=models.CASCADE)   
+    booking_id = models.CharField(max_length=100)  
     room_type = models.CharField(max_length=100)   
     breakfast = models.IntegerField()  
     adult_num = models.IntegerField()  
@@ -131,13 +134,13 @@ class book_request(models.Model):
 
 
 class customer_info(models.Model):
-    booking_id = models.ForeignKey(booking, on_delete=models.CASCADE)   
+    booking_id = models.CharField(max_length=100)    
     first_name = models.CharField(max_length=30)    
     last_name= models.CharField(max_length=30)    
 
 
 class member_customer(models.Model):
-    booking_id = models.ForeignKey(customer_info, on_delete=models.CASCADE)   
+    booking_id = models.CharField(max_length=100)  
     member_id = models.CharField(max_length=100)   
 
 
@@ -158,20 +161,20 @@ class card_list(models.Model):
 
 class invoice(models.Model):
     product_id = models.CharField(max_length=100)   
-    order_time = models.DateTimeField()    
-    offer_time = models.DateTimeField(null=True)    
+    order_time = models.CharField(max_length=20) 
+    offer_time = models.CharField(max_length=20)   
     is_payment = models.BooleanField()    
     count = models.IntegerField()  
     booking_id = models.CharField(max_length=100)   
 
 
 class product_price(models.Model):
-    product_id = models.ForeignKey(product, on_delete=models.CASCADE)   
+    product_id = models.CharField(max_length=100)  
     price = models.IntegerField()  
 
 
 class in_storage(models.Model):
-    product_id = models.ForeignKey(product, on_delete=models.CASCADE) 
+    product_id = models.CharField(max_length=100)  
     count = models.IntegerField()  
 
 
@@ -182,23 +185,16 @@ class purchase_list(models.Model):
 
 
 class staff_info(models.Model):
-    staff_id = models.ForeignKey(staff, on_delete=models.CASCADE)   
+    staff_id = models.CharField(max_length=100,primary_key=True)    
     first_name = models.CharField(max_length=30)    
     last_name = models.CharField(max_length=30)    
-
-
-class staff_phone(models.Model):
-    staff_id = models.ForeignKey(staff, on_delete=models.CASCADE)  
-    phone = models.CharField(max_length=100)   
-
-
-class staff_account(models.Model):
-    staff_id = models.ForeignKey(staff, on_delete=models.CASCADE)    
-    account = models.ForeignKey(account_info, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=100)  
+    bank = models.CharField(max_length=30)  
+    account = models.CharField(max_length=100)  
 
 
 class staff_address(models.Model):
-    staff_id = models.ForeignKey(staff_info, on_delete=models.CASCADE)
+    staff_id = models.CharField(max_length=100,primary_key=True)  
     wide_area_unit = models.CharField(max_length=30)    
     street = models.CharField(max_length=30)    
     basic_unit = models.CharField(max_length=30, null=True)    
@@ -206,36 +202,44 @@ class staff_address(models.Model):
     eub_myeon = models.CharField(max_length=30, null=True)    
     building_number = models.CharField(max_length=30)    
     detail_address = models.CharField(max_length=100, null=True)   
-    
 
 
 class customer_phone(models.Model):
-    booking_id = models.ForeignKey(customer_info, on_delete=models.CASCADE) 
+    booking_id = models.CharField(max_length=100)   
     phone = models.CharField(max_length=100)   
 
 
 class staff_working_info(models.Model):
     staff_id = models.CharField(max_length=100)   
     x_day= models.CharField(max_length=30)    
-    work_time_start = models.DateTimeField()    
-    work_time_end = models.DateTimeField()    
+    work_time_start = models.CharField(max_length=20)   
+    work_time_end = models.CharField(max_length=20)  
 
 
 class staff_day_off_info(models.Model):
     staff_id = models.CharField(max_length=100)   
-    off_start = models.DateTimeField() 
-    off_end = models.DateTimeField()   
+    off_start = models.CharField(max_length=20) 
+    off_end = models.CharField(max_length=20) 
     day_off_type = models.CharField(max_length=100)   
     is_paid = models.BooleanField()    
 
 
 class team_staff(models.Model):
-    staff_id = models.CharField(max_length=100)   
+    staff_id = models.CharField(max_length=100,primary_key=True)   
     team_name = models.CharField(max_length=30)    
 
 
 class bill(models.Model):
-    booking_id = models.ForeignKey(booking, on_delete=models.CASCADE) 
-    paytime = models.DateTimeField()    
+    booking_id = models.CharField(max_length=100)  
+    paytime = models.CharField(max_length=20)    
     payment = models.CharField(max_length=30)    
-    card_id = models.CharField(max_length=100, null=True)   
+    card_id = models.CharField(max_length=100, null=True)  
+
+class coupon_list(models.Model):
+    coupon_id = models.CharField(max_length=100, primary_key=True)
+    coupon_type = models.CharField(max_length=100)
+    coupon_name = models.CharField(max_length=30)
+    value = models.IntegerField()
+    min_price = models.IntegerField()
+    member_id = models.CharField(max_length=100)
+

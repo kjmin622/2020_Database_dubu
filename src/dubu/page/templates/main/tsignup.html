@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Sign Up</title>
+    </head>
+    <body>
+        <p>{{Error}}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="account">
+                <label for="first_name">first name</label>
+                <br>
+                <input type="text" name="first_name" class="form-control" id="first_name">
+                <br>
+                <label for="last_name">last name</label>
+                <br>
+                <input type="text" name="last_name" class="form-control" id="last_name">
+                <br>
+                <label for="birth">Birthday</label>
+                <br>
+                <input type="date" name="birth" class="form-control" id="birth">
+                <br>
+                <label for="phone">HP</label>
+                <br>
+                <input type="text" name="phone" class="form-control" id="phone">
+                <br>
+                <label for="email">E-mail</label>
+                <br>
+                <input type="text" name="email" class="form-control" id="email">
+                <br>
+                <label for="member_id">ID</label>
+                <br>
+                <input type="text" name="member_id" class="form-control" id="member_id">
+                <br>
+                <label for="password1">PW</label>
+                <br>
+                <input type="password" name="password1" class="form-control" id="password1">
+                <br>
+                <label for="password">PW Check</label>
+                <br>
+                <input type="password" name="password2" class="form-control" id="password2">
+                <br>
+                <label for="is_sms">SMS agreement</label>
+                <br>
+                <input type="checkbox" name="is_sms" class="form-control" id="is_sms">
+                Yes, I agree.
+                <br>
+            </div>
+            <button type="submit" class="btn btn-default">submit</button>
+        </form>
+    </body>
+</html>

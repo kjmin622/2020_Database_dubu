@@ -1,0 +1,87 @@
+/* room_select 틀 */
+*{
+    margin: 0px;
+    padding:0px;
+}
+
+body{
+    /* background-color: black; */
+    min-width: 1000px;
+}
+.s_i_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+}
+
+.bold_sec{
+    /* margin-top: 20px; */
+    /* margin-bottom: 20px; */
+    border: 2px solid;
+    border-color: darkgray;
+    display: flex;
+    flex-flow: column;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.sub_title_select{
+    font-size: 30px;
+}
+
+
+/* room_select의 두가지출력 정보를 가로로 놓기 위한 css */
+.room_select_output{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 60%;
+    padding: 0px;
+    /* border: 2px solid;
+    border-color: aquamarine; */
+    align-items: stretch;
+    margin-top: 30px;
+}
+
+.o_1{
+    font-size: 15px;
+    padding: 50px 30px;
+}
+
+/* 예약자의 정보를 입력하는 section css */
+.room_select_input{
+    display: flex;
+    flex-flow: row;
+    padding:20px 20px;
+    /* justify-content: space-around; */
+    flex-wrap: wrap;
+    /* font-size: 100px; */
+}
+/* room들의 정보를 정리하는 css */
+.output_room_list{
+    display: flex;
+    flex-flow: column;
+    justify-items: start;
+}
+
+.room_info{
+    flex-grow: 1;
+}
+
+/* 손님의 예약정보를 정렬하기 위한 css */
+
+.reservation_output{
+    display: flex;
+    flex-flow: column;
+}
+
+.reservation_info{
+    flex-grow:2;
+}
+
+.staff_s_a{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

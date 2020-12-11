@@ -1,0 +1,440 @@
+{% comment %} Engineering {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/bil.css' %}">
+
+
+    <style>
+      .b_s_r{
+        height:200px;
+        overflow:auto;
+      }
+      th, td{
+        padding: 3px 10px;
+      }
+      table, thead, tbody, th, td, tr{
+        border:1px solid gray;
+        white-space:nowrap;
+      }
+      th{
+        text-align:center;
+        font-size:17px;
+        font-weight:500;
+      }
+    </style>
+
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'staff' %}">Staff</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
+              {% comment %} Log out {% endcomment %}
+              <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
+	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
+	          <li class="nav-item"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
+	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
+	          <li class="nav-item active"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
+            <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+            <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
+          </ul> 
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+    <div class="hero-wrap m_back">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">BILL</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+
+
+{% comment %} main section  {% endcomment %}
+<div class="bill_a">
+<!-- hotel내부의 기계들의 정보를 검색가능한 section-->
+  <section class="search_bill  row_c">
+
+      <div class="staff_s_div bold_sec">
+        <div class="sub_title_b">
+          <a>BILL</a>
+          <input type="text" id="room_search" class="b_input" placeholder="Room Number" style="margin:0px 40px;">
+        </div>
+        <div class="s_i_s">
+
+            <div class="bill_search">
+              <div class="b_s_t">Add order info</div>
+              <div class="insert_purchase" style="margin: 20px 40px 40px 30px;">
+                <form method="POST" name="insert_purchase">
+                  {% csrf_token %}
+                  <input  style="margin: 10px ;" type="hidden" name="method" value="insert_purchase">
+                  <input  style="margin: 10px ;" type="text" class="insert_booking_id" name="booking_id" placeholder="booking_id" readonly>
+                  <input  style="margin: 10px ;" type="text" name="name" placeholder="product_id">
+                  <input  style="margin: 10px ;" type="text" name="count" placeholder="count">
+                  <input  class="insert_purchase_btn" type="button" value="insert" style="padding: 3px 45px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
+                </form>
+              </div>
+              <div style="display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
+                <div class="b_s_t">Purchase</div>
+                <div class="sub_title_b"> 
+                  <div class="b_s_t" style="margin: 0px 20px;">총 이용 금액: </div>
+                  <div class="b_s_t b_t_o total_price">0</div>
+                </div>
+              </div>
+              <div class="b_s">
+                <div class="b_s_r b_output">
+                  <table class="purchase_tab">
+                    <thead><th>Reservation Id</th><th>Room Number</th><th>Product Id</th><th>Product Name</th><th>count</th><th>price</th><th>order time</th><th>offer time</th></thead>
+                    <tbody>
+                      {% for data in invoice_datas %}
+                      <tr>
+                        <td class="b_s_p">{{data.booking_id}}</td>
+                        <td class="searchpivot b_s_p" name="purchase_{{data.room_num}}">{{data.room_num}}</td>
+                        <td class="b_s_p">{{data.product_id}}</td>
+                        <td class="b_s_p">{{data.name}}</td>
+                        <td class="b_s_p">{{data.count}}</td>
+                        <td class="b_s_p">{{data.price}}</td>
+                        <td class="b_s_p">{{data.order_time}}</td>
+                        {% if data.offer_time == '' %}
+                        <td class="b_s_p">
+                          <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="method" value="offer_complete">
+                            <input type="hidden" name="booking_id" value="{{data.booking_id}}">
+                            <input type="hidden" name="product_id" value="{{data.product_id}}">
+                            <input type="hidden" name="order_time" value="{{data.order_time}}">
+                            <input type="submit" value="제공완료" style=" padding: 2px 55px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 13px;">
+                          </form>
+                        </td>
+                        {% else %}
+                        <td class="b_s_p">{{data.offer_time}}</td>
+                        {% endif %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="bill_search">
+              <div style="display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
+                <div class="b_s_t">Coupon List</div>
+                <div class="sub_title_b"> 
+                  <div class="b_s_t" style="margin: 0px 20px;">총 할인 금액: </div>
+                  <div class="coupon_price b_s_t b_t_o">0</div>
+                </div>
+              </div>
+              <div class="b_s">
+                <div class="b_s_r b_output">
+                  <table class="coupon_tab">
+                    <thead><th>Member Id</th><th>Coupon Name</th><th>Coupon Id</th><th>Dc Price</th><th>Min Price</th><th>사용 여부</th></thead>
+                    <tbody>
+                      {% for data in coupon_datas %}
+                      <tr class="coupon_{{data.room_num}}">
+                        <td class="b_s_p">{{data.member_id}}</td>
+                        <td class="b_s_p">{{data.coupon_name}}</td>
+                        <td class="b_s_p">{{data.coupon_id}}</td>
+                        <td class="b_s_p">{{data.value}}</td>
+                        <td class="b_s_p">{{data.min_price}}</td>
+                        <td class="b_s_p"><input class="b_button coupon_use_btn" id="{{data.coupon_id}}_no_{{data.value}}_{{data.min_price}}" style="color:gray;" type="button" value="< USE >"></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:40px; margin-bottom:50px; display:  flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
+              <div class="sub_title_b"> 
+                <div class="b_s_t" style="margin: 0px 20px;">Point: </div>
+                <div class="b_s_t b_t_o point_value">0</div>
+              </div>
+              <div class="sub_title_b" style="margin: 0px 40px;"> 
+                <div class="b_s_t" style="margin: 0px 20px;">Point to Use: </div>
+                <input class="b_s_t b_t_o point_price" placeholder="0">
+              </div>
+            </div>
+
+            <hr style="border: dotted 2px darkgray;">
+
+            <div style="margin-top:50px; display: flex; flex-flow:row; flex-wrap:nowrap; justify-content: space-between; align-items: baseline;">
+              <div class="sub_title_b"> 
+                <div class="b_s_t" style="margin: 0px 20px;">Total: </div>
+                <div class="b_s_t b_t_o final_price">0</div>
+              </div>
+              <div class="sub_title_b" style="margin: 0px 40px;"> 
+                <input class="b_p submit_btn" type="button" value="COMPLETE">
+              </div>
+            </div>
+            <form method="POST" name="submit_bill">
+              {% csrf_token %}
+            </form>
+
+        </div>
+      </div>
+
+  </section>
+</div>
+
+
+
+<!-- footer -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">DuBu Hotel</h2>
+              <p>Welcome .</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick menu</h2>
+              <ul class="list-unstyled">
+              {% comment %} log out 버튼 {% endcomment %}
+                <li><a href="#" class="py-2 d-block">Log out</a></li>
+                <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
+                <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">DuBu hotel</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">주소||주소||주소</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+0 000 0000 0000</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">DuBu@hanyang.ac.kr</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+
+  </body>
+</html>
+
+<script>
+$(".purchase_tab > tbody > tr").hide();
+$(".coupon_tab > tbody > tr").hide();
+$(document).ready(function(){
+  var is_this = false;
+  var final_price = 0;
+  var num = 0;
+  var point = 0;
+  var coupon_list = [];
+  $('#room_search').keyup(function(){
+    $('.coupon_price').text('0');
+    num = $(this).val();
+    $(".purchase_tab > tbody > tr").hide();
+    var temp = $("td[name=purchase_"+num+"]");
+    temp.parents().show();
+    var price = 0;
+    if(temp.length){
+      is_this = true;
+
+      {% for data in invoice_datas %}
+      if('{{data.room_num}}'==num){
+        $('.insert_booking_id').val('{{data.booking_id}}');
+      }
+      {% endfor %}
+
+      $('.coupon_tab > tbody > tr').remove();
+      {% for data in coupon_datas %}
+      $('.coupon_tab > tbody').append('<tr class="coupon_{{data.room_num}}"><td class="b_s_p">{{data.member_id}}</td><td class="b_s_p">{{data.coupon_name}}</td><td class="b_s_p">{{data.coupon_id}}</td><td class="b_s_p">{{data.value}}</td><td class="b_s_p">{{data.min_price}}</td><td class="b_s_p"><input class="b_button coupon_use_btn" id="{{data.coupon_id}}_no_{{data.value}}_{{data.min_price}}" style="color:gray;" type="button" value="< USE >"></td></tr>');
+      {% endfor %}
+
+      {% for data in point_datas %}
+      if('{{data.room_num}}'==num){
+        $(".point_value").text('{{data.point}}');
+      }
+      {% endfor %}
+
+      {% for data in invoice_datas %}
+      if('{{data.room_num}}' == num){
+        price = price+1*'{{data.price}}'.split('(')[0];
+      }
+      {% endfor %}
+      $('.total_price').text(""+price);
+
+      $(".coupon_tab > tbody > tr").hide();
+      temp = $('.coupon_'+num);
+      temp.show();
+
+      final_price = 1*price;
+      $('.final_price').text(final_price);
+      reload();
+    }
+    else{
+      is_this=false;
+      $('.total_price').text('0');
+      $(".point_value").text('0');
+      $(".insert_booking_id").val('');
+      coupon_list = [];
+      final_price = 0;
+      num=0;
+      point=0;
+    }
+  });
+
+  $('.point_price').keyup(function(){
+    if(isNaN($(this).val())){
+      $(this).val('');
+    }
+    else if(final_price<1*$('.point_price').val()){
+      $(this).val(final_price);
+    }
+    else if(1*$(this).val() > 1*$('.point_value').text()){
+      $(this).val($('.point_value').text());
+    }
+
+    point = $(this).val();
+    if(point==''){
+      point = 0;
+    }
+    $('.final_price').text(final_price - point);
+  });
+
+  var reload = function(){
+      $('.coupon_use_btn').click(function(){
+      var coupon_info = $(this).attr('id').split('_');
+      var coupon_id = coupon_info[0];
+      var used = coupon_info[1];
+      var value = coupon_info[2];
+      var min_price = coupon_info[3];
+      if(1*min_price > 1*$('.total_price').text()){
+        alert("결제 금액이 "+min_price+"원 이상이여야 사용할 수 있는 쿠폰입니다.");
+      }
+      else if(used=="no"){
+        if(final_price-value-point<0){
+          alert("결제 금액은 음수가 될 수 없습니다.");
+          return;
+        }
+        $('.coupon_price').text(1*$('.coupon_price').text()+1*value);
+        $(this).attr('id',coupon_id+'_yes_'+value+'_'+min_price);
+        $(this).css('color','white');
+        final_price = final_price - 1*value;
+        $('.final_price').text(final_price-point);
+        coupon_list.push(coupon_id);
+      }
+      else if(used=="yes"){
+        $('.coupon_price').text(1*$('.coupon_price').text()-1*value);
+        $(this).attr('id',coupon_id+'_no_'+value+'_'+min_price);
+        $(this).css('color','gray');
+        final_price = final_price + 1*value;
+        $('.final_price').text(final_price-point);
+        coupon_list.splice(coupon_list.indexOf(coupon_id),1);
+      }
+    });
+  }
+
+  $('.submit_btn').click(function(){
+    if(is_this && confirm("정말 결제를 완료하시겠습니까?")){
+      $('form[name=submit_bill]').append("<input type='hidden' name='room_num' value='"+num+"'>");
+      $('form[name=submit_bill]').append("<input type='hidden' name='price' value='"+final_price+"'>");
+      $('form[name=submit_bill]').append("<input type='hidden' name='point' value='"+point+"'>");
+      for(var i=0; i<coupon_list.length; i++){
+        $('form[name=submit_bill]').append("<input type='hidden' name='coupon_list' value='"+coupon_list[i]+"'>");
+      }
+      document.submit_bill.submit();
+    }
+  })
+
+  $('.insert_purchase_btn').click(function(){
+    if(is_this && confirm("주문을 추가하시겠습니까?")){
+      document.insert_purchase.submit();
+    }
+  });
+});
+</script>

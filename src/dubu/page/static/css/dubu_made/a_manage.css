@@ -1,0 +1,117 @@
+/* product 틀 */
+*{
+    margin: 0px;
+    padding:0px;
+}
+
+.s_i_s{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+
+.bold_sec{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid;
+    border-color: darkgray;
+    display: flex;
+    flex-flow: column;
+    /* padding-top: 30px; */
+    /* padding-bottom: 40px; */
+    padding: 30px 30px;
+}
+
+body{
+    min-width: 1300px;
+}
+
+.m_b{
+    padding: 0px 20px;
+    background-color: rgb(95, 95, 95);
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.m_b_a{
+    padding: 0px 20px;
+    margin: 1px;
+    width: 150px;
+    background-color: rgb(95, 95, 95);
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.m_r_b{
+    padding: 0px 60px;
+    background-color: rgb(95, 95, 95);
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.i_p_b{
+    width: 150px;
+    padding-left:5px;
+    margin: 2px;
+}
+
+.m_s{
+    width: 170px;
+    font-size: 17px;
+    padding: 2px 10px;
+    height: 40px;
+    /* border: 2px solid;
+    border-color: blueviolet; */
+}
+
+.sub_t{
+    font-size: 30px;
+    padding: 5px 40px;
+    /* border: 2px solid; */
+    /* border-color: blueviolet; */
+}
+
+.addStaffBox{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.addBookingBox{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+
+.m_r_room_select{
+    display:flex; 
+    flex-wrap:nowrap; 
+    flex-flow: column; 
+    align-items:center; 
+    width:max-content;
+    margin: 5px 20px 15px 5px;
+}
+
+.i_e_b{
+    width: 140px;
+    padding-left:5px;
+    margin: 2px;
+}
+
+.e_a{
+    padding: 0px 20px;
+    margin: 1px;
+    width: 140px;
+    background-color: rgb(95, 95, 95);
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    font-size: 17px;    
+}

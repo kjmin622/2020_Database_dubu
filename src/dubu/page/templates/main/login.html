@@ -1,0 +1,293 @@
+{% comment %} 로그인 {% endcomment %}
+{% comment %} 로그아웃은 단순히 버튼 입니다. {% endcomment %}
+
+{% comment %} 회원가입 {% endcomment %}
+
+{% comment %}  예약#1 {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/log.css' %}">
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'index' %}">DuBu</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+              <li class="nav-item active"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
+              <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
+              <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">Join</a></li>
+            {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
+              <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+{% comment %} style="background-image: url({% static 'images/bg_1.jpg'%});" {% endcomment %}
+  <div class="hero-wrap m_back" >
+    <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Log in</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+{% comment %} test  {% endcomment %}
+<div class="tle">
+	<section class="test1 ">
+    <form method="POST">
+      {% csrf_token %}
+
+        <div class="container"> 
+
+          <div class = "container">
+
+            <div class = "container" style = "padding-bottom: 20px;">
+              <div class = "container "> ID
+                <input style="display:none" aria-hidden="true"> <input type="password" style="display:none" aria-hidden="true">
+                <input type="text" name="member_id" class="form-control" id="member_id login_member_id" autocomplete="off">
+              </div>
+
+              <div class = "container "> PASSWORD
+                <input type="password" name="password" class="form-control" id="password">
+              </div>
+            </div>
+
+            <div class = "container">
+              <input type="submit" class="btn" value="Login">
+              <button class = "btn"><a href="{% url 'join' %}">회원가입</a></button>
+              <input type="button" class = "popup1_btn btn" value="ID/PASSWORD 찾기">
+            </div>
+
+          </div>
+
+        </div>
+
+    </form>    
+  </section>
+
+
+  <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
+
+  <div class="popup popup1" style = "display: none; padding-bottom: 120px;">
+
+    <div class="l_find">
+    <section class="t_ser " style="z-index: 0; margin-right: 10px;">  
+      <p style="font-size:25px">Find ID</p>
+      <div class="s_t ">
+        &nbsp; &nbsp;Name<br><br><input type="text" class="ppp id_in " id="idfind_name" placeholder="ex) 홍길동" style="top:0px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        &nbsp; &nbsp;Phone<br><br><input type="text" class="ppp  pass_in " id="idfind_phone_num" placeholder="ex) 01011112222" style="top:53px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        &nbsp; &nbsp;Email<br><br><input type="text" class="ppp  e_in " id="idfind_email" placeholder="ex) dubu@gmail.com" style="top:108px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        <input type="button" value="확인" id="idfind_btn" class="send login_button btn" style="background-color: rgb(239, 239, 239); color: black; left: 155px; height: 42px; width: 72px; bottom: 0px; top:152px;">
+      </div>
+    </section>
+
+    <section class="t_ser " style="z-index: 0; margin-left: 10px;">
+      <p style="font-size:25px">Find PASSWORD</p>
+      <div class="s_t ">
+        &nbsp; &nbsp;Name<br><br><input type="text" class="ppp id_in " id="pwfind_name" placeholder="ex) 홍길동" style="top:0px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        &nbsp; &nbsp;ID<br><br><input type="text" class="ppp  pass_in " id="pwfind_id" placeholder="ex) hong123" style="top:53px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        &nbsp; &nbsp;Email<br><br><input type="text" class="ppp  e_in " id="pwfind_email" placeholder="ex) dubu@gmail.com" style="top:108px; left: 110px; border-radius: 0px; border-color: darkgray; width: 200px; padding-left: 3px;">
+        <input type="button" class="send login_button btn" id="pwfind_btn" value="확인" style="background-color: rgb(239, 239, 239); color: black; left: 155px; height: 42px; width: 72px; bottom: 0px; top:152px;">
+      </div>
+    </section>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+<!-- footer -->
+<footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "text-align: center; font-size: 40px">DuBu Hotel</h2>
+          <p style= "text-align: center;">For a comfortable time.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 90px;">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-5">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">Quick Menu</h2>
+          <ul class="list-unstyled">
+            <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
+            <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-block">Join</a></li>
+            {% endif %}
+            <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
+            <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-md">
+         <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Privacy</h2>
+          <ul class="list-unstyled">
+            <li><a href="#" class="py-2 d-block">Career</a></li>
+            <li><a href="#" class="py-2 d-block">About Us</a></li>
+            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            <li><a href="#" class="py-2 d-block">Services</a></li>
+          </ul>
+        </div>
+      </div> -->
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">About Hotel</h2>
+          <div class="block-23 mb-3">
+            <ul>
+              <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+
+        <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+    </div>
+  </div>
+</footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
+
+<script>
+    $('.popup_background').click(function(){
+      $('.popup').css('display', 'none')
+    });
+
+    $('.popup1_btn').click(function(){
+      $('.popup_background').css('display', 'block');
+      $('.popup1').css('display', 'block');
+    });
+</script>
+
+<script>
+$(document).ready(function(){
+  $('#idfind_btn').click(function(){
+    var name = $('#idfind_name').val().replace(' ','');
+    var phone_num = $('#idfind_phone_num').val().replace(' ','');
+    var email = $('#idfind_email').val().replace(' ','');
+    if(false);
+    {% for data in member_datas %}
+    else if('{{data.last_name}}'+'{{data.first_name}}'.replace(' ','')==name && '{{data.phone}}'.replace(' ','')==phone_num && '{{data.email}}'.replace(' ','')==email){
+      alert('{{data.member_id}}');
+      flag = false;
+    }
+    {% endfor %}
+    else{
+      alert("일치하지 않는 계정 정보입니다.");
+    }
+    $('#idfind_name').val("");
+    $('#idfind_phone_num').val("");
+    $('#idfind_email').val("");
+  });
+
+  $('#pwfind_btn').click(function(){
+    var name = $('#pwfind_name').val().replace(' ','');
+    var member_id = $('#pwfind_id').val().replace(' ','');
+    var email = $('#pwfind_email').val().replace(' ','');
+    if(false);
+    {% for data in member_datas %}
+    else if('{{data.last_name}}'+'{{data.first_name}}'.replace(' ','')==name && '{{data.member_id}}'.replace(' ','')==member_id && '{{data.email}}'.replace(' ','')==email){
+      alert('{{data.password}}');
+      flag = false;
+    }
+    {% endfor %}
+    else{
+      alert("일치하지 않는 계정 정보입니다.");
+    }
+
+    $('#pwfind_name').val("");
+    $('#pwfind_id').val("");
+    $('#pwfind_email').val("");
+  });
+});
+</script>

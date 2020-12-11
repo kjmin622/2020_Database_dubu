@@ -1,0 +1,254 @@
+<html>
+    <head>
+        <title>login</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <style>
+            .manageBox{
+                position:relative;
+                width:1350px;
+                overflow:scroll;
+                border:solid 1px black;
+                padding:20px;
+            }
+            .searchBox h4{
+                display:inline;
+            }
+            .resultBox{
+                position: relative;
+                width: 1310px;
+                height:250px;
+                overflow:scroll;
+                border:solid 1px black;
+                margin-top:20px;
+            }
+            .resultList{
+                list-style: none;
+            }
+            .resultList li div{
+                display:inline;
+            }
+            table,thead,tbody,th,td{
+                border:solid 1px gray;
+                white-space:nowrap;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="manageBox staff_work_box">
+            <h3>직원근무관리</h3>
+            <div class="searchBox">
+                <h4>search</h4>
+                <input type="text" placeholder="search" id="staff_working_search">
+            </div>
+            <div class="resultBox">
+                <table id="staff_working_tab">
+                    <thead>
+                        <th>이름</th><th>소속팀</th><th>담당객실</th><th>부서</th><th>역할</th><th>근무상태</th>
+                    </thead>
+                    <tbody>
+                        {% for data in datas %}
+                        <tr>
+                            <td>{{data.last_name}} {{data.first_name}}</td>
+                            <td>{{data.team}}</td>
+                            <td class="working_search">없음</td>
+                            <td class="working_search">{{data.depart_name}}</td>
+                            <td>{{data.depart_position}}</td>
+                            <td>{{data.status}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="manageBox staff_info_box">
+            <h3>직원정보관리</h3>
+            <div class="searchBox">
+                <h4>name</h4>
+                <input type="text" placeholder="search" id="staff_info_search">
+            </div>
+            <div class="resultBox">
+                <table id="staff_result_tab">
+                    <thead>
+                    <th>staff_id</th><th>name</th><th>rank</th><th>depart_id</th><th>team</th><th>status</th><th>bank</th><th>account</th><th>phone</th><th>address</th><th>edit</th><th>working_time</th><th>holiday</th><th>delete</th>
+                    </thead>
+                    <tbody>
+                    {% for data in datas %}
+                    <tr><td>{{data.staff_id}}</td>
+                        <td class="staff_info_name">{{data.last_name}} {{data.first_name}}</td>
+                        <td>{{data.rank}}</td>
+                        <td>{{data.depart_id}}</td>
+                        <td>{{data.team}}</td>
+                        <td>{{data.status}}</td>
+                        <td>{{data.bank}}</td>
+                        <td>{{data.account}}</td>
+                        <td>{{data.phone}}</td>
+                        <td>{{data.wide_area_unit}} {{data.basic_unit}} {{data.street}} {{data.si_gu}} {{data.eub_myeon}} {{data.building_number}} {{data.detail_address}}</td>
+                        <td><input type="button" value="edit" class="edit_btn" name="edit_{{data.staff_id}}"></td>
+                        <td><input type="button" value="근무일 보기/수정" class="working_btn" name="working_{{data.staff_id}}"></td>
+                        <td><input type="button" value="휴가일 보기/수정" class="holiday_btn" name="holiday_{{data.staff_id}}"></td>
+                        <td><form action="{% url 'delete_staff' %}" method="POST" onsubmit="return confirm('정말 제거하시겠습니까?');">
+                            <input type="text" value="{{data.staff_id}}" style="display:none" name="staff_id" readonly>
+                            <input type="submit" value="delete" class="delete_btn"></form></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="addStaffBox">
+                <form action="{% url 'insert_staff' %}" method="POST">
+                    {% for s in names %}
+                    <input type="text" name="{{s}}" placeholder="{{s}}">
+                    {% endfor %}
+                    <input type="submit" value="add">
+                </form>
+            </div>
+        </div>
+
+        <!-- popup -->
+        <div class="fullscreen popup" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.5)"></div>
+        <div class="staff_info_edit popup" style="display:none;z-index: 100; position:fixed; width:250px; height:700px; padding:20px;left:50%; top:50%; transform:translate(-125px,-350px); background-color:rgba(255,255,255,0.8)">
+            <form action="{% url 'edit_staff' %}" method="POST">
+            {% for s in names %}
+            {% if s != 'staff_id' %}
+            <div style="display:block">
+            <label style="display:block; margin-top:2px; margin-bottom:-2px">{{s}}</label>
+            <input type="text" id="staff_edit_input_{{s}}" name="{{s}}" placeholder="{{s}}">
+            </div>
+            {% else %}
+            <input type="text" id="staff_edit_input_staff_id" name="staff_id" readonly>
+            {% endif %}
+            {% endfor %}
+            <input type="submit" value="edit">
+            </form>
+        </div>
+        <div class="staff_working popup" style="display:none;overflow:scroll;z-index:100;position:fixed;width:300px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-150px,-300px);background-color:rgba(255,255,255,0.8);">
+            <div>
+                <table class="working_result_box">
+                    <thead><th> start </th><th>end</th><th>Xday</th><th>delete</th></thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <form action="{% url 'insert_staff_working' %}" method="POST">
+                    <input type="text" style="display: none" name="staff_id" class="work_sid" readonly>
+                    <input type="text" name="work_time_start" placeholder="starttime(00:00)">
+                    <input type="text" name="work_time_end" placeholder="endtime(00:00)"><br>
+                    <input type="radio" name="x_day" value="sun_day" checked>sun_day
+                    <input type="radio" name="x_day" value="mon_day">mon_day
+                    <input type="radio" name="x_day" value="tues_day">tues_day<br>
+                    <input type="radio" name="x_day" value="wednes_day">wednes_day
+                    <input type="radio" name="x_day" value="thurs_day">thurs_day
+                    <input type="radio" name="x_day" value="fri_day">fri_day<br>
+                    <input type="radio" name="x_day" value="satur_day">satur_day
+                    <input type="submit" value="add">
+                </form>
+            </div>
+        </div>
+
+        <div class="staff_holiday popup" style="display:none;overflow:scroll;z-index:100;position:fixed;width:400px;height:600px;padding:20px;left:50%;top:50%;transform:translate(-200px,-300px);background-color:rgba(255,255,255,0.8);">
+            <div>
+                <table class="holiday_result_box">
+                    <thead><th>start</th><th>end</th><th>type</th><th>paid</th><th>delete</th></thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <form action="{% url 'insert_staff_holiday' %}" method="POST">
+                    <input type="text" style="display: none" name="staff_id" class="holi_sid" readonly>
+                    <input type="text" name="off_start" placeholder="startdate(0000-00-00)">
+                    <input type="text" name="off_end" placeholder="enddate(0000-00-00)">
+                    <input type="text" name="day_off_type" placeholder="병가 연차...">
+                    <input type="text" name="is_paid" placeholder="True/False">
+                    <input type="submit" value="add">
+                </form>
+            </div>
+        </div>
+
+        </div>
+            
+        </div>
+    </body>
+</html>
+<script>
+    $(document).ready(function() {
+        $("#staff_working_search").keyup(function() {
+            var k = $(this).val();
+            $("#staff_working_tab > tbody > tr").hide();
+            var temp = $(".working_search:contains('" + k + "')");
+            $(temp).parent().show();
+        })
+    })
+    $(document).ready(function() {
+        $("#staff_info_search").keyup(function() {
+            var k = $(this).val();
+            $("#staff_result_tab > tbody > tr").hide();
+            var temp = $(".staff_info_name:contains('" + k + "')");
+
+            $(temp).parent().show();
+        })
+    })
+    $(".fullscreen").click(function(){
+        $(".popup").css("display","none");
+    })
+
+    $(".edit_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_info_edit").css("display","block");
+        var staff_id = $(this).attr('name').slice(5);
+        {% for data in datas %}
+        if(staff_id == '{{data.staff_id}}'){
+            $('#staff_edit_input_staff_id').attr('value','{{data.staff_id}}')
+            $('#staff_edit_input_rank').attr('value','{{data.rank}}')
+            $('#staff_edit_input_status').attr('value','{{data.status}}')
+            $('#staff_edit_input_depart_id').attr('value','{{data.depart_id}}')
+            $('#staff_edit_input_team').attr('value','{{data.team}}')
+            $('#staff_edit_input_first_name').attr('value','{{data.first_name}}')
+            $('#staff_edit_input_last_name').attr('value','{{data.last_name}}')
+            $('#staff_edit_input_phone').attr('value','{{data.phone}}')
+            $('#staff_edit_input_bank').attr('value','{{data.bank}}')
+            $('#staff_edit_input_account').attr('value','{{data.account}}')
+            $('#staff_edit_input_wide_area_unit').attr('value','{{data.wide_area_unit}}')
+            $('#staff_edit_input_street').attr('value','{{data.street}}')
+            $('#staff_edit_input_basic_unit').attr('value','{{data.basic_unit}}')
+            $('#staff_edit_input_si_gu').attr('value','{{data.si_gu}}')
+            $('#staff_edit_input_eub_myeon').attr('value','{{data.eub_myeon}}')
+            $('#staff_edit_input_building_number').attr('value','{{data.building_number}}')
+            $('#staff_edit_input_detail_address').attr('value','{{data.detail_address}}')
+        }
+        {% endfor %}
+    })
+
+    $(".working_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_working").css("display","block");
+        $(".working_result_box tbody").empty();
+        var staff_id = $(this).attr('name').slice(8);
+        $(".work_sid").attr('value',staff_id);
+        {% for data in working_datas %}
+        if(staff_id == '{{data.staff_id}}'){
+            $('.working_result_box tbody').append("<tr><td>{{data.work_time_start}}</td><td>{{data.work_time_end}}</td><td>{{data.x_day}}</td><td><form action=\"{% url 'delete_staff_working' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete'></form></td></tr>");
+        }
+        
+        {% endfor %}
+    })
+
+    $(".holiday_btn").click(function(){
+        $(".fullscreen").css("display","block");
+        $(".staff_holiday").css("display","block");
+        $(".holiday_result_box tbody").empty();
+        var staff_id = $(this).attr('name').slice(8);
+        $(".holi_sid").attr('value',staff_id);
+        {% for data in holiday_datas %}
+        if(staff_id == '{{data.staff_id}}'){
+            $('.holiday_result_box tbody').append("<tr><td>{{data.off_start}}</td><td>{{data.off_end}}</td><td>{{data.day_off_type}}</td><td>{{data.is_paid}}</td><td><form action=\"{% url 'delete_staff_holiday' %}\" method='POST'><input type='text' value='{{data.id}}' name='id' style='display:none;' readonly><input type='submit' value='delete'></form></td></tr>");
+        }
+        
+        {% endfor %}
+    })
+
+
+</script>

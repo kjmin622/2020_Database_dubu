@@ -1,0 +1,610 @@
+{% comment %}  예약#1 {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/main.css' %}">>
+
+
+    <style>
+      .popup1{
+        width:50%;
+        height:700px;
+        overflow:auto;
+        position:fixed;
+        left:50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+      }
+    </style>
+
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'index' %}">DuBu</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{% url 'reservation' %}" class="nav-link">Reservation</a></li>
+            {% if login %} 
+	            <li class="nav-item active"><a href="{% url 'logout' %}" class="nav-link">Log out</a></li>
+              <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li>
+            {% else %}
+              <li class="nav-item active"><a href="{% url 'login' %}" class="nav-link">Log in</a></li>
+              <li class="nav-item active"><a href="{% url 'join' %}" class="nav-link">Join</a></li>
+            {% endif %}
+          {% comment %} <li class="nav-item active"><a href="{% url 'mypage' %}" class="nav-link">My page</a></li> {% endcomment %}
+            <li class="nav-item active"><a href="{% url 'about' %}" class="nav-link">About hotel</a></li>
+            {% comment %} <li class="nav-item active"><a href="{% url 'event' %}" class="nav-link">Event</a></li> {% endcomment %}
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+{% comment %} style="background-image: url({% static 'images/bg_1.jpg'%});" {% endcomment %}
+  <div class="hero-wrap m_back" >
+    <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Reservation</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+		
+{% comment %} test  {% endcomment %}
+<form method='POST' action = "{% url 'reservation3' %}">
+{% csrf_token %}
+<input type="text" name="method" class="form-control" value="reservation2" style="display:none" readonly>
+<input type="hidden" name="check_in" class="form-control" value='{{request.check_in}}' placeholder="Check-in date">
+<input type="hidden" name="check_out" class="form-control" value='{{request.check_out}}' placeholder="Check-out date">
+<input type="hidden" name = "adult_num" class = "count" value='{{request.adult_num}}' readonly style = "width:40px; padding-left: 13px;">
+<input type="hidden"  name = "child_num"class = "count" value='{{request.child_num}}' readonly style = "width:40px; padding-left: 13px;">
+<section class="test1 row_c">
+  <div class = "staff_s_div"  style="padding-top: 50px; padding-bottom: 20px; min-width: 500px;">
+    <div class= "staff_title" style = "padding-bottom: 10px; padding-left: 0px;">01 객실검색 > 02 객실ㆍ요금ㆍ옵션 선택</div>
+  </div>
+  
+  <div class="bold_test_staff staff_s_div bold_sec" style= "min-width: 1200px;">
+    <center>
+    <div class="p-4 align-self-stretch d-flex" style="width: 448px;">
+      <div class="wrap" style = "margin-right:30px;">
+        <label for="#">Check-in Date</label>
+        <p>{{request.check_in}}</p>
+      </div>
+      <div class="wrap" style = "margin-right:30px;">
+        <label for="#">Check-out Date</label>
+        <p>{{request.check_out}}</p>
+      </div>
+
+      <div class="wrap" style = "margin-right:30px;">
+        <label for="#">Adult</label>
+        <p>{{request.adult_num}}</p>
+      </div>
+
+      <div class="wrap" style = "margin-right:0px;">
+        <label for="#">Child</label>
+        <p>{{request.child_num}}</p>
+      </div>
+
+    </div>
+    </center>
+
+  </div>
+  <br>
+  <br>
+  
+  
+
+  <div class="bold_test_staff staff_s_div bold_sec" style="padding-bottom: 0px; padding-top: 0px; margin-bottom: 0px; margin-top: 0px; min-width: 1200px;">
+    <div class = "bold_test_staff staff_s_div bold_sec" style="overflow:auto; height:700px; padding-left: 0px; border: rgb(0 0 0 / 0%); margin-top: 0px; margin-bottom: 0px; min-width: 1180px;">
+
+      {% for data in room_datas %}
+      {% if request.total_num <= data.mem_limit %}
+      {% for room in room_info %}
+      {% if room.room_type == data.room_type %}
+      {% if room.room_num > 0 %}
+      <div  class="bold_test_staff staff_s_div bold_sec" style="width:1094px; margin-top: 20px; background-color:#dee2e63b; border: 0px; padding-top: 20px; padding-bottom: 20px; min-width: 1150px;">
+        <div class="staff_title " style="padding-bottom: 20px;">{{data.room_type}}</div>
+        <div class="s_i_s">
+          <div class="s_i  col_c">
+            <div class="s_i_logo " style="padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; background-color: rgb(0 0 0 / 0%);"><img width="580px" src="{% static data.photo_url %}"></div>
+          </div>
+
+          <div class="s_i s_i_text" style="padding-top: 80px; padding-bottom: 0px;">
+            <ul style="list-style-type:none; text-align: center;">
+              <input type="button" name="{{data.room_type}}" class = "popup1_btn btn" style="border-radius:10px; width: 176px; height: 64px;" value="자세히 보기"><br><br><br><br>
+              <p style="font-size: 20px;"> 금액 : {{data.price}}   &nbsp;￦</p><br><br>
+              <input type="checkbox" name = "room_type" value="{{data.room_type}}" class="select" style= "width: 20px; height: 20px; vertical-align: -2.3px;"> <a style="font-size: 20px;">선택</a>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+
+    
+    </div>
+  </div>
+  
+    
+  
+
+  <div class="popup popup_background" style= "display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); min-width: 1200px;"></div>
+  <center>
+  <div class="popup popup1" style = "display: none; min-width: 1200px;">
+    <div class = "container" style = "padding-bottom: 30px; padding-top: 10px;">
+      <div class = "s_i_logo" style = "margin-top:10px; padding-bottom: 30px; padding-top:30px; padding-left:50px; padding-right:50px; margin-bottom: 10px;">
+      <img src = "{% static 'images/moreroom.jpg' %}" style = "width: 800px; height: 500px;">
+      </div>
+      <div class = "s_i s_i text" style="width: 1100px; min-width: 1100px;">
+        <ul style = "list-style-type: none">
+          <li> Room name : <p style="display:inline" class="popup_room_name"></p></li>
+          <li> 객실 설명 : DUBU 디럭스 룸은 3~4명 정도의 인원을 위한 객실입니다. DUBU 디럭스 룸은 마치 내 집 같은 편안함과 안락한 분위기를 느낄 수 있도록 설계하고, 보다 큰 침대와 큰 욕조로 구성된 공간입니다. </li>
+        </ul>
+      </div>
+
+      <div class = "container" style = "border:2px solid gray; margin-bottom: 30px; width: 1100px; min-width: 1100px; ">
+        <label for="#">객실개요</label>
+        <div class = "container" style="text-algin:center;">
+          <ul style = "list-style-type: none">
+            <li>bed type : <p style="display:inline" class="popup_bed_type"></p></li>
+            <li> 최대 인원 : <p style="display:inline" class="popup_people"></p></li>
+            <li>남은 개수 : <p style="display:inline" class="popup_count"></p></li>
+            <li> check-in/check-out : 15:00/12:00</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class = "container" style = "border:2px solid gray; width: 1100px; min-width: 1100px; text-algin:center;">
+        <label for="#">어메니티</label>
+        <div class = "container" style="width: 820px; text-algin:center;" >
+          <ul style = "list-style-type: none">
+            <li> 일반 : 42’’ LCD TV / 55” UHD TV / 손전등 / 슬리퍼 / 전화기 / 티포트 / 금고 / 구둣주걱 / 구두클리너 / 미니바</li>
+            <li> 욕실 : 세면대 2개 / 1회용 칫솔 및 치약 / 면도기 / 목욕 가운 / 비데 / 헤어드라이어 / 욕실용품 / 샤워 캡 / 슬리퍼 / 에머리보드 / 욕조 / 위생봉지 / 면봉</li>
+            <li> 기타 : 케이블/위성 TV 채널 / 무료 생수 1일 2병 / 보이스 메일 서비스 / 커피 및 티 메이커 / 무료 일간 신문 / 셔츠 무료 다림질서비스(1일 2개) / 옷솔 / 구두 광택 서비스</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </center>
+
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 1200px;">
+    <div class="staff_title ">조식 신청</div>
+    <div class="s_i_s">
+      <div class="s_i s_i_text" style="padding-left: 0px; padding-right: 0px;">
+        <ul style="list-style-type:none;">
+          <li style="padding-left: 50px;">인원 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <input class = "num_btn" name = "meal" value = "-" type = "button" style = "width: 23pt; height: 23pt;" count_range = "m">
+            <input class = "count" value='0' name = "breakfast_num" readonly style = "width:40px; padding-left: 13px;">
+            <input class = "num_btn" name = "meal" value = "+" type = "button" style = "width: 23pt; height: 23pt;" count_range = "p">
+          </li><br>
+          <li style="padding-bottom: 15px; padding-left: 50px; display: inline;" id= "breakfast_num">금액 : 0 </li><p style="display: inline;">&nbsp;￦</p>
+          <li>&nbsp;</li>
+          <br>
+          <p style="padding-left: 30px;"> * 유아와 어린이는 별도로 신청해주세요. </p>
+        </ul>
+      </div>
+    </div>
+    <div class="staff_title ">추가 요청</div>
+    <div class="s_i_s">
+      <div class="s_i s_i_text">
+        <textarea name="extra_text" style= "width: 800px; height: 100px"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 1200px;">
+    
+      <div class="staff_title ">객실 요금</div>
+      <div class="s_i_s">
+        <div class="s_i s_i_text" style="padding-right: 0px; padding-left: 0px;">
+          <ul style="list-style-type:none">
+            <li>
+              <input type="hidden" name = "room_cost" value="" style="padding-bottom: 15px; display: inline;"> <p id ="room_cost" style="display: inline;">객실 금액 : 0</p> <p style="display: inline;">&nbsp;￦</p></li>
+            <li>&nbsp;</li>
+
+            <li>
+              <input type="hidden" name = "breakfast_cost" value="" style="padding-bottom: 15px; display: inline;"> <p id ="breakfast_cost" style="display: inline;"> 조식 금액 : 0</p> <p style="display: inline;">&nbsp;￦</p></li>
+            <li>&nbsp;</li>
+
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+
+            <li>
+              <input type="hidden" name = "total" value="" style="padding-bottom: 15px; display: inline;"> <p id ="total" style="display: inline; font-weight: bold; font-size: 20px;">총 금액 : 0</p> <p style="display: inline; font-weight: bold; font-size: 20px;">&nbsp;￦</p></li>
+            <li>&nbsp;</li>
+            <br>
+          </ul>
+        </div>
+      </div>
+  </div>
+
+  <div class="bold_test_staff staff_s_div bold_sec" style = "min-width: 1200px;">
+    <div class="staff_title ">요금 정책 & 취소 규정</div>
+    <div class="s_i_s">
+      <div class="s_i s_i_text">
+        <label for="#">- 요금 정책</label>
+        <p>객실 금액에 부가세 10%와 봉사료 10%(총 20%)가 포함됩니다.</p>
+        <label for="#">- 취소 규정</label>
+        <p>예약 취소 및 변경은 체크인 하루 전 18:00(한국시간)까지 가능합니다. 예약하신 일자에 체크인 되지 않거나 또는 위의 지정 시간 이후에 예약을 취소했을 경우에는 예약 사항에 대해 노-쇼 (No Show) 처리되며, 이에 따른 위약금으로 예약 첫날에 해당하는 1박 객실요금이 청구되오니 유의하시기 바랍니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class = "staff_s_div">
+    <div style = "padding-bottom:50px; padding-top:20px;">
+    <center>
+    <button class = "btn" onclick="location.href='{% url 'reservation3' %}'" style="border-radius:10px;"> 객실 및 요금 확인 </button>
+    </center>
+    </div>
+  </div>
+</section>
+</form>
+
+    
+
+<!-- footer -->
+<footer class="ftco-footer ftco-bg-dark ftco-section" style ="padding-bottom: 30px;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "text-align: center; font-size: 40px">DuBu Hotel</h2>
+          <p style= "text-align: center;">For a comfortable time.</p>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5" style = "padding-left: 85px;">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-5">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">Quick Menu</h2>
+          <ul class="list-unstyled">
+            <!-- <li><a href="#" class="py-2 d-block">Blog</a></li> -->
+            <!-- <li><a href="#" class="py-2 d-block">Rooms</a></li> -->
+            {% if login %} 
+              <li><a href="{% url 'mypage' %}" class="py-2 d-block">My page</a></li>
+            {% else %}
+              <li><a href="{% url 'join' %}" class="py-2 d-block">Join</a></li>
+            {% endif %}
+            <li><a href="{% url 'reservation' %}" class="py-2 d-block">Reservation</a></li>
+            <li><a href="{% url 'about' %}" class="py-2 d-block">About hotel</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- <div class="col-md">
+         <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2">Privacy</h2>
+          <ul class="list-unstyled">
+            <li><a href="#" class="py-2 d-block">Career</a></li>
+            <li><a href="#" class="py-2 d-block">About Us</a></li>
+            <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+            <li><a href="#" class="py-2 d-block">Services</a></li>
+          </ul>
+        </div>
+      </div> -->
+      <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+          <h2 class="ftco-heading-2" style = "font-size: 25px">About Hotel</h2>
+          <div class="block-23 mb-3">
+            <ul>
+              <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+              <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+              <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+
+        <!-- <p>Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.</p> -->
+      </div>
+    </div>
+  </div>
+</footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+  </body>
+</html>
+
+<script>
+  $('.popup_background').click(function(){
+    $('.popup').css('display', 'none')
+  });
+
+  $('.popup1_btn').click(function(){
+    $('.popup_background').css('display', 'block');
+    $('.popup1').css('display', 'block');
+    {% for data in room_datas %}
+    if('{{data.room_type}}'==$(this).attr('name')){
+      $('.popup_room_name').text('{{data.room_type}}');
+      $('.popup_bed_type').text('{{data.bed_type}} ({{data.bed_num}}개)');
+      $('.popup_people').text('{{data.mem_limit}}');
+    }
+    {% endfor %}
+    {% for data in room_info %}
+    if('{{data.room_type}}'==$(this).attr('name')){
+      $('.popup_count').text('{{data.room_num}}');
+    }
+    {% endfor %}
+  });
+
+  $(".num_btn").click(function(){
+    var mp_value = $(this).attr("value");
+    var x=$("input[name=breakfast_num]");
+    var int=1*x.attr("value");
+    if(mp_value == '-') {
+      if(int>=1){
+        int--;
+      }
+    }
+    else{
+      int++;
+    }
+    
+
+    $("#breakfast_num").text("금액 : "+(int*10000));
+    $("input[name=breakfast_num]").attr("value", ""+ int);
+
+    $("#breakfast_cost").text("조식 금액 : "+(int*10000));
+    $("input[name=breakfast_cost]").attr("value", ""+ (int*10000));
+
+
+    x.attr("value",int+"");
+    if($("#total").text()!="총 금액 : "){
+      var y= 1* $("#room_cost").text().slice(8);
+      $("#total").text("총 금액 : "+(  y + (int*10000) ));
+      $("input[name=total]").attr("value", ""+ ( y + (int * 10000)) );
+
+    }
+  })
+
+$(document).ready(function(){
+  $(".select").click(function(){
+    var int;
+    var value = $(this).attr("value");
+
+    {% for data in room_datas %}
+    if(value=='{{data.room_type}}'){
+      int=1*'{{data.price}}';
+    }
+    {% endfor %}
+
+
+
+    var x= 1* $("#breakfast_cost").text().slice(8);
+    $("#room_cost").text("객실 금액 : "+int);
+    $("input[name=room_cost]").attr("value", ""+ int);
+
+
+
+
+    
+   
+  })
+})
+
+{% comment %} 
+
+  $(".popup1_btn btn").click(function(){
+    var room = $(this).attr("name");
+    if(room=="st_s.r"){
+      var x=$("input[name=adult_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+    else if(room=="st_ d.r"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+    
+    else if(room=="su_s.r"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+    
+    else if(room=="su_d.r"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+    
+    else if(room=="d_d.r"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+    
+    else if(room=="d_q.r"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+    
+    else if(room=="s_d_q.r"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+    else if(room=="s_d_k.r"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+    else if(room=="s_r_q.r"){
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+
+    else { //room=="s_r_k.r"
+      var x=$("input[name=child_num]");
+      var int=1*x.attr("value");
+      if(mp_value == '-') {
+        if(int>=1){
+          int--;
+        }
+      }
+      else{
+        int++;
+      }
+      x.attr("value",int+"");
+    }
+  }) 
+{% endcomment %}
+
+    
+  </script>
+

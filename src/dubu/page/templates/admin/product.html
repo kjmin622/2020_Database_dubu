@@ -1,0 +1,432 @@
+{% comment %} Product {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuBu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% comment %} dubu_make {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dubu_made/back.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dubu_made/product.css' %}">
+  
+    <style>
+      .pro_search_result{
+        height:230px;
+        overflow:auto;
+      }
+      th, td{
+        padding: 3px 10px;
+      }
+      table, thead, tbody, th, td, tr{
+        border:1px solid gray;
+        white-space:nowrap;
+      }
+      th{
+        text-align:center;
+        font-size:17px;
+        font-weight:500;
+      }
+
+      .p_output th,td{
+        padding: 3px 20px;
+      }
+
+      .cursor{
+        cursor:pointer;
+      }
+
+      .product_list_tab th{
+        width:150px;
+      }
+    </style>
+  
+  </head>
+  <body>
+
+<!--start nav-->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="{% url 'staff' %}">Staff</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="{% url 'staff' %}" class="nav-link">Staff Home</a></li>
+            {% comment %} Log out {% endcomment %}
+              <li class="nav-item active"><a href="{% url 'admin_logout' %}" class="nav-link">Log out</a></li>
+              {% comment %} <li class="nav-item active"><a href="{% url 's_reservation' %}" class="nav-link">Reservation</a></li> {% endcomment %}
+	          <li class="nav-item active"><a href="{% url 'room_select' %}" class="nav-link">Room select</a></li>
+	          <li class="nav-item active"><a href="{% url 'bill' %}" class="nav-link">Bill</a></li>
+	          <li class="nav-item active"><a href="{% url 'parking' %}" class="nav-link">Parking</a></li>
+	          <li class="nav-item"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
+	          <li class="nav-item active"><a href="{% url 'staff_search' %}" class="nav-link">Search</a></li>
+              <li class="nav-item active"><a href="{% url 'management' %}" class="nav-link">Management</a></li>
+          </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!-- END nav -->
+
+{% comment %} top : title + background {% endcomment %}
+    <div class="hero-wrap m_back">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <h1 class="mb-4 bread">Product</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %} end top {% endcomment %}
+
+<div class="product_a">
+<!-- 재고의 정보를 보여주고 수정가능한 section-->
+  <section class="search_product  row_c">
+      <div class="staff_s_div bold_sec" style="height: 450px">
+        <div class="sub_title ">재고 현황 및 수정</div>
+        <div class="s_i_s">
+          
+            <div class="pro_search">
+
+              <div class="s_s_t">Product 재고 확인 및 수정</div>
+
+              <div class="p_s">
+                <input type="text" class="pro_search_input p_input" placeholder="Product Name">
+                <div class="pro_search_result p_output">
+                  <table> 
+                    <thead><th>Product Id</th><th>Product Name</th><th>In storage</th><th>Price</th><th>EDIT</th></thead>
+                    <tbody>
+                      
+                      {% for data in product_datas %}
+                      <tr>
+                        <td class="pro_search_pivot">{{data.product_id}}</td>
+                        <td class="pro_search_pivot">{{data.name}}</td>
+                        <td class="pro_search_pivot">{{data.count}}</td>
+                        <td class="pro_search_pivot">{{data.price}}</td>
+                        <td class="pro_search_pivot"><div name="{{data.product_id}}" class="p_button product_edit_btn">EDIT</div></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- 발주 신청이 가능한 section-->
+  <section class="search_p_apply  row_c">
+      <div class="staff_s_div bold_sec">
+        <div class="sub_title ">발주 신청</div>
+        <div class="park_insert" style="margin:0px 30px;">
+          <div class="s_s_t"></div>
+          <form method="POST" onsubmit="return confirm('발주를 신청하시겠습니까?');">
+          {% csrf_token %}
+            <input type="text" name="method" value="add_purchase" style="display:none" readonly>
+
+            <div style="display:flex; flex-flow:row; flex-wrap:nowrap;">
+
+              <div style="border:2px solid darkgray; height: 250px; overflow:scroll; padding:2px;">
+                <table class="purchase_tab" >
+                  <thead>
+                    <th>Product Id</th><th>Product Name</th><th>Count</th><th>Delete</th>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+
+              <div style="display:flex; flex-flow:column; justify-content: space-between; margin:0px 50px;">
+                <div class="p_i_input" style="padding:0px;"> 
+                  <input class="p_i_add p_i_i" type="text" name="purchase_product_id" placeholder="Product Id">
+                  <input class="p_i_add p_i_i" type="text" name="purchase_count" placeholder="Count">
+                  <input class="p_i_add p_button cursor" id="purchase_insert_btn" type="button" value="INSERT">
+                </div>
+                <input class="p_i_add p_button cursor" type="submit" value="REQUEST" style="width:415px;">
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+  </section>
+
+  <!-- 발주 정보를 확인하고 재고 정보를 갱신가능한 section-->
+  <section class="search_a_check row_c">
+      <div class="bold_test_product staff_s_div bold_sec" style="height: 450px">
+        <div class="sub_title ">발주 현황</div>
+        <div class="s_i_s">
+              <div class="b_s">
+                <div class="b_s_r b_output" style="height: 250px; overflow: scroll;margin-top:30px;">
+                  <table>
+                    <thead><th>Purchase Id</th><th>Order Date</th><th>Delivery Date</th><th>Is Purchase</th><th>Staff ID</th><th>Product List</th><th>납품완료</th></thead>
+                    <tbody>
+                      {% for data in purchase_datas %}
+                      <tr>
+                        <td class="b_s_p">{{data.purchase_id}}</td>
+                        <td class="b_s_p">{{data.order_date}}</td>
+                        <td class="b_s_p">{{data.delivery_date}}</td>
+                        <td class="b_s_p">{{data.is_purchase}}</td>
+                        <td class="b_s_p">{{data.staff_id}}</td>
+                        <td class="b_s_p"><div class="product_list_btn p_button" name="{{data.purchase_id}}">LIST</div></td>                  
+                        {% if not data.is_purchase %}
+                          <td class="b_s_p">
+                          <form method="POST" onsubmit="return confirm('정말 물품을 전부 수령하셨습니까?');">
+                          {% csrf_token %}
+                          <input type="text" style="display:none" name="method" value="purchase_complete" readonly>
+                          <input type="text" style="display:none" name="purchase_id" value="{{data.purchase_id}}" readonly>
+                          <button class="p_button cursor" name="purchased">완료</button>
+                          </form>
+                        </td>
+                        
+                        {% else %}
+                        <td class="b_s_p"><div class="p_button" name="no-purchase" style="color:rgb(200,200,200);">완료</div></td>
+                        {% endif %}
+                        
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+        </div>
+      </div>
+  </section>
+</div>
+
+<div class="fullscreen popup" style="display:none;position:fixed;left:0px;top:0px;width:100%;height:100%;background-color:rgba(0,0,0,0.5)"></div>
+<!--product_edit 팝업-->
+<div class="product_edit_popup popup" style="border-radius:2px; box-shadow: 0px 0px 20px rgb(56, 56, 56); box-sizing:content-box;display:none;z-index: 100; position:fixed; width:250px; height:300px; padding:20px;left:50%; top:50%; transform:translate(-125px,-150px); background-color:rgba(255,255,255,0.8)">
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="method" value="product_edit" style="display:none" readonly>
+      <div style="margin:10px 0px;">
+        <label style="display:block;margin:0px; margin-top:-3px; margin-bottom:5px;height:20px">Room Type</label>
+        <input type="text" id="product_edit_id" name="product_id" style="height:21px; padding:1px;" readonly>
+      </div>
+      <div style="margin:10px 0px;">
+        <label style="display:block;margin:0px; margin-top:-3px; margin-bottom:5px;height:20px">이름</label>
+        <input type="text" id="product_edit_name" name="name" placeholder="name" style="height:21px; padding:1px;">
+      </div>
+      <div style="margin:10px 0px;">
+        <label style="display:block;margin:0px; margin-top:-3px; margin-bottom:5px;height:20px">개수</label>
+        <input type="text" id="product_edit_count" name="count" placeholder="count" style="height:21px; padding:1px;">
+      </div>
+      <div style="margin:10px 0px;">
+        <label style="display:block;margin:0px; margin-top:-3px; margin-bottom:5px;height:20px">가격</label>
+        <input type="text" id="product_edit_price" name="price" placeholder="price" style="height:21px; padding:1px;">
+      </div>
+      <input type="submit" value="edit" style="margin-top:20px; padding: 3px 35px; background-color: rgb(95, 95, 95); border: 0px; color: white; border-radius: 5px; font-size: 15px;">
+    </form>
+</div>
+
+<!--product_list 팝업-->
+<div class="product_list_popup popup" style="ovwrflow:scroll; box-sizing:content-box;display:none;z-index: 100; position:fixed; width:300px; height:340px; left:50%; top:50%; transform:translate(-150px,-170px); background-color:rgba(255,255,255,0.8); border-radius:2px; box-shadow: 0px 0px 20px rgb(56, 56, 56); padding:20px;">
+    <table class="product_list_tab">
+      <thead><th>Product ID</th><th>Name</th><th>Count</th></thead>
+      <tbody>
+      </tbody>
+    </table>
+</div>
+
+
+
+<!-- footer -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">DuBu Hotel</h2>
+              <p>Hotel Information System .</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+{% comment %} 링크 추가 혹은 제거 해야합니다 {% endcomment %}
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Quick menu</h2>
+              <ul class="list-unstyled">
+              {% comment %} log out 버튼 {% endcomment %}
+                <li><a href="{% url 'admin_logout' %}" class="py-2 d-block">Log out</a></li>
+                <li><a href="{% url 'staff' %}" class="py-2 d-block">Staff home</a></li>
+                <li><a href="{% url 'product' %}" class="py-2 d-block">Product</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">DuBu hotel</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+                  <li><a href="#"><span class="icon icon-map-marker"></span><span class="text">경기도 안산시 상록수 사동 한양대학교 55</span></a></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">031-436-8000</span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">ericadubu@gmail.com</span></a></li>	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+
+  </body>
+</html>
+
+<script>
+  $(document).ready(function() {
+    $(".pro_search_input").keyup(function() {
+        var k = $(this).val();
+        $(".pro_search_result> table > tbody > tr").hide();
+        var temp = $(".pro_search_pivot:contains('" + k + "')");
+
+        $(temp).parent().show();
+    });
+
+    
+    function delete_reload(){
+      $(".purchase_delete_btn").click(function(){
+        $(".purchase_"+$(this).attr("name")).remove();
+      });
+    }
+
+    $("#purchase_insert_btn").click(function(){
+      var t_pid = $("input[name=purchase_product_id]");
+      var t_count = $("input[name=purchase_count]");
+      var pid = t_pid.val();
+      var count = t_count.val();
+      t_pid.val("");t_count.val("");
+      var table_body = $('.purchase_tab>tbody');
+      var table_have_pid = $('.purchase_pid').text().split('_');
+      var flagz = true;
+
+      for(var i=0; i<table_have_pid.length; i++){
+        var tpid = table_have_pid[i];
+        if(tpid==pid){
+          var tnum = 1*$('tr.purchase_'+pid+'>.purchase_count').text() + 1*count;
+          $('tr.purchase_'+pid+'>.purchase_count').text(tnum+"");
+          $('div.purchase_'+pid+'>input[name=count]').attr('value',""+tnum);
+          flagz=false;
+        }
+      }
+      if(flagz){
+        var flag = false;
+        {% for data in product_datas %}
+        if("{{data.product_id}}" == pid){
+          flag = true;
+          table_body.append("<tr class='purchase_{{data.product_id}}'><td class='purchase_pid'>{{data.product_id}}</td><td>{{data.name}}</td><td class='purchase_count'>"+count+"</td><td><input class='purchase_delete_btn p_i_add p_button' name='{{data.product_id}}' type='button' value='delete'></td></tr>");
+          table_body.append("<div style='display:none' class='purchase_{{data.product_id}}'><input type='text' style='display:none' name='product_id' value='{{data.product_id}}' readonly><input type='text' style='display:none' value='"+count+"' name='count' readonly></div>");
+        }
+        {% endfor %}
+        if(flag==false){
+          alert("없는 제품id입니다.");
+        }
+
+        delete_reload();
+      }
+    });
+
+    $(".fullscreen").click(function(){
+        $(".popup").css("display","none");
+    });
+
+    $('.product_list_btn').click(function(){
+        $(".fullscreen").css("display","block");
+        $(".product_list_popup").css("display","block");
+        $(".product_list_tab>tbody>tr").remove();
+        var purchase_id = $(this).attr("name");
+        {% for data in purchase_datas %}
+        if('{{data.purchase_id}}'==purchase_id){
+          
+          {% for p in data.product %}
+            {% for prodata in product_datas %}
+              if('{{p.0}}'=='{{prodata.product_id}}'){
+                $('.product_list_tab>tbody').append("<tr><td>{{p.0}}</td><td>{{prodata.name}}</td><td>{{p.1}}</td></tr>");
+              }
+            {% endfor %}
+          {% endfor %}
+        }
+        {% endfor %}
+    });
+  });
+
+  $('.product_edit_btn').click(function(){
+    $(".fullscreen").css("display","block");
+    $(".product_edit_popup").css("display","block");
+    var product_id = $(this).attr('name');
+    {% for data in product_datas %}
+    if('{{data.product_id}}'==product_id){
+      $('#product_edit_id').attr('value','{{data.product_id}}');
+      $('#product_edit_name').attr('value','{{data.name}}');
+      $('#product_edit_price').attr('value','{{data.price}}');
+      $('#product_edit_count').attr('value','{{data.count}}');
+    }
+    {% endfor %}
+  });
+
+
+</script>
+
